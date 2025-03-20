@@ -46,6 +46,7 @@ Public Class ucSales
         Dim salesPrice = (From i In dc.trans_SalesReportPrices).ToList()
         Dim salesPriceSummary = (From i In dc.trans_SalesReportSummaries).ToList()
         Dim vessel = (From i In mdb.ml_Vessels Select i).ToList()
+        Debug.WriteLine("Loaded")
 
         Dim salesData = From sr In sales Join
                         v In vessel On sr.unloadingVessel_ID Equals v.ml_vID Join

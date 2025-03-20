@@ -2,10 +2,12 @@
 Imports DevExpress.XtraLayout
 Imports DevExpress.XtraGrid
 Imports DevExpress.XtraGrid.Views.Grid
+Imports DevExpress.XtraGrid.Views.BandedGrid
 Public Class frm_salesInvoice
 
     Private tabControl As XtraTabControl
     Private txtNote As TextBox
+    Private grid As GridControl
 
     Private ctrlSales As ctrlSales
 
@@ -22,17 +24,14 @@ Public Class frm_salesInvoice
         LayoutControl2.Controls.Add(tabControl)
 
         Dim layoutItem As LayoutControlItem = LayoutControl2.AddItem("", tabControl)
-        layoutItem.TextVisible = False ' Hide label
+        layoutItem.TextVisible = False
 
-        'Dim wsGrid = setTab(AddTab(tabControl, "Weight Slips"))
         Dim adGrid = setTab(AddTab(tabControl, "Amount Details"))
         Dim sGrid = setTab(AddTab(tabControl, "Summary"))
 
-        'displayWeightSlips(wsGrid)
         displayAmountDetails(adGrid)
         displaySummary(sGrid)
 
-        ' Initialize Note TextBox
         txtNote = New TextBox() With {
             .Multiline = True,
             .Height = 80,
@@ -40,7 +39,6 @@ Public Class frm_salesInvoice
         }
         LayoutControl2.Controls.Add(txtNote)
 
-        ' Add TextBox to layout
         Dim noteLayoutItem As LayoutControlItem = LayoutControl2.AddItem("Note:", txtNote)
         noteLayoutItem.TextVisible = True
 
@@ -62,36 +60,77 @@ Public Class frm_salesInvoice
     End Function
 
     Sub displayAmountDetails(ByRef grid As GridControl)
-        ' Initialize GridView
         Dim gridView As New GridView(grid)
         grid.MainView = gridView
         grid.ViewCollection.Add(gridView)
 
-        ' Enable footer and merge all columns into one
         gridView.OptionsView.ShowFooter = True
         gridView.OptionsView.AllowCellMerge = True
 
-        ' Force GridControl to initialize before setting the data source
         grid.ForceInitialize()
 
         AddHandler gridView.CustomDrawFooter, AddressOf GridView_CustomDrawFooter
     End Sub
 
     Sub displaySummary(ByRef grid As GridControl)
-        ' Initialize GridView
-        Dim gridView As New GridView(grid)
-        grid.MainView = gridView
-        grid.ViewCollection.Add(gridView)
+        Dim bandedView As New BandedGridView(grid)
+        grid.MainView = bandedView
+        grid.ViewCollection.Add(bandedView)
 
-        ' Enable footer and merge all columns into one
-        gridView.OptionsView.ShowFooter = True
-        gridView.OptionsView.AllowCellMerge = True
+        bandedView.OptionsView.ShowFooter = True
+        bandedView.OptionsView.AllowCellMerge = False
 
-        ' Force GridControl to initialize before setting the data source
+        Dim bandCatcher As GridBand = CreateCenteredBand("CATCHER")
+        Dim bandTonnage As GridBand = CreateCenteredBand("TONNAGE")
+        Dim bandKilos As GridBand = CreateCenteredBand("KILOS")
+        Dim bandAmount As GridBand = CreateCenteredBand("AMOUNT")
+
+        bandTonnage.Children.Add(CreateCenteredBand("CATCHERS PARTIAL"))
+        bandTonnage.Children.Add(CreateCenteredBand(" "))
+        bandTonnage.Children.Add(CreateCenteredBand("ACTUAL QTY"))
+
+        bandKilos.Children.Add(CreateCenteredBand("ACTUAL QTY"))
+        bandKilos.Children.Add(CreateCenteredBand("FISHMEAL"))
+        bandKilos.Children.Add(CreateCenteredBand("SPOILAGE"))
+        bandKilos.Children.Add(CreateCenteredBand("NET"))
+
+        bandAmount.Children.Add(CreateCenteredBand("ACTUAL QTY"))
+        bandAmount.Children.Add(CreateCenteredBand("FISHMEAL"))
+        bandAmount.Children.Add(CreateCenteredBand("SPOILAGE"))
+        bandAmount.Children.Add(CreateCenteredBand("NET IN USD"))
+        bandAmount.Children.Add(CreateCenteredBand("NET IN PHP"))
+        bandAmount.Children.Add(CreateCenteredBand(" "))
+        bandAmount.Children.Add(CreateCenteredBand("AVERAGE PRICE PER CATCHER"))
+
+        bandedView.Bands.AddRange(New GridBand() {bandCatcher, bandTonnage, bandKilos, bandAmount})
+
+        For Each band As GridBand In bandedView.Bands
+            ApplyCenterAlignment(band)
+        Next
+
         grid.ForceInitialize()
-
-        AddHandler gridView.CustomDrawFooter, AddressOf GridView_CustomDrawFooter
     End Sub
+
+    Function CreateCenteredBand(caption As String) As GridBand
+        Dim band As New GridBand() With {.Caption = caption}
+        band.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        band.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
+        band.AppearanceHeader.Options.UseTextOptions = True
+        Return band
+    End Function
+
+    Sub ApplyCenterAlignment(band As GridBand)
+        band.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        band.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
+        band.AppearanceHeader.Options.UseTextOptions = True
+
+        For Each subBand As GridBand In band.Children
+            ApplyCenterAlignment(subBand)
+        Next
+    End Sub
+
+
+
 
     Private Sub GridView_CustomDrawFooter(sender As Object, e As Views.Base.RowObjectCustomDrawEventArgs)
         Dim view As GridView = TryCast(sender, GridView)
