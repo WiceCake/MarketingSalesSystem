@@ -75,7 +75,7 @@ Public Class ucSales
                                            .SellingType = s.sellingType,
                                            .Buyer = s.buyer,
                                            .ActualQty = actualQty.Sum(Function(j) sumFields(j)),
-                                           .Fishmeal = actualQty.Sum(Function(j) getFishMeal(j)) - spoilage.Sum(Function(j) getFishMeal(j)),
+                                           .Fishmeal = actualQty.Sum(Function(j) j.fishmeal) - spoilage.Sum(Function(j) j.fishmeal),
                                            .Spoilage = spoilage.Sum(Function(j) sumFields(j)),
                                            .NetQty = actualQty.Sum(Function(j) sumFields(j)) - spoilage.Sum(Function(j) sumFields(j)),
                                            .SalesInUSD = Math.Round(totalAmount / s.usdRate, 2),
@@ -91,11 +91,6 @@ Public Class ucSales
         gridView.PopulateColumns()
         gridTransMode(gridView)
     End Sub
-
-    Function getFishMeal(record As trans_SalesReportCatcher) As Decimal
-        Debug.WriteLine(record.fishmeal)
-        Return record.fishmeal
-    End Function
 
     Function sumFields(record As trans_SalesReportCatcher) As Decimal
         Return record.skipjack0_300To0_499 + record.skipjack0_500To0_999 +
