@@ -62,22 +62,22 @@ Public Class ucSales
                          Select s, src, srp, cad, ca, v).ToList()
 
         Dim salesData = (From s In salesList
-                         Let catchQ = catchList.Where(Function(j) s.salesReport_ID = j.s.salesReport_ID).Select(Function(j, index) New With {.Index = index, .Record = j})
-                         Let actualQty = catchQ.Where(Function(j) j.Index Mod 2 = 0)
-                         Let spoilage = catchQ.Where(Function(j) j.Index Mod 2 = 1)
-                         Let totalAmount = actualQty.Sum(Function(j) multiplyFields(j.Record.src)) - spoilage.Sum(Function(j) multiplyFields(j.Record.src))
+                         Let groupedCatchQ = catchList.Where(Function(j) s.salesReport_ID = j.s.salesReport_ID).
+                                                       GroupBy(Function(j) j.src.catchActivityDetail_ID).ToList()
+                         Let actualQty = groupedCatchQ.Select(Function(g) g.FirstOrDefault().src).ToList()
+                         Let spoilage = groupedCatchQ.Select(Function(g) If(g.Count() > 1, g.Skip(1).FirstOrDefault().src, Nothing)).ToList()
+                         Let totalAmount = actualQty.Sum(Function(j) multiplyFields(j)) - spoilage.Sum(Function(j) multiplyFields(j))
                          Select New With {
                                            .salesReport_ID = s.salesReport_ID,
                                            .SalesNo = s.salesNum,
                                            .Catcher = (From j In catchList Where s.salesReport_ID = j.s.salesReport_ID Select j.ca.catchReferenceNum).Distinct().First,
-                                           .Vessels = (From j In catchList Where s.salesReport_ID = j.s.salesReport_ID Select j.v.vesselName).Distinct.ToList,
                                            .CoveredDate = s.salesDate,
                                            .SellingType = s.sellingType,
                                            .Buyer = s.buyer,
-                                           .ActualQty = actualQty.Sum(Function(j) sumFields(j.Record.src)),
-                                           .Fishmeal = actualQty.Sum(Function(j) j.Record.src.fishmeal) - spoilage.Sum(Function(j) j.Record.src.fishmeal),
-                                           .Spoilage = spoilage.Sum(Function(j) sumFields(j.Record.src)),
-                                           .NetQty = actualQty.Sum(Function(j) sumFields(j.Record.src)) - spoilage.Sum(Function(j) sumFields(j.Record.src)),
+                                           .ActualQty = actualQty.Sum(Function(j) sumFields(j)),
+                                           .Fishmeal = actualQty.Sum(Function(j) getFishMeal(j)) - spoilage.Sum(Function(j) getFishMeal(j)),
+                                           .Spoilage = spoilage.Sum(Function(j) sumFields(j)),
+                                           .NetQty = actualQty.Sum(Function(j) sumFields(j)) - spoilage.Sum(Function(j) sumFields(j)),
                                            .SalesInUSD = Math.Round(totalAmount / s.usdRate, 2),
                                            .USDRate = s.usdRate,
                                            .SalesInPHP = totalAmount,
@@ -85,12 +85,17 @@ Public Class ucSales
                                        }).ToList
 
 
+        '.Vessels = (From j In catchList Where s.salesReport_ID = j.s.salesReport_ID Select j.v.vesselName).Distinct.ToList,
+
         gridView.GridControl.DataSource = salesData
         gridView.PopulateColumns()
         gridTransMode(gridView)
     End Sub
 
-
+    Function getFishMeal(record As trans_SalesReportCatcher) As Decimal
+        Debug.WriteLine(record.fishmeal)
+        Return record.fishmeal
+    End Function
 
     Function sumFields(record As trans_SalesReportCatcher) As Decimal
         Return record.skipjack0_300To0_499 + record.skipjack0_500To0_999 +
