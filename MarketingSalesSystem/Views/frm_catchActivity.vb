@@ -79,7 +79,13 @@ Public Class frm_catchActivity
 
     End Sub
 
-    Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles btnDeleteCatcher.Click
+
+    Private Sub btnDelete_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnDelete.ItemClick
+        ctrlCA.deleteCatch()
+    End Sub
+
+    Private Sub SimpleButton1_Click_1(sender As Object, e As EventArgs) Handles btnDelete1.Click
+
         If GridView1.SelectedRowsCount < 1 Then
             XtraMessageBox.Show("Please select a row first!", APPNAME, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
@@ -115,12 +121,4 @@ Public Class frm_catchActivity
             GridView1.ClearSelection()
         End If
     End Sub
-    'HAKDOGGGG
-
-
-
-    Private Sub btnDelete_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnDelete.ItemClick
-        ctrlCA.deleteCatch()
-    End Sub
-
 End Class
