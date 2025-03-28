@@ -42,19 +42,17 @@ Public Class ucCatcher
     Sub loadGrid()
         Dim dc As New mkdbDataContext
 
-        Dim ca = New CatchActivity(dc).getByDate(CDate(dtFrom.EditValue), CDate(dtTo.EditValue)).ToList()
-        Dim cad = ca.Join(dc.trans_CatchMethods,
-                   Function(c) c.method_ID,
-                   Function(j) j.catchMethod_ID,
-                   Function(c, j) New With {
-                        .catchActivity_ID = c.catchActivity_ID,
-                        .CatchReferenceNumber = c.catchReferenceNum,
-                        .CatchDate = c.catchDate,
-                        .CatchMethod = j.catchMethod,
-                        .Longitude = c.longitude,
-                        .Latitude = c.latitude
-                    }).ToList()
-
+        Dim caList = New CatchActivity(dc).getByDate(CDate(dtFrom.EditValue), CDate(dtTo.EditValue)).ToList()
+        Dim cadList = (From ca In caList
+                       Join cm In dc.trans_CatchMethods On cm.catchMethod_ID Equals ca.method_ID
+                       Select New With {
+                           .catchActivity_ID = ca.catchActivity_ID,
+                           .CatchReferenceNumber = ca.catchReferenceNum,
+                           .CatchDate = ca.catchDate,
+                           .CatchMethod = cm.catchMethod,
+                           .Longitude = ca.longitude,
+                           .Latitude = ca.latitude
+                           }).ToList
 
         Dim gridView = New GridView()
         AddHandler gridView.DoubleClick, AddressOf HandleGridDoubleClick
@@ -64,7 +62,7 @@ Public Class ucCatcher
         grid.ViewCollection.Add(gridView)
 
 
-        gridView.GridControl.DataSource = cad
+        gridView.GridControl.DataSource = cadList
         gridView.PopulateColumns()
 
         gridTransMode(gridView)
