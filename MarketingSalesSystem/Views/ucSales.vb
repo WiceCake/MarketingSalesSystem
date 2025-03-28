@@ -77,7 +77,7 @@ Public Class ucSales
                                            .ActualQty = actualQty.Sum(Function(j) sumFields(j.Record.src)),
                                            .Fishmeal = catchQ.Sum(Function(j) j.Record.src.fishmeal),
                                            .Spoilage = spoilage.Sum(Function(j) sumFields(j.Record.src)),
-                                           .NetQty = actualQty.Sum(Function(j) j.Record.src.fishmeal) - spoilage.Sum(Function(j) sumFields(j.Record.src)),
+                                           .NetQty = actualQty.Sum(Function(j) sumFields(j.Record.src)) - spoilage.Sum(Function(j) sumFields(j.Record.src)),
                                            .SalesInUSD = Math.Round(totalAmount / s.usdRate, 2),
                                            .USDRate = s.usdRate,
                                            .SalesInPHP = totalAmount,

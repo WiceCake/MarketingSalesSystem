@@ -99,6 +99,7 @@ Public Class ctrlCatchers
                     If isNew Then
                         .catchReferenceNum = .GenerateRefNum()
                         .Add()
+                        SuccessfullyAddedUpdatedMessage()
                     Else
                         .catchReferenceNum = frmCA.txt_catNum.Caption
                         .Save()
