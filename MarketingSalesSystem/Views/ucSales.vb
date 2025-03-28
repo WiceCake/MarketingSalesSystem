@@ -51,106 +51,45 @@ Public Class ucSales
         Dim dc As New mkdbDataContext()
         Dim mdc As New tpmdbDataContext()
 
-        ' Fetch all necessary data in a single query
-        Dim salesList As List(Of SalesReport) = New SalesReport(dc).getByDate(CDate(dtFrom.EditValue), CDate(dtTo.EditValue)).ToList()
+        Dim salesList = New SalesReport(dc).getByDate(CDate(dtFrom.EditValue), CDate(dtTo.EditValue)).ToList()
 
-        ' Preload all sales report prices in a Dictionary
-        Dim salesPricesDict As Dictionary(Of Integer, trans_SalesReportPrice) = dc.trans_SalesReportPrices.
-            Where(Function(p) salesList.Select(Function(s) s.salesReport_ID).Contains(p.salesReport_ID)).
-            ToDictionary(Function(p) p.salesReport_ID)
-
-        ' Preload all catchers related to sales reports
-        Dim salesCatchers As List(Of trans_SalesReportCatcher) = dc.trans_SalesReportCatchers.
-            Where(Function(src) salesList.Select(Function(s) s.salesReport_ID).Contains(src.salesReport_ID)).ToList()
-
-        ' Preload all vessel names
-        Dim vesselDict As Dictionary(Of Integer, String) = mdc.ml_Vessels.ToDictionary(Function(v) v.ml_vID, Function(v) v.vesselName)
-
-        ' Preload catch details
-        Dim vesselIDs = (From src In salesCatchers
+        Dim catchList = (From s In salesList
+                         Join srp In dc.trans_SalesReportPrices On srp.salesReport_ID Equals s.salesReport_ID
+                         Join src In dc.trans_SalesReportCatchers On src.salesReport_ID Equals s.salesReport_ID
                          Join cad In dc.trans_CatchActivityDetails On cad.catchActivityDetail_ID Equals src.catchActivityDetail_ID
                          Join ca In dc.trans_CatchActivities On ca.catchActivity_ID Equals cad.catchActivity_ID
+                         Join v In mdc.ml_Vessels On cad.vessel_ID Equals v.ml_vID
+                         Select s, src, srp, cad, ca, v).ToList()
+
+        Dim salesData = (From s In salesList
+                         Let catchQ = catchList.Where(Function(j) s.salesReport_ID = j.s.salesReport_ID).Select(Function(j, index) New With {.Index = index, .Record = j})
+                         Let actualQty = catchQ.Where(Function(j) j.Index Mod 2 = 0)
+                         Let spoilage = catchQ.Where(Function(j) j.Index Mod 2 = 1)
+                         Let totalAmount = actualQty.Sum(Function(j) multiplyFields(j.Record.src)) - spoilage.Sum(Function(j) multiplyFields(j.Record.src))
                          Select New With {
-                             .salesReport_ID = src.salesReport_ID,
-                             .vessel_ID = cad.vessel_ID,
-                             .catchReferenceNum = ca.catchReferenceNum
-                         }).Distinct().ToList()
+                                           .salesReport_ID = s.salesReport_ID,
+                                           .SalesNo = s.salesNum,
+                                           .Catcher = (From j In catchList Where s.salesReport_ID = j.s.salesReport_ID Select j.ca.catchReferenceNum).Distinct().First,
+                                           .Vessels = (From j In catchList Where s.salesReport_ID = j.s.salesReport_ID Select j.v.vesselName).Distinct.ToList,
+                                           .CoveredDate = s.salesDate,
+                                           .SellingType = s.sellingType,
+                                           .Buyer = s.buyer,
+                                           .ActualQty = actualQty.Sum(Function(j) sumFields(j.Record.src)),
+                                           .Fishmeal = catchQ.Sum(Function(j) j.Record.src.fishmeal),
+                                           .Spoilage = spoilage.Sum(Function(j) sumFields(j.Record.src)),
+                                           .NetQty = actualQty.Sum(Function(j) j.Record.src.fishmeal) - spoilage.Sum(Function(j) sumFields(j.Record.src)),
+                                           .SalesInUSD = Math.Round(totalAmount / s.usdRate, 2),
+                                           .USDRate = s.usdRate,
+                                           .SalesInPHP = totalAmount,
+                                           .AveragePrice = totalAmount
+                                       }).ToList
 
-        ' Fix: Convert to Dictionary<salesReport_ID, List<Object>>
-        Dim vesselLookup As Dictionary(Of Integer, List(Of Object)) = vesselIDs.GroupBy(Function(v) v.salesReport_ID).
-            ToDictionary(Function(g) g.Key, Function(g) g.Select(Function(x) CType(x, Object)).ToList())
 
-        ' Transform data efficiently
-        Dim data = salesList.Select(Function(sr) transformData(sr, salesPricesDict, salesCatchers, vesselDict, vesselLookup)).ToList()
-
-        gridView.GridControl.DataSource = data
+        gridView.GridControl.DataSource = salesData
         gridView.PopulateColumns()
         gridTransMode(gridView)
     End Sub
 
-
-
-    Function transformData(sr As SalesReport,
-                       salesPricesDict As Dictionary(Of Integer, trans_SalesReportPrice),
-                       salesCatchers As List(Of trans_SalesReportCatcher),
-                       vesselDict As Dictionary(Of Integer, String),
-                       vesselLookup As Dictionary(Of Integer, List(Of Object))) As Object
-
-        Dim dc As New mkdbDataContext
-
-        ' Get price directly from dictionary
-        Dim price As trans_SalesReportPrice = If(salesPricesDict.ContainsKey(sr.salesReport_ID), salesPricesDict(sr.salesReport_ID), Nothing)
-
-        ' Get catchers related to the sales report and fetch vessel details
-        Dim catchers = (From c In salesCatchers
-                        Join cad In dc.trans_CatchActivityDetails On c.catchActivityDetail_ID Equals cad.catchActivityDetail_ID
-                        Join ca In dc.trans_CatchActivities On ca.catchActivity_ID Equals cad.catchActivity_ID
-                        Where c.salesReport_ID = sr.salesReport_ID
-                        Select New With {
-                            .CatchReferenceNum = ca.catchReferenceNum,
-                            .CatchActivityID = c.catchActivityDetail_ID,
-                            .VesselName = If(vesselDict.ContainsKey(cad.vessel_ID), vesselDict(cad.vessel_ID), "Unknown")
-                        }).Distinct().ToList()
-
-        ' Initialize counters
-        Dim actualQty As Decimal = 0
-        Dim fishMeal As Decimal = 0
-        Dim spoilage As Decimal = 0
-        Dim net As Decimal = 0
-        Dim totalAmount As Decimal = 0
-
-        ' Process all catchers efficiently
-        For Each catcher In catchers
-            Dim getCatch = salesCatchers.Where(Function(c) c.catchActivityDetail_ID = catcher.CatchActivityID).ToList()
-            If getCatch.Count >= 2 Then
-                actualQty += sumFields(getCatch(0))
-                fishMeal += getCatch(0).fishmeal
-                spoilage += sumFields(getCatch(1))
-                net += (actualQty - spoilage)
-                totalAmount += calculateTotalAmount(getCatch(0), getCatch(1), price)
-            End If
-        Next
-
-
-        ' Return structured data
-        Return New With {
-            .salesReport_ID = sr.salesReport_ID,
-            .SalesNo = sr.salesNum,
-            .CoveredDate = sr.salesDate,
-            .Catcher = catchers.Select(Function(c) c.CatchReferenceNum).First,
-            .SellingType = sr.sellingType,
-            .Vessels = catchers.Select(Function(v) New With {.VesselName = v.VesselName}).Distinct().ToList,
-            .Buyer = sr.buyer,
-            .ActualQty = actualQty,
-            .Fishmeal = fishMeal,
-            .Spoilage = spoilage,
-            .NetQty = actualQty - spoilage,
-            .SalesInUSD = If(sr.usdRate > 0, Math.Round(totalAmount / sr.usdRate, 2), 0),
-            .USDRate = sr.usdRate,
-            .SalesInPHP = totalAmount,
-            .AveragePrice = totalAmount
-        }
-    End Function
 
 
     Function sumFields(record As trans_SalesReportCatcher) As Decimal
@@ -168,34 +107,38 @@ Public Class ucSales
                record.bigeye10AndUP + record.bonito + record.fishmeal
     End Function
 
-    Function calculateTotalAmount(actual As trans_SalesReportCatcher, spoilage As trans_SalesReportCatcher, price As trans_SalesReportPrice) As Decimal
+    Function multiplyFields(qty As trans_SalesReportCatcher) As Decimal
         Dim total As Decimal = 0
 
-        total += (actual.skipjack0_300To0_499 - spoilage.skipjack0_300To0_499) * price.skipjack0_300To0_499
-        total += (actual.skipjack0_500To0_999 - spoilage.skipjack0_500To0_999) * price.skipjack0_500To0_999
-        total += (actual.skipjack1_0To1_39 - spoilage.skipjack1_0To1_39) * price.skipjack1_0To1_39
-        total += (actual.skipjack1_4To1_79 - spoilage.skipjack1_4To1_79) * price.skipjack1_4To1_79
-        total += (actual.skipjack1_8To2_49 - spoilage.skipjack1_8To2_49) * price.skipjack1_8To2_49
-        total += (actual.skipjack2_5To3_49 - spoilage.skipjack2_5To3_49) * price.skipjack2_5To3_49
-        total += (actual.skipjack3_5AndUP - spoilage.skipjack3_5AndUP) * price.skipjack3_5AndUP
-        total += (actual.yellowfin0_300To0_499 - spoilage.yellowfin0_300To0_499) * price.yellowfin0_300To0_499
-        total += (actual.yellowfin0_500To0_999 - spoilage.yellowfin0_500To0_999) * price.yellowfin0_500To0_999
-        total += (actual.yellowfin1_0To1_49 - spoilage.yellowfin1_0To1_49) * price.yellowfin1_0To1_49
-        total += (actual.yellowfin1_5To2_49 - spoilage.yellowfin1_5To2_49) * price.yellowfin1_5To2_49
-        total += (actual.yellowfin2_5To3_49 - spoilage.yellowfin2_5To3_49) * price.yellowfin2_5To3_49
-        total += (actual.yellowfin3_5To4_99 - spoilage.yellowfin3_5To4_99) * price.yellowfin3_5To4_99
-        total += (actual.yellowfin5_0To9_99 - spoilage.yellowfin5_0To9_99) * price.yellowfin5_0To9_99
-        total += (actual.yellowfin10AndUpGood - spoilage.yellowfin10AndUpGood) * price.yellowfin10AndUpGood
-        total += (actual.yellowfin10AndUpDeformed - spoilage.yellowfin10AndUpDeformed) * price.yellowfin10AndUpDeformed
-        total += (actual.bigeye0_500To0_999 - spoilage.bigeye0_500To0_999) * price.bigeye0_500To0_999
-        total += (actual.bigeye1_0To1_49 - spoilage.bigeye1_0To1_49) * price.bigeye1_0To1_49
-        total += (actual.bigeye1_5To2_49 - spoilage.bigeye1_5To2_49) * price.bigeye1_5To2_49
-        total += (actual.bigeye2_5To3_49 - spoilage.bigeye2_5To3_49) * price.bigeye2_5To3_49
-        total += (actual.bigeye3_5To4_99 - spoilage.bigeye3_5To4_99) * price.bigeye3_5To4_99
-        total += (actual.bigeye5_0To9_99 - spoilage.bigeye5_0To9_99) * price.bigeye5_0To9_99
-        total += (actual.bigeye10AndUP - spoilage.bigeye10AndUP) * price.bigeye10AndUP
-        total += (actual.bonito - spoilage.bonito) * price.bonito
-        total += (actual.fishmeal - spoilage.fishmeal) * price.fishmeal
+        Dim dc = New mkdbDataContext
+
+        Dim price = (From i In dc.trans_SalesReportPrices Where qty.salesReport_ID = i.salesReport_ID Select i).FirstOrDefault
+
+        total += qty.skipjack0_300To0_499 * price.skipjack0_300To0_499
+        total += qty.skipjack0_500To0_999 * price.skipjack0_500To0_999
+        total += qty.skipjack1_0To1_39 * price.skipjack1_0To1_39
+        total += qty.skipjack1_4To1_79 * price.skipjack1_4To1_79
+        total += qty.skipjack1_8To2_49 * price.skipjack1_8To2_49
+        total += qty.skipjack2_5To3_49 * price.skipjack2_5To3_49
+        total += qty.skipjack3_5AndUP * price.skipjack3_5AndUP
+        total += qty.yellowfin0_300To0_499 * price.yellowfin0_300To0_499
+        total += qty.yellowfin0_500To0_999 * price.yellowfin0_500To0_999
+        total += qty.yellowfin1_0To1_49 * price.yellowfin1_0To1_49
+        total += qty.yellowfin1_5To2_49 * price.yellowfin1_5To2_49
+        total += qty.yellowfin2_5To3_49 * price.yellowfin2_5To3_49
+        total += qty.yellowfin3_5To4_99 * price.yellowfin3_5To4_99
+        total += qty.yellowfin5_0To9_99 * price.yellowfin5_0To9_99
+        total += qty.yellowfin10AndUpGood * price.yellowfin10AndUpGood
+        total += qty.yellowfin10AndUpDeformed * price.yellowfin10AndUpDeformed
+        total += qty.bigeye0_500To0_999 * price.bigeye0_500To0_999
+        total += qty.bigeye1_0To1_49 * price.bigeye1_0To1_49
+        total += qty.bigeye1_5To2_49 * price.bigeye1_5To2_49
+        total += qty.bigeye2_5To3_49 * price.bigeye2_5To3_49
+        total += qty.bigeye3_5To4_99 * price.bigeye3_5To4_99
+        total += qty.bigeye5_0To9_99 * price.bigeye5_0To9_99
+        total += qty.bigeye10AndUP * price.bigeye10AndUP
+        total += qty.bonito * price.bonito
+        total += qty.fishmeal * price.fishmeal
 
         Return Math.Round(total, 2)
     End Function
