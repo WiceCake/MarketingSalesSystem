@@ -46,7 +46,9 @@ Public Class ctrlCatchers
         mkdb = New mkdbDataContext
 
         mdlCA = New CatchActivity(caID, mkdb)
-        mdlCAD = New CatchActivityDetail(mkdb)
+
+        Dim mdlCAD_ID = (From i In mkdb.trans_CatchActivityDetails Where i.catchActivity_ID = mdlCA.catchActivity_ID Select i.catchActivityDetail_ID).First
+        mdlCAD = New CatchActivityDetail(mdlCAD_ID, mkdb)
 
         frmCA = New frm_catchActivity(Me)
 
@@ -57,8 +59,9 @@ Public Class ctrlCatchers
         frmCA.GridControl1.DataSource = frmCA.dt
 
         With frmCA
-            '.btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-            .btnPost.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            If mdlCA.approvalStatus = 1 Then
+                .ribbonTools.Visible = False
+            End If
             .layoutBtnAdd.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
             .layoutBtnDelete.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
 
@@ -97,21 +100,31 @@ Public Class ctrlCatchers
                     .longitude = CDec(frmCA.txtLong.EditValue)
                     .method_ID = CInt(frmCA.cmbMethod.EditValue)
                     If isNew Then
-                        .catchReferenceNum = .GenerateRefNum()
+                        .approvalStatus = Approval_Status.Draft
+                        .catchReferenceNum = "Draft"
                         .Add()
                         SuccessfullyAddedUpdatedMessage()
                     Else
+                        .approvalStatus = Approval_Status.Submitted
                         .catchReferenceNum = frmCA.txt_catNum.Caption
                         .Save()
                         SuccessfullyAddedUpdatedMessage()
                     End If
                 End With
 
+                Dim vesselIDs = (From i In mkdb.trans_CatchActivityDetails Where i.catchActivity_ID = mdlCA.catchActivity_ID Select i.catchActivityDetail_ID).ToList()
+                Dim count = 0
                 For Each item As DataRow In frmCA.dt.Rows
                     With mdlCAD
                         .catchActivity_ID = mdlCA.catchActivity_ID
                         .vessel_ID = CInt(item("Catcher"))
-                        .Add()
+                        If isNew Then
+                            .Add()
+                        Else
+                            .catchActivityDetail_ID = vesselIDs(count)
+                            .Save()
+                            count += 1
+                        End If
                     End With
                 Next
                 ts.Complete()
@@ -120,6 +133,24 @@ Public Class ctrlCatchers
             End Try
         End Using
         ucC.loadGrid()
+        frmCA.Close()
+    End Sub
+
+    Sub postedDraft()
+        Using ts As New TransactionScope
+            Try
+                With mdlCA
+                    .approvalStatus = Approval_Status.Posted
+                    .Posted()
+                End With
+
+                ts.Complete()
+            Catch ex As Exception
+                Debug.WriteLine("Error: " & ex.Message)
+            End Try
+        End Using
+        SuccessfullySavedMessage()
+        ucC.refreshData()
         frmCA.Close()
     End Sub
 
