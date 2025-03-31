@@ -13,4 +13,3 @@ D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.vbpr
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.exe.licenses
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.exe
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.pdb
-D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.vbprojResolveAssemblyReference.cache
