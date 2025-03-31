@@ -158,7 +158,7 @@
         AAAASUVORK5CYII=
 </value>
   </data>
-  <data name="SimpleButton1.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btn_filter.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAA10RVh0VGl0
         bGUARmlsdGVyO4UaZdEAAAM3SURBVDhPfZFrSNNhFMZPdqOrdM8UDdNsc6XWMs1RhIUoWNlFQruYadjl
