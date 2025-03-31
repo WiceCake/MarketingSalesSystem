@@ -34,11 +34,11 @@ Public Class ucSales
 
         Dim tabs = New XtraTabControl()
 
-        catcherTab = New XtraTabPage() With {.Name = "catcherTab", .Text = "By Catcher"}
         buyerTab = New XtraTabPage() With {.Name = "buyerTab", .Text = "By Buyer"}
+        catcherTab = New XtraTabPage() With {.Name = "catcherTab", .Text = "By Catcher"}
 
-        tabs.TabPages.Add(catcherTab)
         tabs.TabPages.Add(buyerTab)
+        tabs.TabPages.Add(catcherTab)
 
         LayoutControl2.Controls.Add(tabs)
 
