@@ -106,6 +106,7 @@ Public Class frm_salesInvoice
             .Columns("SA_Total").OptionsColumn.ReadOnly = True
             .Columns("NK_Total").OptionsColumn.ReadOnly = True
             .Columns("NA_Total").OptionsColumn.ReadOnly = True
+            .Columns("NA_Total").Summary.Add(DevExpress.Data.SummaryItemType.Sum, "NA_Total", "Total: {0}")
 
             bandClass.Fixed = Columns.FixedStyle.Left
             bandSize.Fixed = Columns.FixedStyle.Left
