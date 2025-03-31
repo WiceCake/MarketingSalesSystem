@@ -17,10 +17,11 @@ Public Class ucCatcher
 
         AddHandler grid.Load, AddressOf gridLoaded
 
-        dtFrom.EditValue = Nothing
+        dtFrom.EditValue = Date.Now.AddDays(-15)
         dtFrom.Properties.MaxValue = Date.Now
-        dtTo.EditValue = Nothing
-        dtTo.Properties.MaxValue = Date.Now
+
+        dtTo.EditValue = Date.Now
+        dtTo.Properties.MaxValue = Date.Now.AddDays(1)
 
     End Sub
 

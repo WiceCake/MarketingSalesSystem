@@ -274,9 +274,9 @@ Public Class frm_salesInvoice
         Dim missingFields As New StringBuilder()
         If Not dateCreated Then missingFields.AppendLine("Date Created")
         If Not sellType Then missingFields.AppendLine("Sell Type")
-        If Not unloadingVessel Then missingFields.AppendLine("Unloading Vessel")
+        If Not unloadingVessel Then missingFields.AppendLine("Unloading Vessel") 'Unloading Vessel
         If Not salesNum Then missingFields.AppendLine("Sales Number")
-        If Not catchDeliveryNum Then missingFields.AppendLine("Catch Delivery Number") 'HAKDOG
+        If Not catchDeliveryNum Then missingFields.AppendLine("Catch Delivery Number")
         If Not usdRate Then missingFields.AppendLine("USD Rate")
         If Not contactNum Then missingFields.AppendLine("Contact Number")
         If Not remark Then missingFields.AppendLine("Remarks")

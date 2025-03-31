@@ -187,14 +187,16 @@
         Dim newNum As Integer
 
         If lastRef IsNot Nothing Then
-            Dim lastNumStr As String = lastRef.Substring(9)
+            Dim lastNumStr As String = lastRef.Substring(9) ' Extract the numeric part
             Dim lastNum As Integer
             If Integer.TryParse(lastNumStr, lastNum) Then
-                newNum = lastNum + 1
+                newNum = lastNum + 1 ' Increment the last number
             End If
+        Else
+            newNum = 1 ' Start from 1 if no previous reference number exists
         End If
 
-        Return String.Format("SR-{0}{1:D3}", yearMonth, newNum)
+        Return String.Format("SR-{0}{1:D3}", yearMonth, newNum) ' Format to 3 digits
     End Function
 
 End Class
