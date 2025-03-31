@@ -387,8 +387,7 @@ Partial Class frm_salesInvoice
         Me.txtCNum.MenuManager = Me.RibbonControl
         Me.txtCNum.Name = "txtCNum"
         Me.txtCNum.Properties.Mask.EditMask = "f0"
-        Me.txtCNum.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
-        Me.txtCNum.Properties.MaxLength = 11
+        Me.txtCNum.Properties.MaxLength = 50
         Me.txtCNum.Size = New System.Drawing.Size(221, 22)
         Me.txtCNum.StyleController = Me.LayoutControl1
         Me.txtCNum.TabIndex = 13
@@ -718,9 +717,9 @@ Partial Class frm_salesInvoice
         CType(Me.LayoutControlGroup3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout
+        Me.PerformLayout()
 
-End Sub
+    End Sub
 
     Friend WithEvents RibbonControl As DevExpress.XtraBars.Ribbon.RibbonControl
     Friend WithEvents RibbonPage1 As DevExpress.XtraBars.Ribbon.RibbonPage
