@@ -8,6 +8,7 @@ Public Class ucSales
 
     Private tabControl As XtraTabControl
     Private grid As GridControl
+    Private gridCatcherTest As GridControl
 
     Private catcherTab As XtraTabPage
     Private buyerTab As XtraTabPage
@@ -46,18 +47,27 @@ Public Class ucSales
         mainLayoutItem.TextVisible = False
 
         Dim layoutBuyer As New LayoutControl() With {.Name = "layoutBuyer", .Dock = DockStyle.Fill}
+        Dim layoutCatcher As New LayoutControl() With {.Name = "layoutCatcher", .Dock = DockStyle.Fill}
 
         buyerTab.Controls.Add(layoutBuyer)
+        catcherTab.Controls.Add(layoutCatcher)
 
         grid = New GridControl() With {
             .Dock = DockStyle.Fill
         }
 
+        gridCatcherTest = New GridControl() With {
+            .Dock = DockStyle.Fill
+        }
+
         layoutBuyer.Controls.Add(grid)
+        layoutCatcher.Controls.Add(gridCatcherTest)
 
         Dim layoutBuyerItem As LayoutControlItem = layoutBuyer.AddItem("", grid)
         layoutBuyerItem.TextVisible = False
 
+        Dim layoutCatcherItem As LayoutControlItem = layoutCatcher.AddItem("", gridCatcherTest)
+        layoutCatcherItem.TextVisible = False
     End Sub
 
     Private Sub gridLoaded(sender As Object, e As EventArgs)
