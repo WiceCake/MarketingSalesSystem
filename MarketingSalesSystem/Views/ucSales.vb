@@ -9,6 +9,9 @@ Public Class ucSales
     Private tabControl As XtraTabControl
     Private grid As GridControl
 
+    Private catcherTab As XtraTabPage
+    Private buyerTab As XtraTabPage
+
     Sub New(ByVal title As String)
         InitializeComponent()
 
@@ -28,14 +31,33 @@ Public Class ucSales
     End Sub
 
     Sub loadData()
+
+        Dim tabs = New XtraTabControl()
+
+        catcherTab = New XtraTabPage() With {.Name = "catcherTab", .Text = "By Catcher"}
+        buyerTab = New XtraTabPage() With {.Name = "buyerTab", .Text = "By Buyer"}
+
+        tabs.TabPages.Add(catcherTab)
+        tabs.TabPages.Add(buyerTab)
+
+        LayoutControl2.Controls.Add(tabs)
+
+        Dim mainLayoutItem As LayoutControlItem = LayoutControl2.AddItem("", tabs)
+        mainLayoutItem.TextVisible = False
+
+        Dim layoutBuyer As New LayoutControl() With {.Name = "layoutBuyer", .Dock = DockStyle.Fill}
+
+        buyerTab.Controls.Add(layoutBuyer)
+
         grid = New GridControl() With {
             .Dock = DockStyle.Fill
         }
 
-        LayoutControl2.Controls.Add(grid)
+        layoutBuyer.Controls.Add(grid)
 
-        Dim layoutItem As LayoutControlItem = LayoutControl2.AddItem("", grid)
-        layoutItem.TextVisible = False
+        Dim layoutBuyerItem As LayoutControlItem = layoutBuyer.AddItem("", grid)
+        layoutBuyerItem.TextVisible = False
+
     End Sub
 
     Private Sub gridLoaded(sender As Object, e As EventArgs)
