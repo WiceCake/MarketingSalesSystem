@@ -121,4 +121,8 @@ Public Class frm_catchActivity
             GridView1.ClearSelection()
         End If
     End Sub
+
+    Private Sub btnPost_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnPost.ItemClick
+        ctrlCA.postedDraft()
+    End Sub
 End Class

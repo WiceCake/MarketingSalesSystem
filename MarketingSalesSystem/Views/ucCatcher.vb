@@ -62,9 +62,11 @@ Public Class ucCatcher
         grid.MainView = gridView
         grid.ViewCollection.Add(gridView)
 
-
         gridView.GridControl.DataSource = cadList
         gridView.PopulateColumns()
+
+        ' Enable footer
+        gridView.OptionsView.ShowFooter = True
 
         gridTransMode(gridView)
     End Sub

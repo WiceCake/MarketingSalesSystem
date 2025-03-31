@@ -502,26 +502,19 @@ Public Class ctrlSales
         Dim sc = (From i In tpmdb.ml_SupplierCategories Select i.ml_supCat).ToArray
         frmSI.cmbST.Properties.Items.AddRange(sc)
 
-        ' Query catch activities first (from mkdb)
         Dim uv = (From ca In mkdb.trans_CatchActivities
-                  Join cad In mkdb.trans_CatchActivityDetails On ca.catchActivity_ID Equals cad.catchActivity_ID
-                  Group By ca.catchActivity_ID, ca.catchReferenceNum Into VesselIDs = Group
+                  Where ca.approvalStatus = 1
                   Select New With {
-                      .catchActivity_ID = catchActivity_ID,
-                      .catchReferenceNum = catchReferenceNum,
-                      .VesselIDs = VesselIDs.Select(Function(x) x.cad.vessel_ID).Distinct().ToList()
-                  }).ToList()
+                    .catchActivity_ID = ca.catchActivity_ID,
+                    .catchDate = ca.catchDate,
+                    .refNum = ca.catchReferenceNum
+                    }).ToList()
 
-        ' Query vessels separately (from tpmdb) and store in a dictionary
-        Dim vesselDict = tpmdb.ml_Vessels.ToDictionary(Function(v) v.ml_vID, Function(v) v.vesselName)
+        Dim formattedUv = uv.Select(Function(ca) New With {
+            .catchActivity_ID = ca.catchActivity_ID,
+            .catchDate = ca.catchDate.ToString("yyyy-MM-dd") & " - " & ca.refNum}).ToList()
 
-        ' Map vessel names to each catchReferenceNum
-        Dim uvWithVessels = uv.Select(Function(item) New With {
-            .catchActivity_ID = item.catchActivity_ID,
-            .catchReferenceNum = item.catchReferenceNum & " - " & String.Join(", ", item.VesselIDs.Select(Function(id) If(vesselDict.ContainsKey(id), vesselDict(id), "Unknown")))
-        }).ToList()
-
-        lookUpTransMode(uvWithVessels, frmSI.cmbUV, "catchReferenceNum", "catchActivity_ID", "Select unloading vessel")
+        lookUpTransMode(formattedUv, frmSI.cmbUV, "catchDate", "catchActivity_ID", "Select catcher")
     End Sub
 
     Sub changeBuyerInput()

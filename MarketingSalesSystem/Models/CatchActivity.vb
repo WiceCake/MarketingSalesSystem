@@ -62,9 +62,9 @@
     End Sub
 
     Sub Save()
-        Dim sca = From i In dc.trans_CatchActivities Where i.catchActivity_ID = catchActivity_ID Select i
+        Dim ca = From i In dc.trans_CatchActivities Where i.catchActivity_ID = catchActivity_ID Select i
 
-        For Each i In sca
+        For Each i In ca
             i.catchActivity_ID = catchActivity_ID
             i.catchDate = catchDate
             i.method_ID = method_ID
@@ -72,6 +72,7 @@
             i.latitude = latitude
             i.longitude = longitude
             i.approvalStatus = approvalStatus
+            dc.SubmitChanges()
         Next
     End Sub
 
@@ -80,6 +81,16 @@
 
         For Each i In sca
             dc.trans_CatchActivities.DeleteOnSubmit(i)
+            dc.SubmitChanges()
+        Next
+    End Sub
+
+    Sub Posted()
+        Dim ca = From i In dc.trans_CatchActivities Where i.catchActivity_ID = catchActivity_ID Select i
+
+        For Each i In ca
+            i.catchReferenceNum = GenerateRefNum()
+            i.approvalStatus = approvalStatus
             dc.SubmitChanges()
         Next
     End Sub
@@ -119,7 +130,8 @@
     End Function
 
     Function GenerateRefNum() As String
-        Dim yearMonth = Date.Now.Year & Date.Now.Month
+        Dim yearMonth = Date.Now.ToString("yyyyMM")
+        'Dim yearMonth = Date.Now.Year & Date.Now.Month
 
         Dim prefix As String = "CA-" & yearMonth
 
@@ -131,13 +143,16 @@
         Dim newNum As Integer
 
         If lastRef IsNot Nothing Then
-            Dim lastNumStr As String = lastRef.Substring(9)
+            Dim lastNumStr As String = lastRef.Substring(9) ' Get the part after "SR-YYYYMM"
             Dim lastNum As Integer
             If Integer.TryParse(lastNumStr, lastNum) Then
-                newNum = lastNum + 1
+                newNum = lastNum + 1 ' Increment the last number
             End If
+        Else
+            newNum = 1 ' Start from 1 if no previous reference number exists
         End If
 
-        Return String.Format("CA-{0}{1:D3}", yearMonth, newNum)
+        Return String.Format("{0}{1:D3}", prefix, newNum)
+        'Return String.Format("CA-{0}{1:D3}", yearMonth, newNum)
     End Function
 End Class
