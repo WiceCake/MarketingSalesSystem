@@ -506,12 +506,13 @@ Public Class ctrlSales
                   Where ca.approvalStatus = 1
                   Select New With {
                     .catchActivity_ID = ca.catchActivity_ID,
-                    .catchDate = ca.catchDate
+                    .catchDate = ca.catchDate,
+                    .refNum = ca.catchReferenceNum
                     }).ToList()
 
         Dim formattedUv = uv.Select(Function(ca) New With {
             .catchActivity_ID = ca.catchActivity_ID,
-            .catchDate = ca.catchDate.ToString("yyyy-MM-dd")}).ToList()
+            .catchDate = ca.catchDate.ToString("yyyy-MM-dd") & " - " & ca.refNum}).ToList()
 
         lookUpTransMode(formattedUv, frmSI.cmbUV, "catchDate", "catchActivity_ID", "Select catcher")
     End Sub
