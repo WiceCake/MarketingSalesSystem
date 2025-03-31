@@ -513,7 +513,7 @@ Public Class ctrlSales
             .catchActivity_ID = ca.catchActivity_ID,
             .catchDate = ca.catchDate.ToString("yyyy-MM-dd")}).ToList()
 
-        lookUpTransMode(formattedUv, frmSI.cmbUV, "catchDate", "catchActivity_ID", "Select unloading vessel")
+        lookUpTransMode(formattedUv, frmSI.cmbUV, "catchDate", "catchActivity_ID", "Select catcher")
     End Sub
 
     Sub changeBuyerInput()
