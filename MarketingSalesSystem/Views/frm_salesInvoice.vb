@@ -36,11 +36,6 @@ Public Class frm_salesInvoice
         End If
     End Sub
 
-
-    Private Sub GridControl1_Load(sender As Object, e As EventArgs) Handles GridControl1.Load
-
-    End Sub
-
     Sub createBands(count As Integer, catcherID As Integer)
         Dim mkdb As New mkdbDataContext
 
@@ -49,12 +44,12 @@ Public Class frm_salesInvoice
             Where(Function(j) j.catchActivity_ID = catcherID).
             Select(Function(j) j.vessel_ID).ToList()
 
-        Dim bandClass = AddBand("Class", BandedGridView1)
-        Dim bandSize = AddBand("Size", BandedGridView1)
-        Dim bandPrice = AddBand("Price", BandedGridView1)
-        Dim bandAU = AddBand("Actual Unloading", BandedGridView1)
-        Dim bandSpoilage = AddBand("Spoilage", BandedGridView1)
-        Dim bandNet = AddBand("Net", BandedGridView1)
+        Dim bandClass = AddBand("Class", BandedGridView3)
+        Dim bandSize = AddBand("Size", BandedGridView3)
+        Dim bandPrice = AddBand("Price", BandedGridView3)
+        Dim bandAU = AddBand("Actual Unloading", BandedGridView3)
+        Dim bandSpoilage = AddBand("Spoilage", BandedGridView3)
+        Dim bandNet = AddBand("Net", BandedGridView3)
         ' Testing Trace
 
         ' ---- Actual Unloading ----
@@ -81,9 +76,10 @@ Public Class frm_salesInvoice
         populateBand(bandNAmount, catchers)
         Dim bandNATotal = AddBand("Total", bandNAmount) ' Restored Total band
 
+        BandedGridView3.PopulateColumns()
+
         ' ---- Assign Columns to Bands ----
-        With BandedGridView1
-            .PopulateColumns()
+        With BandedGridView3
 
             .Columns("Class").OwnerBand = bandClass
             .Columns("Size").OwnerBand = bandSize
@@ -117,11 +113,11 @@ Public Class frm_salesInvoice
             .OptionsView.ShowFooter = True
 
             ' ---- Align Headers & Columns ----
-            For Each band As DevExpress.XtraGrid.Views.BandedGrid.GridBand In BandedGridView1.Bands
+            For Each band As DevExpress.XtraGrid.Views.BandedGrid.GridBand In BandedGridView3.Bands
                 SetHeaderAlignment(band)
             Next
 
-            For Each col As BandedGridColumn In BandedGridView1.Columns
+            For Each col As BandedGridColumn In BandedGridView3.Columns
                 col.Width = 100
             Next
 
@@ -152,7 +148,7 @@ Public Class frm_salesInvoice
         Dim countBand = 1
         For Each band As GridBand In parentBand.Children
             If band.Caption IsNot "Total" Then
-                With BandedGridView1.Columns(caption & countBand)
+                With BandedGridView3.Columns(caption & countBand)
                     .OwnerBand = band
                     .UnboundType = DevExpress.Data.UnboundColumnType.Decimal
                     If isReadOnly Then .OptionsColumn.ReadOnly = True
@@ -184,7 +180,7 @@ Public Class frm_salesInvoice
         Return band
     End Function
 
-    Private Sub BandedGridView1_CellValueChanged(sender As Object, e As Views.Base.CellValueChangedEventArgs) Handles BandedGridView1.CellValueChanged
+    Private Sub BandedGridView3_CellValueChanged(sender As Object, e As Views.Base.CellValueChangedEventArgs) Handles BandedGridView3.CellValueChanged
         Dim view As BandedGridView = TryCast(sender, DevExpress.XtraGrid.Views.BandedGrid.BandedGridView)
         If view Is Nothing Then
             Return
@@ -198,67 +194,6 @@ Public Class frm_salesInvoice
         ctrlSales.updateTotal(r.Row)
     End Sub
 
-    Private Sub GridControl2_Load(sender As Object, e As EventArgs) Handles GridControl2.Load
-        Dim bandCatcher = AddBand("Catcher", BandedGridView2)
-        Dim bandTonnage = AddBand("Tonnage", BandedGridView2)
-        Dim bandKilos = AddBand("Kilos", BandedGridView2)
-        Dim bandAmount = AddBand("Amount", BandedGridView2)
-
-        Dim bandCCP = AddBand("Catcher Partial", bandTonnage)
-        Dim bandCAQ = AddBand("Actual Qty", bandTonnage)
-
-        Dim bandKAQ = AddBand("Actual Qty", bandKilos)
-        Dim bandKF = AddBand("FishMeal", bandKilos)
-        Dim bandKS = AddBand("Spoilage", bandKilos)
-        Dim bandKN = AddBand("Net", bandKilos)
-
-        Dim bandAAQ = AddBand("Actual Qty", bandAmount)
-        Dim bandAF = AddBand("FishMeal", bandAmount)
-        Dim bandAS = AddBand("Spoilage", bandAmount)
-        Dim bandAN_USD = AddBand("Net In USD", bandAmount)
-        Dim bandAN_PHP = AddBand("Net In PHP", bandAmount)
-        Dim bandAAP = AddBand("Average Price per Catcher", bandAmount)
-
-
-        With BandedGridView2
-            .PopulateColumns()
-
-            .Columns("Catcher").OwnerBand = bandCatcher
-            .Columns("T_CatcherPartial").OwnerBand = bandTonnage
-            .Columns("T_ActualQty").OwnerBand = bandTonnage
-            .Columns("K_ActualQty").OwnerBand = bandKilos
-            .Columns("K_Fishmeal").OwnerBand = bandKilos
-            .Columns("K_Spoilage").OwnerBand = bandKilos
-            .Columns("K_Net").OwnerBand = bandKilos
-            .Columns("A_ActualQty").OwnerBand = bandAmount
-            .Columns("A_Fishmeal").OwnerBand = bandAmount
-            .Columns("A_Spoilage").OwnerBand = bandAmount
-            .Columns("A_NetUSD").OwnerBand = bandAmount
-            .Columns("A_NetPHP").OwnerBand = bandAmount
-            .Columns("A_AveragePrice").OwnerBand = bandAmount
-
-        End With
-
-        BandedGridView2.OptionsView.ShowFooter = True
-
-        For Each band As DevExpress.XtraGrid.Views.BandedGrid.GridBand In BandedGridView2.Bands
-            SetHeaderAlignment(band)
-        Next
-
-        With BandedGridView2
-            .Columns("T_ActualQty").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
-            .Columns("K_ActualQty").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
-            .Columns("K_Net").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
-            .Columns("A_ActualQty").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
-            .Columns("A_NetUSD").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
-            .Columns("A_NetPHP").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
-            .Columns("A_AveragePrice").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
-
-            .BestFitColumns()
-            .OptionsView.ColumnAutoWidth = False
-            .OptionsView.ShowColumnHeaders = False
-        End With
-    End Sub
 
     Private Sub btnSave_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnSave.ItemClick
         confirmClose = False ' Prevent FormClosing interference
@@ -279,7 +214,6 @@ Public Class frm_salesInvoice
         If Not catchDeliveryNum Then missingFields.AppendLine("Catch Delivery Number")
         If Not usdRate Then missingFields.AppendLine("USD Rate")
         If Not contactNum Then missingFields.AppendLine("Contact Number")
-        If Not remark Then missingFields.AppendLine("Remarks")
 
         If CInt(rBT.EditValue) = 1 Then
             If validateField(txtBuyer) Then buyerName = txtBuyer.Text : buyerID = Nothing _
@@ -321,11 +255,11 @@ Public Class frm_salesInvoice
     End Sub
 
     Private Sub cmbUV_EditValueChanged(sender As Object, e As EventArgs) Handles cmbUV.EditValueChanged
-        BandedGridView1.Bands.Clear()
+        BandedGridView3.Bands.Clear()
         Dim catcher = CType(sender, DevExpress.XtraEditors.LookUpEdit)
         'Debug.WriteLine(catcher.EditValue)
         ctrlSales.initSalesDataTable(CInt(catcher.EditValue))
-        GridControl1.DataSource = dt
+        GridControl3.DataSource = dt
         createBands(rowCount, CInt(catcher.EditValue))
         ctrlSales.loadRows()
 
@@ -339,4 +273,7 @@ Public Class frm_salesInvoice
         txtCDNum.EditValue = getValue
     End Sub
 
+    Private Sub GridControl3_Load(sender As Object, e As EventArgs) Handles GridControl3.Load
+
+    End Sub
 End Class

@@ -1,3 +1,8 @@
+D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\MarketingSalesSystem.exe.config
+D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\MarketingSalesSystem.exe
+D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\MarketingSalesSystem.pdb
+D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.frm_catchActivity.resources
+D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.ucCatcher.resources
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.ucSales.resources
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.ucWeightSlip.resources
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.frmMain.resources
@@ -6,11 +11,5 @@ D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.frm_
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.ucBase.resources
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.vbproj.GenerateResource.Cache
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.exe.licenses
-D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\MarketingSalesSystem.exe.config
-D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\MarketingSalesSystem.exe
-D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\MarketingSalesSystem.pdb
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.exe
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.pdb
-D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.frm_catchActivity.resources
-D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.ucCatcher.resources
-D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.vbprojResolveAssemblyReference.cache
