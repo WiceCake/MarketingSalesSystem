@@ -87,9 +87,14 @@ Public Class ucSales
 
 
         '.Vessels = (From j In catchList Where s.salesReport_ID = j.s.salesReport_ID Select j.v.vesselName).Distinct.ToList,
+        'Hakdoggggg
 
         gridView.GridControl.DataSource = salesData
         gridView.PopulateColumns()
+
+        ' Enable footer
+        gridView.OptionsView.ShowFooter = True
+
         gridTransMode(gridView)
     End Sub
 
