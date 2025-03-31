@@ -7,7 +7,8 @@
       <Column Name="method_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="longitude" Type="System.Decimal" DbType="Decimal(9,6) NOT NULL" CanBeNull="false" />
       <Column Name="latitude" Type="System.Decimal" DbType="Decimal(9,6) NOT NULL" CanBeNull="false" />
-      <Column Name="catchReferenceNum" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="catchReferenceNum" Type="System.String" DbType="VarChar(13) NOT NULL" CanBeNull="false" />
+      <Column Name="approvalStatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.trans_WeightSlipDetails" Member="trans_WeightSlipDetails">
@@ -67,7 +68,7 @@
   <Table Name="dbo.trans_SalesReport" Member="trans_SalesReports">
     <Type Name="trans_SalesReport">
       <Column Name="salesReport_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="referenceNum" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="referenceNum" Type="System.String" DbType="VarChar(13) NOT NULL" CanBeNull="false" />
       <Column Name="salesDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="salesNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="sellingType" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
@@ -150,17 +151,17 @@
   <Table Name="dbo.trans_SalesReportSummary" Member="trans_SalesReportSummaries">
     <Type Name="trans_SalesReportSummary">
       <Column Name="salesReportSummary_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="salesReport_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="vessel_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="catchersPartialQty" Type="System.Decimal" DbType="Decimal(10,5)" CanBeNull="true" />
-      <Column Name="catchersPartialUnloadedQty" Type="System.Decimal" DbType="Decimal(10,5)" CanBeNull="true" />
-      <Column Name="catchersActualUnloadedQty" Type="System.Decimal" DbType="Decimal(10,5)" CanBeNull="true" />
-      <Column Name="actualQtyInKilos" Type="System.Decimal" DbType="Decimal(10,5)" CanBeNull="true" />
-      <Column Name="fishmealInKilos" Type="System.Decimal" DbType="Decimal(10,5)" CanBeNull="true" />
-      <Column Name="spoilageInKilos" Type="System.Decimal" DbType="Decimal(10,5)" CanBeNull="true" />
-      <Column Name="actualQtyInAmount" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
-      <Column Name="fishmealInAmount" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
-      <Column Name="spoilageInAmount" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="salesReport_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vessel_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="catchersPartialQty" Type="System.Decimal" DbType="Decimal(10,5) NOT NULL" CanBeNull="false" />
+      <Column Name="catchersPartialUnloadedQty" Type="System.Decimal" DbType="Decimal(10,5) NOT NULL" CanBeNull="false" />
+      <Column Name="catchersActualUnloadedQty" Type="System.Decimal" DbType="Decimal(10,5) NOT NULL" CanBeNull="false" />
+      <Column Name="actualQtyInKilos" Type="System.Decimal" DbType="Decimal(10,5) NOT NULL" CanBeNull="false" />
+      <Column Name="fishmealInKilos" Type="System.Decimal" DbType="Decimal(10,5) NOT NULL" CanBeNull="false" />
+      <Column Name="spoilageInKilos" Type="System.Decimal" DbType="Decimal(10,5) NOT NULL" CanBeNull="false" />
+      <Column Name="actualQtyInAmount" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="fishmealInAmount" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="spoilageInAmount" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.trans_SalesReportWeightSlips" Member="trans_SalesReportWeightSlips">

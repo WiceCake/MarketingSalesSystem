@@ -5,6 +5,7 @@
     Public longitude As Decimal
     Public latitude As Decimal
     Public catchReferenceNum As String
+    Public approvalStatus As Integer
 
     Private dc As mkdbDataContext
 
@@ -24,6 +25,7 @@
             longitude = i.longitude
             latitude = i.latitude
             catchReferenceNum = i.catchReferenceNum
+            approvalStatus = i.approvalStatus
         Next
 
     End Sub
@@ -39,6 +41,7 @@
         longitude = i.longitude
         latitude = i.latitude
         catchReferenceNum = i.catchReferenceNum
+        approvalStatus = i.approvalStatus
     End Sub
 
     Sub Add()
@@ -50,6 +53,7 @@
             .longitude = longitude
             .latitude = latitude
             .catchReferenceNum = catchReferenceNum
+            .approvalStatus = approvalStatus
         End With
 
         dc.trans_CatchActivities.InsertOnSubmit(ca)
@@ -67,6 +71,7 @@
             i.catchReferenceNum = catchReferenceNum
             i.latitude = latitude
             i.longitude = longitude
+            i.approvalStatus = approvalStatus
         Next
     End Sub
 

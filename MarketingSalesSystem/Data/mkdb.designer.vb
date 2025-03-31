@@ -209,6 +209,8 @@ Partial Public Class trans_CatchActivity
 	
 	Private _catchReferenceNum As String
 	
+	Private _approvalStatus As Integer
+	
     #Region "Extensibility Method Definitions"
     Partial Private Sub OnLoaded()
     End Sub
@@ -239,6 +241,10 @@ Partial Public Class trans_CatchActivity
     Partial Private Sub OncatchReferenceNumChanging(value As String)
     End Sub
     Partial Private Sub OncatchReferenceNumChanged()
+    End Sub
+    Partial Private Sub OnapprovalStatusChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnapprovalStatusChanged()
     End Sub
     #End Region
 	
@@ -332,7 +338,7 @@ Partial Public Class trans_CatchActivity
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchReferenceNum", DbType:="VarChar(12) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchReferenceNum", DbType:="VarChar(13) NOT NULL", CanBeNull:=false)>  _
 	Public Property catchReferenceNum() As String
 		Get
 			Return Me._catchReferenceNum
@@ -344,6 +350,23 @@ Partial Public Class trans_CatchActivity
 				Me._catchReferenceNum = value
 				Me.SendPropertyChanged("catchReferenceNum")
 				Me.OncatchReferenceNumChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_approvalStatus", DbType:="Int NOT NULL")>  _
+	Public Property approvalStatus() As Integer
+		Get
+			Return Me._approvalStatus
+		End Get
+		Set
+			If ((Me._approvalStatus = value)  _
+						= false) Then
+				Me.OnapprovalStatusChanging(value)
+				Me.SendPropertyChanging
+				Me._approvalStatus = value
+				Me.SendPropertyChanged("approvalStatus")
+				Me.OnapprovalStatusChanged
 			End If
 		End Set
 	End Property
@@ -1546,7 +1569,7 @@ Partial Public Class trans_SalesReport
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_referenceNum", DbType:="VarChar(12) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_referenceNum", DbType:="VarChar(13) NOT NULL", CanBeNull:=false)>  _
 	Public Property referenceNum() As String
 		Get
 			Return Me._referenceNum
@@ -3161,27 +3184,27 @@ Partial Public Class trans_SalesReportSummary
 	
 	Private _salesReportSummary_ID As Integer
 	
-	Private _salesReport_ID As System.Nullable(Of Integer)
+	Private _salesReport_ID As Integer
 	
-	Private _vessel_ID As System.Nullable(Of Integer)
+	Private _vessel_ID As Integer
 	
-	Private _catchersPartialQty As System.Nullable(Of Decimal)
+	Private _catchersPartialQty As Decimal
 	
-	Private _catchersPartialUnloadedQty As System.Nullable(Of Decimal)
+	Private _catchersPartialUnloadedQty As Decimal
 	
-	Private _catchersActualUnloadedQty As System.Nullable(Of Decimal)
+	Private _catchersActualUnloadedQty As Decimal
 	
-	Private _actualQtyInKilos As System.Nullable(Of Decimal)
+	Private _actualQtyInKilos As Decimal
 	
-	Private _fishmealInKilos As System.Nullable(Of Decimal)
+	Private _fishmealInKilos As Decimal
 	
-	Private _spoilageInKilos As System.Nullable(Of Decimal)
+	Private _spoilageInKilos As Decimal
 	
-	Private _actualQtyInAmount As System.Nullable(Of Decimal)
+	Private _actualQtyInAmount As Decimal
 	
-	Private _fishmealInAmount As System.Nullable(Of Decimal)
+	Private _fishmealInAmount As Decimal
 	
-	Private _spoilageInAmount As System.Nullable(Of Decimal)
+	Private _spoilageInAmount As Decimal
 	
     #Region "Extensibility Method Definitions"
     Partial Private Sub OnLoaded()
@@ -3194,47 +3217,47 @@ Partial Public Class trans_SalesReportSummary
     End Sub
     Partial Private Sub OnsalesReportSummary_IDChanged()
     End Sub
-    Partial Private Sub OnsalesReport_IDChanging(value As System.Nullable(Of Integer))
+    Partial Private Sub OnsalesReport_IDChanging(value As Integer)
     End Sub
     Partial Private Sub OnsalesReport_IDChanged()
     End Sub
-    Partial Private Sub Onvessel_IDChanging(value As System.Nullable(Of Integer))
+    Partial Private Sub Onvessel_IDChanging(value As Integer)
     End Sub
     Partial Private Sub Onvessel_IDChanged()
     End Sub
-    Partial Private Sub OncatchersPartialQtyChanging(value As System.Nullable(Of Decimal))
+    Partial Private Sub OncatchersPartialQtyChanging(value As Decimal)
     End Sub
     Partial Private Sub OncatchersPartialQtyChanged()
     End Sub
-    Partial Private Sub OncatchersPartialUnloadedQtyChanging(value As System.Nullable(Of Decimal))
+    Partial Private Sub OncatchersPartialUnloadedQtyChanging(value As Decimal)
     End Sub
     Partial Private Sub OncatchersPartialUnloadedQtyChanged()
     End Sub
-    Partial Private Sub OncatchersActualUnloadedQtyChanging(value As System.Nullable(Of Decimal))
+    Partial Private Sub OncatchersActualUnloadedQtyChanging(value As Decimal)
     End Sub
     Partial Private Sub OncatchersActualUnloadedQtyChanged()
     End Sub
-    Partial Private Sub OnactualQtyInKilosChanging(value As System.Nullable(Of Decimal))
+    Partial Private Sub OnactualQtyInKilosChanging(value As Decimal)
     End Sub
     Partial Private Sub OnactualQtyInKilosChanged()
     End Sub
-    Partial Private Sub OnfishmealInKilosChanging(value As System.Nullable(Of Decimal))
+    Partial Private Sub OnfishmealInKilosChanging(value As Decimal)
     End Sub
     Partial Private Sub OnfishmealInKilosChanged()
     End Sub
-    Partial Private Sub OnspoilageInKilosChanging(value As System.Nullable(Of Decimal))
+    Partial Private Sub OnspoilageInKilosChanging(value As Decimal)
     End Sub
     Partial Private Sub OnspoilageInKilosChanged()
     End Sub
-    Partial Private Sub OnactualQtyInAmountChanging(value As System.Nullable(Of Decimal))
+    Partial Private Sub OnactualQtyInAmountChanging(value As Decimal)
     End Sub
     Partial Private Sub OnactualQtyInAmountChanged()
     End Sub
-    Partial Private Sub OnfishmealInAmountChanging(value As System.Nullable(Of Decimal))
+    Partial Private Sub OnfishmealInAmountChanging(value As Decimal)
     End Sub
     Partial Private Sub OnfishmealInAmountChanged()
     End Sub
-    Partial Private Sub OnspoilageInAmountChanging(value As System.Nullable(Of Decimal))
+    Partial Private Sub OnspoilageInAmountChanging(value As Decimal)
     End Sub
     Partial Private Sub OnspoilageInAmountChanged()
     End Sub
@@ -3262,13 +3285,14 @@ Partial Public Class trans_SalesReportSummary
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesReport_ID", DbType:="Int")>  _
-	Public Property salesReport_ID() As System.Nullable(Of Integer)
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesReport_ID", DbType:="Int NOT NULL")>  _
+	Public Property salesReport_ID() As Integer
 		Get
 			Return Me._salesReport_ID
 		End Get
 		Set
-			If (Me._salesReport_ID.Equals(value) = false) Then
+			If ((Me._salesReport_ID = value)  _
+						= false) Then
 				Me.OnsalesReport_IDChanging(value)
 				Me.SendPropertyChanging
 				Me._salesReport_ID = value
@@ -3278,13 +3302,14 @@ Partial Public Class trans_SalesReportSummary
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_vessel_ID", DbType:="Int")>  _
-	Public Property vessel_ID() As System.Nullable(Of Integer)
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_vessel_ID", DbType:="Int NOT NULL")>  _
+	Public Property vessel_ID() As Integer
 		Get
 			Return Me._vessel_ID
 		End Get
 		Set
-			If (Me._vessel_ID.Equals(value) = false) Then
+			If ((Me._vessel_ID = value)  _
+						= false) Then
 				Me.Onvessel_IDChanging(value)
 				Me.SendPropertyChanging
 				Me._vessel_ID = value
@@ -3294,13 +3319,14 @@ Partial Public Class trans_SalesReportSummary
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchersPartialQty", DbType:="Decimal(10,5)")>  _
-	Public Property catchersPartialQty() As System.Nullable(Of Decimal)
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchersPartialQty", DbType:="Decimal(10,5) NOT NULL")>  _
+	Public Property catchersPartialQty() As Decimal
 		Get
 			Return Me._catchersPartialQty
 		End Get
 		Set
-			If (Me._catchersPartialQty.Equals(value) = false) Then
+			If ((Me._catchersPartialQty = value)  _
+						= false) Then
 				Me.OncatchersPartialQtyChanging(value)
 				Me.SendPropertyChanging
 				Me._catchersPartialQty = value
@@ -3310,13 +3336,14 @@ Partial Public Class trans_SalesReportSummary
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchersPartialUnloadedQty", DbType:="Decimal(10,5)")>  _
-	Public Property catchersPartialUnloadedQty() As System.Nullable(Of Decimal)
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchersPartialUnloadedQty", DbType:="Decimal(10,5) NOT NULL")>  _
+	Public Property catchersPartialUnloadedQty() As Decimal
 		Get
 			Return Me._catchersPartialUnloadedQty
 		End Get
 		Set
-			If (Me._catchersPartialUnloadedQty.Equals(value) = false) Then
+			If ((Me._catchersPartialUnloadedQty = value)  _
+						= false) Then
 				Me.OncatchersPartialUnloadedQtyChanging(value)
 				Me.SendPropertyChanging
 				Me._catchersPartialUnloadedQty = value
@@ -3326,13 +3353,14 @@ Partial Public Class trans_SalesReportSummary
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchersActualUnloadedQty", DbType:="Decimal(10,5)")>  _
-	Public Property catchersActualUnloadedQty() As System.Nullable(Of Decimal)
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchersActualUnloadedQty", DbType:="Decimal(10,5) NOT NULL")>  _
+	Public Property catchersActualUnloadedQty() As Decimal
 		Get
 			Return Me._catchersActualUnloadedQty
 		End Get
 		Set
-			If (Me._catchersActualUnloadedQty.Equals(value) = false) Then
+			If ((Me._catchersActualUnloadedQty = value)  _
+						= false) Then
 				Me.OncatchersActualUnloadedQtyChanging(value)
 				Me.SendPropertyChanging
 				Me._catchersActualUnloadedQty = value
@@ -3342,13 +3370,14 @@ Partial Public Class trans_SalesReportSummary
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_actualQtyInKilos", DbType:="Decimal(10,5)")>  _
-	Public Property actualQtyInKilos() As System.Nullable(Of Decimal)
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_actualQtyInKilos", DbType:="Decimal(10,5) NOT NULL")>  _
+	Public Property actualQtyInKilos() As Decimal
 		Get
 			Return Me._actualQtyInKilos
 		End Get
 		Set
-			If (Me._actualQtyInKilos.Equals(value) = false) Then
+			If ((Me._actualQtyInKilos = value)  _
+						= false) Then
 				Me.OnactualQtyInKilosChanging(value)
 				Me.SendPropertyChanging
 				Me._actualQtyInKilos = value
@@ -3358,13 +3387,14 @@ Partial Public Class trans_SalesReportSummary
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_fishmealInKilos", DbType:="Decimal(10,5)")>  _
-	Public Property fishmealInKilos() As System.Nullable(Of Decimal)
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_fishmealInKilos", DbType:="Decimal(10,5) NOT NULL")>  _
+	Public Property fishmealInKilos() As Decimal
 		Get
 			Return Me._fishmealInKilos
 		End Get
 		Set
-			If (Me._fishmealInKilos.Equals(value) = false) Then
+			If ((Me._fishmealInKilos = value)  _
+						= false) Then
 				Me.OnfishmealInKilosChanging(value)
 				Me.SendPropertyChanging
 				Me._fishmealInKilos = value
@@ -3374,13 +3404,14 @@ Partial Public Class trans_SalesReportSummary
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_spoilageInKilos", DbType:="Decimal(10,5)")>  _
-	Public Property spoilageInKilos() As System.Nullable(Of Decimal)
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_spoilageInKilos", DbType:="Decimal(10,5) NOT NULL")>  _
+	Public Property spoilageInKilos() As Decimal
 		Get
 			Return Me._spoilageInKilos
 		End Get
 		Set
-			If (Me._spoilageInKilos.Equals(value) = false) Then
+			If ((Me._spoilageInKilos = value)  _
+						= false) Then
 				Me.OnspoilageInKilosChanging(value)
 				Me.SendPropertyChanging
 				Me._spoilageInKilos = value
@@ -3390,13 +3421,14 @@ Partial Public Class trans_SalesReportSummary
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_actualQtyInAmount", DbType:="Decimal(10,2)")>  _
-	Public Property actualQtyInAmount() As System.Nullable(Of Decimal)
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_actualQtyInAmount", DbType:="Decimal(10,2) NOT NULL")>  _
+	Public Property actualQtyInAmount() As Decimal
 		Get
 			Return Me._actualQtyInAmount
 		End Get
 		Set
-			If (Me._actualQtyInAmount.Equals(value) = false) Then
+			If ((Me._actualQtyInAmount = value)  _
+						= false) Then
 				Me.OnactualQtyInAmountChanging(value)
 				Me.SendPropertyChanging
 				Me._actualQtyInAmount = value
@@ -3406,13 +3438,14 @@ Partial Public Class trans_SalesReportSummary
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_fishmealInAmount", DbType:="Decimal(10,2)")>  _
-	Public Property fishmealInAmount() As System.Nullable(Of Decimal)
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_fishmealInAmount", DbType:="Decimal(10,2) NOT NULL")>  _
+	Public Property fishmealInAmount() As Decimal
 		Get
 			Return Me._fishmealInAmount
 		End Get
 		Set
-			If (Me._fishmealInAmount.Equals(value) = false) Then
+			If ((Me._fishmealInAmount = value)  _
+						= false) Then
 				Me.OnfishmealInAmountChanging(value)
 				Me.SendPropertyChanging
 				Me._fishmealInAmount = value
@@ -3422,13 +3455,14 @@ Partial Public Class trans_SalesReportSummary
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_spoilageInAmount", DbType:="Decimal(10,2)")>  _
-	Public Property spoilageInAmount() As System.Nullable(Of Decimal)
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_spoilageInAmount", DbType:="Decimal(10,2) NOT NULL")>  _
+	Public Property spoilageInAmount() As Decimal
 		Get
 			Return Me._spoilageInAmount
 		End Get
 		Set
-			If (Me._spoilageInAmount.Equals(value) = false) Then
+			If ((Me._spoilageInAmount = value)  _
+						= false) Then
 				Me.OnspoilageInAmountChanging(value)
 				Me.SendPropertyChanging
 				Me._spoilageInAmount = value
