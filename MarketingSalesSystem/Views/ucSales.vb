@@ -90,6 +90,10 @@ Public Class ucSales
 
         gridView.GridControl.DataSource = salesData
         gridView.PopulateColumns()
+
+        ' Enable footer
+        gridView.OptionsView.ShowFooter = True
+
         gridTransMode(gridView)
     End Sub
 
