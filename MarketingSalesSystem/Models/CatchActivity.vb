@@ -130,7 +130,9 @@
     End Function
 
     Function GenerateRefNum() As String
-        Dim yearMonth = Date.Now.Year & Date.Now.Month.ToString("D2") ' Ensure proper formatting (YYYYMM)
+        Dim yearMonth = Date.Now.ToString("yyyyMM")
+        'Dim yearMonth = Date.Now.Year & Date.Now.Month
+
         Dim prefix As String = "CA-" & yearMonth
 
         Dim lastRef = (From sr In dc.trans_CatchActivities
@@ -138,16 +140,19 @@
                        Order By sr.catchReferenceNum Descending
                        Select sr.catchReferenceNum).FirstOrDefault()
 
-        Dim newNum As Integer = 1 ' Start at 1 by default
+        Dim newNum As Integer
 
         If lastRef IsNot Nothing Then
-            Dim lastNumStr As String = lastRef.Substring(9)
+            Dim lastNumStr As String = lastRef.Substring(9) ' Get the part after "SR-YYYYMM"
             Dim lastNum As Integer
             If Integer.TryParse(lastNumStr, lastNum) Then
-                newNum = lastNum + 1
+                newNum = lastNum + 1 ' Increment the last number
             End If
+        Else
+            newNum = 1 ' Start from 1 if no previous reference number exists
         End If
 
-        Return String.Format("CA-{0}{1:D3}", yearMonth, newNum)
+        Return String.Format("{0}{1:D3}", prefix, newNum)
+        'Return String.Format("CA-{0}{1:D3}", yearMonth, newNum)
     End Function
 End Class

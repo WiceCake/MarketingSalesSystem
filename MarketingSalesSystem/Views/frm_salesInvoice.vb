@@ -195,7 +195,6 @@ Public Class frm_salesInvoice
         ctrlSales.updateTotal(r.Row)
     End Sub
 
-
     Private Sub btnSave_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnSave.ItemClick
         confirmClose = False ' Prevent FormClosing interference
         Dim dateCreated = validateField(dtCreated)
