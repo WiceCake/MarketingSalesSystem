@@ -31,6 +31,18 @@
         vessel_ID = i.vessel_ID
     End Sub
 
+    Function getRows() As List(Of CatchActivityDetail)
+        Dim cadList As New List(Of CatchActivityDetail)
+
+        Dim cads = From item In dc.trans_CatchActivityDetails Select item
+
+        For Each cad In cads
+            cadList.Add(New CatchActivityDetail(cad, dc))
+        Next
+
+        Return cadList
+    End Function
+
     Sub Add()
         Dim cad As New trans_CatchActivityDetail
 
@@ -44,17 +56,16 @@
         Me.catchActivityDetail_ID = cad.catchActivityDetail_ID
     End Sub
 
-    Function getRows() As List(Of CatchActivityDetail)
-        Dim cadList As New List(Of CatchActivityDetail)
+    Sub Save()
+        Dim cad = From i In dc.trans_CatchActivityDetails Where i.catchActivityDetail_ID = catchActivityDetail_ID Select i
 
-        Dim cads = From item In dc.trans_CatchActivityDetails Select item
-
-        For Each cad In cads
-            cadList.Add(New CatchActivityDetail(cad, dc))
+        For Each i In cad
+            i.catchActivityDetail_ID = catchActivityDetail_ID
+            i.catchActivity_ID = catchActivity_ID
+            i.vessel_ID = vessel_ID
+            dc.SubmitChanges()
         Next
-
-        Return cadList
-    End Function
+    End Sub
 
     Sub Delete()
         Dim sca = From i In dc.trans_CatchActivityDetails Where i.catchActivity_ID = catchActivity_ID Select i
