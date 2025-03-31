@@ -198,67 +198,67 @@ Public Class frm_salesInvoice
         ctrlSales.updateTotal(r.Row)
     End Sub
 
-    Private Sub GridControl2_Load(sender As Object, e As EventArgs) Handles GridControl2.Load
-        Dim bandCatcher = AddBand("Catcher", BandedGridView2)
-        Dim bandTonnage = AddBand("Tonnage", BandedGridView2)
-        Dim bandKilos = AddBand("Kilos", BandedGridView2)
-        Dim bandAmount = AddBand("Amount", BandedGridView2)
+    'Private Sub GridControl2_Load(sender As Object, e As EventArgs) Handles GridControl2.Load
+    '    Dim bandCatcher = AddBand("Catcher", BandedGridView2)
+    '    Dim bandTonnage = AddBand("Tonnage", BandedGridView2)
+    '    Dim bandKilos = AddBand("Kilos", BandedGridView2)
+    '    Dim bandAmount = AddBand("Amount", BandedGridView2)
 
-        Dim bandCCP = AddBand("Catcher Partial", bandTonnage)
-        Dim bandCAQ = AddBand("Actual Qty", bandTonnage)
+    '    Dim bandCCP = AddBand("Catcher Partial", bandTonnage)
+    '    Dim bandCAQ = AddBand("Actual Qty", bandTonnage)
 
-        Dim bandKAQ = AddBand("Actual Qty", bandKilos)
-        Dim bandKF = AddBand("FishMeal", bandKilos)
-        Dim bandKS = AddBand("Spoilage", bandKilos)
-        Dim bandKN = AddBand("Net", bandKilos)
+    '    Dim bandKAQ = AddBand("Actual Qty", bandKilos)
+    '    Dim bandKF = AddBand("FishMeal", bandKilos)
+    '    Dim bandKS = AddBand("Spoilage", bandKilos)
+    '    Dim bandKN = AddBand("Net", bandKilos)
 
-        Dim bandAAQ = AddBand("Actual Qty", bandAmount)
-        Dim bandAF = AddBand("FishMeal", bandAmount)
-        Dim bandAS = AddBand("Spoilage", bandAmount)
-        Dim bandAN_USD = AddBand("Net In USD", bandAmount)
-        Dim bandAN_PHP = AddBand("Net In PHP", bandAmount)
-        Dim bandAAP = AddBand("Average Price per Catcher", bandAmount)
+    '    Dim bandAAQ = AddBand("Actual Qty", bandAmount)
+    '    Dim bandAF = AddBand("FishMeal", bandAmount)
+    '    Dim bandAS = AddBand("Spoilage", bandAmount)
+    '    Dim bandAN_USD = AddBand("Net In USD", bandAmount)
+    '    Dim bandAN_PHP = AddBand("Net In PHP", bandAmount)
+    '    Dim bandAAP = AddBand("Average Price per Catcher", bandAmount)
 
 
-        With BandedGridView2
-            .PopulateColumns()
+    '    With BandedGridView2
+    '        .PopulateColumns()
 
-            .Columns("Catcher").OwnerBand = bandCatcher
-            .Columns("T_CatcherPartial").OwnerBand = bandTonnage
-            .Columns("T_ActualQty").OwnerBand = bandTonnage
-            .Columns("K_ActualQty").OwnerBand = bandKilos
-            .Columns("K_Fishmeal").OwnerBand = bandKilos
-            .Columns("K_Spoilage").OwnerBand = bandKilos
-            .Columns("K_Net").OwnerBand = bandKilos
-            .Columns("A_ActualQty").OwnerBand = bandAmount
-            .Columns("A_Fishmeal").OwnerBand = bandAmount
-            .Columns("A_Spoilage").OwnerBand = bandAmount
-            .Columns("A_NetUSD").OwnerBand = bandAmount
-            .Columns("A_NetPHP").OwnerBand = bandAmount
-            .Columns("A_AveragePrice").OwnerBand = bandAmount
+    '        .Columns("Catcher").OwnerBand = bandCatcher
+    '        .Columns("T_CatcherPartial").OwnerBand = bandTonnage
+    '        .Columns("T_ActualQty").OwnerBand = bandTonnage
+    '        .Columns("K_ActualQty").OwnerBand = bandKilos
+    '        .Columns("K_Fishmeal").OwnerBand = bandKilos
+    '        .Columns("K_Spoilage").OwnerBand = bandKilos
+    '        .Columns("K_Net").OwnerBand = bandKilos
+    '        .Columns("A_ActualQty").OwnerBand = bandAmount
+    '        .Columns("A_Fishmeal").OwnerBand = bandAmount
+    '        .Columns("A_Spoilage").OwnerBand = bandAmount
+    '        .Columns("A_NetUSD").OwnerBand = bandAmount
+    '        .Columns("A_NetPHP").OwnerBand = bandAmount
+    '        .Columns("A_AveragePrice").OwnerBand = bandAmount
 
-        End With
+    '    End With
 
-        BandedGridView2.OptionsView.ShowFooter = True
+    '    BandedGridView2.OptionsView.ShowFooter = True
 
-        For Each band As DevExpress.XtraGrid.Views.BandedGrid.GridBand In BandedGridView2.Bands
-            SetHeaderAlignment(band)
-        Next
+    '    For Each band As DevExpress.XtraGrid.Views.BandedGrid.GridBand In BandedGridView2.Bands
+    '        SetHeaderAlignment(band)
+    '    Next
 
-        With BandedGridView2
-            .Columns("T_ActualQty").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
-            .Columns("K_ActualQty").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
-            .Columns("K_Net").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
-            .Columns("A_ActualQty").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
-            .Columns("A_NetUSD").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
-            .Columns("A_NetPHP").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
-            .Columns("A_AveragePrice").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
+    '    With BandedGridView2
+    '        .Columns("T_ActualQty").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
+    '        .Columns("K_ActualQty").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
+    '        .Columns("K_Net").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
+    '        .Columns("A_ActualQty").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
+    '        .Columns("A_NetUSD").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
+    '        .Columns("A_NetPHP").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
+    '        .Columns("A_AveragePrice").UnboundType = DevExpress.Data.UnboundColumnType.Decimal
 
-            .BestFitColumns()
-            .OptionsView.ColumnAutoWidth = False
-            .OptionsView.ShowColumnHeaders = False
-        End With
-    End Sub
+    '        .BestFitColumns()
+    '        .OptionsView.ColumnAutoWidth = False
+    '        .OptionsView.ShowColumnHeaders = False
+    '    End With
+    'End Sub
 
     Private Sub btnSave_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnSave.ItemClick
         confirmClose = False ' Prevent FormClosing interference
