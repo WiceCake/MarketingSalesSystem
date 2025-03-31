@@ -11,6 +11,7 @@ Public Class ctrlCatchers
     Private ucC As ucCatcher
 
     'Private ucS As ucSales
+    'Kian comment should be on kian-contact-no-srting
 
     Private mkdb As mkdbDataContext
 
