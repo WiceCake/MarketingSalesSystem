@@ -62,9 +62,9 @@
     End Sub
 
     Sub Save()
-        Dim sca = From i In dc.trans_CatchActivities Where i.catchActivity_ID = catchActivity_ID Select i
+        Dim ca = From i In dc.trans_CatchActivities Where i.catchActivity_ID = catchActivity_ID Select i
 
-        For Each i In sca
+        For Each i In ca
             i.catchActivity_ID = catchActivity_ID
             i.catchDate = catchDate
             i.method_ID = method_ID
@@ -72,6 +72,7 @@
             i.latitude = latitude
             i.longitude = longitude
             i.approvalStatus = approvalStatus
+            dc.SubmitChanges()
         Next
     End Sub
 
@@ -80,6 +81,16 @@
 
         For Each i In sca
             dc.trans_CatchActivities.DeleteOnSubmit(i)
+            dc.SubmitChanges()
+        Next
+    End Sub
+
+    Sub Posted()
+        Dim ca = From i In dc.trans_CatchActivities Where i.catchActivity_ID = catchActivity_ID Select i
+
+        For Each i In ca
+            i.catchReferenceNum = GenerateRefNum()
+            i.approvalStatus = approvalStatus
             dc.SubmitChanges()
         Next
     End Sub
@@ -119,8 +130,7 @@
     End Function
 
     Function GenerateRefNum() As String
-        Dim yearMonth = Date.Now.Year & Date.Now.Month
-
+        Dim yearMonth = Date.Now.Year & Date.Now.Month.ToString("D2") ' Ensure proper formatting (YYYYMM)
         Dim prefix As String = "CA-" & yearMonth
 
         Dim lastRef = (From sr In dc.trans_CatchActivities
@@ -128,7 +138,7 @@
                        Order By sr.catchReferenceNum Descending
                        Select sr.catchReferenceNum).FirstOrDefault()
 
-        Dim newNum As Integer
+        Dim newNum As Integer = 1 ' Start at 1 by default
 
         If lastRef IsNot Nothing Then
             Dim lastNumStr As String = lastRef.Substring(9)

@@ -28,10 +28,11 @@ Partial Class frm_catchActivity
         Me.btnPost = New DevExpress.XtraBars.BarButtonItem()
         Me.RibbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
-        Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.ribbonTools = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
         Me.LayoutControl2 = New DevExpress.XtraLayout.LayoutControl()
+        Me.btnDelete1 = New DevExpress.XtraEditors.SimpleButton()
         Me.btnAddCatcher = New DevExpress.XtraEditors.SimpleButton()
         Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -39,6 +40,7 @@ Partial Class frm_catchActivity
         Me.LayoutControlItem6 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.layoutBtnAdd = New DevExpress.XtraLayout.LayoutControlItem()
         Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.layoutBtnDelete = New DevExpress.XtraLayout.LayoutControlItem()
         Me.txtLong = New DevExpress.XtraEditors.TextEdit()
         Me.txtLat = New DevExpress.XtraEditors.TextEdit()
         Me.cmbMethod = New DevExpress.XtraEditors.LookUpEdit()
@@ -52,8 +54,6 @@ Partial Class frm_catchActivity
         Me.EmptySpaceItem4 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.EmptySpaceItem2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.btnDelete1 = New DevExpress.XtraEditors.SimpleButton()
-        Me.layoutBtnDelete = New DevExpress.XtraLayout.LayoutControlItem()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
@@ -65,6 +65,7 @@ Partial Class frm_catchActivity
         CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.layoutBtnAdd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.layoutBtnDelete, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtLong.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtLat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cmbMethod.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -79,7 +80,6 @@ Partial Class frm_catchActivity
         CType(Me.EmptySpaceItem4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.layoutBtnDelete, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
@@ -134,7 +134,7 @@ Partial Class frm_catchActivity
         '
         'RibbonPage1
         '
-        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup1, Me.RibbonPageGroup2})
+        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup1, Me.ribbonTools})
         Me.RibbonPage1.Name = "RibbonPage1"
         Me.RibbonPage1.Text = "Home"
         '
@@ -146,14 +146,14 @@ Partial Class frm_catchActivity
         Me.RibbonPageGroup1.Name = "RibbonPageGroup1"
         Me.RibbonPageGroup1.Text = "Information"
         '
-        'RibbonPageGroup2
+        'ribbonTools
         '
-        Me.RibbonPageGroup2.AllowTextClipping = False
-        Me.RibbonPageGroup2.ItemLinks.Add(Me.btnSave)
-        Me.RibbonPageGroup2.ItemLinks.Add(Me.btnDelete)
-        Me.RibbonPageGroup2.ItemLinks.Add(Me.btnPost)
-        Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
-        Me.RibbonPageGroup2.Text = "Actions"
+        Me.ribbonTools.AllowTextClipping = False
+        Me.ribbonTools.ItemLinks.Add(Me.btnSave)
+        Me.ribbonTools.ItemLinks.Add(Me.btnDelete)
+        Me.ribbonTools.ItemLinks.Add(Me.btnPost)
+        Me.ribbonTools.Name = "ribbonTools"
+        Me.ribbonTools.Text = "Actions"
         '
         'RibbonStatusBar
         '
@@ -192,6 +192,16 @@ Partial Class frm_catchActivity
         Me.LayoutControl2.Size = New System.Drawing.Size(1027, 527)
         Me.LayoutControl2.TabIndex = 8
         Me.LayoutControl2.Text = "LayoutControl2"
+        '
+        'btnDelete1
+        '
+        Me.btnDelete1.ImageOptions.Image = CType(resources.GetObject("btnDelete1.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnDelete1.Location = New System.Drawing.Point(515, 12)
+        Me.btnDelete1.Name = "btnDelete1"
+        Me.btnDelete1.Size = New System.Drawing.Size(248, 38)
+        Me.btnDelete1.StyleController = Me.LayoutControl2
+        Me.btnDelete1.TabIndex = 7
+        Me.btnDelete1.Text = "Delete"
         '
         'btnAddCatcher
         '
@@ -256,6 +266,15 @@ Partial Class frm_catchActivity
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
         Me.EmptySpaceItem1.Size = New System.Drawing.Size(503, 42)
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'layoutBtnDelete
+        '
+        Me.layoutBtnDelete.Control = Me.btnDelete1
+        Me.layoutBtnDelete.Location = New System.Drawing.Point(503, 0)
+        Me.layoutBtnDelete.Name = "layoutBtnDelete"
+        Me.layoutBtnDelete.Size = New System.Drawing.Size(252, 42)
+        Me.layoutBtnDelete.TextSize = New System.Drawing.Size(0, 0)
+        Me.layoutBtnDelete.TextVisible = False
         '
         'txtLong
         '
@@ -385,25 +404,6 @@ Partial Class frm_catchActivity
         Me.LayoutControlItem5.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem5.TextVisible = False
         '
-        'btnDelete1
-        '
-        Me.btnDelete1.ImageOptions.Image = CType(resources.GetObject("SimpleButton1.ImageOptions.Image"), System.Drawing.Image)
-        Me.btnDelete1.Location = New System.Drawing.Point(515, 12)
-        Me.btnDelete1.Name = "btnDelete1"
-        Me.btnDelete1.Size = New System.Drawing.Size(248, 38)
-        Me.btnDelete1.StyleController = Me.LayoutControl2
-        Me.btnDelete1.TabIndex = 7
-        Me.btnDelete1.Text = "Delete"
-        '
-        'layoutBtnDelete
-        '
-        Me.layoutBtnDelete.Control = Me.btnDelete1
-        Me.layoutBtnDelete.Location = New System.Drawing.Point(503, 0)
-        Me.layoutBtnDelete.Name = "layoutBtnDelete"
-        Me.layoutBtnDelete.Size = New System.Drawing.Size(252, 42)
-        Me.layoutBtnDelete.TextSize = New System.Drawing.Size(0, 0)
-        Me.layoutBtnDelete.TextVisible = False
-        '
         'frm_catchActivity
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
@@ -429,6 +429,7 @@ Partial Class frm_catchActivity
         CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.layoutBtnAdd, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.layoutBtnDelete, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtLong.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtLat.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cmbMethod.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -443,7 +444,6 @@ Partial Class frm_catchActivity
         CType(Me.EmptySpaceItem4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.layoutBtnDelete, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -455,7 +455,7 @@ Partial Class frm_catchActivity
     Friend WithEvents RibbonStatusBar As DevExpress.XtraBars.Ribbon.RibbonStatusBar
     Friend WithEvents BarHeaderItem1 As DevExpress.XtraBars.BarHeaderItem
     Friend WithEvents txt_catNum As DevExpress.XtraBars.BarStaticItem
-    Friend WithEvents RibbonPageGroup2 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents ribbonTools As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents btnSave As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents btnDelete As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents btnPost As DevExpress.XtraBars.BarButtonItem
