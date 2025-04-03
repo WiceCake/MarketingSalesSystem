@@ -85,9 +85,6 @@ Public Class ucSales
         Dim layoutCatcherItem As LayoutControlItem = layoutCatcher.AddItem("", gridCatcher)
         layoutBuyerItem.TextVisible = False
         layoutCatcherItem.TextVisible = False
-
-        Dim layoutCatcherItem As LayoutControlItem = layoutCatcher.AddItem("", gridCatcherTest)
-        layoutCatcherItem.TextVisible = False
     End Sub
 
     Private Sub gridBuyerLoaded(sender As Object, e As EventArgs)
