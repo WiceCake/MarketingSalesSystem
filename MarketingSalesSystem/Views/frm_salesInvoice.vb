@@ -38,6 +38,15 @@ Public Class frm_salesInvoice
         End If
     End Sub
 
+    'ADD  FUNCTIONALITY
+    Private Sub rCT_SelectedIndexChanged(sender As Object, e As EventArgs) Handles rCT.SelectedIndexChanged
+        If rCT.SelectedIndex = 0 Then
+            ctrlSales.changeCarrierInput()
+        Else
+            ctrlSales.changeCarrierCombo()
+        End If
+    End Sub
+
     Sub createBands(count As Integer, catcherID As Integer)
         Dim mkdb As New mkdbDataContext
 
@@ -208,21 +217,21 @@ Public Class frm_salesInvoice
         confirmClose = False ' Prevent FormClosing interference
         Dim dateCreated = validateField(dtCreated)
         Dim sellType = validateField(cmbST)
-        Dim unloadingVessel = validateField(cmbUV)
+        Dim Catcher = validateField(cmbUV)
         Dim salesNum = validateField(txtSaleNum)
         Dim catchDeliveryNum = validateField(txtCDNum)
         Dim usdRate = validateField(txtUSD)
-        Dim contactNum = validateField(txtCNum)
+        Dim contractNum = validateField(txtCNum)
         Dim remark = validateField(txtRemark)
 
         Dim missingFields As New StringBuilder()
         If Not dateCreated Then missingFields.AppendLine("Date Created")
         If Not sellType Then missingFields.AppendLine("Sell Type")
-        If Not unloadingVessel Then missingFields.AppendLine("Unloading Vessel") 'Unloading Vessel
+        If Not Catcher Then missingFields.AppendLine("Unloading Vessel") 'Unloading Vessel
         If Not salesNum Then missingFields.AppendLine("Sales Number")
         If Not catchDeliveryNum Then missingFields.AppendLine("Catch Delivery Number")
         If Not usdRate Then missingFields.AppendLine("USD Rate")
-        If Not contactNum Then missingFields.AppendLine("Contact Number")
+        If Not contractNum Then missingFields.AppendLine("Contract Number")
 
         If CInt(rBT.EditValue) = 1 Then
             If validateField(txtBuyer) Then buyerName = txtBuyer.Text : buyerID = Nothing _
@@ -293,8 +302,10 @@ Public Class frm_salesInvoice
         e.Graphics.DrawString("Select catcher to display rows in this grid.", e.Appearance.Font, SystemBrushes.ControlDark, New RectangleF(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height), drawFormat)
     End Sub
 
-    Private Sub GridControl3_Load(sender As Object, e As EventArgs) Handles GridControl3.Load
-
+    Private Sub txtUSD_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUSD.KeyPress
+        If Not Char.IsDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True ' Blocks any non-numeric input, including '-'
+        End If
     End Sub
 
 End Class

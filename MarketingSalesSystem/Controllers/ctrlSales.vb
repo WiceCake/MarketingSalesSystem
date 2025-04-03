@@ -45,6 +45,8 @@ Public Class ctrlSales
             .txtBuyer.Enabled = False
             .lcmbBuyer.Visibility = Utils.LayoutVisibility.Never
             .ltxtBuyer.Visibility = Utils.LayoutVisibility.Never
+            .lcmbCarrier.Visibility = Utils.LayoutVisibility.Never
+            .ltxtCarrier.Visibility = Utils.LayoutVisibility.Never
             .txt_refNum.Caption = "Draft"
             loadCombo()
             .Show()
@@ -580,6 +582,40 @@ Public Class ctrlSales
             .BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         End With
         frmSI.cmbBuyer.Enabled = True
+    End Sub
+    ' CHANGES
+    Sub changeCarrierInput()
+        With frmSI
+            .cmbCarrier.Enabled = False
+            .txtCarrier.Enabled = True
+            .lcmbCarrier.Visibility = Utils.LayoutVisibility.Never
+            .ltxtCarrier.Visibility = Utils.LayoutVisibility.Always
+        End With
+    End Sub
+
+    Sub changeCarrierCombo()
+        With frmSI
+            .cmbCarrier.Enabled = True
+            .txtCarrier.Enabled = False
+            .lcmbCarrier.Visibility = Utils.LayoutVisibility.Always
+            .ltxtCarrier.Visibility = Utils.LayoutVisibility.Never
+        End With
+
+        'Dim carriers = (From i In tpmdb.ml_Suppliers Select
+        '              ID = i.ml_SupID,
+        '              CarrierName = i.ml_Supplier).ToList()
+        'With frmSI.cmbCarrier.Properties
+        '    .DataSource = carriers
+        '    .DisplayMember = "CarrierName"
+        '    .ValueMember = "ID"
+        '    .NullText = "Select a carrier"
+        '    .ShowHeader = False
+        '    .ShowFooter = False
+        '    .Columns.Clear()
+        '    .Columns.Add(New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CarrierName", "Carrier Name"))
+        '    .BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
+        'End With
+        frmSI.cmbCarrier.Enabled = True
     End Sub
 
     Sub initSalesDataTableS()
