@@ -43,6 +43,29 @@
         Return cadList
     End Function
 
+    Function getByDate(Optional ByVal startDate As Date = #1/1/1900#, Optional ByVal endDate As Date = Nothing) As List(Of CatchActivityDetail)
+        If endDate = Nothing Then
+            endDate = Date.Now
+        End If
+
+        If startDate = Nothing Then
+            startDate = #1/1/1900#
+        End If
+
+        Dim cadList As New List(Of CatchActivityDetail)
+
+        Dim cads = From cad In dc.trans_CatchActivityDetails
+                  Join ca In dc.trans_CatchActivities On ca.catchActivity_ID Equals cad.catchActivity_ID
+                   Where ca.catchDate >= startDate.Date AndAlso ca.catchDate <= endDate.Date
+                   Select cad
+
+        For Each cad In cads
+            cadList.Add(New CatchActivityDetail(cad, dc))
+        Next
+
+        Return cadList
+    End Function
+
     Sub Add()
         Dim cad As New trans_CatchActivityDetail
 
@@ -75,4 +98,5 @@
             dc.SubmitChanges()
         Next
     End Sub
+
 End Class

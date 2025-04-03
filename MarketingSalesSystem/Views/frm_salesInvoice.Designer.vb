@@ -36,7 +36,6 @@ Partial Class frm_salesInvoice
         Me.LayoutControl2 = New DevExpress.XtraLayout.LayoutControl()
         Me.GridControl3 = New DevExpress.XtraGrid.GridControl()
         Me.BandedGridView3 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
-        Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.Root = New DevExpress.XtraLayout.LayoutControlGroup()
         Me.LayoutControlItem6 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.txtUSD = New DevExpress.XtraEditors.TextEdit()
@@ -275,16 +274,9 @@ Partial Class frm_salesInvoice
         '
         'BandedGridView3
         '
-        Me.BandedGridView3.Bands.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.GridBand() {Me.GridBand1})
         Me.BandedGridView3.GridControl = Me.GridControl3
         Me.BandedGridView3.Name = "BandedGridView3"
         Me.BandedGridView3.OptionsView.ShowGroupPanel = False
-        '
-        'GridBand1
-        '
-        Me.GridBand1.Caption = "GridBand1"
-        Me.GridBand1.Name = "GridBand1"
-        Me.GridBand1.VisibleIndex = 0
         '
         'Root
         '
@@ -773,7 +765,6 @@ Partial Class frm_salesInvoice
     Friend WithEvents LayoutControlItem13 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents GridControl3 As DevExpress.XtraGrid.GridControl
     Friend WithEvents BandedGridView3 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridView
-    Friend WithEvents GridBand1 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents LayoutControlItem6 As DevExpress.XtraLayout.LayoutControlItem
 
 

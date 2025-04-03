@@ -5,6 +5,7 @@ Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraGrid.Views.BandedGrid
 Imports DevExpress.XtraEditors
 Imports System.Text
+Imports DevExpress.XtraGrid.Views.Base
 
 Public Class frm_salesInvoice
 
@@ -271,6 +272,17 @@ Public Class frm_salesInvoice
 
         'Debug.WriteLine(CInt(catcher.EditValue))
         txtCDNum.EditValue = getValue
+    End Sub
+
+    Private Sub bandedGridView_CustomDrawEmptyForeground(ByVal sender As Object, ByVal e As CustomDrawEventArgs) Handles BandedGridView3.CustomDrawEmptyForeground
+        Dim view As BandedGridView = TryCast(sender, BandedGridView)
+        If view.RowCount <> 0 Then
+            Return
+        End If
+        Dim drawFormat As New StringFormat()
+        drawFormat.LineAlignment = StringAlignment.Center
+        drawFormat.Alignment = drawFormat.LineAlignment
+        e.Graphics.DrawString("Select catcher to display rows in this grid.", e.Appearance.Font, SystemBrushes.ControlDark, New RectangleF(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height), drawFormat)
     End Sub
 
     Private Sub GridControl3_Load(sender As Object, e As EventArgs) Handles GridControl3.Load
