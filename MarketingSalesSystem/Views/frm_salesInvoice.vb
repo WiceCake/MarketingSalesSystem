@@ -6,6 +6,7 @@ Imports DevExpress.XtraGrid.Views.BandedGrid
 Imports DevExpress.XtraEditors
 Imports System.Text
 Imports DevExpress.XtraGrid.Views.Base
+Imports DevExpress.Data
 
 Public Class frm_salesInvoice
 
@@ -107,7 +108,7 @@ Public Class frm_salesInvoice
             .Columns("SA_Total").OptionsColumn.ReadOnly = True
             .Columns("NK_Total").OptionsColumn.ReadOnly = True
             .Columns("NA_Total").OptionsColumn.ReadOnly = True
-            .Columns("NA_Total").Summary.Add(DevExpress.Data.SummaryItemType.Sum, "NA_Total", "Total: {0}")
+            .Columns("NA_Total").Summary.Add(SummaryItemType.Sum, "NA_Total", "Total: {0}")
 
             bandClass.Fixed = Columns.FixedStyle.Left
             bandSize.Fixed = Columns.FixedStyle.Left
@@ -115,9 +116,16 @@ Public Class frm_salesInvoice
             .OptionsView.ShowFooter = True
 
             ' ---- Align Headers & Columns ----
-            For Each band As DevExpress.XtraGrid.Views.BandedGrid.GridBand In BandedGridView3.Bands
+            For Each band As GridBand In .Bands
                 SetHeaderAlignment(band)
             Next
+
+
+            If isPosted Then
+                For Each col As BandedGridColumn In .Columns
+                    col.OptionsColumn.ReadOnly = True
+                Next
+            End If
 
             For Each col As BandedGridColumn In BandedGridView3.Columns
                 col.Width = 100
@@ -288,4 +296,5 @@ Public Class frm_salesInvoice
     Private Sub GridControl3_Load(sender As Object, e As EventArgs) Handles GridControl3.Load
 
     End Sub
+
 End Class

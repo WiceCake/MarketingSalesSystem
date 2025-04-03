@@ -87,6 +87,7 @@ Public Class ucCatcher
 
     Public Overrides Sub openForm()
         Dim ctrlCA = New ctrlCatchers(Me)
+        loadGrid()
     End Sub
 
 End Class

@@ -3,6 +3,7 @@ Imports DevExpress.XtraLayout
 Imports DevExpress.XtraGrid
 Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraPrinting
+Imports DevExpress.XtraGrid.Columns
 
 Public Class ucSales
     Inherits ucBase
@@ -11,6 +12,10 @@ Public Class ucSales
     Private gridBuyer As GridControl
     Private gridCatcher As GridControl
     Private currentGrid As GridControl
+    Private catcherGridView As GridView
+    Private buyerGridView As GridView
+    Private refreshCatcher As Boolean = False
+    Private refreshBuyer As Boolean = False
 
     Private catcherTab As XtraTabPage
     Private buyerTab As XtraTabPage
@@ -34,6 +39,10 @@ Public Class ucSales
 
         dtTo.EditValue = Date.Now
         dtTo.Properties.MaxValue = Date.Now.AddDays(1)
+
+    End Sub
+
+    Private Sub buyerFooter(ByVal sender As System.Object, ByVal e As PageFooterArea)
 
     End Sub
 
@@ -76,9 +85,6 @@ Public Class ucSales
         Dim layoutCatcherItem As LayoutControlItem = layoutCatcher.AddItem("", gridCatcher)
         layoutBuyerItem.TextVisible = False
         layoutCatcherItem.TextVisible = False
-
-        Dim layoutCatcherItem As LayoutControlItem = layoutCatcher.AddItem("", gridCatcherTest)
-        layoutCatcherItem.TextVisible = False
     End Sub
 
     Private Sub gridBuyerLoaded(sender As Object, e As EventArgs)
@@ -90,11 +96,11 @@ Public Class ucSales
     End Sub
 
     Sub loadGridCatcher()
-        Dim gridView = New GridView()
-        gridView.GridControl = gridCatcher
-        AddHandler gridView.DoubleClick, AddressOf HandleGridDoubleClick
-        gridCatcher.MainView = gridView
-        gridCatcher.ViewCollection.Add(gridView)
+        If catcherGridView Is Nothing Then catcherGridView = New GridView() : refreshCatcher = True
+        catcherGridView.GridControl = gridCatcher
+        AddHandler catcherGridView.DoubleClick, AddressOf HandleGridDoubleClick
+        gridCatcher.MainView = catcherGridView
+        gridCatcher.ViewCollection.Add(catcherGridView)
 
         Dim dc As New mkdbDataContext()
         Dim mdc As New tpmdbDataContext()
@@ -189,22 +195,22 @@ Public Class ucSales
         '                    .AveragePrice = totalAmount
         '            })
 
-        gridView.GridControl.DataSource = data
-        gridView.PopulateColumns()
+        catcherGridView.GridControl.DataSource = data
+        If Not refreshCatcher Then catcherGridView.PopulateColumns()
 
         ' Enable footer
-        gridView.OptionsView.ShowFooter = True
+        catcherGridView.OptionsView.ShowFooter = True
 
-        gridTransMode(gridView)
+        gridTransMode(catcherGridView)
 
     End Sub
 
     Sub loadGridBuyer()
-        Dim gridView = New GridView()
-        gridView.GridControl = gridBuyer
-        AddHandler gridView.DoubleClick, AddressOf HandleGridDoubleClick
-        gridBuyer.MainView = gridView
-        gridBuyer.ViewCollection.Add(gridView)
+        If buyerGridView Is Nothing Then buyerGridView = New GridView() : refreshBuyer = True
+        buyerGridView.GridControl = gridBuyer
+        AddHandler buyerGridView.DoubleClick, AddressOf HandleGridDoubleClick
+        gridBuyer.MainView = buyerGridView
+        gridBuyer.ViewCollection.Add(buyerGridView)
 
         Dim dc As New mkdbDataContext()
         Dim mdc As New tpmdbDataContext()
@@ -285,13 +291,13 @@ Public Class ucSales
         '                .AveragePrice = totalAmount
         '            })
 
-        gridView.GridControl.DataSource = data
-        gridView.PopulateColumns()
+        buyerGridView.GridControl.DataSource = data
+        If Not refreshBuyer Then buyerGridView.PopulateColumns()
 
         ' Enable footer
-        gridView.OptionsView.ShowFooter = True
+        buyerGridView.OptionsView.ShowFooter = True
 
-        gridTransMode(gridView)
+        gridTransMode(buyerGridView)
     End Sub
 
     Function sumFields(record As trans_SalesReportCatcher) As Decimal
