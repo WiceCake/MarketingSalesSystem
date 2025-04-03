@@ -155,4 +155,5 @@
         Return String.Format("{0}{1:D3}", prefix, newNum)
         'Return String.Format("CA-{0}{1:D3}", yearMonth, newNum)
     End Function
+
 End Class

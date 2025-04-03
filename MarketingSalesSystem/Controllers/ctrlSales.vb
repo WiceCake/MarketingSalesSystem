@@ -257,7 +257,8 @@ Public Class ctrlSales
                 Debug.WriteLine(ex.Message)
             End Try
         End Using
-        ucS.loadGrid()
+        ucS.loadGridCatcher()
+        ucS.loadGridBuyer()
         frmSI.Close()
     End Sub
 
@@ -279,7 +280,8 @@ Public Class ctrlSales
                 End Try
             End Using
         End If
-        ucS.loadGrid()
+        ucS.loadGridBuyer()
+        ucS.loadGridCatcher()
         frmSI.Close()
     End Sub
 
@@ -296,6 +298,8 @@ Public Class ctrlSales
                 Debug.WriteLine("Error: " & ex.Message)
             End Try
         End Using
+        ucS.loadGridCatcher()
+        ucS.loadGridBuyer()
         frmSI.Close()
     End Sub
 
