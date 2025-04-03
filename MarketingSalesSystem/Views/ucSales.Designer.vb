@@ -23,10 +23,10 @@ Partial Class ucSales
         '
         'ucSales
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Name = "ucSales"
-        Me.Size = New System.Drawing.Size(886, 482)
+        Me.Size = New System.Drawing.Size(1013, 482)
         Me.ResumeLayout(False)
 
     End Sub
