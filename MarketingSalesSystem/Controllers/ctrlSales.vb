@@ -144,12 +144,13 @@ Public Class ctrlSales
         Dim SA_Total As Decimal = 0
         Dim NK_Total As Decimal = 0
         Dim NA_Total As Decimal = 0
-        
+
+        ' First pass: Compute AUK and AUA totals
         For Each col As DataColumn In r.Table.Columns
             Dim colName As String = col.ColumnName
 
             If colName.StartsWith("AUK_Catcher") Then
-                Dim catcherValue As Decimal = CDec(If(IsDBNull(r(colName)), 0, r(colName)))
+                Dim catcherValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
                 AUK_Total += catcherValue
 
                 ' Calculate Actual Unloading Amount dynamically
@@ -158,20 +159,43 @@ Public Class ctrlSales
                     r(auaColumn) = catcherValue * Price
                     AUA_Total += CDec(r(auaColumn))
                 End If
-            ElseIf colName.StartsWith("SK_Catcher") Then
-                Dim catcherValue As Decimal = CDec(If(IsDBNull(r(colName)), 0, r(colName)))
-                SK_Total += catcherValue
+            End If
+        Next
 
-                ' Calculate Spoilage Amount dynamically
+        ' Second pass: Adjust SK values to ensure SK ≤ AUK and SK is non-negative
+        For Each col As DataColumn In r.Table.Columns
+            Dim colName As String = col.ColumnName
+
+            If colName.StartsWith("SK_Catcher") Then
+                Dim aukColumn As String = colName.Replace("SK", "AUK")
+                Dim skValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
+                Dim aukValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(aukColumn)), 0, r(aukColumn))))
+
+                ' Ensure SK does not exceed AUK and is non-negative
+                skValue = Math.Min(skValue, aukValue)
+                r(colName) = skValue  ' Update SK with the corrected value
+
+                SK_Total += skValue
+            End If
+        Next
+
+        ' Third pass: Compute SA and SA_Total using the updated SK values
+        For Each col As DataColumn In r.Table.Columns
+            Dim colName As String = col.ColumnName
+
+            If colName.StartsWith("SK_Catcher") Then
                 Dim saColumn As String = colName.Replace("SK", "SA")
+                Dim skValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
+
+                ' Compute SA using the corrected SK value
                 If r.Table.Columns.Contains(saColumn) Then
-                    r(saColumn) = catcherValue * Price
+                    r(saColumn) = skValue * Price
                     SA_Total += CDec(r(saColumn))
                 End If
             End If
         Next
 
-        ' Compute Net Kilos and Net Amount dynamically
+        ' Fourth pass: Compute NK and NA, ensuring no negative values
         For Each col As DataColumn In r.Table.Columns
             Dim colName As String = col.ColumnName
 
@@ -179,27 +203,28 @@ Public Class ctrlSales
                 Dim skColumn As String = colName.Replace("AUK", "SK")
                 Dim nkColumn As String = colName.Replace("AUK", "NK")
 
-                Dim aukValue As Decimal = CDec(If(IsDBNull(r(colName)), 0, r(colName)))
-                Dim skValue As Decimal = CDec(If(IsDBNull(r(skColumn)), 0, r(skColumn)))
+                Dim aukValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
+                Dim skValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(skColumn)), 0, r(skColumn))))
 
                 If r.Table.Columns.Contains(nkColumn) Then
-                    r(nkColumn) = aukValue - skValue
+                    r(nkColumn) = Math.Max(0, aukValue - skValue)
                     NK_Total += CDec(r(nkColumn))
                 End If
             ElseIf colName.StartsWith("AUA_Catcher") Then
                 Dim saColumn As String = colName.Replace("AUA", "SA")
                 Dim naColumn As String = colName.Replace("AUA", "NA")
 
-                Dim auaValue As Decimal = CDec(If(IsDBNull(r(colName)), 0, r(colName)))
-                Dim saValue As Decimal = CDec(If(IsDBNull(r(saColumn)), 0, r(saColumn)))
+                Dim auaValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
+                Dim saValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(saColumn)), 0, r(saColumn))))
 
                 If r.Table.Columns.Contains(naColumn) Then
-                    r(naColumn) = auaValue - saValue
+                    r(naColumn) = Math.Max(0, auaValue - saValue)
                     NA_Total += CDec(r(naColumn))
                 End If
             End If
         Next
 
+        ' Update row totals
         r("AUK_Total") = AUK_Total
         r("AUA_Total") = AUA_Total
         r("SK_Total") = SK_Total
@@ -207,6 +232,8 @@ Public Class ctrlSales
         r("NK_Total") = NK_Total
         r("NA_Total") = NA_Total
     End Sub
+
+
 
 
     Sub updateAllTotals()
