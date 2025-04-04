@@ -41,6 +41,8 @@ Public Class ucCatcher
     End Sub
 
     Sub loadGrid()
+
+
         Dim dc As New mkdbDataContext
 
         Dim caList = New CatchActivity(dc).getByDate(CDate(dtFrom.EditValue), CDate(dtTo.EditValue)).ToList()

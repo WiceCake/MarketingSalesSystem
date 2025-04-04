@@ -304,7 +304,15 @@ Public Class frm_salesInvoice
 
     Private Sub txtUSD_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUSD.KeyPress
         If Not Char.IsDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
-            e.Handled = True ' Blocks any non-numeric input, including '-'
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub txtUSD_KeyDown(sender As Object, e As KeyEventArgs) Handles txtUSD.KeyDown
+        If e.KeyCode = Keys.Down Then
+            If Val(txtUSD.Text) <= 0 Then
+                e.SuppressKeyPress = True
+            End If
         End If
     End Sub
 
