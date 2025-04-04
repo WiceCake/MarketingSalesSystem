@@ -87,6 +87,18 @@ Public Class ctrlSales
             .cmbUV.Properties.ReadOnly = True
             .txtCDNum.Properties.ReadOnly = True
 
+            If mdlSR.unloadingVessel_ID IsNot Nothing 
+                Dim values() As String = mdlSR.unloadingForeignVessel.Split(","c)
+                Dim foreignCarrier As New Dictionary(Of Integer, String)
+                foreignCarrier = values.Select(Function(v, i) New KeyValuePair(Of Integer, String)(i, v)).
+                                        ToDictionary(Function(x) x.Key, Function(v) v.Value.Trim)
+                checkComboTransMode(foreignCarrier.ToList, .cmbFCarrier, "Value", "Key")
+                .cmbFCarrier.CheckAll()
+            End If
+            If mdlSR.unloadingVessel_ID IsNot Nothing Then
+                .cmbCCarrier.SetEditValue(mdlSR.unloadingVessel_ID)
+            End If
+
             'Fields
             .dtCreated.EditValue = mdlSR.salesDate
             .cmbST.EditValue = mdlSR.sellingType
@@ -245,6 +257,8 @@ Public Class ctrlSales
     End Sub
 
     Sub saveDraft()
+        'Debug.WriteLine(frmSI.cmbFCarrier.Properties.GetDisplayText(frmSI.cmbFCarrier.Properties.GetCheckedItems).ToString)
+        'Return
         Using ts As New TransactionScope()
             Try
 
@@ -253,8 +267,9 @@ Public Class ctrlSales
                     mdlSR.salesNum = .txtSaleNum.Text
                     mdlSR.sellingType = .cmbST.EditValue.ToString
                     mdlSR.unloadingType = "###"
-                    mdlSR.unloadingForeignVessel = "###"
-                    mdlSR.buyer = If(.buyerName.ToString Is Nothing, .buyerName.ToString, .cmbBuyer.EditValue.ToString)
+                    mdlSR.unloadingForeignVessel = .cmbFCarrier.Properties.GetDisplayText(.cmbFCarrier.Properties.GetCheckedItems).ToString
+                    mdlSR.unloadingVessel_ID = .cmbCCarrier.Properties.GetCheckedItems().ToString
+                    mdlSR.buyer = If(CInt(.rBT.EditValue) = 1, .txtBuyer.Text, .cmbBuyer.EditValue.ToString)
                     mdlSR.catchtDeliveryNum = .cmbUV.EditValue.ToString
                     mdlSR.usdRate = CDec(.txtUSD.EditValue)
                     mdlSR.contractNum = .txtCNum.Text
