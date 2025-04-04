@@ -91,6 +91,7 @@ Public Class ctrlSales
             .dtCreated.EditValue = mdlSR.salesDate
             .cmbST.EditValue = mdlSR.sellingType
             .txtSaleNum.EditValue = mdlSR.salesNum
+            .txtInvoiceNum.EditValue = mdlSR.invoiceNum
             .cmbUV.EditValue = mdlSR.catchtDeliveryNum
 
             Dim number As Integer
@@ -251,6 +252,7 @@ Public Class ctrlSales
                 With frmSI
                     mdlSR.salesDate = CDate(.dtCreated.EditValue)
                     mdlSR.salesNum = .txtSaleNum.Text
+                    mdlSR.invoiceNum = .txtInvoiceNum.Text
                     mdlSR.sellingType = .cmbST.EditValue.ToString
                     mdlSR.unloadingType = "###"
                     mdlSR.unloadingForeignVessel = "###"

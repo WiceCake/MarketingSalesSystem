@@ -217,6 +217,7 @@ Public Class frm_salesInvoice
         Dim sellType = validateField(cmbST)
         Dim Catcher = validateField(cmbUV)
         Dim salesNum = validateField(txtSaleNum)
+        Dim invoiceNum = validateField(txtInvoiceNum)
         Dim catchDeliveryNum = validateField(txtCDNum)
         Dim usdRate = validateField(txtUSD)
         Dim contractNum = validateField(txtCNum)
@@ -227,6 +228,7 @@ Public Class frm_salesInvoice
         If Not sellType Then missingFields.AppendLine("Sell Type")
         If Not Catcher Then missingFields.AppendLine("Unloading Vessel") 'Unloading Vessel
         If Not salesNum Then missingFields.AppendLine("Sales Number")
+        If Not invoiceNum Then missingFields.AppendLine("Invoice Number")
         If Not catchDeliveryNum Then missingFields.AppendLine("Catch Delivery Number")
         If Not usdRate Then missingFields.AppendLine("USD Rate")
         If Not contractNum Then missingFields.AppendLine("Contract Number")
@@ -246,7 +248,7 @@ Public Class frm_salesInvoice
             Return
         End If
 
-        'ctrlSales.saveDraft()
+        ctrlSales.saveDraft()
     End Sub
 
     Private Sub btnDelete_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnDelete.ItemClick

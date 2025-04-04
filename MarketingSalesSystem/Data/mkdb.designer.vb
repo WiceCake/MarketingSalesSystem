@@ -55,17 +55,17 @@ Partial Public Class mkdbDataContext
     End Sub
   Partial Private Sub Deletetrans_CatchMethod(instance As trans_CatchMethod)
     End Sub
-  Partial Private Sub Inserttrans_SalesReport(instance As trans_SalesReport)
-    End Sub
-  Partial Private Sub Updatetrans_SalesReport(instance As trans_SalesReport)
-    End Sub
-  Partial Private Sub Deletetrans_SalesReport(instance As trans_SalesReport)
-    End Sub
   Partial Private Sub Inserttrans_SalesReportCatcher(instance As trans_SalesReportCatcher)
     End Sub
   Partial Private Sub Updatetrans_SalesReportCatcher(instance As trans_SalesReportCatcher)
     End Sub
   Partial Private Sub Deletetrans_SalesReportCatcher(instance As trans_SalesReportCatcher)
+    End Sub
+  Partial Private Sub Inserttrans_SalesReport(instance As trans_SalesReport)
+    End Sub
+  Partial Private Sub Updatetrans_SalesReport(instance As trans_SalesReport)
+    End Sub
+  Partial Private Sub Deletetrans_SalesReport(instance As trans_SalesReport)
     End Sub
   Partial Private Sub Inserttrans_SalesReportPrice(instance As trans_SalesReportPrice)
     End Sub
@@ -79,17 +79,17 @@ Partial Public Class mkdbDataContext
     End Sub
   Partial Private Sub Deletetrans_SalesReportSummary(instance As trans_SalesReportSummary)
     End Sub
-  Partial Private Sub Inserttrans_SalesReportWeightSlip(instance As trans_SalesReportWeightSlip)
-    End Sub
-  Partial Private Sub Updatetrans_SalesReportWeightSlip(instance As trans_SalesReportWeightSlip)
-    End Sub
-  Partial Private Sub Deletetrans_SalesReportWeightSlip(instance As trans_SalesReportWeightSlip)
-    End Sub
   Partial Private Sub Inserttrans_WeightSlip(instance As trans_WeightSlip)
     End Sub
   Partial Private Sub Updatetrans_WeightSlip(instance As trans_WeightSlip)
     End Sub
   Partial Private Sub Deletetrans_WeightSlip(instance As trans_WeightSlip)
+    End Sub
+  Partial Private Sub Inserttrans_SalesReportWeightSlip(instance As trans_SalesReportWeightSlip)
+    End Sub
+  Partial Private Sub Updatetrans_SalesReportWeightSlip(instance As trans_SalesReportWeightSlip)
+    End Sub
+  Partial Private Sub Deletetrans_SalesReportWeightSlip(instance As trans_SalesReportWeightSlip)
     End Sub
   #End Region
 	
@@ -142,15 +142,15 @@ Partial Public Class mkdbDataContext
 		End Get
 	End Property
 	
-	Public ReadOnly Property trans_SalesReports() As System.Data.Linq.Table(Of trans_SalesReport)
-		Get
-			Return Me.GetTable(Of trans_SalesReport)
-		End Get
-	End Property
-	
 	Public ReadOnly Property trans_SalesReportCatchers() As System.Data.Linq.Table(Of trans_SalesReportCatcher)
 		Get
 			Return Me.GetTable(Of trans_SalesReportCatcher)
+		End Get
+	End Property
+	
+	Public ReadOnly Property trans_SalesReports() As System.Data.Linq.Table(Of trans_SalesReport)
+		Get
+			Return Me.GetTable(Of trans_SalesReport)
 		End Get
 	End Property
 	
@@ -166,15 +166,15 @@ Partial Public Class mkdbDataContext
 		End Get
 	End Property
 	
-	Public ReadOnly Property trans_SalesReportWeightSlips() As System.Data.Linq.Table(Of trans_SalesReportWeightSlip)
-		Get
-			Return Me.GetTable(Of trans_SalesReportWeightSlip)
-		End Get
-	End Property
-	
 	Public ReadOnly Property trans_WeightSlips() As System.Data.Linq.Table(Of trans_WeightSlip)
 		Get
 			Return Me.GetTable(Of trans_WeightSlip)
+		End Get
+	End Property
+	
+	Public ReadOnly Property trans_SalesReportWeightSlips() As System.Data.Linq.Table(Of trans_SalesReportWeightSlip)
+		Get
+			Return Me.GetTable(Of trans_SalesReportWeightSlip)
 		End Get
 	End Property
 	
@@ -1436,425 +1436,6 @@ Partial Public Class trans_CatchMethod
 	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_SalesReport")>  _
-Partial Public Class trans_SalesReport
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _salesReport_ID As Integer
-	
-	Private _invoiceNum As String
-	
-	Private _referenceNum As String
-	
-	Private _salesDate As Date
-	
-	Private _salesNum As String
-	
-	Private _sellingType As String
-	
-	Private _unloadingType As String
-	
-	Private _unloadingVessel_ID As String
-	
-	Private _unloadingForeignVessel As String
-	
-	Private _buyer As String
-	
-	Private _catchtDeliveryNum As String
-	
-	Private _usdRate As Decimal
-	
-	Private _contractNum As String
-	
-	Private _remarks As String
-	
-	Private _encodedBy As Integer
-	
-	Private _encodedOn As Date
-	
-	Private _approvalStatus As Integer
-	
-    #Region "Extensibility Method Definitions"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnsalesReport_IDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnsalesReport_IDChanged()
-    End Sub
-    Partial Private Sub OninvoiceNumChanging(value As String)
-    End Sub
-    Partial Private Sub OninvoiceNumChanged()
-    End Sub
-    Partial Private Sub OnreferenceNumChanging(value As String)
-    End Sub
-    Partial Private Sub OnreferenceNumChanged()
-    End Sub
-    Partial Private Sub OnsalesDateChanging(value As Date)
-    End Sub
-    Partial Private Sub OnsalesDateChanged()
-    End Sub
-    Partial Private Sub OnsalesNumChanging(value As String)
-    End Sub
-    Partial Private Sub OnsalesNumChanged()
-    End Sub
-    Partial Private Sub OnsellingTypeChanging(value As String)
-    End Sub
-    Partial Private Sub OnsellingTypeChanged()
-    End Sub
-    Partial Private Sub OnunloadingTypeChanging(value As String)
-    End Sub
-    Partial Private Sub OnunloadingTypeChanged()
-    End Sub
-    Partial Private Sub OnunloadingVessel_IDChanging(value As String)
-    End Sub
-    Partial Private Sub OnunloadingVessel_IDChanged()
-    End Sub
-    Partial Private Sub OnunloadingForeignVesselChanging(value As String)
-    End Sub
-    Partial Private Sub OnunloadingForeignVesselChanged()
-    End Sub
-    Partial Private Sub OnbuyerChanging(value As String)
-    End Sub
-    Partial Private Sub OnbuyerChanged()
-    End Sub
-    Partial Private Sub OncatchtDeliveryNumChanging(value As String)
-    End Sub
-    Partial Private Sub OncatchtDeliveryNumChanged()
-    End Sub
-    Partial Private Sub OnusdRateChanging(value As Decimal)
-    End Sub
-    Partial Private Sub OnusdRateChanged()
-    End Sub
-    Partial Private Sub OncontractNumChanging(value As String)
-    End Sub
-    Partial Private Sub OncontractNumChanged()
-    End Sub
-    Partial Private Sub OnremarksChanging(value As String)
-    End Sub
-    Partial Private Sub OnremarksChanged()
-    End Sub
-    Partial Private Sub OnencodedByChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnencodedByChanged()
-    End Sub
-    Partial Private Sub OnencodedOnChanging(value As Date)
-    End Sub
-    Partial Private Sub OnencodedOnChanged()
-    End Sub
-    Partial Private Sub OnapprovalStatusChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnapprovalStatusChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesReport_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property salesReport_ID() As Integer
-		Get
-			Return Me._salesReport_ID
-		End Get
-		Set
-			If ((Me._salesReport_ID = value)  _
-						= false) Then
-				Me.OnsalesReport_IDChanging(value)
-				Me.SendPropertyChanging
-				Me._salesReport_ID = value
-				Me.SendPropertyChanged("salesReport_ID")
-				Me.OnsalesReport_IDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_invoiceNum", DbType:="VarChar(20)")>  _
-	Public Property invoiceNum() As String
-		Get
-			Return Me._invoiceNum
-		End Get
-		Set
-			If (String.Equals(Me._invoiceNum, value) = false) Then
-				Me.OninvoiceNumChanging(value)
-				Me.SendPropertyChanging
-				Me._invoiceNum = value
-				Me.SendPropertyChanged("invoiceNum")
-				Me.OninvoiceNumChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_referenceNum", DbType:="VarChar(13) NOT NULL", CanBeNull:=false)>  _
-	Public Property referenceNum() As String
-		Get
-			Return Me._referenceNum
-		End Get
-		Set
-			If (String.Equals(Me._referenceNum, value) = false) Then
-				Me.OnreferenceNumChanging(value)
-				Me.SendPropertyChanging
-				Me._referenceNum = value
-				Me.SendPropertyChanged("referenceNum")
-				Me.OnreferenceNumChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesDate", DbType:="Date NOT NULL")>  _
-	Public Property salesDate() As Date
-		Get
-			Return Me._salesDate
-		End Get
-		Set
-			If ((Me._salesDate = value)  _
-						= false) Then
-				Me.OnsalesDateChanging(value)
-				Me.SendPropertyChanging
-				Me._salesDate = value
-				Me.SendPropertyChanged("salesDate")
-				Me.OnsalesDateChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesNum", DbType:="VarChar(20) NOT NULL", CanBeNull:=false)>  _
-	Public Property salesNum() As String
-		Get
-			Return Me._salesNum
-		End Get
-		Set
-			If (String.Equals(Me._salesNum, value) = false) Then
-				Me.OnsalesNumChanging(value)
-				Me.SendPropertyChanging
-				Me._salesNum = value
-				Me.SendPropertyChanged("salesNum")
-				Me.OnsalesNumChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_sellingType", DbType:="VarChar(20) NOT NULL", CanBeNull:=false)>  _
-	Public Property sellingType() As String
-		Get
-			Return Me._sellingType
-		End Get
-		Set
-			If (String.Equals(Me._sellingType, value) = false) Then
-				Me.OnsellingTypeChanging(value)
-				Me.SendPropertyChanging
-				Me._sellingType = value
-				Me.SendPropertyChanged("sellingType")
-				Me.OnsellingTypeChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_unloadingType", DbType:="VarChar(20) NOT NULL", CanBeNull:=false)>  _
-	Public Property unloadingType() As String
-		Get
-			Return Me._unloadingType
-		End Get
-		Set
-			If (String.Equals(Me._unloadingType, value) = false) Then
-				Me.OnunloadingTypeChanging(value)
-				Me.SendPropertyChanging
-				Me._unloadingType = value
-				Me.SendPropertyChanged("unloadingType")
-				Me.OnunloadingTypeChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_unloadingVessel_ID", DbType:="VarChar(140)")>  _
-	Public Property unloadingVessel_ID() As String
-		Get
-			Return Me._unloadingVessel_ID
-		End Get
-		Set
-			If (String.Equals(Me._unloadingVessel_ID, value) = false) Then
-				Me.OnunloadingVessel_IDChanging(value)
-				Me.SendPropertyChanging
-				Me._unloadingVessel_ID = value
-				Me.SendPropertyChanged("unloadingVessel_ID")
-				Me.OnunloadingVessel_IDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_unloadingForeignVessel", DbType:="VarChar(140)")>  _
-	Public Property unloadingForeignVessel() As String
-		Get
-			Return Me._unloadingForeignVessel
-		End Get
-		Set
-			If (String.Equals(Me._unloadingForeignVessel, value) = false) Then
-				Me.OnunloadingForeignVesselChanging(value)
-				Me.SendPropertyChanging
-				Me._unloadingForeignVessel = value
-				Me.SendPropertyChanged("unloadingForeignVessel")
-				Me.OnunloadingForeignVesselChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_buyer", DbType:="VarChar(100) NOT NULL", CanBeNull:=false)>  _
-	Public Property buyer() As String
-		Get
-			Return Me._buyer
-		End Get
-		Set
-			If (String.Equals(Me._buyer, value) = false) Then
-				Me.OnbuyerChanging(value)
-				Me.SendPropertyChanging
-				Me._buyer = value
-				Me.SendPropertyChanged("buyer")
-				Me.OnbuyerChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchtDeliveryNum", DbType:="VarChar(15) NOT NULL", CanBeNull:=false)>  _
-	Public Property catchtDeliveryNum() As String
-		Get
-			Return Me._catchtDeliveryNum
-		End Get
-		Set
-			If (String.Equals(Me._catchtDeliveryNum, value) = false) Then
-				Me.OncatchtDeliveryNumChanging(value)
-				Me.SendPropertyChanging
-				Me._catchtDeliveryNum = value
-				Me.SendPropertyChanged("catchtDeliveryNum")
-				Me.OncatchtDeliveryNumChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_usdRate", DbType:="Decimal(10,2) NOT NULL")>  _
-	Public Property usdRate() As Decimal
-		Get
-			Return Me._usdRate
-		End Get
-		Set
-			If ((Me._usdRate = value)  _
-						= false) Then
-				Me.OnusdRateChanging(value)
-				Me.SendPropertyChanging
-				Me._usdRate = value
-				Me.SendPropertyChanged("usdRate")
-				Me.OnusdRateChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_contractNum", DbType:="VarChar(50) NOT NULL", CanBeNull:=false)>  _
-	Public Property contractNum() As String
-		Get
-			Return Me._contractNum
-		End Get
-		Set
-			If (String.Equals(Me._contractNum, value) = false) Then
-				Me.OncontractNumChanging(value)
-				Me.SendPropertyChanging
-				Me._contractNum = value
-				Me.SendPropertyChanged("contractNum")
-				Me.OncontractNumChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_remarks", DbType:="VarChar(300)")>  _
-	Public Property remarks() As String
-		Get
-			Return Me._remarks
-		End Get
-		Set
-			If (String.Equals(Me._remarks, value) = false) Then
-				Me.OnremarksChanging(value)
-				Me.SendPropertyChanging
-				Me._remarks = value
-				Me.SendPropertyChanged("remarks")
-				Me.OnremarksChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_encodedBy", DbType:="Int NOT NULL")>  _
-	Public Property encodedBy() As Integer
-		Get
-			Return Me._encodedBy
-		End Get
-		Set
-			If ((Me._encodedBy = value)  _
-						= false) Then
-				Me.OnencodedByChanging(value)
-				Me.SendPropertyChanging
-				Me._encodedBy = value
-				Me.SendPropertyChanged("encodedBy")
-				Me.OnencodedByChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_encodedOn", DbType:="DateTime NOT NULL")>  _
-	Public Property encodedOn() As Date
-		Get
-			Return Me._encodedOn
-		End Get
-		Set
-			If ((Me._encodedOn = value)  _
-						= false) Then
-				Me.OnencodedOnChanging(value)
-				Me.SendPropertyChanging
-				Me._encodedOn = value
-				Me.SendPropertyChanged("encodedOn")
-				Me.OnencodedOnChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_approvalStatus", DbType:="Int NOT NULL")>  _
-	Public Property approvalStatus() As Integer
-		Get
-			Return Me._approvalStatus
-		End Get
-		Set
-			If ((Me._approvalStatus = value)  _
-						= false) Then
-				Me.OnapprovalStatusChanging(value)
-				Me.SendPropertyChanging
-				Me._approvalStatus = value
-				Me.SendPropertyChanged("approvalStatus")
-				Me.OnapprovalStatusChanged
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-End Class
-
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_SalesReportCatcher")>  _
 Partial Public Class trans_SalesReportCatcher
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
@@ -2515,6 +2096,425 @@ Partial Public Class trans_SalesReportCatcher
 				Me._fishmeal = value
 				Me.SendPropertyChanged("fishmeal")
 				Me.OnfishmealChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_SalesReport")>  _
+Partial Public Class trans_SalesReport
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _salesReport_ID As Integer
+	
+	Private _invoiceNum As String
+	
+	Private _referenceNum As String
+	
+	Private _salesDate As Date
+	
+	Private _salesNum As String
+	
+	Private _sellingType As String
+	
+	Private _unloadingType As String
+	
+	Private _unloadingVessel_ID As String
+	
+	Private _unloadingForeignVessel As String
+	
+	Private _buyer As String
+	
+	Private _catchtDeliveryNum As String
+	
+	Private _usdRate As Decimal
+	
+	Private _contractNum As String
+	
+	Private _remarks As String
+	
+	Private _encodedBy As Integer
+	
+	Private _encodedOn As Date
+	
+	Private _approvalStatus As Integer
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnsalesReport_IDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnsalesReport_IDChanged()
+    End Sub
+    Partial Private Sub OninvoiceNumChanging(value As String)
+    End Sub
+    Partial Private Sub OninvoiceNumChanged()
+    End Sub
+    Partial Private Sub OnreferenceNumChanging(value As String)
+    End Sub
+    Partial Private Sub OnreferenceNumChanged()
+    End Sub
+    Partial Private Sub OnsalesDateChanging(value As Date)
+    End Sub
+    Partial Private Sub OnsalesDateChanged()
+    End Sub
+    Partial Private Sub OnsalesNumChanging(value As String)
+    End Sub
+    Partial Private Sub OnsalesNumChanged()
+    End Sub
+    Partial Private Sub OnsellingTypeChanging(value As String)
+    End Sub
+    Partial Private Sub OnsellingTypeChanged()
+    End Sub
+    Partial Private Sub OnunloadingTypeChanging(value As String)
+    End Sub
+    Partial Private Sub OnunloadingTypeChanged()
+    End Sub
+    Partial Private Sub OnunloadingVessel_IDChanging(value As String)
+    End Sub
+    Partial Private Sub OnunloadingVessel_IDChanged()
+    End Sub
+    Partial Private Sub OnunloadingForeignVesselChanging(value As String)
+    End Sub
+    Partial Private Sub OnunloadingForeignVesselChanged()
+    End Sub
+    Partial Private Sub OnbuyerChanging(value As String)
+    End Sub
+    Partial Private Sub OnbuyerChanged()
+    End Sub
+    Partial Private Sub OncatchtDeliveryNumChanging(value As String)
+    End Sub
+    Partial Private Sub OncatchtDeliveryNumChanged()
+    End Sub
+    Partial Private Sub OnusdRateChanging(value As Decimal)
+    End Sub
+    Partial Private Sub OnusdRateChanged()
+    End Sub
+    Partial Private Sub OncontractNumChanging(value As String)
+    End Sub
+    Partial Private Sub OncontractNumChanged()
+    End Sub
+    Partial Private Sub OnremarksChanging(value As String)
+    End Sub
+    Partial Private Sub OnremarksChanged()
+    End Sub
+    Partial Private Sub OnencodedByChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnencodedByChanged()
+    End Sub
+    Partial Private Sub OnencodedOnChanging(value As Date)
+    End Sub
+    Partial Private Sub OnencodedOnChanged()
+    End Sub
+    Partial Private Sub OnapprovalStatusChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnapprovalStatusChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesReport_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property salesReport_ID() As Integer
+		Get
+			Return Me._salesReport_ID
+		End Get
+		Set
+			If ((Me._salesReport_ID = value)  _
+						= false) Then
+				Me.OnsalesReport_IDChanging(value)
+				Me.SendPropertyChanging
+				Me._salesReport_ID = value
+				Me.SendPropertyChanged("salesReport_ID")
+				Me.OnsalesReport_IDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_invoiceNum", DbType:="VarChar(20)")>  _
+	Public Property invoiceNum() As String
+		Get
+			Return Me._invoiceNum
+		End Get
+		Set
+			If (String.Equals(Me._invoiceNum, value) = false) Then
+				Me.OninvoiceNumChanging(value)
+				Me.SendPropertyChanging
+				Me._invoiceNum = value
+				Me.SendPropertyChanged("invoiceNum")
+				Me.OninvoiceNumChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_referenceNum", DbType:="VarChar(13) NOT NULL", CanBeNull:=false)>  _
+	Public Property referenceNum() As String
+		Get
+			Return Me._referenceNum
+		End Get
+		Set
+			If (String.Equals(Me._referenceNum, value) = false) Then
+				Me.OnreferenceNumChanging(value)
+				Me.SendPropertyChanging
+				Me._referenceNum = value
+				Me.SendPropertyChanged("referenceNum")
+				Me.OnreferenceNumChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesDate", DbType:="Date NOT NULL")>  _
+	Public Property salesDate() As Date
+		Get
+			Return Me._salesDate
+		End Get
+		Set
+			If ((Me._salesDate = value)  _
+						= false) Then
+				Me.OnsalesDateChanging(value)
+				Me.SendPropertyChanging
+				Me._salesDate = value
+				Me.SendPropertyChanged("salesDate")
+				Me.OnsalesDateChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesNum", DbType:="VarChar(20) NOT NULL", CanBeNull:=false)>  _
+	Public Property salesNum() As String
+		Get
+			Return Me._salesNum
+		End Get
+		Set
+			If (String.Equals(Me._salesNum, value) = false) Then
+				Me.OnsalesNumChanging(value)
+				Me.SendPropertyChanging
+				Me._salesNum = value
+				Me.SendPropertyChanged("salesNum")
+				Me.OnsalesNumChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_sellingType", DbType:="VarChar(20) NOT NULL", CanBeNull:=false)>  _
+	Public Property sellingType() As String
+		Get
+			Return Me._sellingType
+		End Get
+		Set
+			If (String.Equals(Me._sellingType, value) = false) Then
+				Me.OnsellingTypeChanging(value)
+				Me.SendPropertyChanging
+				Me._sellingType = value
+				Me.SendPropertyChanged("sellingType")
+				Me.OnsellingTypeChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_unloadingType", DbType:="VarChar(20) NOT NULL", CanBeNull:=false)>  _
+	Public Property unloadingType() As String
+		Get
+			Return Me._unloadingType
+		End Get
+		Set
+			If (String.Equals(Me._unloadingType, value) = false) Then
+				Me.OnunloadingTypeChanging(value)
+				Me.SendPropertyChanging
+				Me._unloadingType = value
+				Me.SendPropertyChanged("unloadingType")
+				Me.OnunloadingTypeChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_unloadingVessel_ID", DbType:="VarChar(140)")>  _
+	Public Property unloadingVessel_ID() As String
+		Get
+			Return Me._unloadingVessel_ID
+		End Get
+		Set
+			If (String.Equals(Me._unloadingVessel_ID, value) = false) Then
+				Me.OnunloadingVessel_IDChanging(value)
+				Me.SendPropertyChanging
+				Me._unloadingVessel_ID = value
+				Me.SendPropertyChanged("unloadingVessel_ID")
+				Me.OnunloadingVessel_IDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_unloadingForeignVessel", DbType:="VarChar(140)")>  _
+	Public Property unloadingForeignVessel() As String
+		Get
+			Return Me._unloadingForeignVessel
+		End Get
+		Set
+			If (String.Equals(Me._unloadingForeignVessel, value) = false) Then
+				Me.OnunloadingForeignVesselChanging(value)
+				Me.SendPropertyChanging
+				Me._unloadingForeignVessel = value
+				Me.SendPropertyChanged("unloadingForeignVessel")
+				Me.OnunloadingForeignVesselChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_buyer", DbType:="VarChar(100) NOT NULL", CanBeNull:=false)>  _
+	Public Property buyer() As String
+		Get
+			Return Me._buyer
+		End Get
+		Set
+			If (String.Equals(Me._buyer, value) = false) Then
+				Me.OnbuyerChanging(value)
+				Me.SendPropertyChanging
+				Me._buyer = value
+				Me.SendPropertyChanged("buyer")
+				Me.OnbuyerChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchtDeliveryNum", DbType:="VarChar(15) NOT NULL", CanBeNull:=false)>  _
+	Public Property catchtDeliveryNum() As String
+		Get
+			Return Me._catchtDeliveryNum
+		End Get
+		Set
+			If (String.Equals(Me._catchtDeliveryNum, value) = false) Then
+				Me.OncatchtDeliveryNumChanging(value)
+				Me.SendPropertyChanging
+				Me._catchtDeliveryNum = value
+				Me.SendPropertyChanged("catchtDeliveryNum")
+				Me.OncatchtDeliveryNumChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_usdRate", DbType:="Decimal(10,2) NOT NULL")>  _
+	Public Property usdRate() As Decimal
+		Get
+			Return Me._usdRate
+		End Get
+		Set
+			If ((Me._usdRate = value)  _
+						= false) Then
+				Me.OnusdRateChanging(value)
+				Me.SendPropertyChanging
+				Me._usdRate = value
+				Me.SendPropertyChanged("usdRate")
+				Me.OnusdRateChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_contractNum", DbType:="VarChar(50) NOT NULL", CanBeNull:=false)>  _
+	Public Property contractNum() As String
+		Get
+			Return Me._contractNum
+		End Get
+		Set
+			If (String.Equals(Me._contractNum, value) = false) Then
+				Me.OncontractNumChanging(value)
+				Me.SendPropertyChanging
+				Me._contractNum = value
+				Me.SendPropertyChanged("contractNum")
+				Me.OncontractNumChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_remarks", DbType:="VarChar(300)")>  _
+	Public Property remarks() As String
+		Get
+			Return Me._remarks
+		End Get
+		Set
+			If (String.Equals(Me._remarks, value) = false) Then
+				Me.OnremarksChanging(value)
+				Me.SendPropertyChanging
+				Me._remarks = value
+				Me.SendPropertyChanged("remarks")
+				Me.OnremarksChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_encodedBy", DbType:="Int NOT NULL")>  _
+	Public Property encodedBy() As Integer
+		Get
+			Return Me._encodedBy
+		End Get
+		Set
+			If ((Me._encodedBy = value)  _
+						= false) Then
+				Me.OnencodedByChanging(value)
+				Me.SendPropertyChanging
+				Me._encodedBy = value
+				Me.SendPropertyChanged("encodedBy")
+				Me.OnencodedByChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_encodedOn", DbType:="DateTime NOT NULL")>  _
+	Public Property encodedOn() As Date
+		Get
+			Return Me._encodedOn
+		End Get
+		Set
+			If ((Me._encodedOn = value)  _
+						= false) Then
+				Me.OnencodedOnChanging(value)
+				Me.SendPropertyChanging
+				Me._encodedOn = value
+				Me.SendPropertyChanged("encodedOn")
+				Me.OnencodedOnChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_approvalStatus", DbType:="Int NOT NULL")>  _
+	Public Property approvalStatus() As Integer
+		Get
+			Return Me._approvalStatus
+		End Get
+		Set
+			If ((Me._approvalStatus = value)  _
+						= false) Then
+				Me.OnapprovalStatusChanging(value)
+				Me.SendPropertyChanging
+				Me._approvalStatus = value
+				Me.SendPropertyChanged("approvalStatus")
+				Me.OnapprovalStatusChanged
 			End If
 		End Set
 	End Property
@@ -3206,27 +3206,27 @@ Partial Public Class trans_SalesReportSummary
 	
 	Private _salesReportSummary_ID As Integer
 	
-	Private _salesReport_ID As Integer
+	Private _salesReport_ID As System.Nullable(Of Integer)
 	
-	Private _vessel_ID As Integer
+	Private _vessel_ID As System.Nullable(Of Integer)
 	
-	Private _catchersPartialQty As Decimal
+	Private _catchersPartialQty As System.Nullable(Of Decimal)
 	
-	Private _catchersPartialUnloadedQty As Decimal
+	Private _catchersPartialUnloadedQty As System.Nullable(Of Decimal)
 	
-	Private _catchersActualUnloadedQty As Decimal
+	Private _catchersActualUnloadedQty As System.Nullable(Of Decimal)
 	
-	Private _actualQtyInKilos As Decimal
+	Private _actualQtyInKilos As System.Nullable(Of Decimal)
 	
-	Private _fishmealInKilos As Decimal
+	Private _fishmealInKilos As System.Nullable(Of Decimal)
 	
-	Private _spoilageInKilos As Decimal
+	Private _spoilageInKilos As System.Nullable(Of Decimal)
 	
-	Private _actualQtyInAmount As Decimal
+	Private _actualQtyInAmount As System.Nullable(Of Decimal)
 	
-	Private _fishmealInAmount As Decimal
+	Private _fishmealInAmount As System.Nullable(Of Decimal)
 	
-	Private _spoilageInAmount As Decimal
+	Private _spoilageInAmount As System.Nullable(Of Decimal)
 	
     #Region "Extensibility Method Definitions"
     Partial Private Sub OnLoaded()
@@ -3239,47 +3239,47 @@ Partial Public Class trans_SalesReportSummary
     End Sub
     Partial Private Sub OnsalesReportSummary_IDChanged()
     End Sub
-    Partial Private Sub OnsalesReport_IDChanging(value As Integer)
+    Partial Private Sub OnsalesReport_IDChanging(value As System.Nullable(Of Integer))
     End Sub
     Partial Private Sub OnsalesReport_IDChanged()
     End Sub
-    Partial Private Sub Onvessel_IDChanging(value As Integer)
+    Partial Private Sub Onvessel_IDChanging(value As System.Nullable(Of Integer))
     End Sub
     Partial Private Sub Onvessel_IDChanged()
     End Sub
-    Partial Private Sub OncatchersPartialQtyChanging(value As Decimal)
+    Partial Private Sub OncatchersPartialQtyChanging(value As System.Nullable(Of Decimal))
     End Sub
     Partial Private Sub OncatchersPartialQtyChanged()
     End Sub
-    Partial Private Sub OncatchersPartialUnloadedQtyChanging(value As Decimal)
+    Partial Private Sub OncatchersPartialUnloadedQtyChanging(value As System.Nullable(Of Decimal))
     End Sub
     Partial Private Sub OncatchersPartialUnloadedQtyChanged()
     End Sub
-    Partial Private Sub OncatchersActualUnloadedQtyChanging(value As Decimal)
+    Partial Private Sub OncatchersActualUnloadedQtyChanging(value As System.Nullable(Of Decimal))
     End Sub
     Partial Private Sub OncatchersActualUnloadedQtyChanged()
     End Sub
-    Partial Private Sub OnactualQtyInKilosChanging(value As Decimal)
+    Partial Private Sub OnactualQtyInKilosChanging(value As System.Nullable(Of Decimal))
     End Sub
     Partial Private Sub OnactualQtyInKilosChanged()
     End Sub
-    Partial Private Sub OnfishmealInKilosChanging(value As Decimal)
+    Partial Private Sub OnfishmealInKilosChanging(value As System.Nullable(Of Decimal))
     End Sub
     Partial Private Sub OnfishmealInKilosChanged()
     End Sub
-    Partial Private Sub OnspoilageInKilosChanging(value As Decimal)
+    Partial Private Sub OnspoilageInKilosChanging(value As System.Nullable(Of Decimal))
     End Sub
     Partial Private Sub OnspoilageInKilosChanged()
     End Sub
-    Partial Private Sub OnactualQtyInAmountChanging(value As Decimal)
+    Partial Private Sub OnactualQtyInAmountChanging(value As System.Nullable(Of Decimal))
     End Sub
     Partial Private Sub OnactualQtyInAmountChanged()
     End Sub
-    Partial Private Sub OnfishmealInAmountChanging(value As Decimal)
+    Partial Private Sub OnfishmealInAmountChanging(value As System.Nullable(Of Decimal))
     End Sub
     Partial Private Sub OnfishmealInAmountChanged()
     End Sub
-    Partial Private Sub OnspoilageInAmountChanging(value As Decimal)
+    Partial Private Sub OnspoilageInAmountChanging(value As System.Nullable(Of Decimal))
     End Sub
     Partial Private Sub OnspoilageInAmountChanged()
     End Sub
@@ -3307,267 +3307,6 @@ Partial Public Class trans_SalesReportSummary
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesReport_ID", DbType:="Int NOT NULL")>  _
-	Public Property salesReport_ID() As Integer
-		Get
-			Return Me._salesReport_ID
-		End Get
-		Set
-			If ((Me._salesReport_ID = value)  _
-						= false) Then
-				Me.OnsalesReport_IDChanging(value)
-				Me.SendPropertyChanging
-				Me._salesReport_ID = value
-				Me.SendPropertyChanged("salesReport_ID")
-				Me.OnsalesReport_IDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_vessel_ID", DbType:="Int NOT NULL")>  _
-	Public Property vessel_ID() As Integer
-		Get
-			Return Me._vessel_ID
-		End Get
-		Set
-			If ((Me._vessel_ID = value)  _
-						= false) Then
-				Me.Onvessel_IDChanging(value)
-				Me.SendPropertyChanging
-				Me._vessel_ID = value
-				Me.SendPropertyChanged("vessel_ID")
-				Me.Onvessel_IDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchersPartialQty", DbType:="Decimal(10,5) NOT NULL")>  _
-	Public Property catchersPartialQty() As Decimal
-		Get
-			Return Me._catchersPartialQty
-		End Get
-		Set
-			If ((Me._catchersPartialQty = value)  _
-						= false) Then
-				Me.OncatchersPartialQtyChanging(value)
-				Me.SendPropertyChanging
-				Me._catchersPartialQty = value
-				Me.SendPropertyChanged("catchersPartialQty")
-				Me.OncatchersPartialQtyChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchersPartialUnloadedQty", DbType:="Decimal(10,5) NOT NULL")>  _
-	Public Property catchersPartialUnloadedQty() As Decimal
-		Get
-			Return Me._catchersPartialUnloadedQty
-		End Get
-		Set
-			If ((Me._catchersPartialUnloadedQty = value)  _
-						= false) Then
-				Me.OncatchersPartialUnloadedQtyChanging(value)
-				Me.SendPropertyChanging
-				Me._catchersPartialUnloadedQty = value
-				Me.SendPropertyChanged("catchersPartialUnloadedQty")
-				Me.OncatchersPartialUnloadedQtyChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchersActualUnloadedQty", DbType:="Decimal(10,5) NOT NULL")>  _
-	Public Property catchersActualUnloadedQty() As Decimal
-		Get
-			Return Me._catchersActualUnloadedQty
-		End Get
-		Set
-			If ((Me._catchersActualUnloadedQty = value)  _
-						= false) Then
-				Me.OncatchersActualUnloadedQtyChanging(value)
-				Me.SendPropertyChanging
-				Me._catchersActualUnloadedQty = value
-				Me.SendPropertyChanged("catchersActualUnloadedQty")
-				Me.OncatchersActualUnloadedQtyChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_actualQtyInKilos", DbType:="Decimal(10,5) NOT NULL")>  _
-	Public Property actualQtyInKilos() As Decimal
-		Get
-			Return Me._actualQtyInKilos
-		End Get
-		Set
-			If ((Me._actualQtyInKilos = value)  _
-						= false) Then
-				Me.OnactualQtyInKilosChanging(value)
-				Me.SendPropertyChanging
-				Me._actualQtyInKilos = value
-				Me.SendPropertyChanged("actualQtyInKilos")
-				Me.OnactualQtyInKilosChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_fishmealInKilos", DbType:="Decimal(10,5) NOT NULL")>  _
-	Public Property fishmealInKilos() As Decimal
-		Get
-			Return Me._fishmealInKilos
-		End Get
-		Set
-			If ((Me._fishmealInKilos = value)  _
-						= false) Then
-				Me.OnfishmealInKilosChanging(value)
-				Me.SendPropertyChanging
-				Me._fishmealInKilos = value
-				Me.SendPropertyChanged("fishmealInKilos")
-				Me.OnfishmealInKilosChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_spoilageInKilos", DbType:="Decimal(10,5) NOT NULL")>  _
-	Public Property spoilageInKilos() As Decimal
-		Get
-			Return Me._spoilageInKilos
-		End Get
-		Set
-			If ((Me._spoilageInKilos = value)  _
-						= false) Then
-				Me.OnspoilageInKilosChanging(value)
-				Me.SendPropertyChanging
-				Me._spoilageInKilos = value
-				Me.SendPropertyChanged("spoilageInKilos")
-				Me.OnspoilageInKilosChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_actualQtyInAmount", DbType:="Decimal(10,2) NOT NULL")>  _
-	Public Property actualQtyInAmount() As Decimal
-		Get
-			Return Me._actualQtyInAmount
-		End Get
-		Set
-			If ((Me._actualQtyInAmount = value)  _
-						= false) Then
-				Me.OnactualQtyInAmountChanging(value)
-				Me.SendPropertyChanging
-				Me._actualQtyInAmount = value
-				Me.SendPropertyChanged("actualQtyInAmount")
-				Me.OnactualQtyInAmountChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_fishmealInAmount", DbType:="Decimal(10,2) NOT NULL")>  _
-	Public Property fishmealInAmount() As Decimal
-		Get
-			Return Me._fishmealInAmount
-		End Get
-		Set
-			If ((Me._fishmealInAmount = value)  _
-						= false) Then
-				Me.OnfishmealInAmountChanging(value)
-				Me.SendPropertyChanging
-				Me._fishmealInAmount = value
-				Me.SendPropertyChanged("fishmealInAmount")
-				Me.OnfishmealInAmountChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_spoilageInAmount", DbType:="Decimal(10,2) NOT NULL")>  _
-	Public Property spoilageInAmount() As Decimal
-		Get
-			Return Me._spoilageInAmount
-		End Get
-		Set
-			If ((Me._spoilageInAmount = value)  _
-						= false) Then
-				Me.OnspoilageInAmountChanging(value)
-				Me.SendPropertyChanging
-				Me._spoilageInAmount = value
-				Me.SendPropertyChanged("spoilageInAmount")
-				Me.OnspoilageInAmountChanged
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_SalesReportWeightSlips")>  _
-Partial Public Class trans_SalesReportWeightSlip
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _salesReportWeightSlip_ID As Integer
-	
-	Private _salesReport_ID As System.Nullable(Of Integer)
-	
-	Private _weightSlipDetail_ID As System.Nullable(Of Integer)
-	
-    #Region "Extensibility Method Definitions"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnsalesReportWeightSlip_IDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnsalesReportWeightSlip_IDChanged()
-    End Sub
-    Partial Private Sub OnsalesReport_IDChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnsalesReport_IDChanged()
-    End Sub
-    Partial Private Sub OnweightSlipDetail_IDChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnweightSlipDetail_IDChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesReportWeightSlip_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property salesReportWeightSlip_ID() As Integer
-		Get
-			Return Me._salesReportWeightSlip_ID
-		End Get
-		Set
-			If ((Me._salesReportWeightSlip_ID = value)  _
-						= false) Then
-				Me.OnsalesReportWeightSlip_IDChanging(value)
-				Me.SendPropertyChanging
-				Me._salesReportWeightSlip_ID = value
-				Me.SendPropertyChanged("salesReportWeightSlip_ID")
-				Me.OnsalesReportWeightSlip_IDChanged
-			End If
-		End Set
-	End Property
-	
 	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesReport_ID", DbType:="Int")>  _
 	Public Property salesReport_ID() As System.Nullable(Of Integer)
 		Get
@@ -3584,18 +3323,162 @@ Partial Public Class trans_SalesReportWeightSlip
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_weightSlipDetail_ID", DbType:="Int")>  _
-	Public Property weightSlipDetail_ID() As System.Nullable(Of Integer)
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_vessel_ID", DbType:="Int")>  _
+	Public Property vessel_ID() As System.Nullable(Of Integer)
 		Get
-			Return Me._weightSlipDetail_ID
+			Return Me._vessel_ID
 		End Get
 		Set
-			If (Me._weightSlipDetail_ID.Equals(value) = false) Then
-				Me.OnweightSlipDetail_IDChanging(value)
+			If (Me._vessel_ID.Equals(value) = false) Then
+				Me.Onvessel_IDChanging(value)
 				Me.SendPropertyChanging
-				Me._weightSlipDetail_ID = value
-				Me.SendPropertyChanged("weightSlipDetail_ID")
-				Me.OnweightSlipDetail_IDChanged
+				Me._vessel_ID = value
+				Me.SendPropertyChanged("vessel_ID")
+				Me.Onvessel_IDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchersPartialQty", DbType:="Decimal(10,5)")>  _
+	Public Property catchersPartialQty() As System.Nullable(Of Decimal)
+		Get
+			Return Me._catchersPartialQty
+		End Get
+		Set
+			If (Me._catchersPartialQty.Equals(value) = false) Then
+				Me.OncatchersPartialQtyChanging(value)
+				Me.SendPropertyChanging
+				Me._catchersPartialQty = value
+				Me.SendPropertyChanged("catchersPartialQty")
+				Me.OncatchersPartialQtyChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchersPartialUnloadedQty", DbType:="Decimal(10,5)")>  _
+	Public Property catchersPartialUnloadedQty() As System.Nullable(Of Decimal)
+		Get
+			Return Me._catchersPartialUnloadedQty
+		End Get
+		Set
+			If (Me._catchersPartialUnloadedQty.Equals(value) = false) Then
+				Me.OncatchersPartialUnloadedQtyChanging(value)
+				Me.SendPropertyChanging
+				Me._catchersPartialUnloadedQty = value
+				Me.SendPropertyChanged("catchersPartialUnloadedQty")
+				Me.OncatchersPartialUnloadedQtyChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchersActualUnloadedQty", DbType:="Decimal(10,5)")>  _
+	Public Property catchersActualUnloadedQty() As System.Nullable(Of Decimal)
+		Get
+			Return Me._catchersActualUnloadedQty
+		End Get
+		Set
+			If (Me._catchersActualUnloadedQty.Equals(value) = false) Then
+				Me.OncatchersActualUnloadedQtyChanging(value)
+				Me.SendPropertyChanging
+				Me._catchersActualUnloadedQty = value
+				Me.SendPropertyChanged("catchersActualUnloadedQty")
+				Me.OncatchersActualUnloadedQtyChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_actualQtyInKilos", DbType:="Decimal(10,5)")>  _
+	Public Property actualQtyInKilos() As System.Nullable(Of Decimal)
+		Get
+			Return Me._actualQtyInKilos
+		End Get
+		Set
+			If (Me._actualQtyInKilos.Equals(value) = false) Then
+				Me.OnactualQtyInKilosChanging(value)
+				Me.SendPropertyChanging
+				Me._actualQtyInKilos = value
+				Me.SendPropertyChanged("actualQtyInKilos")
+				Me.OnactualQtyInKilosChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_fishmealInKilos", DbType:="Decimal(10,5)")>  _
+	Public Property fishmealInKilos() As System.Nullable(Of Decimal)
+		Get
+			Return Me._fishmealInKilos
+		End Get
+		Set
+			If (Me._fishmealInKilos.Equals(value) = false) Then
+				Me.OnfishmealInKilosChanging(value)
+				Me.SendPropertyChanging
+				Me._fishmealInKilos = value
+				Me.SendPropertyChanged("fishmealInKilos")
+				Me.OnfishmealInKilosChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_spoilageInKilos", DbType:="Decimal(10,5)")>  _
+	Public Property spoilageInKilos() As System.Nullable(Of Decimal)
+		Get
+			Return Me._spoilageInKilos
+		End Get
+		Set
+			If (Me._spoilageInKilos.Equals(value) = false) Then
+				Me.OnspoilageInKilosChanging(value)
+				Me.SendPropertyChanging
+				Me._spoilageInKilos = value
+				Me.SendPropertyChanged("spoilageInKilos")
+				Me.OnspoilageInKilosChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_actualQtyInAmount", DbType:="Decimal(10,2)")>  _
+	Public Property actualQtyInAmount() As System.Nullable(Of Decimal)
+		Get
+			Return Me._actualQtyInAmount
+		End Get
+		Set
+			If (Me._actualQtyInAmount.Equals(value) = false) Then
+				Me.OnactualQtyInAmountChanging(value)
+				Me.SendPropertyChanging
+				Me._actualQtyInAmount = value
+				Me.SendPropertyChanged("actualQtyInAmount")
+				Me.OnactualQtyInAmountChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_fishmealInAmount", DbType:="Decimal(10,2)")>  _
+	Public Property fishmealInAmount() As System.Nullable(Of Decimal)
+		Get
+			Return Me._fishmealInAmount
+		End Get
+		Set
+			If (Me._fishmealInAmount.Equals(value) = false) Then
+				Me.OnfishmealInAmountChanging(value)
+				Me.SendPropertyChanging
+				Me._fishmealInAmount = value
+				Me.SendPropertyChanged("fishmealInAmount")
+				Me.OnfishmealInAmountChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_spoilageInAmount", DbType:="Decimal(10,2)")>  _
+	Public Property spoilageInAmount() As System.Nullable(Of Decimal)
+		Get
+			Return Me._spoilageInAmount
+		End Get
+		Set
+			If (Me._spoilageInAmount.Equals(value) = false) Then
+				Me.OnspoilageInAmountChanging(value)
+				Me.SendPropertyChanging
+				Me._spoilageInAmount = value
+				Me.SendPropertyChanged("spoilageInAmount")
+				Me.OnspoilageInAmountChanged
 			End If
 		End Set
 	End Property
@@ -3966,6 +3849,112 @@ Partial Public Class trans_WeightSlip
 				Me._encodedOn = value
 				Me.SendPropertyChanged("encodedOn")
 				Me.OnencodedOnChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_SalesReportWeightSlips")>  _
+Partial Public Class trans_SalesReportWeightSlip
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _salesReportWeightSlip_ID As Integer
+	
+	Private _salesReport_ID As System.Nullable(Of Integer)
+	
+	Private _weightSlipDetail_ID As System.Nullable(Of Integer)
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnsalesReportWeightSlip_IDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnsalesReportWeightSlip_IDChanged()
+    End Sub
+    Partial Private Sub OnsalesReport_IDChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnsalesReport_IDChanged()
+    End Sub
+    Partial Private Sub OnweightSlipDetail_IDChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnweightSlipDetail_IDChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesReportWeightSlip_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property salesReportWeightSlip_ID() As Integer
+		Get
+			Return Me._salesReportWeightSlip_ID
+		End Get
+		Set
+			If ((Me._salesReportWeightSlip_ID = value)  _
+						= false) Then
+				Me.OnsalesReportWeightSlip_IDChanging(value)
+				Me.SendPropertyChanging
+				Me._salesReportWeightSlip_ID = value
+				Me.SendPropertyChanged("salesReportWeightSlip_ID")
+				Me.OnsalesReportWeightSlip_IDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesReport_ID", DbType:="Int")>  _
+	Public Property salesReport_ID() As System.Nullable(Of Integer)
+		Get
+			Return Me._salesReport_ID
+		End Get
+		Set
+			If (Me._salesReport_ID.Equals(value) = false) Then
+				Me.OnsalesReport_IDChanging(value)
+				Me.SendPropertyChanging
+				Me._salesReport_ID = value
+				Me.SendPropertyChanged("salesReport_ID")
+				Me.OnsalesReport_IDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_weightSlipDetail_ID", DbType:="Int")>  _
+	Public Property weightSlipDetail_ID() As System.Nullable(Of Integer)
+		Get
+			Return Me._weightSlipDetail_ID
+		End Get
+		Set
+			If (Me._weightSlipDetail_ID.Equals(value) = false) Then
+				Me.OnweightSlipDetail_IDChanging(value)
+				Me.SendPropertyChanging
+				Me._weightSlipDetail_ID = value
+				Me.SendPropertyChanged("weightSlipDetail_ID")
+				Me.OnweightSlipDetail_IDChanged
 			End If
 		End Set
 	End Property
