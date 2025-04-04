@@ -73,8 +73,8 @@
       <Column Name="salesNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="sellingType" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="unloadingType" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="unloadingVessel_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="unloadingForeignVessel" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="unloadingVessel_ID" Type="System.String" DbType="VarChar(140)" CanBeNull="true" />
+      <Column Name="unloadingForeignVessel" Type="System.String" DbType="VarChar(140)" CanBeNull="true" />
       <Column Name="buyer" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="catchtDeliveryNum" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
       <Column Name="usdRate" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />

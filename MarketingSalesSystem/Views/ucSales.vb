@@ -137,11 +137,16 @@ Public Class ucSales
                            GroupBy(Function(src) New With {Key .salesReport_ID = src.salesReport_ID, Key .catchActivityDetail_ID = src.catchActivityDetail_ID}).
                            ToDictionary(Function(g) g.Key, Function(g) g.ToList())
 
+        Dim buyerDict = mdc.ml_Suppliers.ToDictionary(Function(s) s.ml_SupID, Function(s) s.ml_Supplier)
+
+        Dim number As Integer
+
         ' Process the final query
         Dim data = (From cl In catchList
                     Join s In salesList On s.salesReport_ID Equals cl.salesReport_ID
                     Let key = New With {Key .salesReport_ID = cl.salesReport_ID, Key .catchActivityDetail_ID = cl.catchActivityDetail_ID}
                     Let catchData = catchActivityDetailsDict(cl.catchActivityDetail_ID)
+                    Let buyer = If(Integer.TryParse(s.buyer, number), buyerDict(CInt(s.buyer)), s.buyer)
                     Let catchersData = catchersDict(key)
                     Let firstCatcher = catchersData.FirstOrDefault()
                     Let secondCatcher = catchersData(1)
@@ -155,7 +160,7 @@ Public Class ucSales
                         .CatchReferenceNumber = catchData.ca.catchReferenceNum,
                         .CoveredDate = s.salesDate,
                         .SellingType = s.sellingType,
-                        .Buyer = s.buyer,
+                        .Buyer = buyer,
                         .ActualQty = actualQty,
                         .Fishmeal = firstCatcher.fishmeal - secondCatcher.fishmeal,
                         .Spoilage = spoilageQty,
@@ -238,6 +243,10 @@ Public Class ucSales
         Dim catchActivitiesDict = dc.trans_CatchActivities.
                                   ToDictionary(Function(ca) ca.catchActivity_ID, Function(ca) ca)
 
+        Dim buyerDict = mdc.ml_Suppliers.ToDictionary(Function(s) s.ml_SupID, Function(s) s.ml_Supplier)
+
+        Dim number As Integer
+
         ' Process the final query
         Dim data = (From s In salesList
                 Let catchersData = If(catchersDict.ContainsKey(s.salesReport_ID), catchersDict(s.salesReport_ID), Nothing)
@@ -246,6 +255,7 @@ Public Class ucSales
                                     Let cad = catchActivityDetailsDict(src.catchActivityDetail_ID)
                                     Let ca = If(cad IsNot Nothing, catchActivitiesDict(cad.catchActivity_ID), Nothing)
                                     Select ca).FirstOrDefault(), Nothing)
+                Let buyer = If(Integer.TryParse(s.buyer, number), buyerDict(CInt(s.buyer)), s.buyer)
                 Let actualQty = catchersData.Select(Function(aq) aq).ToList()
                 Let spoilageQty = catchersData.Skip(1).ToList()
                 Let totalAmount = actualQty.Sum(Function(aq) multiplyFields(aq)) - spoilageQty.Sum(Function(sq) multiplyFields(sq))
@@ -255,7 +265,7 @@ Public Class ucSales
                         .CatcherRefNum = catchData.catchReferenceNum,
                         .CoveredDate = s.salesDate,
                         .SellingType = s.sellingType,
-                        .Buyer = s.buyer,
+                        .Buyer = buyer,
                         .ActualQty = actualQty.Sum(Function(aq) sumFields(aq)),
                         .Fishmeal = actualQty.Sum(Function(aq) aq.fishmeal) - spoilageQty.Sum(Function(sq) sq.fishmeal),
                         .Spoilage = spoilageQty.Sum(Function(sq) sumFields(sq)),

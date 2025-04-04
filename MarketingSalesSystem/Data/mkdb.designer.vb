@@ -1444,6 +1444,8 @@ Partial Public Class trans_SalesReport
 	
 	Private _salesReport_ID As Integer
 	
+	Private _invoiceNum As String
+	
 	Private _referenceNum As String
 	
 	Private _salesDate As Date
@@ -1454,7 +1456,7 @@ Partial Public Class trans_SalesReport
 	
 	Private _unloadingType As String
 	
-	Private _unloadingVessel_ID As System.Nullable(Of Integer)
+	Private _unloadingVessel_ID As String
 	
 	Private _unloadingForeignVessel As String
 	
@@ -1485,6 +1487,10 @@ Partial Public Class trans_SalesReport
     End Sub
     Partial Private Sub OnsalesReport_IDChanged()
     End Sub
+    Partial Private Sub OninvoiceNumChanging(value As String)
+    End Sub
+    Partial Private Sub OninvoiceNumChanged()
+    End Sub
     Partial Private Sub OnreferenceNumChanging(value As String)
     End Sub
     Partial Private Sub OnreferenceNumChanged()
@@ -1505,7 +1511,7 @@ Partial Public Class trans_SalesReport
     End Sub
     Partial Private Sub OnunloadingTypeChanged()
     End Sub
-    Partial Private Sub OnunloadingVessel_IDChanging(value As System.Nullable(Of Integer))
+    Partial Private Sub OnunloadingVessel_IDChanging(value As String)
     End Sub
     Partial Private Sub OnunloadingVessel_IDChanged()
     End Sub
@@ -1565,6 +1571,22 @@ Partial Public Class trans_SalesReport
 				Me._salesReport_ID = value
 				Me.SendPropertyChanged("salesReport_ID")
 				Me.OnsalesReport_IDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_invoiceNum", DbType:="VarChar(20)")>  _
+	Public Property invoiceNum() As String
+		Get
+			Return Me._invoiceNum
+		End Get
+		Set
+			If (String.Equals(Me._invoiceNum, value) = false) Then
+				Me.OninvoiceNumChanging(value)
+				Me.SendPropertyChanging
+				Me._invoiceNum = value
+				Me.SendPropertyChanged("invoiceNum")
+				Me.OninvoiceNumChanged
 			End If
 		End Set
 	End Property
@@ -1650,13 +1672,13 @@ Partial Public Class trans_SalesReport
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_unloadingVessel_ID", DbType:="Int")>  _
-	Public Property unloadingVessel_ID() As System.Nullable(Of Integer)
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_unloadingVessel_ID", DbType:="VarChar(140)")>  _
+	Public Property unloadingVessel_ID() As String
 		Get
 			Return Me._unloadingVessel_ID
 		End Get
 		Set
-			If (Me._unloadingVessel_ID.Equals(value) = false) Then
+			If (String.Equals(Me._unloadingVessel_ID, value) = false) Then
 				Me.OnunloadingVessel_IDChanging(value)
 				Me.SendPropertyChanging
 				Me._unloadingVessel_ID = value
@@ -1666,7 +1688,7 @@ Partial Public Class trans_SalesReport
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_unloadingForeignVessel", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_unloadingForeignVessel", DbType:="VarChar(140)")>  _
 	Public Property unloadingForeignVessel() As String
 		Get
 			Return Me._unloadingForeignVessel

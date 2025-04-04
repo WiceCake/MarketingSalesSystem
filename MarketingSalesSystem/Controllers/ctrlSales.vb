@@ -45,8 +45,6 @@ Public Class ctrlSales
             .txtBuyer.Enabled = False
             .lcmbBuyer.Visibility = Utils.LayoutVisibility.Never
             .ltxtBuyer.Visibility = Utils.LayoutVisibility.Never
-            .lcmbCarrier.Visibility = Utils.LayoutVisibility.Never
-            .ltxtCarrier.Visibility = Utils.LayoutVisibility.Never
             .txt_refNum.Caption = "Draft"
             loadCombo()
             .Show()
@@ -95,8 +93,10 @@ Public Class ctrlSales
             .txtSaleNum.EditValue = mdlSR.salesNum
             .cmbUV.EditValue = mdlSR.catchtDeliveryNum
 
-            If CInt(mdlSR.unloadingForeignVessel) = 0 Then .rBT.SelectedIndex = 0 Else .rBT.SelectedIndex = 1
-            If CInt(.rBT.EditValue) = 1 Then .txtBuyer.EditValue = mdlSR.buyer Else .cmbBuyer.EditValue = mdlSR.unloadingForeignVessel
+            Dim number As Integer
+
+            If Integer.TryParse(mdlSR.buyer, number) Then .rBT.SelectedIndex = 1 Else .rBT.SelectedIndex = 0
+            If CInt(.rBT.EditValue) = 1 Then .txtBuyer.EditValue = mdlSR.buyer Else .cmbBuyer.EditValue = mdlSR.buyer
             .txtUSD.EditValue = mdlSR.usdRate
             .txtCNum.EditValue = mdlSR.contractNum
             .txtRemark.EditValue = mdlSR.remarks
@@ -253,8 +253,8 @@ Public Class ctrlSales
                     mdlSR.salesNum = .txtSaleNum.Text
                     mdlSR.sellingType = .cmbST.EditValue.ToString
                     mdlSR.unloadingType = "###"
-                    mdlSR.unloadingForeignVessel = .buyerID.ToString
-                    mdlSR.buyer = .buyerName.ToString
+                    mdlSR.unloadingForeignVessel = "###"
+                    mdlSR.buyer = If(.buyerName.ToString Is Nothing, .buyerName.ToString, .cmbBuyer.EditValue.ToString)
                     mdlSR.catchtDeliveryNum = .cmbUV.EditValue.ToString
                     mdlSR.usdRate = CDec(.txtUSD.EditValue)
                     mdlSR.contractNum = .txtCNum.Text
@@ -548,6 +548,10 @@ Public Class ctrlSales
             .catchDate = ca.catchDate.ToString("yyyy-MM-dd") & " - " & ca.refNum}).ToList()
 
         lookUpTransMode(formattedUv, frmSI.cmbUV, "catchDate", "catchActivity_ID", "Select catcher")
+
+        Dim cc = (From c In tpmdb.ml_Vessels Select c.ml_vID, c.vesselName)
+
+        checkComboTransMode(cc, frmSI.cmbCCarrier, "vesselName", "ml_vID")
     End Sub
 
     Sub changeBuyerInput()
@@ -582,40 +586,6 @@ Public Class ctrlSales
             .BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
         End With
         frmSI.cmbBuyer.Enabled = True
-    End Sub
-    ' CHANGES
-    Sub changeCarrierInput()
-        With frmSI
-            .cmbCarrier.Enabled = False
-            .txtCarrier.Enabled = True
-            .lcmbCarrier.Visibility = Utils.LayoutVisibility.Never
-            .ltxtCarrier.Visibility = Utils.LayoutVisibility.Always
-        End With
-    End Sub
-
-    Sub changeCarrierCombo()
-        With frmSI
-            .cmbCarrier.Enabled = True
-            .txtCarrier.Enabled = False
-            .lcmbCarrier.Visibility = Utils.LayoutVisibility.Always
-            .ltxtCarrier.Visibility = Utils.LayoutVisibility.Never
-        End With
-
-        'Dim carriers = (From i In tpmdb.ml_Suppliers Select
-        '              ID = i.ml_SupID,
-        '              CarrierName = i.ml_Supplier).ToList()
-        'With frmSI.cmbCarrier.Properties
-        '    .DataSource = carriers
-        '    .DisplayMember = "CarrierName"
-        '    .ValueMember = "ID"
-        '    .NullText = "Select a carrier"
-        '    .ShowHeader = False
-        '    .ShowFooter = False
-        '    .Columns.Clear()
-        '    .Columns.Add(New DevExpress.XtraEditors.Controls.LookUpColumnInfo("CarrierName", "Carrier Name"))
-        '    .BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
-        'End With
-        frmSI.cmbCarrier.Enabled = True
     End Sub
 
     Sub initSalesDataTableS()
