@@ -341,4 +341,8 @@ Public Class frm_salesInvoice
             cmbFCarrier.EditValue = ""
         End If
     End Sub
+
+    Private Sub BarButtonItem1_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem1.ItemClick
+        ctrlSales.print()
+    End Sub
 End Class

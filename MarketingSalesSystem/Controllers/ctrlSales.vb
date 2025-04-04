@@ -1,6 +1,7 @@
 ﻿Imports DevExpress.XtraEditors
 Imports DevExpress.XtraLayout
 Imports System.Transactions
+Imports DevExpress.XtraReports.UI
 
 Public Class ctrlSales
 
@@ -46,6 +47,7 @@ Public Class ctrlSales
             .lcmbBuyer.Visibility = Utils.LayoutVisibility.Never
             .ltxtBuyer.Visibility = Utils.LayoutVisibility.Never
             .txt_refNum.Caption = "Draft"
+            .rbnTools.Visible = False
             loadCombo()
             .Show()
         End With
@@ -72,9 +74,11 @@ Public Class ctrlSales
         ucS = uc
 
         With frmSI
+            .rbnTools.Visible = False
             If mdlSR.approvalStatus = Approval_Status.Posted Then
-                .rbnTools.Visible = False
+                .rbnActions.Visible = False
                 .isPosted = True
+                .rbnTools.Visible = True
             End If
 
             .Text = "Sales Invoice"
@@ -87,7 +91,7 @@ Public Class ctrlSales
             .cmbUV.Properties.ReadOnly = True
             .txtCDNum.Properties.ReadOnly = True
 
-            If mdlSR.unloadingVessel_ID IsNot Nothing 
+            If mdlSR.unloadingVessel_ID IsNot Nothing Then
                 Dim values() As String = mdlSR.unloadingForeignVessel.Split(","c)
                 Dim foreignCarrier As New Dictionary(Of Integer, String)
                 foreignCarrier = values.Select(Function(v, i) New KeyValuePair(Of Integer, String)(i, v)).
@@ -623,6 +627,19 @@ Public Class ctrlSales
             .dts.Columns.Add("A_NetPHP", GetType(Double))
             .dts.Columns.Add("A_AveragePrice", GetType(Double))
         End With
+    End Sub
+
+    Sub print()
+        Dim Tool As ReportPrintTool
+        Dim rpt As XtraReport
+
+        Dim rp = New rptSalesInvoiceReport()
+        rp.salesReport_ID = mdlSR.salesReport_ID
+        rpt = rp
+        Tool = New ReportPrintTool(rpt)
+        Tool.AutoShowParametersPanel = False
+        Tool.PreviewForm.WindowState = FormWindowState.Maximized
+        Tool.ShowPreview()
     End Sub
 
 End Class
