@@ -23,6 +23,8 @@ Public Class frm_salesInvoice
     Public isPosted As Boolean = False
     Public rowCount As Integer
 
+    Private foreignCarrier As Dictionary(Of Integer, String)
+
     Public confirmClose As Boolean = True
 
     Sub New(ByRef ctrlS As ctrlSales)
@@ -35,15 +37,6 @@ Public Class frm_salesInvoice
             ctrlSales.changeBuyerInput()
         Else
             ctrlSales.changeBuyerCombo()
-        End If
-    End Sub
-
-    'ADD  FUNCTIONALITY
-    Private Sub rCT_SelectedIndexChanged(sender As Object, e As EventArgs) Handles rCT.SelectedIndexChanged
-        If rCT.SelectedIndex = 0 Then
-            ctrlSales.changeCarrierInput()
-        Else
-            ctrlSales.changeCarrierCombo()
         End If
     End Sub
 
@@ -214,6 +207,11 @@ Public Class frm_salesInvoice
     End Sub
 
     Private Sub btnSave_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnSave.ItemClick
+        Dim displayValues As Object = cmbFCarrier.Properties.GetDisplayText(cmbFCarrier.Properties.GetCheckedItems)
+
+
+        Debug.WriteLine(displayValues)
+
         confirmClose = False ' Prevent FormClosing interference
         Dim dateCreated = validateField(dtCreated)
         Dim sellType = validateField(cmbST)
@@ -248,7 +246,7 @@ Public Class frm_salesInvoice
             Return
         End If
 
-        ctrlSales.saveDraft()
+        'ctrlSales.saveDraft()
     End Sub
 
     Private Sub btnDelete_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnDelete.ItemClick
@@ -308,4 +306,26 @@ Public Class frm_salesInvoice
         End If
     End Sub
 
+    'Private Sub cmbCarrier_EditValueChanged(sender As Object, e As EventArgs) Handles cmbCarrier.EditValueChanged
+    '    Dim value = TryCast(sender, CheckedComboBoxEdit)
+    '    Debug.WriteLine(value.EditValue)
+    'End Sub
+
+    Private Sub cmbCarrier_KeyDown(sender As Object, e As KeyEventArgs) Handles cmbFCarrier.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Dim data = TryCast(sender, CheckedComboBoxEdit)
+            If String.IsNullOrWhiteSpace(data.EditValue.ToString()) Then Return
+
+            If foreignCarrier Is Nothing Then
+                foreignCarrier = New Dictionary(Of Integer, String)()
+            End If
+
+            Dim count As Integer = foreignCarrier.Count
+
+            foreignCarrier.Add(count, data.EditValue.ToString)
+
+            checkComboTransMode(foreignCarrier.ToList, cmbFCarrier, "Value", "Key")
+            cmbFCarrier.EditValue = ""
+        End If
+    End Sub
 End Class

@@ -29,6 +29,14 @@ Module modUtils
         End Try
     End Sub
 
+    Sub checkComboTransMode(ByVal dataSource As Object, ByRef ccmb As CheckedComboBoxEdit, valueName As String, idName As String)
+        With ccmb.Properties
+            .DataSource = dataSource
+            .DisplayMember = valueName
+            .ValueMember = idName
+        End With
+    End Sub
+
     Sub lookUpTransMode(ByVal dataSource As Object, ByRef lookUpEdit As LookUpEdit, valueName As String, idName As String, defaultValue As String)
         With lookUpEdit.Properties
             .DataSource = dataSource
@@ -41,6 +49,7 @@ Module modUtils
             .Columns.Add(New DevExpress.XtraEditors.Controls.LookUpColumnInfo(valueName, ""))
         End With
     End Sub
+
 
     Sub lookUpTransMode(ByVal dataSource As Object, ByRef lookUpEdit As RepositoryItemLookUpEdit, valueName As String, idName As String, defaultValue As String)
         With lookUpEdit

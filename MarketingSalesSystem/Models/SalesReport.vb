@@ -1,11 +1,12 @@
 ﻿Public Class SalesReport
     Public salesReport_ID As Integer
+    Public invoiceNum As String
     Public referenceNum As String
     Public salesDate As Date
     Public salesNum As String
     Public sellingType As String
     Public unloadingType As String
-    Public unloadingVessel_ID As Integer?
+    Public unloadingVessel_ID As String
     Public unloadingForeignVessel As String
     Public buyer As String
     Public catchtDeliveryNum As String
@@ -29,6 +30,7 @@
 
         For Each i In e
             Me.salesReport_ID = salesReportID
+            invoiceNum = i.invoiceNum
             referenceNum = i.referenceNum
             salesDate = i.salesDate
             salesNum = i.salesNum
@@ -53,6 +55,7 @@
         Dim i = sr
 
         Me.salesReport_ID = i.salesReport_ID
+        invoiceNum = i.invoiceNum
         referenceNum = i.referenceNum
         salesDate = i.salesDate
         salesNum = i.salesNum
@@ -75,6 +78,7 @@
 
         With sr
             .salesDate = salesDate
+            .invoiceNum = invoiceNum
             .referenceNum = "Draft"
             .salesNum = salesNum
             .sellingType = sellingType
@@ -101,6 +105,7 @@
 
         For Each i In sr
             i.salesDate = salesDate
+            i.invoiceNum = invoiceNum
             i.referenceNum = i.referenceNum
             i.salesNum = salesNum
             i.sellingType = sellingType
