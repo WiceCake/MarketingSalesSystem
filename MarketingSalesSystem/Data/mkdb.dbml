@@ -68,6 +68,7 @@
   <Table Name="dbo.trans_SalesReport" Member="trans_SalesReports">
     <Type Name="trans_SalesReport">
       <Column Name="salesReport_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="invoiceNum" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="referenceNum" Type="System.String" DbType="VarChar(13) NOT NULL" CanBeNull="false" />
       <Column Name="salesDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="salesNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />

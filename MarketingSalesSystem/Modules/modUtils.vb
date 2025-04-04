@@ -81,6 +81,10 @@ Module modUtils
         Return (Not control.EditValue Is Nothing)
     End Function
 
+    Function validateField(ByRef control As CheckedComboBoxEdit) As Boolean
+        Return (Not control.EditValue Is Nothing)
+    End Function
+
     Sub requiredMessage(ByVal fields As String)
         XtraMessageBox.Show("Required Fields: " + vbNewLine + fields, APPNAME, MessageBoxButtons.OK, MessageBoxIcon.Warning)
     End Sub
