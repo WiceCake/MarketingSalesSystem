@@ -89,24 +89,19 @@ Public Class ucSales
 
     Private Sub gridBuyerLoaded(sender As Object, e As EventArgs)
         loadGridBuyer()
+        AddHandler buyerGridView.DoubleClick, AddressOf HandleGridDoubleClick
     End Sub
 
     Private Sub gridCatcherLoaded(sender As Object, e As EventArgs)
         loadGridCatcher()
+        AddHandler catcherGridView.DoubleClick, AddressOf HandleGridDoubleClick
     End Sub
 
     Sub loadGridCatcher()
         If catcherGridView Is Nothing Then catcherGridView = New GridView() : refreshCatcher = True
         catcherGridView.GridControl = gridCatcher
-        AddHandler catcherGridView.DoubleClick, AddressOf HandleGridDoubleClick
         gridCatcher.MainView = catcherGridView
         gridCatcher.ViewCollection.Add(catcherGridView)
-
-        If buyerGridView Is Nothing Then buyerGridView = New GridView() : refreshCatcher = True
-        buyerGridView.GridControl = gridBuyer
-        AddHandler buyerGridView.DoubleClick, AddressOf HandleGridDoubleClick
-        gridBuyer.MainView = buyerGridView
-        gridBuyer.ViewCollection.Add(buyerGridView)
 
         Dim dc As New mkdbDataContext()
         Dim mdc As New tpmdbDataContext()
@@ -220,7 +215,6 @@ Public Class ucSales
     Sub loadGridBuyer()
         If buyerGridView Is Nothing Then buyerGridView = New GridView() : refreshBuyer = True
         buyerGridView.GridControl = gridBuyer
-        AddHandler buyerGridView.DoubleClick, AddressOf HandleGridDoubleClick
         gridBuyer.MainView = buyerGridView
         gridBuyer.ViewCollection.Add(buyerGridView)
 
