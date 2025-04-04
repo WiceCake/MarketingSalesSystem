@@ -38,7 +38,6 @@ Public Class frm_catchActivity
         lookUpTransMode(vessels, lookupEdit, "vesselName", "ml_vID", "Select catcher")
 
         GridView1.Columns("Catcher").OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False
-
     End Sub
 
     Private Sub btnAddCatcher_Click(sender As Object, e As EventArgs) Handles btnAddCatcher.Click

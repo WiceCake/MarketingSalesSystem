@@ -26,10 +26,10 @@ Partial Class ucCatcher
         '
         'ucCatcher
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Name = "ucCatcher"
-        Me.Size = New System.Drawing.Size(636, 460)
+        Me.Size = New System.Drawing.Size(554, 435)
         Me.ResumeLayout(False)
 
     End Sub

@@ -102,6 +102,12 @@ Public Class ucSales
         gridCatcher.MainView = catcherGridView
         gridCatcher.ViewCollection.Add(catcherGridView)
 
+        If buyerGridView Is Nothing Then buyerGridView = New GridView() : refreshCatcher = True
+        buyerGridView.GridControl = gridBuyer
+        AddHandler buyerGridView.DoubleClick, AddressOf HandleGridDoubleClick
+        gridBuyer.MainView = buyerGridView
+        gridBuyer.ViewCollection.Add(buyerGridView)
+
         Dim dc As New mkdbDataContext()
         Dim mdc As New tpmdbDataContext()
 
