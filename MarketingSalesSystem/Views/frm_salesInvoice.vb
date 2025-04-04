@@ -207,14 +207,16 @@ Public Class frm_salesInvoice
     End Sub
 
     Private Sub btnSave_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnSave.ItemClick
-        Dim displayValues As Object = cmbFCarrier.Properties.GetDisplayText(cmbFCarrier.Properties.GetCheckedItems)
-
-
-        Debug.WriteLine(displayValues)
+        'Dim displayFCarrier As Object = cmbFCarrier.Properties.GetDisplayText(cmbFCarrier.Properties.GetCheckedItems)
+        'Dim displayCCarrier As Object = cmbCCarrier.Properties.GetCheckedItems()
+        '
+        'Debug.WriteLine(displayFCarrier)
+        'Debug.WriteLine(displayCCarrier)
 
         confirmClose = False ' Prevent FormClosing interference
         Dim dateCreated = validateField(dtCreated)
         Dim sellType = validateField(cmbST)
+        Dim companyCarrier = validateField(cmbCCarrier)
         Dim Catcher = validateField(cmbUV)
         Dim salesNum = validateField(txtSaleNum)
         Dim invoiceNum = validateField(txtInvoiceNum)
@@ -226,6 +228,7 @@ Public Class frm_salesInvoice
         Dim missingFields As New StringBuilder()
         If Not dateCreated Then missingFields.AppendLine("Date Created")
         If Not sellType Then missingFields.AppendLine("Sell Type")
+        If Not companyCarrier Then missingFields.AppendLine("Company Carrier")
         If Not Catcher Then missingFields.AppendLine("Unloading Vessel") 'Unloading Vessel
         If Not salesNum Then missingFields.AppendLine("Sales Number")
         If Not invoiceNum Then missingFields.AppendLine("Invoice Number")

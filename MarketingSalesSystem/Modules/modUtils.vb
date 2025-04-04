@@ -29,11 +29,17 @@ Module modUtils
         End Try
     End Sub
 
-    Sub checkComboTransMode(ByVal dataSource As Object, ByRef ccmb As CheckedComboBoxEdit, valueName As String, idName As String)
+    Sub checkComboTransMode(dataSource As Object, ByRef ccmb As CheckedComboBoxEdit, valueName As String, idName As String)
         With ccmb.Properties
             .DataSource = dataSource
             .DisplayMember = valueName
             .ValueMember = idName
+        End With
+    End Sub
+
+    Sub checkComboTransMode(dataSource As Object, ByRef ccmb As CheckedComboBoxEdit)
+        With ccmb.Properties
+            .DataSource = dataSource
         End With
     End Sub
 
@@ -82,7 +88,7 @@ Module modUtils
     End Function
 
     Function validateField(ByRef control As CheckedComboBoxEdit) As Boolean
-        Return (Not control.EditValue Is Nothing)
+        Return (Not String.IsNullOrWhiteSpace(control.EditValue.ToString()))
     End Function
 
     Sub requiredMessage(ByVal fields As String)
