@@ -156,6 +156,7 @@ Public Class ucSales
                     Select New With {
                         .salesReport_ID = s.salesReport_ID,
                         .SalesNo = s.salesNum,
+                        .InvoiceNo = s.invoiceNum,
                         .Catcher = vesselDict(catchData.cad.vessel_ID),
                         .CatchReferenceNumber = catchData.ca.catchReferenceNum,
                         .CoveredDate = s.salesDate,
@@ -262,6 +263,7 @@ Public Class ucSales
                     Select New With {
                         .salesReport_ID = s.salesReport_ID,
                         .SalesNo = s.salesNum,
+                        .InvoiceNo = s.invoiceNum,
                         .CatcherRefNum = catchData.catchReferenceNum,
                         .CoveredDate = s.salesDate,
                         .SellingType = s.sellingType,

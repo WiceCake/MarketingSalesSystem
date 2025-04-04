@@ -219,6 +219,7 @@ Public Class frm_salesInvoice
         Dim companyCarrier = validateField(cmbCCarrier)
         Dim Catcher = validateField(cmbUV)
         Dim salesNum = validateField(txtSaleNum)
+        Dim invoiceNum = validateField(txtInvoiceNum)
         Dim catchDeliveryNum = validateField(txtCDNum)
         Dim usdRate = validateField(txtUSD)
         Dim contractNum = validateField(txtCNum)
@@ -230,6 +231,7 @@ Public Class frm_salesInvoice
         If Not companyCarrier Then missingFields.AppendLine("Company Carrier")
         If Not Catcher Then missingFields.AppendLine("Unloading Vessel") 'Unloading Vessel
         If Not salesNum Then missingFields.AppendLine("Sales Number")
+        If Not invoiceNum Then missingFields.AppendLine("Invoice Number")
         If Not catchDeliveryNum Then missingFields.AppendLine("Catch Delivery Number")
         If Not usdRate Then missingFields.AppendLine("USD Rate")
         If Not contractNum Then missingFields.AppendLine("Contract Number")
