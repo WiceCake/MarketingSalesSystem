@@ -26,9 +26,11 @@ Partial Class frm_catchActivity
         Me.btnSave = New DevExpress.XtraBars.BarButtonItem()
         Me.btnDelete = New DevExpress.XtraBars.BarButtonItem()
         Me.btnPost = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
         Me.RibbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
-        Me.ribbonTools = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rbnActions = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rbnTools = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
         Me.LayoutControl2 = New DevExpress.XtraLayout.LayoutControl()
@@ -85,13 +87,13 @@ Partial Class frm_catchActivity
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.BarHeaderItem1, Me.txt_catNum, Me.btnSave, Me.btnDelete, Me.btnPost})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.BarHeaderItem1, Me.txt_catNum, Me.btnSave, Me.btnDelete, Me.btnPost, Me.BarButtonItem1})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
         Me.RibbonControl.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.RibbonControl.MaxItemId = 6
+        Me.RibbonControl.MaxItemId = 8
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.RibbonPage1})
-        Me.RibbonControl.Size = New System.Drawing.Size(1061, 198)
+        Me.RibbonControl.Size = New System.Drawing.Size(909, 162)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
         '
         'BarHeaderItem1
@@ -132,9 +134,17 @@ Partial Class frm_catchActivity
         Me.btnPost.Name = "btnPost"
         Me.btnPost.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
         '
+        'BarButtonItem1
+        '
+        Me.BarButtonItem1.Caption = "Print"
+        Me.BarButtonItem1.Id = 7
+        Me.BarButtonItem1.ImageOptions.Image = CType(resources.GetObject("BarButtonItem1.ImageOptions.Image"), System.Drawing.Image)
+        Me.BarButtonItem1.ImageOptions.LargeImage = CType(resources.GetObject("BarButtonItem1.ImageOptions.LargeImage"), System.Drawing.Image)
+        Me.BarButtonItem1.Name = "BarButtonItem1"
+        '
         'RibbonPage1
         '
-        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup1, Me.ribbonTools})
+        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup1, Me.rbnActions, Me.rbnTools})
         Me.RibbonPage1.Name = "RibbonPage1"
         Me.RibbonPage1.Text = "Home"
         '
@@ -146,22 +156,29 @@ Partial Class frm_catchActivity
         Me.RibbonPageGroup1.Name = "RibbonPageGroup1"
         Me.RibbonPageGroup1.Text = "Information"
         '
-        'ribbonTools
+        'rbnActions
         '
-        Me.ribbonTools.AllowTextClipping = False
-        Me.ribbonTools.ItemLinks.Add(Me.btnSave)
-        Me.ribbonTools.ItemLinks.Add(Me.btnDelete)
-        Me.ribbonTools.ItemLinks.Add(Me.btnPost)
-        Me.ribbonTools.Name = "ribbonTools"
-        Me.ribbonTools.Text = "Actions"
+        Me.rbnActions.AllowTextClipping = False
+        Me.rbnActions.ItemLinks.Add(Me.btnSave)
+        Me.rbnActions.ItemLinks.Add(Me.btnDelete)
+        Me.rbnActions.ItemLinks.Add(Me.btnPost)
+        Me.rbnActions.Name = "rbnActions"
+        Me.rbnActions.Text = "Actions"
+        '
+        'rbnTools
+        '
+        Me.rbnTools.AllowTextClipping = False
+        Me.rbnTools.ItemLinks.Add(Me.BarButtonItem1)
+        Me.rbnTools.Name = "rbnTools"
+        Me.rbnTools.Text = "Tools"
         '
         'RibbonStatusBar
         '
-        Me.RibbonStatusBar.Location = New System.Drawing.Point(0, 787)
+        Me.RibbonStatusBar.Location = New System.Drawing.Point(0, 639)
         Me.RibbonStatusBar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.RibbonStatusBar.Name = "RibbonStatusBar"
         Me.RibbonStatusBar.Ribbon = Me.RibbonControl
-        Me.RibbonStatusBar.Size = New System.Drawing.Size(1061, 32)
+        Me.RibbonStatusBar.Size = New System.Drawing.Size(909, 26)
         '
         'LayoutControl1
         '
@@ -171,12 +188,12 @@ Partial Class frm_catchActivity
         Me.LayoutControl1.Controls.Add(Me.cmbMethod)
         Me.LayoutControl1.Controls.Add(Me.dtCreated)
         Me.LayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LayoutControl1.Location = New System.Drawing.Point(0, 198)
+        Me.LayoutControl1.Location = New System.Drawing.Point(0, 162)
         Me.LayoutControl1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.LayoutControl1.Name = "LayoutControl1"
         Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(1128, 355, 650, 400)
         Me.LayoutControl1.Root = Me.LayoutControlGroup1
-        Me.LayoutControl1.Size = New System.Drawing.Size(1061, 589)
+        Me.LayoutControl1.Size = New System.Drawing.Size(909, 477)
         Me.LayoutControl1.TabIndex = 2
         Me.LayoutControl1.Text = "LayoutControl1"
         '
@@ -185,20 +202,21 @@ Partial Class frm_catchActivity
         Me.LayoutControl2.Controls.Add(Me.btnDelete1)
         Me.LayoutControl2.Controls.Add(Me.btnAddCatcher)
         Me.LayoutControl2.Controls.Add(Me.GridControl1)
-        Me.LayoutControl2.Location = New System.Drawing.Point(12, 64)
+        Me.LayoutControl2.Location = New System.Drawing.Point(12, 60)
         Me.LayoutControl2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.LayoutControl2.Name = "LayoutControl2"
         Me.LayoutControl2.Root = Me.Root
-        Me.LayoutControl2.Size = New System.Drawing.Size(1037, 513)
+        Me.LayoutControl2.Size = New System.Drawing.Size(885, 405)
         Me.LayoutControl2.TabIndex = 8
         Me.LayoutControl2.Text = "LayoutControl2"
         '
         'btnDelete1
         '
         Me.btnDelete1.ImageOptions.Image = CType(resources.GetObject("btnDelete1.ImageOptions.Image"), System.Drawing.Image)
-        Me.btnDelete1.Location = New System.Drawing.Point(520, 12)
+        Me.btnDelete1.Location = New System.Drawing.Point(444, 12)
+        Me.btnDelete1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnDelete1.Name = "btnDelete1"
-        Me.btnDelete1.Size = New System.Drawing.Size(250, 36)
+        Me.btnDelete1.Size = New System.Drawing.Size(212, 36)
         Me.btnDelete1.StyleController = Me.LayoutControl2
         Me.btnDelete1.TabIndex = 7
         Me.btnDelete1.Text = "Delete"
@@ -206,10 +224,10 @@ Partial Class frm_catchActivity
         'btnAddCatcher
         '
         Me.btnAddCatcher.ImageOptions.Image = CType(resources.GetObject("btnAddCatcher.ImageOptions.Image"), System.Drawing.Image)
-        Me.btnAddCatcher.Location = New System.Drawing.Point(774, 12)
+        Me.btnAddCatcher.Location = New System.Drawing.Point(660, 12)
         Me.btnAddCatcher.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnAddCatcher.Name = "btnAddCatcher"
-        Me.btnAddCatcher.Size = New System.Drawing.Size(251, 36)
+        Me.btnAddCatcher.Size = New System.Drawing.Size(213, 36)
         Me.btnAddCatcher.StyleController = Me.LayoutControl2
         Me.btnAddCatcher.TabIndex = 5
         Me.btnAddCatcher.Text = "Add Catcher"
@@ -222,12 +240,13 @@ Partial Class frm_catchActivity
         Me.GridControl1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GridControl1.MenuManager = Me.RibbonControl
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(1013, 449)
+        Me.GridControl1.Size = New System.Drawing.Size(861, 341)
         Me.GridControl1.TabIndex = 4
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
         'GridView1
         '
+        Me.GridView1.DetailHeight = 284
         Me.GridView1.GridControl = Me.GridControl1
         Me.GridView1.Name = "GridView1"
         Me.GridView1.OptionsView.ShowGroupPanel = False
@@ -238,7 +257,7 @@ Partial Class frm_catchActivity
         Me.Root.GroupBordersVisible = False
         Me.Root.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem6, Me.layoutBtnAdd, Me.EmptySpaceItem1, Me.layoutBtnDelete})
         Me.Root.Name = "Root"
-        Me.Root.Size = New System.Drawing.Size(1037, 513)
+        Me.Root.Size = New System.Drawing.Size(885, 405)
         Me.Root.TextVisible = False
         '
         'LayoutControlItem6
@@ -246,16 +265,16 @@ Partial Class frm_catchActivity
         Me.LayoutControlItem6.Control = Me.GridControl1
         Me.LayoutControlItem6.Location = New System.Drawing.Point(0, 40)
         Me.LayoutControlItem6.Name = "LayoutControlItem6"
-        Me.LayoutControlItem6.Size = New System.Drawing.Size(1017, 453)
+        Me.LayoutControlItem6.Size = New System.Drawing.Size(865, 345)
         Me.LayoutControlItem6.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem6.TextVisible = False
         '
         'layoutBtnAdd
         '
         Me.layoutBtnAdd.Control = Me.btnAddCatcher
-        Me.layoutBtnAdd.Location = New System.Drawing.Point(762, 0)
+        Me.layoutBtnAdd.Location = New System.Drawing.Point(648, 0)
         Me.layoutBtnAdd.Name = "layoutBtnAdd"
-        Me.layoutBtnAdd.Size = New System.Drawing.Size(255, 40)
+        Me.layoutBtnAdd.Size = New System.Drawing.Size(217, 40)
         Me.layoutBtnAdd.TextSize = New System.Drawing.Size(0, 0)
         Me.layoutBtnAdd.TextVisible = False
         '
@@ -264,65 +283,65 @@ Partial Class frm_catchActivity
         Me.EmptySpaceItem1.AllowHotTrack = False
         Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 0)
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(508, 40)
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(432, 40)
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
         '
         'layoutBtnDelete
         '
         Me.layoutBtnDelete.Control = Me.btnDelete1
-        Me.layoutBtnDelete.Location = New System.Drawing.Point(508, 0)
+        Me.layoutBtnDelete.Location = New System.Drawing.Point(432, 0)
         Me.layoutBtnDelete.Name = "layoutBtnDelete"
-        Me.layoutBtnDelete.Size = New System.Drawing.Size(254, 40)
+        Me.layoutBtnDelete.Size = New System.Drawing.Size(216, 40)
         Me.layoutBtnDelete.TextSize = New System.Drawing.Size(0, 0)
         Me.layoutBtnDelete.TextVisible = False
         '
         'txtLong
         '
-        Me.txtLong.Location = New System.Drawing.Point(706, 38)
+        Me.txtLong.Location = New System.Drawing.Point(604, 36)
         Me.txtLong.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtLong.MenuManager = Me.RibbonControl
         Me.txtLong.Name = "txtLong"
         Me.txtLong.Properties.Mask.EditMask = "f9"
         Me.txtLong.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.txtLong.Properties.MaxLength = 13
-        Me.txtLong.Size = New System.Drawing.Size(281, 22)
+        Me.txtLong.Size = New System.Drawing.Size(240, 20)
         Me.txtLong.StyleController = Me.LayoutControl1
         Me.txtLong.TabIndex = 7
         '
         'txtLat
         '
-        Me.txtLat.Location = New System.Drawing.Point(706, 12)
+        Me.txtLat.Location = New System.Drawing.Point(604, 12)
         Me.txtLat.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtLat.MenuManager = Me.RibbonControl
         Me.txtLat.Name = "txtLat"
         Me.txtLat.Properties.Mask.EditMask = "f9"
         Me.txtLat.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.txtLat.Properties.MaxLength = 13
-        Me.txtLat.Size = New System.Drawing.Size(281, 22)
+        Me.txtLat.Size = New System.Drawing.Size(240, 20)
         Me.txtLat.StyleController = Me.LayoutControl1
         Me.txtLat.TabIndex = 6
         '
         'cmbMethod
         '
-        Me.cmbMethod.Location = New System.Drawing.Point(194, 38)
+        Me.cmbMethod.Location = New System.Drawing.Point(167, 36)
         Me.cmbMethod.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.cmbMethod.MenuManager = Me.RibbonControl
         Me.cmbMethod.Name = "cmbMethod"
         Me.cmbMethod.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cmbMethod.Size = New System.Drawing.Size(292, 22)
+        Me.cmbMethod.Size = New System.Drawing.Size(249, 20)
         Me.cmbMethod.StyleController = Me.LayoutControl1
         Me.cmbMethod.TabIndex = 5
         '
         'dtCreated
         '
         Me.dtCreated.EditValue = Nothing
-        Me.dtCreated.Location = New System.Drawing.Point(194, 12)
+        Me.dtCreated.Location = New System.Drawing.Point(167, 12)
         Me.dtCreated.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dtCreated.MenuManager = Me.RibbonControl
         Me.dtCreated.Name = "dtCreated"
         Me.dtCreated.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.dtCreated.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.dtCreated.Size = New System.Drawing.Size(292, 22)
+        Me.dtCreated.Size = New System.Drawing.Size(249, 20)
         Me.dtCreated.StyleController = Me.LayoutControl1
         Me.dtCreated.TabIndex = 4
         '
@@ -332,59 +351,59 @@ Partial Class frm_catchActivity
         Me.LayoutControlGroup1.GroupBordersVisible = False
         Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem1, Me.LayoutControlItem2, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.EmptySpaceItem3, Me.EmptySpaceItem4, Me.EmptySpaceItem2, Me.LayoutControlItem5})
         Me.LayoutControlGroup1.Name = "Root"
-        Me.LayoutControlGroup1.Size = New System.Drawing.Size(1061, 589)
+        Me.LayoutControlGroup1.Size = New System.Drawing.Size(909, 477)
         Me.LayoutControlGroup1.TextVisible = False
         '
         'LayoutControlItem1
         '
         Me.LayoutControlItem1.Control = Me.dtCreated
-        Me.LayoutControlItem1.Location = New System.Drawing.Point(60, 0)
+        Me.LayoutControlItem1.Location = New System.Drawing.Point(51, 0)
         Me.LayoutControlItem1.Name = "LayoutControlItem1"
-        Me.LayoutControlItem1.Size = New System.Drawing.Size(418, 26)
+        Me.LayoutControlItem1.Size = New System.Drawing.Size(357, 24)
         Me.LayoutControlItem1.Text = "Date: "
-        Me.LayoutControlItem1.TextSize = New System.Drawing.Size(119, 16)
+        Me.LayoutControlItem1.TextSize = New System.Drawing.Size(101, 13)
         '
         'LayoutControlItem2
         '
         Me.LayoutControlItem2.Control = Me.cmbMethod
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(60, 26)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(51, 24)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
-        Me.LayoutControlItem2.Size = New System.Drawing.Size(418, 26)
+        Me.LayoutControlItem2.Size = New System.Drawing.Size(357, 24)
         Me.LayoutControlItem2.Text = "Method of Catching: "
-        Me.LayoutControlItem2.TextSize = New System.Drawing.Size(119, 16)
+        Me.LayoutControlItem2.TextSize = New System.Drawing.Size(101, 13)
         '
         'LayoutControlItem3
         '
         Me.LayoutControlItem3.Control = Me.txtLat
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(572, 0)
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(488, 0)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
-        Me.LayoutControlItem3.Size = New System.Drawing.Size(407, 26)
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(348, 24)
         Me.LayoutControlItem3.Text = "Latitude: "
-        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(119, 16)
+        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(101, 13)
         '
         'LayoutControlItem4
         '
         Me.LayoutControlItem4.Control = Me.txtLong
-        Me.LayoutControlItem4.Location = New System.Drawing.Point(572, 26)
+        Me.LayoutControlItem4.Location = New System.Drawing.Point(488, 24)
         Me.LayoutControlItem4.Name = "LayoutControlItem4"
-        Me.LayoutControlItem4.Size = New System.Drawing.Size(407, 26)
+        Me.LayoutControlItem4.Size = New System.Drawing.Size(348, 24)
         Me.LayoutControlItem4.Text = "Longitude: "
-        Me.LayoutControlItem4.TextSize = New System.Drawing.Size(119, 16)
+        Me.LayoutControlItem4.TextSize = New System.Drawing.Size(101, 13)
         '
         'EmptySpaceItem3
         '
         Me.EmptySpaceItem3.AllowHotTrack = False
-        Me.EmptySpaceItem3.Location = New System.Drawing.Point(478, 0)
+        Me.EmptySpaceItem3.Location = New System.Drawing.Point(408, 0)
         Me.EmptySpaceItem3.Name = "EmptySpaceItem3"
-        Me.EmptySpaceItem3.Size = New System.Drawing.Size(94, 52)
+        Me.EmptySpaceItem3.Size = New System.Drawing.Size(80, 48)
         Me.EmptySpaceItem3.TextSize = New System.Drawing.Size(0, 0)
         '
         'EmptySpaceItem4
         '
         Me.EmptySpaceItem4.AllowHotTrack = False
-        Me.EmptySpaceItem4.Location = New System.Drawing.Point(979, 0)
+        Me.EmptySpaceItem4.Location = New System.Drawing.Point(836, 0)
         Me.EmptySpaceItem4.Name = "EmptySpaceItem4"
-        Me.EmptySpaceItem4.Size = New System.Drawing.Size(62, 52)
+        Me.EmptySpaceItem4.Size = New System.Drawing.Size(53, 48)
         Me.EmptySpaceItem4.TextSize = New System.Drawing.Size(0, 0)
         '
         'EmptySpaceItem2
@@ -392,23 +411,23 @@ Partial Class frm_catchActivity
         Me.EmptySpaceItem2.AllowHotTrack = False
         Me.EmptySpaceItem2.Location = New System.Drawing.Point(0, 0)
         Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Size = New System.Drawing.Size(60, 52)
+        Me.EmptySpaceItem2.Size = New System.Drawing.Size(51, 48)
         Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem5
         '
         Me.LayoutControlItem5.Control = Me.LayoutControl2
-        Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 52)
+        Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 48)
         Me.LayoutControlItem5.Name = "LayoutControlItem5"
-        Me.LayoutControlItem5.Size = New System.Drawing.Size(1041, 517)
+        Me.LayoutControlItem5.Size = New System.Drawing.Size(889, 409)
         Me.LayoutControlItem5.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem5.TextVisible = False
         '
         'frm_catchActivity
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1061, 819)
+        Me.ClientSize = New System.Drawing.Size(909, 665)
         Me.Controls.Add(Me.LayoutControl1)
         Me.Controls.Add(Me.RibbonStatusBar)
         Me.Controls.Add(Me.RibbonControl)
@@ -455,7 +474,7 @@ Partial Class frm_catchActivity
     Friend WithEvents RibbonStatusBar As DevExpress.XtraBars.Ribbon.RibbonStatusBar
     Friend WithEvents BarHeaderItem1 As DevExpress.XtraBars.BarHeaderItem
     Friend WithEvents txt_catNum As DevExpress.XtraBars.BarStaticItem
-    Friend WithEvents ribbonTools As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents rbnActions As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents btnSave As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents btnDelete As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents btnPost As DevExpress.XtraBars.BarButtonItem
@@ -483,6 +502,8 @@ Partial Class frm_catchActivity
     Friend WithEvents layoutBtnAdd As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents btnDelete1 As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents layoutBtnDelete As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents BarButtonItem1 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents rbnTools As DevExpress.XtraBars.Ribbon.RibbonPageGroup
 
 
 End Class
