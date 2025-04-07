@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 ﻿Public Class SalesReportInvoice
+=======
+﻿Public Class SalesReportInvoice
+>>>>>>> Stashed changes
     ' Sales Report Column
     Public Property SalesReportID As Integer
     Public Property UnloadingVesselID As String
@@ -76,9 +80,18 @@
     Public Property SRPBigeye10AndUP As Decimal
     Public Property SRPBonito As Decimal
     Public Property SRPFishmeal As Decimal
+<<<<<<< Updated upstream
 
 
     Sub New()
 
     End Sub
 End Class
+=======
+
+
+    Sub New()
+
+    End Sub
+End Class
+>>>>>>> Stashed changes
