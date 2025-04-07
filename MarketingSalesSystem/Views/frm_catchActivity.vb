@@ -8,6 +8,7 @@ Public Class frm_catchActivity
     Public dt As DataTable
 
     Private ctrlCA As ctrlCatchers
+    Public isPosted As Boolean = False
 
     Sub New(ByRef ctrl As ctrlCatchers)
         InitializeComponent()
@@ -123,5 +124,9 @@ Public Class frm_catchActivity
 
     Private Sub btnPost_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnPost.ItemClick
         ctrlCA.postedDraft()
+    End Sub
+
+    Private Sub BarButtonItem1_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem1.ItemClick
+        ctrlCA.print()
     End Sub
 End Class

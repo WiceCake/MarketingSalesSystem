@@ -33,4 +33,5 @@ D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\SqlServerTypes\x64\msvcr1
 D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\SqlServerTypes\x64\SqlServerSpatial110.dll
 D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\SqlServerTypes\x86\msvcr100.dll
 D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\SqlServerTypes\x86\SqlServerSpatial110.dll
-D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\Microsoft.SqlServer.Types.dll
+D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.vbprojResolveAssemblyReference.cache
+D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.rptCatcherReport.resources
