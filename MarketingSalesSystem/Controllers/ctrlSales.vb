@@ -630,16 +630,12 @@ Public Class ctrlSales
     End Sub
 
     Sub print()
-        Dim Tool As ReportPrintTool
-        Dim rpt As XtraReport
+        Dim tool As ReportPrintTool
 
         Dim rp = New rptSalesInvoiceReport()
-        rp.salesReport_ID = mdlSR.salesReport_ID
-        rpt = rp
-        Tool = New ReportPrintTool(rpt)
-        Tool.AutoShowParametersPanel = False
-        Tool.PreviewForm.WindowState = FormWindowState.Maximized
-        Tool.ShowPreview()
+        rp.DataSource = getReportSalesInvoice(mdlSR.salesReport_ID)
+        tool = New ReportPrintTool(rp)
+        tool.ShowPreviewDialog()
     End Sub
 
 End Class
