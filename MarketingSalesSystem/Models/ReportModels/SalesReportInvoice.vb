@@ -1,5 +1,9 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 ﻿Public Class SalesReportInvoice
+=======
+﻿Public Class SalesReportInvoice
+>>>>>>> Stashed changes
 =======
 ﻿Public Class SalesReportInvoice
 >>>>>>> Stashed changes
@@ -81,12 +85,21 @@
     Public Property SRPBonito As Decimal
     Public Property SRPFishmeal As Decimal
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 
     Sub New()
 
     End Sub
 End Class
+=======
+
+
+    Sub New()
+
+    End Sub
+End Class
+>>>>>>> Stashed changes
 =======
 
 
