@@ -1,4 +1,4 @@
-﻿Public Class CatchersActivity
+﻿Public Class CatchersReportActivity
     'Catch Activity
     Public Property catchActivity_ID As Integer
     Public Property catchDate As Date

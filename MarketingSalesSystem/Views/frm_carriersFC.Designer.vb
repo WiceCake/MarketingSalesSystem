@@ -25,8 +25,8 @@ Partial Class frm_carriersFC
         Me.SimpleButton3 = New DevExpress.XtraEditors.SimpleButton()
         Me.GridControl2 = New DevExpress.XtraGrid.GridControl()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.SimpleButton2 = New DevExpress.XtraEditors.SimpleButton()
-        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
+        Me.btnAddCarrier = New DevExpress.XtraEditors.SimpleButton()
+        Me.btnDelete1 = New DevExpress.XtraEditors.SimpleButton()
         Me.TextEdit1 = New DevExpress.XtraEditors.DateEdit()
         Me.LayoutControlGroup1 = New DevExpress.XtraLayout.LayoutControlGroup()
         Me.LayoutControlItem1 = New DevExpress.XtraLayout.LayoutControlItem()
@@ -63,8 +63,8 @@ Partial Class frm_carriersFC
         Me.LayoutControl1.Controls.Add(Me.FormTitle)
         Me.LayoutControl1.Controls.Add(Me.SimpleButton3)
         Me.LayoutControl1.Controls.Add(Me.GridControl2)
-        Me.LayoutControl1.Controls.Add(Me.SimpleButton2)
-        Me.LayoutControl1.Controls.Add(Me.SimpleButton1)
+        Me.LayoutControl1.Controls.Add(Me.btnAddCarrier)
+        Me.LayoutControl1.Controls.Add(Me.btnDelete1)
         Me.LayoutControl1.Controls.Add(Me.TextEdit1)
         Me.LayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LayoutControl1.Location = New System.Drawing.Point(0, 0)
@@ -108,25 +108,25 @@ Partial Class frm_carriersFC
         Me.GridView2.OptionsMenu.EnableGroupPanelMenu = False
         Me.GridView2.OptionsView.ShowGroupPanel = False
         '
-        'SimpleButton2
+        'btnAddCarrier
         '
-        Me.SimpleButton2.ImageOptions.Image = CType(resources.GetObject("SimpleButton2.ImageOptions.Image"), System.Drawing.Image)
-        Me.SimpleButton2.Location = New System.Drawing.Point(416, 70)
-        Me.SimpleButton2.Name = "SimpleButton2"
-        Me.SimpleButton2.Size = New System.Drawing.Size(113, 36)
-        Me.SimpleButton2.StyleController = Me.LayoutControl1
-        Me.SimpleButton2.TabIndex = 7
-        Me.SimpleButton2.Text = "Add Carrier"
+        Me.btnAddCarrier.ImageOptions.Image = CType(resources.GetObject("SimpleButton2.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnAddCarrier.Location = New System.Drawing.Point(416, 70)
+        Me.btnAddCarrier.Name = "btnAddCarrier"
+        Me.btnAddCarrier.Size = New System.Drawing.Size(113, 36)
+        Me.btnAddCarrier.StyleController = Me.LayoutControl1
+        Me.btnAddCarrier.TabIndex = 7
+        Me.btnAddCarrier.Text = "Add Carrier"
         '
-        'SimpleButton1
+        'btnDelete1
         '
-        Me.SimpleButton1.ImageOptions.Image = CType(resources.GetObject("SimpleButton1.ImageOptions.Image"), System.Drawing.Image)
-        Me.SimpleButton1.Location = New System.Drawing.Point(292, 70)
-        Me.SimpleButton1.Name = "SimpleButton1"
-        Me.SimpleButton1.Size = New System.Drawing.Size(120, 36)
-        Me.SimpleButton1.StyleController = Me.LayoutControl1
-        Me.SimpleButton1.TabIndex = 6
-        Me.SimpleButton1.Text = "Delete"
+        Me.btnDelete1.ImageOptions.Image = CType(resources.GetObject("SimpleButton1.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnDelete1.Location = New System.Drawing.Point(292, 70)
+        Me.btnDelete1.Name = "btnDelete1"
+        Me.btnDelete1.Size = New System.Drawing.Size(120, 36)
+        Me.btnDelete1.StyleController = Me.LayoutControl1
+        Me.btnDelete1.TabIndex = 6
+        Me.btnDelete1.Text = "Delete"
         '
         'TextEdit1
         '
@@ -171,7 +171,7 @@ Partial Class frm_carriersFC
         '
         'LayoutControlItem3
         '
-        Me.LayoutControlItem3.Control = Me.SimpleButton1
+        Me.LayoutControlItem3.Control = Me.btnDelete1
         Me.LayoutControlItem3.Location = New System.Drawing.Point(280, 58)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
         Me.LayoutControlItem3.Size = New System.Drawing.Size(124, 40)
@@ -180,7 +180,7 @@ Partial Class frm_carriersFC
         '
         'LayoutControlItem4
         '
-        Me.LayoutControlItem4.Control = Me.SimpleButton2
+        Me.LayoutControlItem4.Control = Me.btnAddCarrier
         Me.LayoutControlItem4.Location = New System.Drawing.Point(404, 58)
         Me.LayoutControlItem4.Name = "LayoutControlItem4"
         Me.LayoutControlItem4.Size = New System.Drawing.Size(117, 40)
@@ -272,9 +272,9 @@ Partial Class frm_carriersFC
     Friend WithEvents LayoutControlItem1 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents TextEdit1 As DevExpress.XtraEditors.DateEdit
     Friend WithEvents EmptySpaceItem1 As DevExpress.XtraLayout.EmptySpaceItem
-    Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents btnDelete1 As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LayoutControlItem3 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents SimpleButton2 As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents btnAddCarrier As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LayoutControlItem4 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents EmptySpaceItem2 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents GridControl2 As DevExpress.XtraGrid.GridControl
