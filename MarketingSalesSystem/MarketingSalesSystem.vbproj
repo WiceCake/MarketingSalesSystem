@@ -176,9 +176,6 @@
     <Compile Include="Reports\rptProformaInvoice.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\rptProformaInvoice.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reports\rptSalesInvoiceReport.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -223,12 +220,6 @@
     </None>
     <EmbeddedResource Include="Reports\rptCatcherReport.resx">
       <DependentUpon>rptCatcherReport.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\rptProformaInvoice.resx">
-      <DependentUpon>rptProformaInvoice.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\rptSalesInvoiceReport.resx">
-      <DependentUpon>rptSalesInvoiceReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptProformaInvoice.resx">
       <DependentUpon>rptProformaInvoice.vb</DependentUpon>
