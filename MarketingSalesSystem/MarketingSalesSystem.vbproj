@@ -224,6 +224,9 @@
     <EmbeddedResource Include="Reports\rptProformaInvoice.resx">
       <DependentUpon>rptProformaInvoice.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptSalesInvoiceReport.resx">
+      <DependentUpon>rptSalesInvoiceReport.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_catchActivity.resx">
       <DependentUpon>frm_catchActivity.vb</DependentUpon>
     </EmbeddedResource>
