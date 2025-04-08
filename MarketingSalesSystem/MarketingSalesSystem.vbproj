@@ -146,6 +146,7 @@
     <Compile Include="Models\CatchActivity.vb" />
     <Compile Include="Models\CatchActivityDetail.vb" />
     <Compile Include="Models\CatchMethod.vb" />
+    <Compile Include="Models\ReportModels\CatchersActivity.vb" />
     <Compile Include="Models\ReportModels\SalesReportInvoice.vb" />
     <Compile Include="Models\SalesReportCatcher.vb" />
     <Compile Include="Models\SalesReportWeightSlip.vb" />
@@ -174,6 +175,12 @@
     </Compile>
     <Compile Include="Reports\rptSalesInvoiceReport.vb">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\frm_carriersFC.Designer.vb">
+      <DependentUpon>frm_carriersFC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_carriersFC.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\frm_catchActivity.Designer.vb">
       <DependentUpon>frm_catchActivity.vb</DependentUpon>
@@ -219,6 +226,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptSalesInvoiceReport.resx">
       <DependentUpon>rptSalesInvoiceReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_carriersFC.resx">
+      <DependentUpon>frm_carriersFC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_catchActivity.resx">
       <DependentUpon>frm_catchActivity.vb</DependentUpon>

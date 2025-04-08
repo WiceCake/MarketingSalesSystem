@@ -345,4 +345,8 @@ Public Class frm_salesInvoice
     Private Sub BarButtonItem1_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem1.ItemClick
         ctrlSales.print()
     End Sub
+
+    Private Sub bn_foreignCarrier_Click(sender As Object, e As EventArgs) Handles bn_foreignCarrier.Click
+        Dim frmAddCarrier As New ctrlCarrier()
+    End Sub
 End Class
