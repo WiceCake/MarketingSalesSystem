@@ -211,16 +211,12 @@ Public Class ctrlCatchers
     End Sub
 
     Sub print()
-        Dim Tool As ReportPrintTool
-        Dim rpt As XtraReport
+        Dim tool As ReportPrintTool
 
         Dim rp = New rptCatcherReport()
-        rp.catcherReport_ID = mdlCA.catchActivity_ID
-        rpt = rp
-        Tool = New ReportPrintTool(rpt)
-        Tool.AutoShowParametersPanel = False
-        Tool.PreviewForm.WindowState = FormWindowState.Maximized
-        Tool.ShowPreview()
+        rp.DataSource = getReportCatcherAct(mdlCA.catchActivity_ID)
+        tool = New ReportPrintTool(rp)
+        tool.ShowPreviewDialog()
     End Sub
 
 End Class
