@@ -632,7 +632,7 @@ Public Class ctrlSales
     Sub print()
         Dim tool As ReportPrintTool
 
-        Dim rp = New rptSalesInvoiceReport()
+        Dim rp = New rptProformaInvoice()
         rp.DataSource = getReportSalesInvoice(mdlSR.salesReport_ID)
         tool = New ReportPrintTool(rp)
         tool.ShowPreviewDialog()
