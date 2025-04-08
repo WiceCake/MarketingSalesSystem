@@ -176,12 +176,6 @@
     <Compile Include="Reports\rptProformaInvoice.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\rptSalesInvoiceReport.Designer.vb">
-      <DependentUpon>rptSalesInvoiceReport.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\rptSalesInvoiceReport.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Views\frm_catchActivity.Designer.vb">
       <DependentUpon>frm_catchActivity.vb</DependentUpon>
     </Compile>
@@ -226,9 +220,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptProformaInvoice.resx">
       <DependentUpon>rptProformaInvoice.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\rptSalesInvoiceReport.resx">
-      <DependentUpon>rptSalesInvoiceReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_catchActivity.resx">
       <DependentUpon>frm_catchActivity.vb</DependentUpon>
