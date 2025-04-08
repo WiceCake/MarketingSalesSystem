@@ -1,4 +1,4 @@
-﻿Public Class SalesReportInvoice
+Public Class SalesReportInvoice
     ' Sales Report Column
     Public Property SalesReportID As Integer
     Public Property UnloadingVesselID As String
@@ -76,7 +76,6 @@
     Public Property SRPBigeye10AndUP As Decimal
     Public Property SRPBonito As Decimal
     Public Property SRPFishmeal As Decimal
-
 
     Sub New()
 
