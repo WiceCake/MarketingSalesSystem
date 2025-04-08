@@ -117,6 +117,7 @@
     <Import Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ctrlCarrier.vb" />
     <Compile Include="Controllers\ctrlCatchers.vb" />
     <Compile Include="Controllers\ctrlSales.vb" />
     <Compile Include="Data\mkdb.designer.vb">

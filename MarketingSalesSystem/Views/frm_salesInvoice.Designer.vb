@@ -34,8 +34,8 @@ Partial Class frm_salesInvoice
         Me.rbnTools = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
-        Me.bn_companyCarrier = New DevExpress.XtraEditors.SimpleButton()
-        Me.bn_foreignCarrier = New DevExpress.XtraEditors.SimpleButton()
+        Me.btn_companyCarrier = New DevExpress.XtraEditors.SimpleButton()
+        Me.btn_foreignCarrier = New DevExpress.XtraEditors.SimpleButton()
         Me.txtInvoiceNum = New DevExpress.XtraEditors.TextEdit()
         Me.rBT = New DevExpress.XtraEditors.RadioGroup()
         Me.txtBuyer = New DevExpress.XtraEditors.TextEdit()
@@ -244,8 +244,8 @@ Partial Class frm_salesInvoice
         '
         'LayoutControl1
         '
-        Me.LayoutControl1.Controls.Add(Me.bn_companyCarrier)
-        Me.LayoutControl1.Controls.Add(Me.bn_foreignCarrier)
+        Me.LayoutControl1.Controls.Add(Me.btn_companyCarrier)
+        Me.LayoutControl1.Controls.Add(Me.btn_foreignCarrier)
         Me.LayoutControl1.Controls.Add(Me.txtInvoiceNum)
         Me.LayoutControl1.Controls.Add(Me.rBT)
         Me.LayoutControl1.Controls.Add(Me.txtBuyer)
@@ -270,25 +270,25 @@ Partial Class frm_salesInvoice
         Me.LayoutControl1.TabIndex = 2
         Me.LayoutControl1.Text = "LayoutControl1"
         '
-        'bn_companyCarrier
+        'btn_companyCarrier
         '
-        Me.bn_companyCarrier.ImageOptions.Image = CType(resources.GetObject("bn_companyCarrier.ImageOptions.Image"), System.Drawing.Image)
-        Me.bn_companyCarrier.Location = New System.Drawing.Point(191, 172)
-        Me.bn_companyCarrier.Name = "bn_companyCarrier"
-        Me.bn_companyCarrier.Size = New System.Drawing.Size(145, 36)
-        Me.bn_companyCarrier.StyleController = Me.LayoutControl1
-        Me.bn_companyCarrier.TabIndex = 30
-        Me.bn_companyCarrier.Text = "Add Carrier"
+        Me.btn_companyCarrier.ImageOptions.Image = CType(resources.GetObject("btn_companyCarrier.ImageOptions.Image"), System.Drawing.Image)
+        Me.btn_companyCarrier.Location = New System.Drawing.Point(191, 172)
+        Me.btn_companyCarrier.Name = "btn_companyCarrier"
+        Me.btn_companyCarrier.Size = New System.Drawing.Size(145, 36)
+        Me.btn_companyCarrier.StyleController = Me.LayoutControl1
+        Me.btn_companyCarrier.TabIndex = 30
+        Me.btn_companyCarrier.Text = "Add Carrier"
         '
-        'bn_foreignCarrier
+        'btn_foreignCarrier
         '
-        Me.bn_foreignCarrier.ImageOptions.Image = CType(resources.GetObject("bn_foreignCarrier.ImageOptions.Image"), System.Drawing.Image)
-        Me.bn_foreignCarrier.Location = New System.Drawing.Point(191, 108)
-        Me.bn_foreignCarrier.Name = "bn_foreignCarrier"
-        Me.bn_foreignCarrier.Size = New System.Drawing.Size(145, 36)
-        Me.bn_foreignCarrier.StyleController = Me.LayoutControl1
-        Me.bn_foreignCarrier.TabIndex = 28
-        Me.bn_foreignCarrier.Text = "Add Carrier"
+        Me.btn_foreignCarrier.ImageOptions.Image = CType(resources.GetObject("btn_foreignCarrier.ImageOptions.Image"), System.Drawing.Image)
+        Me.btn_foreignCarrier.Location = New System.Drawing.Point(191, 108)
+        Me.btn_foreignCarrier.Name = "btn_foreignCarrier"
+        Me.btn_foreignCarrier.Size = New System.Drawing.Size(145, 36)
+        Me.btn_foreignCarrier.StyleController = Me.LayoutControl1
+        Me.btn_foreignCarrier.TabIndex = 28
+        Me.btn_foreignCarrier.Text = "Add Carrier"
         '
         'txtInvoiceNum
         '
@@ -667,7 +667,7 @@ Partial Class frm_salesInvoice
         '
         'LayoutControlItem9
         '
-        Me.LayoutControlItem9.Control = Me.bn_foreignCarrier
+        Me.LayoutControlItem9.Control = Me.btn_foreignCarrier
         Me.LayoutControlItem9.Location = New System.Drawing.Point(179, 96)
         Me.LayoutControlItem9.Name = "LayoutControlItem9"
         Me.LayoutControlItem9.Size = New System.Drawing.Size(149, 40)
@@ -701,7 +701,7 @@ Partial Class frm_salesInvoice
         '
         'LayoutControlItem16
         '
-        Me.LayoutControlItem16.Control = Me.bn_companyCarrier
+        Me.LayoutControlItem16.Control = Me.btn_companyCarrier
         Me.LayoutControlItem16.Location = New System.Drawing.Point(179, 160)
         Me.LayoutControlItem16.Name = "LayoutControlItem16"
         Me.LayoutControlItem16.Size = New System.Drawing.Size(149, 40)
@@ -936,9 +936,9 @@ Partial Class frm_salesInvoice
     Friend WithEvents LayoutControlItem7 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents BarButtonItem1 As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents rbnTools As DevExpress.XtraBars.Ribbon.RibbonPageGroup
-    Friend WithEvents bn_foreignCarrier As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents btn_foreignCarrier As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LayoutControlItem9 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents bn_companyCarrier As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents btn_companyCarrier As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents EmptySpaceItem5 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents EmptySpaceItem6 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents LayoutControlItem16 As DevExpress.XtraLayout.LayoutControlItem

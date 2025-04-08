@@ -346,7 +346,12 @@ Public Class frm_salesInvoice
         ctrlSales.print()
     End Sub
 
-    Private Sub bn_foreignCarrier_Click(sender As Object, e As EventArgs) Handles bn_foreignCarrier.Click
-        Dim frmAddCarrier As New ctrlCarrier()
+    Private Sub btn_foreignCarrier_Click(sender As Object, e As EventArgs) Handles btn_foreignCarrier.Click
+        Dim formC As New ctrlCarrier("Foreign Carrier")
     End Sub
+
+    Private Sub btn_companyCarrier_Click(sender As Object, e As EventArgs) Handles btn_companyCarrier.Click
+        Dim formC As New ctrlCarrier("Company Carrier")
+    End Sub
+
 End Class
