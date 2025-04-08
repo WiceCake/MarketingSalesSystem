@@ -19,16 +19,15 @@ Partial Public Class rptSalesInvoiceReport
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.BindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource()
+        Me.BindingSource2 = New System.Windows.Forms.BindingSource()
         Me.GroupHeader1 = New DevExpress.XtraReports.UI.GroupHeaderBand()
-        Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel3 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -64,20 +63,16 @@ Partial Public Class rptSalesInvoiceReport
         Me.GroupHeader1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel3, Me.XrLabel2, Me.XrLabel1})
         Me.GroupHeader1.Name = "GroupHeader1"
         '
-        'XrLabel1
+        'XrLabel3
         '
-        Me.XrLabel1.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.XrLabel1.ForeColor = System.Drawing.Color.Red
-        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(200.0!, 0.0!)
-        Me.XrLabel1.Multiline = True
-        Me.XrLabel1.Name = "XrLabel1"
-        Me.XrLabel1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96.0!)
-        Me.XrLabel1.SizeF = New System.Drawing.SizeF(182.5!, 23.0!)
-        Me.XrLabel1.StylePriority.UseFont = False
-        Me.XrLabel1.StylePriority.UseForeColor = False
-        Me.XrLabel1.StylePriority.UseTextAlignment = False
-        Me.XrLabel1.Text = "PERFORMA INVOICE"
-        Me.XrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter
+        Me.XrLabel3.Font = New System.Drawing.Font("Times New Roman", 11.0!)
+        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(449.9999!, 26.83334!)
+        Me.XrLabel3.Multiline = True
+        Me.XrLabel3.Name = "XrLabel3"
+        Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel3.SizeF = New System.Drawing.SizeF(51.66672!, 23.0!)
+        Me.XrLabel3.StylePriority.UseFont = False
+        Me.XrLabel3.Text = "Date:"
         '
         'XrLabel2
         '
@@ -85,21 +80,25 @@ Partial Public Class rptSalesInvoiceReport
         Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(501.6667!, 26.83334!)
         Me.XrLabel2.Multiline = True
         Me.XrLabel2.Name = "XrLabel2"
-        Me.XrLabel2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96.0!)
+        Me.XrLabel2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel2.SizeF = New System.Drawing.SizeF(148.3333!, 23.0!)
         Me.XrLabel2.Text = "XrLabel2"
         Me.XrLabel2.TextFormatString = "{0:d}"
         '
-        'XrLabel3
+        'XrLabel1
         '
-        Me.XrLabel3.Font = New System.Drawing.Font("Times New Roman", 11.0!)
-        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(449.9999!, 26.83334!)
-        Me.XrLabel3.Multiline = True
-        Me.XrLabel3.Name = "XrLabel3"
-        Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96.0!)
-        Me.XrLabel3.SizeF = New System.Drawing.SizeF(51.66672!, 23.0!)
-        Me.XrLabel3.StylePriority.UseFont = False
-        Me.XrLabel3.Text = "Date:"
+        Me.XrLabel1.Font = New System.Drawing.Font("Times New Roman", 12.0!)
+        Me.XrLabel1.ForeColor = System.Drawing.Color.Red
+        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(200.0!, 0.0!)
+        Me.XrLabel1.Multiline = True
+        Me.XrLabel1.Name = "XrLabel1"
+        Me.XrLabel1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel1.SizeF = New System.Drawing.SizeF(182.5!, 23.0!)
+        Me.XrLabel1.StylePriority.UseFont = False
+        Me.XrLabel1.StylePriority.UseForeColor = False
+        Me.XrLabel1.StylePriority.UseTextAlignment = False
+        Me.XrLabel1.Text = "PERFORMA INVOICE"
+        Me.XrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter
         '
         'rptSalesInvoiceReport
         '

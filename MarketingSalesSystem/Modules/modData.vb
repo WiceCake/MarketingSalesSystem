@@ -1,4 +1,4 @@
-﻿Module modData
+Module modData
     Function getReportSalesInvoice(reportID As Integer) As List(Of SalesReportInvoice)
         Dim retList As New List(Of SalesReportInvoice)
 
