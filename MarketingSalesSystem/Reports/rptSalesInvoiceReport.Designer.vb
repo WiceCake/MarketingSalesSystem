@@ -22,12 +22,12 @@ Partial Public Class rptSalesInvoiceReport
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource()
-        Me.BindingSource2 = New System.Windows.Forms.BindingSource()
         Me.GroupHeader1 = New DevExpress.XtraReports.UI.GroupHeaderBand()
         Me.XrLabel3 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource()
+        Me.BindingSource2 = New System.Windows.Forms.BindingSource()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -49,14 +49,6 @@ Partial Public Class rptSalesInvoiceReport
         Me.BottomMargin.Name = "BottomMargin"
         Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-        '
-        'BindingSource1
-        '
-        Me.BindingSource1.DataSource = GetType(MarketingSalesSystem.SalesReportInvoice)
-        '
-        'BindingSource2
-        '
-        Me.BindingSource2.DataSource = GetType(MarketingSalesSystem.SalesReportInvoice)
         '
         'GroupHeader1
         '
@@ -99,6 +91,14 @@ Partial Public Class rptSalesInvoiceReport
         Me.XrLabel1.StylePriority.UseTextAlignment = False
         Me.XrLabel1.Text = "PERFORMA INVOICE"
         Me.XrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter
+        '
+        'BindingSource1
+        '
+        Me.BindingSource1.DataSource = GetType(MarketingSalesSystem.SalesReportInvoice)
+        '
+        'BindingSource2
+        '
+        Me.BindingSource2.DataSource = GetType(MarketingSalesSystem.SalesReportInvoice)
         '
         'rptSalesInvoiceReport
         '
