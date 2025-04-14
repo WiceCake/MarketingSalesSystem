@@ -12,11 +12,12 @@ Public Class SalesReportInvoice
     Public Property CatchDeliveryNum As String
     Public Property ContractNum As String
     Public Property Remarks As String
-    Public Property EncodedBy As String
-    Public Property ApprovalStatus As String
+    Public Property EncodedBy As Integer
+    Public Property ApprovalStatus As Integer
     Public Property SalesDate As Date
     Public Property EncodedOn As Date
     Public Property UsdRate As Decimal
+    Public Property VesselName As String
 
     ' Sales Report Catcher
     Public Property SalesReportCatcherID As Integer
@@ -49,8 +50,6 @@ Public Class SalesReportInvoice
 
     ' Sales Report Price
     Public Property SalesReportPriceID As Integer
-    Public Property SRPSalesReportCatcherID As Integer
-    Public Property SRPCatchActivityDetailID As Integer
     Public Property SRPSkipjack0To300To499 As Decimal
     Public Property SRPSkipjack0To500To999 As Decimal
     Public Property SRPSkipjack1To0To1To39 As Decimal
