@@ -1,4 +1,5 @@
 ﻿Imports System.Transactions
+Imports DevExpress.XtraReports.UI
 
 Public Class ctrlCatchers
 
@@ -35,6 +36,7 @@ Public Class ctrlCatchers
             .btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
             .btnPost.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
             .Text = "Create Catch Activity"
+            .rbnTools.Visible = False
             loadCombo()
             loadCatcher()
             .Show()
@@ -60,8 +62,16 @@ Public Class ctrlCatchers
         frmCA.GridControl1.DataSource = frmCA.dt
 
         With frmCA
+            'Print Button
+            .rbnTools.Visible = False
+            If mdlCA.approvalStatus = Approval_Status.Posted Then
+                .rbnActions.Visible = False
+                .isPosted = True
+                .rbnTools.Visible = True
+            End If
+
             If mdlCA.approvalStatus = 1 Then
-                .ribbonTools.Visible = False
+                .rbnActions.Visible = False
             End If
             .layoutBtnAdd.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
             .layoutBtnDelete.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
@@ -199,4 +209,14 @@ Public Class ctrlCatchers
         ucC.loadGrid()
         frmCA.Close()
     End Sub
+
+    Sub print()
+        Dim tool As ReportPrintTool
+
+        Dim rp = New rptCatcherReport()
+        rp.DataSource = getReportCatcherAct(mdlCA.catchActivity_ID)
+        tool = New ReportPrintTool(rp)
+        tool.ShowPreviewDialog()
+    End Sub
+
 End Class

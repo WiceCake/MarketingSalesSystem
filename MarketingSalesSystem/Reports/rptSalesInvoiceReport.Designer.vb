@@ -19,7 +19,6 @@ Partial Public Class rptSalesInvoiceReport
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
         Me.XrTable3 = New DevExpress.XtraReports.UI.XRTable()
         Me.XrTableRow4 = New DevExpress.XtraReports.UI.XRTableRow()
@@ -668,7 +667,7 @@ Partial Public Class rptSalesInvoiceReport
         Me.XrLabel4.StylePriority.UseFont = False
         Me.XrLabel4.Text = "Invoice:"
         '
-        'XrLabel3
+        'BindingSource2
         '
         Me.XrLabel3.Font = New System.Drawing.Font("Times New Roman", 11.0!)
         Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(449.9999!, 26.83334!)

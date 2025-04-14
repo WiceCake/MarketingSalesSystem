@@ -1,2 +1,2 @@
-﻿Partial Class MKDBDataSet
+Partial Class MKDBDataSet
 End Class
