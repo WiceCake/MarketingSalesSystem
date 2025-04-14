@@ -74,5 +74,11 @@
         <elementListCompartment Id="80438f44-2874-4cd5-8917-d47f8d0092fe" absoluteBounds="0.765, 7.21, 1.9700000000000002, 0.44169108072916669" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="aaef8b64-8d31-4951-ab68-fb980e571558" absoluteBounds="12.75, 2.625, 2, 1.9631982421875">
+      <DataClassMoniker Name="/mkdbDataContext/trans_SalesUnloaded" />
+      <nestedChildShapes>
+        <elementListCompartment Id="099ca49b-17cb-40d8-9cb6-664d30e4f8e2" absoluteBounds="12.765, 3.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

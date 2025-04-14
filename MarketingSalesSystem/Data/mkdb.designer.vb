@@ -91,6 +91,12 @@ Partial Public Class mkdbDataContext
     End Sub
   Partial Private Sub Deletetrans_SalesReportWeightSlip(instance As trans_SalesReportWeightSlip)
     End Sub
+  Partial Private Sub Inserttrans_SalesUnloaded(instance As trans_SalesUnloaded)
+    End Sub
+  Partial Private Sub Updatetrans_SalesUnloaded(instance As trans_SalesUnloaded)
+    End Sub
+  Partial Private Sub Deletetrans_SalesUnloaded(instance As trans_SalesUnloaded)
+    End Sub
   #End Region
 	
 	Public Sub New()
@@ -187,6 +193,12 @@ Partial Public Class mkdbDataContext
 	Public ReadOnly Property vWeigthSlipBuyers() As System.Data.Linq.Table(Of vWeigthSlipBuyer)
 		Get
 			Return Me.GetTable(Of vWeigthSlipBuyer)
+		End Get
+	End Property
+	
+	Public ReadOnly Property trans_SalesUnloadeds() As System.Data.Linq.Table(Of trans_SalesUnloaded)
+		Get
+			Return Me.GetTable(Of trans_SalesUnloaded)
 		End Get
 	End Property
 End Class
@@ -4049,4 +4061,179 @@ Partial Public Class vWeigthSlipBuyer
 			End If
 		End Set
 	End Property
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_SalesUnloaded")>  _
+Partial Public Class trans_SalesUnloaded
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _CarrierID As Integer
+	
+	Private _SalesReportID As Integer
+	
+	Private _CarrierName As String
+	
+	Private _CarrierType As String
+	
+	Private _UnloadedValue As Decimal
+	
+	Private _DateCreated As Date
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnCarrierIDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnCarrierIDChanged()
+    End Sub
+    Partial Private Sub OnSalesReportIDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnSalesReportIDChanged()
+    End Sub
+    Partial Private Sub OnCarrierNameChanging(value As String)
+    End Sub
+    Partial Private Sub OnCarrierNameChanged()
+    End Sub
+    Partial Private Sub OnCarrierTypeChanging(value As String)
+    End Sub
+    Partial Private Sub OnCarrierTypeChanged()
+    End Sub
+    Partial Private Sub OnUnloadedValueChanging(value As Decimal)
+    End Sub
+    Partial Private Sub OnUnloadedValueChanged()
+    End Sub
+    Partial Private Sub OnDateCreatedChanging(value As Date)
+    End Sub
+    Partial Private Sub OnDateCreatedChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CarrierID", DbType:="Int NOT NULL", IsPrimaryKey:=true)>  _
+	Public Property CarrierID() As Integer
+		Get
+			Return Me._CarrierID
+		End Get
+		Set
+			If ((Me._CarrierID = value)  _
+						= false) Then
+				Me.OnCarrierIDChanging(value)
+				Me.SendPropertyChanging
+				Me._CarrierID = value
+				Me.SendPropertyChanged("CarrierID")
+				Me.OnCarrierIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SalesReportID", DbType:="Int NOT NULL")>  _
+	Public Property SalesReportID() As Integer
+		Get
+			Return Me._SalesReportID
+		End Get
+		Set
+			If ((Me._SalesReportID = value)  _
+						= false) Then
+				Me.OnSalesReportIDChanging(value)
+				Me.SendPropertyChanging
+				Me._SalesReportID = value
+				Me.SendPropertyChanged("SalesReportID")
+				Me.OnSalesReportIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CarrierName", DbType:="VarChar(100) NOT NULL", CanBeNull:=false)>  _
+	Public Property CarrierName() As String
+		Get
+			Return Me._CarrierName
+		End Get
+		Set
+			If (String.Equals(Me._CarrierName, value) = false) Then
+				Me.OnCarrierNameChanging(value)
+				Me.SendPropertyChanging
+				Me._CarrierName = value
+				Me.SendPropertyChanged("CarrierName")
+				Me.OnCarrierNameChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CarrierType", DbType:="VarChar(50) NOT NULL", CanBeNull:=false)>  _
+	Public Property CarrierType() As String
+		Get
+			Return Me._CarrierType
+		End Get
+		Set
+			If (String.Equals(Me._CarrierType, value) = false) Then
+				Me.OnCarrierTypeChanging(value)
+				Me.SendPropertyChanging
+				Me._CarrierType = value
+				Me.SendPropertyChanged("CarrierType")
+				Me.OnCarrierTypeChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_UnloadedValue", DbType:="Decimal(18,2) NOT NULL")>  _
+	Public Property UnloadedValue() As Decimal
+		Get
+			Return Me._UnloadedValue
+		End Get
+		Set
+			If ((Me._UnloadedValue = value)  _
+						= false) Then
+				Me.OnUnloadedValueChanging(value)
+				Me.SendPropertyChanging
+				Me._UnloadedValue = value
+				Me.SendPropertyChanged("UnloadedValue")
+				Me.OnUnloadedValueChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DateCreated", DbType:="DateTime NOT NULL")>  _
+	Public Property DateCreated() As Date
+		Get
+			Return Me._DateCreated
+		End Get
+		Set
+			If ((Me._DateCreated = value)  _
+						= false) Then
+				Me.OnDateCreatedChanging(value)
+				Me.SendPropertyChanging
+				Me._DateCreated = value
+				Me.SendPropertyChanged("DateCreated")
+				Me.OnDateCreatedChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
 End Class
