@@ -7,11 +7,14 @@ Imports DevExpress.XtraEditors
 Imports System.Text
 Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.Data
+Imports DevExpress.XtraEditors.Repository
+Imports DevExpress.Utils
 
 Public Class frm_salesInvoice
 
     Public dt As DataTable
     Public dts As DataTable
+    Public dtss As DataTable
     Private tabControl As XtraTabControl
     Private txtNote As TextBox
 
@@ -27,10 +30,34 @@ Public Class frm_salesInvoice
 
     Public confirmClose As Boolean = True
 
-    Sub New(ByRef ctrlS As ctrlSales)
+    Public Sub New(ByRef ctrlS As ctrlSales)
         InitializeComponent()
         ctrlSales = ctrlS
+
+        ' Initialize the table and editors
+        ' Initialize data table and repository items
+        dtss = New DataTable()
+
+        ' Bind to grid
+        GridControl3.DataSource = dtss
+
+        ' Grid view settings
+        With GridView3
+            .OptionsView.NewItemRowPosition = NewItemRowPosition.Top
+            .OptionsBehavior.AllowAddRows = DefaultBoolean.True
+            .OptionsBehavior.Editable = True
+            .OptionsBehavior.EditorShowMode = EditorShowMode.Click
+        End With
+
+        ' Define columns
+        GridView3.Columns.Clear()
+        With GridView3.Columns
+            .AddVisible("CarrierType", "Carrier Type")
+            .AddVisible("CarrierName", "Carrier Name")
+            .AddVisible("MT", "MT")
+        End With
     End Sub
+
 
     Private Sub RadioGroup1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles rBT.SelectedIndexChanged
         If rBT.SelectedIndex = 0 Then
@@ -319,11 +346,6 @@ Public Class frm_salesInvoice
         End If
     End Sub
 
-    'Private Sub cmbCarrier_EditValueChanged(sender As Object, e As EventArgs) Handles cmbCarrier.EditValueChanged
-    '    Dim value = TryCast(sender, CheckedComboBoxEdit)
-    '    Debug.WriteLine(value.EditValue)
-    'End Sub
-
     Private Sub cmbCarrier_KeyDown(sender As Object, e As KeyEventArgs) Handles cmbFCarrier.KeyDown
         If e.KeyCode = Keys.Enter Then
             Dim data = TryCast(sender, CheckedComboBoxEdit)
@@ -344,14 +366,6 @@ Public Class frm_salesInvoice
 
     Private Sub BarButtonItem1_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem1.ItemClick
         ctrlSales.print()
-    End Sub
-
-    Private Sub btn_foreignCarrier_Click(sender As Object, e As EventArgs) Handles btn_foreignCarrier.Click
-        Dim formC As New ctrlCarrier("Foreign Carrier")
-    End Sub
-
-    Private Sub btn_companyCarrier_Click(sender As Object, e As EventArgs) Handles btn_companyCarrier.Click
-        Dim formC As New ctrlCarrier("Company Carrier")
     End Sub
 
 End Class

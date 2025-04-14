@@ -118,7 +118,6 @@
     <Import Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\ctrlCarrier.vb" />
     <Compile Include="Controllers\ctrlCatchers.vb" />
     <Compile Include="Controllers\ctrlSales.vb" />
     <Compile Include="Data\mkdb.designer.vb">
@@ -178,12 +177,6 @@
     <Compile Include="Reports\rptSalesInvoiceReport.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Views\frm_carriersFC.Designer.vb">
-      <DependentUpon>frm_carriersFC.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Views\frm_carriersFC.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Views\frm_catchActivity.Designer.vb">
       <DependentUpon>frm_catchActivity.vb</DependentUpon>
     </Compile>
@@ -228,9 +221,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptSalesInvoiceReport.resx">
       <DependentUpon>rptSalesInvoiceReport.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\frm_carriersFC.resx">
-      <DependentUpon>frm_carriersFC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_catchActivity.resx">
       <DependentUpon>frm_catchActivity.vb</DependentUpon>

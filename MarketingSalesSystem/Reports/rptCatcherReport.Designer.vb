@@ -19,6 +19,7 @@ Partial Public Class rptCatcherReport
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
@@ -28,8 +29,8 @@ Partial Public Class rptCatcherReport
         Me.XrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
         Me.MkdbDataSet1 = New MarketingSalesSystem.MKDBDataSet()
         Me.Trans_CatchActivitiesTableAdapter = New MarketingSalesSystem.MKDBDataSetTableAdapters.trans_CatchActivitiesTableAdapter()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource()
-        Me.BindingSource2 = New System.Windows.Forms.BindingSource()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.BindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.MkdbDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -60,12 +61,14 @@ Partial Public Class rptCatcherReport
         '
         'XrLabel3
         '
+        Me.XrLabel3.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[catchDate]")})
         Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(504.4271!, 50.73957!)
         Me.XrLabel3.Multiline = True
         Me.XrLabel3.Name = "XrLabel3"
         Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel3.SizeF = New System.Drawing.SizeF(100.0!, 23.0!)
         Me.XrLabel3.Text = "XrLabel3"
+        Me.XrLabel3.TextFormatString = "{0:d}"
         '
         'XrLabel1
         '
@@ -113,7 +116,8 @@ Partial Public Class rptCatcherReport
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.GroupHeader1})
         Me.ComponentStorage.AddRange(New System.ComponentModel.IComponent() {Me.MkdbDataSet1, Me.BindingSource1, Me.BindingSource2})
         Me.DataAdapter = Me.Trans_CatchActivitiesTableAdapter
-        Me.DataSource = Me.BindingSource2
+        Me.DataMember = "trans_CatchActivities"
+        Me.DataSource = Me.MkdbDataSet1
         Me.Version = "18.1"
         CType(Me.MkdbDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
