@@ -17,6 +17,7 @@ Public Class SalesReportInvoice
     Public Property SalesDate As Date
     Public Property EncodedOn As Date
     Public Property UsdRate As Decimal
+    Public Property VesselName As String
 
     ' Sales Report Catcher
     Public Property SalesReportCatcherID As Integer

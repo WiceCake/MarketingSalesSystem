@@ -10,7 +10,15 @@ Module modData
                   Join k In dc.trans_SalesReportPrices On i.salesReport_ID Equals k.salesReport_ID
                   Where i.salesReport_ID = reportID Select i, j, k).ToList
 
-        For Each s In sr
+        Dim groupSR = sr.
+        GroupBy(Function(x) x.j.catchActivityDetail_ID).
+        Select(Function(g) g.First()).
+        ToList()
+
+        Dim cd = (From i In dc.trans_CatchActivityDetails Select i).ToDictionary(Function(i) i.catchActivityDetail_ID, Function(i) i.vessel_ID)
+        Dim vessels = (From i In dc2.ml_Vessels Select i).ToDictionary(Function(i) i.ml_vID, Function(i) i.vesselName)
+
+        For Each s In groupSR
             Dim sri As New SalesReportInvoice
 
             ' Sales Report Column
@@ -31,6 +39,7 @@ Module modData
             sri.SalesDate = s.i.salesDate
             sri.EncodedOn = s.i.encodedOn
             sri.UsdRate = s.i.usdRate
+            sri.VesselName = vessels(cd(s.j.catchActivityDetail_ID))
 
             ' Sales Report Catcher
             sri.SalesReportCatcherID = s.j.salesReportCatcher_ID
