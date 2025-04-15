@@ -203,4 +203,14 @@
       <Column Name="buyer" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.trans_SalesUnloaded" Member="trans_SalesUnloadeds">
+    <Type Name="trans_SalesUnloaded">
+      <Column Name="CarrierID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SalesReportID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CarrierName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CarrierType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UnloadedValue" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>
