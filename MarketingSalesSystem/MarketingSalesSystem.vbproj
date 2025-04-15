@@ -145,6 +145,7 @@
     <Compile Include="MKDBDataSet.vb">
       <DependentUpon>MKDBDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Models\CarrierDetails.vb" />
     <Compile Include="Models\CatchActivity.vb" />
     <Compile Include="Models\CatchActivityDetail.vb" />
     <Compile Include="Models\CatchMethod.vb" />

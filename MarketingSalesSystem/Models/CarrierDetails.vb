@@ -78,6 +78,4 @@
             dc.SubmitChanges()
         Next
     End Sub
-
-
 End Class
