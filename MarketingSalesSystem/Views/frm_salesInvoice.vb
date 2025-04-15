@@ -32,14 +32,6 @@ Public Class frm_salesInvoice
         ctrlSales = ctrlS
     End Sub
 
-    Private Sub RadioGroup1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles rBT.SelectedIndexChanged
-        If rBT.SelectedIndex = 0 Then
-            ctrlSales.changeBuyerInput()
-        Else
-            ctrlSales.changeBuyerCombo()
-        End If
-    End Sub
-
     Sub createBands(count As Integer, catcherID As Integer)
         Dim mkdb As New mkdbDataContext
 
@@ -216,7 +208,6 @@ Public Class frm_salesInvoice
         confirmClose = False ' Prevent FormClosing interference
         Dim dateCreated = validateField(dtCreated)
         Dim sellType = validateField(cmbST)
-        Dim companyCarrier = validateField(cmbCCarrier)
         Dim Catcher = validateField(cmbUV)
         Dim salesNum = validateField(txtSaleNum)
         Dim invoiceNum = validateField(txtInvoiceNum)
@@ -228,23 +219,13 @@ Public Class frm_salesInvoice
         Dim missingFields As New StringBuilder()
         If Not dateCreated Then missingFields.AppendLine("Date Created")
         If Not sellType Then missingFields.AppendLine("Sell Type")
-        If Not companyCarrier Then missingFields.AppendLine("Company Carrier")
-        If Not Catcher Then missingFields.AppendLine("Unloading Vessel") 'Unloading Vessel
+        If Not Catcher Then missingFields.AppendLine("Unloading Vessel")
         If Not salesNum Then missingFields.AppendLine("Sales Number")
         If Not invoiceNum Then missingFields.AppendLine("Invoice Number")
         If Not catchDeliveryNum Then missingFields.AppendLine("Catch Delivery Number")
         If Not usdRate Then missingFields.AppendLine("USD Rate")
         If Not contractNum Then missingFields.AppendLine("Contract Number")
 
-        If CInt(rBT.EditValue) = 1 Then
-            If validateField(txtBuyer) Then buyerName = txtBuyer.Text : buyerID = Nothing _
-                Else missingFields.AppendLine("Buyer")
-        ElseIf CInt(rBT.EditValue) = 2 Then
-            If validateField(cmbBuyer) Then buyerName = cmbBuyer.Text : buyerID = CInt(cmbBuyer.GetColumnValue("ID")) _
-                Else missingFields.AppendLine("Buyer")
-        Else
-            missingFields.AppendLine("Select Type of Buyer")
-        End If
 
         If missingFields.Length > 0 Then
             requiredMessage(missingFields.ToString())
@@ -324,33 +305,16 @@ Public Class frm_salesInvoice
     '    Debug.WriteLine(value.EditValue)
     'End Sub
 
-    Private Sub cmbCarrier_KeyDown(sender As Object, e As KeyEventArgs) Handles cmbFCarrier.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            Dim data = TryCast(sender, CheckedComboBoxEdit)
-            If String.IsNullOrWhiteSpace(data.EditValue.ToString()) Then Return
-
-            If foreignCarrier Is Nothing Then
-                foreignCarrier = New Dictionary(Of Integer, String)()
-            End If
-
-            Dim count As Integer = foreignCarrier.Count
-
-            foreignCarrier.Add(count, data.EditValue.ToString)
-
-            checkComboTransMode(foreignCarrier.ToList, cmbFCarrier, "Value", "Key")
-            cmbFCarrier.EditValue = ""
-        End If
-    End Sub
 
     Private Sub BarButtonItem1_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem1.ItemClick
         ctrlSales.print()
     End Sub
 
-    Private Sub btn_foreignCarrier_Click(sender As Object, e As EventArgs) Handles btn_foreignCarrier.Click
+    Private Sub btn_foreignCarrier_Click(sender As Object, e As EventArgs)
         Dim formC As New ctrlCarrier("Foreign Carrier")
     End Sub
 
-    Private Sub btn_companyCarrier_Click(sender As Object, e As EventArgs) Handles btn_companyCarrier.Click
+    Private Sub btn_companyCarrier_Click(sender As Object, e As EventArgs)
         Dim formC As New ctrlCarrier("Company Carrier")
     End Sub
 

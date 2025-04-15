@@ -42,10 +42,6 @@ Public Class ctrlSales
             .btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
             .dtCreated.Properties.MaxValue = Date.Now
             .txtCDNum.Properties.ReadOnly = True
-            .cmbBuyer.Enabled = False
-            .txtBuyer.Enabled = False
-            .lcmbBuyer.Visibility = Utils.LayoutVisibility.Never
-            .ltxtBuyer.Visibility = Utils.LayoutVisibility.Never
             .txt_refNum.Caption = "Draft"
             .rbnTools.Visible = False
             loadCombo()
@@ -83,25 +79,9 @@ Public Class ctrlSales
 
             .Text = "Sales Invoice"
             .dtCreated.Properties.MaxValue = Date.Now
-            .cmbBuyer.Enabled = False
-            .txtBuyer.Enabled = False
-            .lcmbBuyer.Visibility = Utils.LayoutVisibility.Never
-            .ltxtBuyer.Visibility = Utils.LayoutVisibility.Never
             loadCombo()
             .cmbUV.Properties.ReadOnly = True
             .txtCDNum.Properties.ReadOnly = True
-
-            If mdlSR.unloadingVessel_ID IsNot Nothing Then
-                Dim values() As String = mdlSR.unloadingForeignVessel.Split(","c)
-                Dim foreignCarrier As New Dictionary(Of Integer, String)
-                foreignCarrier = values.Select(Function(v, i) New KeyValuePair(Of Integer, String)(i, v)).
-                                        ToDictionary(Function(x) x.Key, Function(v) v.Value.Trim)
-                checkComboTransMode(foreignCarrier.ToList, .cmbFCarrier, "Value", "Key")
-                .cmbFCarrier.CheckAll()
-            End If
-            If mdlSR.unloadingVessel_ID IsNot Nothing Then
-                .cmbCCarrier.SetEditValue(mdlSR.unloadingVessel_ID)
-            End If
 
             'Fields
             .dtCreated.EditValue = mdlSR.salesDate
@@ -110,10 +90,6 @@ Public Class ctrlSales
             .txtInvoiceNum.EditValue = mdlSR.invoiceNum
             .cmbUV.EditValue = mdlSR.catchtDeliveryNum
 
-            Dim number As Integer
-
-            If Integer.TryParse(mdlSR.buyer, number) Then .rBT.SelectedIndex = 1 Else .rBT.SelectedIndex = 0
-            If CInt(.rBT.EditValue) = 1 Then .txtBuyer.EditValue = mdlSR.buyer Else .cmbBuyer.EditValue = mdlSR.buyer
             .txtUSD.EditValue = mdlSR.usdRate
             .txtCNum.EditValue = mdlSR.contractNum
             .txtRemark.EditValue = mdlSR.remarks
@@ -273,9 +249,6 @@ Public Class ctrlSales
                     mdlSR.invoiceNum = .txtInvoiceNum.Text
                     mdlSR.sellingType = .cmbST.EditValue.ToString
                     mdlSR.unloadingType = "###"
-                    mdlSR.unloadingForeignVessel = .cmbFCarrier.Properties.GetDisplayText(.cmbFCarrier.Properties.GetCheckedItems).ToString
-                    mdlSR.unloadingVessel_ID = .cmbCCarrier.Properties.GetCheckedItems().ToString
-                    mdlSR.buyer = If(CInt(.rBT.EditValue) = 1, .txtBuyer.Text, .cmbBuyer.EditValue.ToString)
                     mdlSR.catchtDeliveryNum = .cmbUV.EditValue.ToString
                     mdlSR.usdRate = CDec(.txtUSD.EditValue)
                     mdlSR.contractNum = .txtCNum.Text
@@ -570,44 +543,8 @@ Public Class ctrlSales
 
         lookUpTransMode(formattedUv, frmSI.cmbUV, "catchDate", "catchActivity_ID", "Select catcher")
 
-        Dim cc = (From c In tpmdb.ml_Vessels Select c.ml_vID, c.vesselName)
-
-        checkComboTransMode(cc, frmSI.cmbCCarrier, "vesselName", "ml_vID")
     End Sub
 
-    Sub changeBuyerInput()
-        With frmSI
-            .cmbBuyer.Enabled = False
-            .txtBuyer.Enabled = True
-            .lcmbBuyer.Visibility = Utils.LayoutVisibility.Never
-            .ltxtBuyer.Visibility = Utils.LayoutVisibility.Always
-        End With
-    End Sub
-
-    Sub changeBuyerCombo()
-        With frmSI
-            .cmbBuyer.Enabled = True
-            .txtBuyer.Enabled = False
-            .lcmbBuyer.Visibility = Utils.LayoutVisibility.Always
-            .ltxtBuyer.Visibility = Utils.LayoutVisibility.Never
-        End With
-
-        Dim buyers = (From i In tpmdb.ml_Suppliers Select
-                      ID = i.ml_SupID,
-                      BuyerName = i.ml_Supplier).ToList()
-        With frmSI.cmbBuyer.Properties
-            .DataSource = buyers
-            .DisplayMember = "BuyerName"
-            .ValueMember = "ID"
-            .NullText = "Select a buyer"
-            .ShowHeader = False
-            .ShowFooter = False
-            .Columns.Clear()
-            .Columns.Add(New DevExpress.XtraEditors.Controls.LookUpColumnInfo("BuyerName", "Buyer Name"))
-            .BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
-        End With
-        frmSI.cmbBuyer.Enabled = True
-    End Sub
 
     Sub initSalesDataTableS()
         With frmSI
