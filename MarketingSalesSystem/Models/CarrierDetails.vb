@@ -49,7 +49,6 @@
             .UnloadedValue = UnloadedValue
             .DateCreated = DateCreated
         End With
-        'Hello
 
         dc.trans_SalesUnloadeds.InsertOnSubmit(carrier)
         dc.SubmitChanges()
