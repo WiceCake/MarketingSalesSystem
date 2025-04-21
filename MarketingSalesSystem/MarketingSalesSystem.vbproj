@@ -169,6 +169,12 @@
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="Reports\PartialReports.Designer.vb">
+      <DependentUpon>PartialReports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\PartialReports.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\rptCatcherReport.Designer.vb">
       <DependentUpon>rptCatcherReport.vb</DependentUpon>
     </Compile>
@@ -232,6 +238,9 @@
     <None Include="Data\tpmdb.dbml.layout">
       <DependentUpon>tpmdb.dbml</DependentUpon>
     </None>
+    <EmbeddedResource Include="Reports\PartialReports.resx">
+      <DependentUpon>PartialReports.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptCatcherReport.resx">
       <DependentUpon>rptCatcherReport.vb</DependentUpon>
     </EmbeddedResource>
