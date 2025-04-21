@@ -7,4 +7,9 @@
         Draft = 4
     End Enum
 
+    Enum Payment_Status As Integer
+        Adjustments = 1
+        Final = 1
+    End Enum
+
 End Module

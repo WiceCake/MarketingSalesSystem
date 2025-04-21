@@ -205,12 +205,61 @@
   </Table>
   <Table Name="dbo.trans_SalesUnloaded" Member="trans_SalesUnloadeds">
     <Type Name="trans_SalesUnloaded">
-      <Column Name="CarrierID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CarrierID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="SalesReportID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CarrierName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="CarrierType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="UnloadedValue" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
-      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" AutoSync="Never" Type="System.DateTime" DbType="DateTime" IsDbGenerated="true" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.trans_SalesInvoiceBuyer" Member="trans_SalesInvoiceBuyers">
+    <Type Name="trans_SalesInvoiceBuyer">
+      <Column Name="salesInvoiceBuyerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="salesInvoiceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="setNum" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="paidAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="adjustmentsAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="paymentStatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="referenceNum" Type="System.String" DbType="VarChar(14)" CanBeNull="true" />
+      <Column Name="buyerName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="sellerType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="approvalStatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="encodedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="encodedBy" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" AutoSync="Never" Type="System.DateTime" DbType="DateTime" IsDbGenerated="true" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.trans_SalesReportBuyer" Member="trans_SalesReportBuyers">
+    <Type Name="trans_SalesReportBuyer">
+      <Column Name="salesBuyerCatchID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="salesInvoiceBuyerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="salesInvoiceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="skipjack0_300To0_499" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="skipjack0_500To0_999" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="skipjack1_0To1_39" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="skipjack1_4To1_79" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="skipjack1_8To2_49" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="skipjack2_5To3_49" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="skipjack3_5AndUP" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="yellowfin0_300To0_499" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="yellowfin0_500To0_999" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="yellowfin1_0To1_49" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="yellowfin1_5To2_49" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="yellowfin2_5To3_49" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="yellowfin3_5To4_99" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="yellowfin5_0To9_99" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="yellowfin10AndUpGood" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="yellowfin10AndUpDeformed" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="bigeye0_500To0_999" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="bigeye1_0To1_49" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="bigeye1_5To2_49" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="bigeye2_5To3_49" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="bigeye3_5To4_99" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="bigeye5_0To9_99" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="bigeye10AndUP" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="bonito" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="fishmeal" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>
