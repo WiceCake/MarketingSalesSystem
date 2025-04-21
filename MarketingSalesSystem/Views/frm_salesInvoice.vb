@@ -7,6 +7,8 @@ Imports DevExpress.XtraEditors
 Imports System.Text
 Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.Data
+Imports DevExpress.XtraEditors.Repository
+Imports DevExpress.XtraGrid.Columns
 
 Public Class frm_salesInvoice
 
@@ -27,12 +29,18 @@ Public Class frm_salesInvoice
 
     Public confirmClose As Boolean = True
 
+    Dim riLookup As New RepositoryItemLookUpEdit()
+    Dim riTextEdit As New RepositoryItemTextEdit()
+
     Sub New(ByRef ctrlS As ctrlSales)
         InitializeComponent()
         ctrlSales = ctrlS
+
+        gvCarrier.OptionsSelection.MultiSelect = True
+        gvCarrier.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CheckBoxRowSelect
     End Sub
 
-    Sub createBands(count As Integer, catcherID As Integer)
+    Sub createBands(catcherID As Integer)
         Dim mkdb As New mkdbDataContext
 
         ' Fetch all catchers in one go
@@ -226,6 +234,20 @@ Public Class frm_salesInvoice
         If Not usdRate Then missingFields.AppendLine("USD Rate")
         If Not contractNum Then missingFields.AppendLine("Contract Number")
 
+        Dim countEmpty = 0
+        For i As Integer = 0 To gvCarrier.RowCount - 1
+            Dim row As DataRow = gvCarrier.GetDataRow(i)
+
+            If String.IsNullOrWhiteSpace(row("Carrier_Type").ToString()) OrElse String.IsNullOrWhiteSpace(row("Carrier_Name").ToString()) _
+                OrElse String.IsNullOrWhiteSpace(row("Metric_Ton").ToString()) Then
+                countEmpty = countEmpty + 1
+            End If
+        Next
+
+        If countEmpty > 0 Then
+            missingFields.AppendLine(countEmpty & " Carrier is Empty!")
+        End If
+
 
         If missingFields.Length > 0 Then
             requiredMessage(missingFields.ToString())
@@ -262,7 +284,7 @@ Public Class frm_salesInvoice
         'Debug.WriteLine(catcher.EditValue)
         ctrlSales.initSalesDataTable(CInt(catcher.EditValue))
         GridControl3.DataSource = dt
-        createBands(rowCount, CInt(catcher.EditValue))
+        createBands(CInt(catcher.EditValue))
         ctrlSales.loadRows()
 
         ' Get reference number
@@ -310,12 +332,114 @@ Public Class frm_salesInvoice
         ctrlSales.print()
     End Sub
 
-    Private Sub btn_foreignCarrier_Click(sender As Object, e As EventArgs)
-        Dim formC As New ctrlCarrier("Foreign Carrier")
+    Private Sub gcCarrier_Load(sender As Object, e As EventArgs) Handles gcCarrier.Load
+        Dim cmb As New RepositoryItemComboBox()
+        cmb.Items.AddRange(New Object() {"Foreign", "Company"})
+
+        gcCarrier.RepositoryItems.Add(cmb)
+
+        Dim dc As New tpmdbDataContext
+
+        Dim carriers = (From i In dc.ml_Vessels Where i.ml_vtID = 1 Select New With {
+                        .ID = i.ml_vID,
+                        .VesselName = i.vesselName}).ToList()
+
+        lookUpTransMode(carriers, riLookup, "VesselName", "ID", "Select Carrier")
+        gcCarrier.RepositoryItems.Add(riLookup)
+        gcCarrier.RepositoryItems.Add(riTextEdit)
+
+        Dim gCT As GridColumn = gvCarrier.Columns("Carrier_Type")
+        Dim gCN As GridColumn = gvCarrier.Columns("Carrier_Name")
+        Dim gMT As GridColumn = gvCarrier.Columns("Metric_Ton")
+
+        gCT.Caption = "Carrier Type"
+        gCN.Caption = "Carrier Name"
+        gMT.Caption = "Metric Ton"
+
+        gCT.ColumnEdit = cmb
+
+        Dim allRowsHaveCarrierType As Boolean = True
+
+        For Each row As DataRow In dts.Rows
+            If String.IsNullOrWhiteSpace(row("Carrier_Type").ToString()) Then
+                allRowsHaveCarrierType = False
+                Exit For
+            End If
+        Next
+
+        If allRowsHaveCarrierType Then
+            gCN.OptionsColumn.AllowEdit = True
+            gMT.OptionsColumn.AllowEdit = True
+        Else
+            gCN.OptionsColumn.AllowEdit = False
+            gMT.OptionsColumn.AllowEdit = False
+        End If
+
+        gMT.UnboundType = DevExpress.Data.UnboundColumnType.Decimal
+        AddHandler gvCarrier.CellValueChanged, AddressOf gvCarrier_CellValueChanged
+        AddHandler gvCarrier.CustomRowCellEdit, AddressOf gvCarrier_CustomRowCellEdit
     End Sub
 
-    Private Sub btn_companyCarrier_Click(sender As Object, e As EventArgs)
-        Dim formC As New ctrlCarrier("Company Carrier")
+    Private Sub gvCarrier_CellValueChanged(sender As Object, e As CellValueChangedEventArgs)
+        If e.Column.FieldName = "Carrier_Type" Then
+
+            ' Enable editing for current row only
+            gvCarrier.Columns("Metric_Ton").OptionsColumn.AllowEdit = True
+            gvCarrier.Columns("Carrier_Name").OptionsColumn.AllowEdit = True
+        End If
     End Sub
 
+    Private Sub gvCarrier_CustomRowCellEdit(sender As Object, e As CustomRowCellEditEventArgs)
+        If e.Column.FieldName = "Carrier_Name" Then
+            Dim val = gvCarrier.GetRowCellValue(e.RowHandle, "Carrier_Type").ToString()
+            If val = "Foreign" Then
+                e.RepositoryItem = riTextEdit ' Lookup for Foreign
+            ElseIf val = "Company" Then
+                e.RepositoryItem = riLookup ' Plain text for Company
+            End If
+        End If
+    End Sub
+
+
+    Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles btnAddCarrier.Click
+        ctrlSales.addCarrier()
+    End Sub
+
+    Private Sub SimpleButton2_Click(sender As Object, e As EventArgs) Handles btnDeleteCarrier.Click
+
+        If gvCarrier.SelectedRowsCount < 1 Then
+            XtraMessageBox.Show("Please select a row first!", APPNAME, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        Dim totalRows As Integer = gvCarrier.RowCount
+        Dim selectedRowCount As Integer = gvCarrier.SelectedRowsCount
+
+        If totalRows = 1 Then
+            XtraMessageBox.Show("Cannot delete this last row!", APPNAME, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        If selectedRowCount = totalRows Then
+            XtraMessageBox.Show("At least one row must remain. Cannot delete all rows!", APPNAME, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim confirmation = XtraMessageBox.Show("Are you sure you want to delete the selected rows?", APPNAME, MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+
+        If confirmation = Windows.Forms.DialogResult.Yes Then
+            Dim selectedRows As Integer() = gvCarrier.GetSelectedRows()
+
+            For i As Integer = selectedRows.Length - 1 To 0 Step -1
+                Dim rowHandle As Integer = selectedRows(i)
+                Dim row As DataRow = gvCarrier.GetDataRow(rowHandle)
+
+                If row IsNot Nothing Then dts.Rows.Remove(row)
+            Next
+
+            gcCarrier.DataSource = dts
+            gvCarrier.RefreshData()
+            gvCarrier.ClearSelection()
+        End If
+    End Sub
 End Class

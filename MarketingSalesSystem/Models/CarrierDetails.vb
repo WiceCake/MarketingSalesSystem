@@ -4,7 +4,7 @@
     Public CarrierName As String
     Public CarrierType As String
     Public UnloadedValue As Decimal
-    Public DateCreated As Date
+    Public DateCreated As Date?
 
     Private dc As mkdbDataContext
 
@@ -47,9 +47,7 @@
             .CarrierName = CarrierName
             .CarrierType = CarrierType
             .UnloadedValue = UnloadedValue
-            .DateCreated = DateCreated
         End With
-
 
         dc.trans_SalesUnloadeds.InsertOnSubmit(carrier)
         dc.SubmitChanges()
@@ -65,7 +63,6 @@
             i.CarrierName = CarrierName
             i.CarrierType = CarrierType
             i.UnloadedValue = UnloadedValue
-            i.DateCreated = DateCreated
             dc.SubmitChanges()
         Next
     End Sub

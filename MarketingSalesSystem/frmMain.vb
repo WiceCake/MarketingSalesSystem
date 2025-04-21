@@ -91,4 +91,15 @@ Partial Public Class frmMain
             xtraTab.TabPages(intab).Show()
         End If
     End Sub
+
+    Private Sub BarButtonItem2_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem2.ItemClick
+        Dim title = "Buyer Sales"
+        Dim intab = InTabs("ucBuyer")
+        If intab = -1 Then
+            Dim uc As New ucBuyer(title)
+            addTab(uc, title)
+        Else
+            xtraTab.TabPages(intab).Show()
+        End If
+    End Sub
 End Class

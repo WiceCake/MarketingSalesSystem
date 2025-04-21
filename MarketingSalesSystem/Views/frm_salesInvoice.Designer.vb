@@ -34,6 +34,13 @@ Partial Class frm_salesInvoice
         Me.rbnTools = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
+        Me.btnDeleteCarrier = New DevExpress.XtraEditors.SimpleButton()
+        Me.btnAddCarrier = New DevExpress.XtraEditors.SimpleButton()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.gcCarrier = New DevExpress.XtraGrid.GridControl()
+        Me.gvCarrier = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.Carrier = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
+        Me.cmbCarrier = New DevExpress.XtraEditors.Repository.RepositoryItemComboBox()
         Me.txtInvoiceNum = New DevExpress.XtraEditors.TextEdit()
         Me.LayoutControl2 = New DevExpress.XtraLayout.LayoutControl()
         Me.GridControl3 = New DevExpress.XtraGrid.GridControl()
@@ -49,18 +56,29 @@ Partial Class frm_salesInvoice
         Me.txtRemark = New DevExpress.XtraEditors.TextEdit()
         Me.cmbUV = New DevExpress.XtraEditors.LookUpEdit()
         Me.LayoutControlGroup1 = New DevExpress.XtraLayout.LayoutControlGroup()
+        Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.EmptySpaceItem2 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.LayoutControlItem1 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.EmptySpaceItem3 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.EmptySpaceItem4 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.LayoutControlItem14 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem2 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem4 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem7 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem8 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.f0 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem9 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem10 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.LayoutControlItem1 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.EmptySpaceItem3 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.LayoutControlItem14 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.LayoutControlItem7 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.EmptySpaceItem6 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.EmptySpaceItem5 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.EmptySpaceItem7 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.EmptySpaceItem8 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.EmptySpaceItem9 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.LayoutControlItem11 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem15 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem16 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
         Me.BandedGridView1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -72,26 +90,13 @@ Partial Class frm_salesInvoice
         Me.LayoutControlGroup3 = New DevExpress.XtraLayout.LayoutControlGroup()
         Me.LayoutControlItem13 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.BehaviorManager1 = New DevExpress.Utils.Behaviors.BehaviorManager(Me.components)
-        Me.EmptySpaceItem2 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.EmptySpaceItem4 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.EmptySpaceItem5 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.LayoutControlItem9 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.gvCarrier = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.gcCarrier = New DevExpress.XtraGrid.GridControl()
-        Me.EmptySpaceItem6 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.EmptySpaceItem7 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.EmptySpaceItem8 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.CarrierName = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.CarrierType = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.MetricTon = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.EmptySpaceItem9 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.LayoutControlItem11 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.Carrier = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
-        Me.cmbCarrier = New DevExpress.XtraEditors.Repository.RepositoryItemComboBox()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.gcCarrier, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.gvCarrier, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Carrier, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cmbCarrier, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtInvoiceNum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl2.SuspendLayout()
@@ -109,18 +114,29 @@ Partial Class frm_salesInvoice
         CType(Me.txtRemark.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cmbUV.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem14, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.f0, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem10, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem14, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem7, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EmptySpaceItem9, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem11, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem15, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem16, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BandedGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -132,19 +148,6 @@ Partial Class frm_salesInvoice
         CType(Me.LayoutControlGroup3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BehaviorManager1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem5, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.gvCarrier, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.gcCarrier, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem6, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem7, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem9, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem11, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Carrier, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.cmbCarrier, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
@@ -242,6 +245,8 @@ Partial Class frm_salesInvoice
         '
         'LayoutControl1
         '
+        Me.LayoutControl1.Controls.Add(Me.btnDeleteCarrier)
+        Me.LayoutControl1.Controls.Add(Me.btnAddCarrier)
         Me.LayoutControl1.Controls.Add(Me.Label1)
         Me.LayoutControl1.Controls.Add(Me.gcCarrier)
         Me.LayoutControl1.Controls.Add(Me.txtInvoiceNum)
@@ -264,36 +269,93 @@ Partial Class frm_salesInvoice
         Me.LayoutControl1.TabIndex = 2
         Me.LayoutControl1.Text = "LayoutControl1"
         '
+        'btnDeleteCarrier
+        '
+        Me.btnDeleteCarrier.ImageOptions.Image = CType(resources.GetObject("SimpleButton2.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnDeleteCarrier.Location = New System.Drawing.Point(1244, 12)
+        Me.btnDeleteCarrier.Name = "btnDeleteCarrier"
+        Me.btnDeleteCarrier.Size = New System.Drawing.Size(116, 27)
+        Me.btnDeleteCarrier.StyleController = Me.LayoutControl1
+        Me.btnDeleteCarrier.TabIndex = 31
+        Me.btnDeleteCarrier.Text = "Remove Carrier"
+        '
+        'btnAddCarrier
+        '
+        Me.btnAddCarrier.ImageOptions.Image = CType(resources.GetObject("SimpleButton1.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnAddCarrier.Location = New System.Drawing.Point(1124, 12)
+        Me.btnAddCarrier.Name = "btnAddCarrier"
+        Me.btnAddCarrier.Size = New System.Drawing.Size(116, 27)
+        Me.btnAddCarrier.StyleController = Me.LayoutControl1
+        Me.btnAddCarrier.TabIndex = 30
+        Me.btnAddCarrier.Text = "Add Carrier"
+        '
+        'Label1
+        '
+        Me.Label1.Location = New System.Drawing.Point(884, 12)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(236, 27)
+        Me.Label1.TabIndex = 29
+        Me.Label1.Text = "Add carrier local and foreign:"
+        '
+        'gcCarrier
+        '
+        Me.gcCarrier.Location = New System.Drawing.Point(884, 57)
+        Me.gcCarrier.MainView = Me.gvCarrier
+        Me.gcCarrier.MenuManager = Me.RibbonControl
+        Me.gcCarrier.Name = "gcCarrier"
+        Me.gcCarrier.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.Carrier, Me.cmbCarrier})
+        Me.gcCarrier.Size = New System.Drawing.Size(476, 256)
+        Me.gcCarrier.TabIndex = 28
+        Me.gcCarrier.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gvCarrier})
+        '
+        'gvCarrier
+        '
+        Me.gvCarrier.GridControl = Me.gcCarrier
+        Me.gvCarrier.Name = "gvCarrier"
+        Me.gvCarrier.OptionsView.ShowGroupPanel = False
+        '
+        'Carrier
+        '
+        Me.Carrier.AutoHeight = False
+        Me.Carrier.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.Carrier.Name = "Carrier"
+        '
+        'cmbCarrier
+        '
+        Me.cmbCarrier.AutoHeight = False
+        Me.cmbCarrier.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.cmbCarrier.Name = "cmbCarrier"
+        '
         'txtInvoiceNum
         '
-        Me.txtInvoiceNum.Location = New System.Drawing.Point(166, 207)
+        Me.txtInvoiceNum.Location = New System.Drawing.Point(164, 206)
         Me.txtInvoiceNum.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtInvoiceNum.MenuManager = Me.RibbonControl
         Me.txtInvoiceNum.Name = "txtInvoiceNum"
-        Me.txtInvoiceNum.Size = New System.Drawing.Size(258, 22)
+        Me.txtInvoiceNum.Size = New System.Drawing.Size(259, 22)
         Me.txtInvoiceNum.StyleController = Me.LayoutControl1
         Me.txtInvoiceNum.TabIndex = 27
         '
         'LayoutControl2
         '
         Me.LayoutControl2.Controls.Add(Me.GridControl3)
-        Me.LayoutControl2.Location = New System.Drawing.Point(14, 317)
+        Me.LayoutControl2.Location = New System.Drawing.Point(12, 317)
         Me.LayoutControl2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.LayoutControl2.Name = "LayoutControl2"
         Me.LayoutControl2.Root = Me.Root
-        Me.LayoutControl2.Size = New System.Drawing.Size(1383, 459)
+        Me.LayoutControl2.Size = New System.Drawing.Size(1387, 461)
         Me.LayoutControl2.TabIndex = 14
         Me.LayoutControl2.Text = "LayoutControl2"
         '
         'GridControl3
         '
         Me.GridControl3.EmbeddedNavigator.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.GridControl3.Location = New System.Drawing.Point(14, 14)
+        Me.GridControl3.Location = New System.Drawing.Point(12, 12)
         Me.GridControl3.MainView = Me.BandedGridView3
         Me.GridControl3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GridControl3.MenuManager = Me.RibbonControl
         Me.GridControl3.Name = "GridControl3"
-        Me.GridControl3.Size = New System.Drawing.Size(1355, 431)
+        Me.GridControl3.Size = New System.Drawing.Size(1363, 437)
         Me.GridControl3.TabIndex = 4
         Me.GridControl3.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.BandedGridView3})
         '
@@ -309,7 +371,7 @@ Partial Class frm_salesInvoice
         Me.Root.GroupBordersVisible = False
         Me.Root.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem6})
         Me.Root.Name = "Root"
-        Me.Root.Size = New System.Drawing.Size(1383, 459)
+        Me.Root.Size = New System.Drawing.Size(1387, 461)
         Me.Root.TextVisible = False
         '
         'LayoutControlItem6
@@ -317,13 +379,13 @@ Partial Class frm_salesInvoice
         Me.LayoutControlItem6.Control = Me.GridControl3
         Me.LayoutControlItem6.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlItem6.Name = "LayoutControlItem6"
-        Me.LayoutControlItem6.Size = New System.Drawing.Size(1359, 435)
+        Me.LayoutControlItem6.Size = New System.Drawing.Size(1367, 441)
         Me.LayoutControlItem6.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem6.TextVisible = False
         '
         'txtUSD
         '
-        Me.txtUSD.Location = New System.Drawing.Point(568, 179)
+        Me.txtUSD.Location = New System.Drawing.Point(567, 178)
         Me.txtUSD.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtUSD.MenuManager = Me.RibbonControl
         Me.txtUSD.Name = "txtUSD"
@@ -331,34 +393,34 @@ Partial Class frm_salesInvoice
         Me.txtUSD.Properties.Mask.EditMask = "n2"
         Me.txtUSD.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.txtUSD.Properties.MaxLength = 13
-        Me.txtUSD.Size = New System.Drawing.Size(284, 22)
+        Me.txtUSD.Size = New System.Drawing.Size(285, 22)
         Me.txtUSD.StyleController = Me.LayoutControl1
         Me.txtUSD.TabIndex = 12
         '
         'txtCDNum
         '
-        Me.txtCDNum.Location = New System.Drawing.Point(568, 153)
+        Me.txtCDNum.Location = New System.Drawing.Point(567, 152)
         Me.txtCDNum.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtCDNum.MenuManager = Me.RibbonControl
         Me.txtCDNum.Name = "txtCDNum"
-        Me.txtCDNum.Size = New System.Drawing.Size(284, 22)
+        Me.txtCDNum.Size = New System.Drawing.Size(285, 22)
         Me.txtCDNum.StyleController = Me.LayoutControl1
         Me.txtCDNum.TabIndex = 11
         '
         'txtSaleNum
         '
-        Me.txtSaleNum.Location = New System.Drawing.Point(568, 127)
+        Me.txtSaleNum.Location = New System.Drawing.Point(567, 126)
         Me.txtSaleNum.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtSaleNum.MenuManager = Me.RibbonControl
         Me.txtSaleNum.Name = "txtSaleNum"
-        Me.txtSaleNum.Size = New System.Drawing.Size(284, 22)
+        Me.txtSaleNum.Size = New System.Drawing.Size(285, 22)
         Me.txtSaleNum.StyleController = Me.LayoutControl1
         Me.txtSaleNum.TabIndex = 8
         '
         'dtCreated
         '
         Me.dtCreated.EditValue = Nothing
-        Me.dtCreated.Location = New System.Drawing.Point(166, 127)
+        Me.dtCreated.Location = New System.Drawing.Point(164, 126)
         Me.dtCreated.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.dtCreated.MenuManager = Me.RibbonControl
         Me.dtCreated.Name = "dtCreated"
@@ -370,46 +432,46 @@ Partial Class frm_salesInvoice
         Me.dtCreated.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None
         Me.dtCreated.Properties.MaxValue = New Date(9999, 12, 31, 0, 0, 0, 0)
         Me.dtCreated.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.dtCreated.Size = New System.Drawing.Size(258, 24)
+        Me.dtCreated.Size = New System.Drawing.Size(259, 24)
         Me.dtCreated.StyleController = Me.LayoutControl1
         Me.dtCreated.TabIndex = 5
         '
         'cmbST
         '
-        Me.cmbST.Location = New System.Drawing.Point(166, 155)
+        Me.cmbST.Location = New System.Drawing.Point(164, 154)
         Me.cmbST.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmbST.MenuManager = Me.RibbonControl
         Me.cmbST.Name = "cmbST"
         Me.cmbST.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cmbST.Size = New System.Drawing.Size(258, 22)
+        Me.cmbST.Size = New System.Drawing.Size(259, 22)
         Me.cmbST.StyleController = Me.LayoutControl1
         Me.cmbST.TabIndex = 6
         '
         'txtCNum
         '
         Me.txtCNum.EditValue = ""
-        Me.txtCNum.Location = New System.Drawing.Point(568, 205)
+        Me.txtCNum.Location = New System.Drawing.Point(567, 204)
         Me.txtCNum.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtCNum.MenuManager = Me.RibbonControl
         Me.txtCNum.Name = "txtCNum"
         Me.txtCNum.Properties.MaxLength = 50
-        Me.txtCNum.Size = New System.Drawing.Size(284, 22)
+        Me.txtCNum.Size = New System.Drawing.Size(285, 22)
         Me.txtCNum.StyleController = Me.LayoutControl1
         Me.txtCNum.TabIndex = 13
         '
         'txtRemark
         '
-        Me.txtRemark.Location = New System.Drawing.Point(14, 799)
+        Me.txtRemark.Location = New System.Drawing.Point(12, 801)
         Me.txtRemark.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtRemark.MenuManager = Me.RibbonControl
         Me.txtRemark.Name = "txtRemark"
-        Me.txtRemark.Size = New System.Drawing.Size(1383, 22)
+        Me.txtRemark.Size = New System.Drawing.Size(1387, 22)
         Me.txtRemark.StyleController = Me.LayoutControl1
         Me.txtRemark.TabIndex = 24
         '
         'cmbUV
         '
-        Me.cmbUV.Location = New System.Drawing.Point(166, 181)
+        Me.cmbUV.Location = New System.Drawing.Point(164, 180)
         Me.cmbUV.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmbUV.MenuManager = Me.RibbonControl
         Me.cmbUV.Name = "cmbUV"
@@ -417,7 +479,7 @@ Partial Class frm_salesInvoice
         Me.cmbUV.Properties.NullText = ""
         Me.cmbUV.Properties.PopupSizeable = False
         Me.cmbUV.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
-        Me.cmbUV.Size = New System.Drawing.Size(258, 22)
+        Me.cmbUV.Size = New System.Drawing.Size(259, 22)
         Me.cmbUV.StyleController = Me.LayoutControl1
         Me.cmbUV.TabIndex = 7
         '
@@ -425,88 +487,33 @@ Partial Class frm_salesInvoice
         '
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.EmptySpaceItem1, Me.EmptySpaceItem2, Me.LayoutControlItem1, Me.EmptySpaceItem3, Me.EmptySpaceItem4, Me.LayoutControlItem14, Me.LayoutControlItem2, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.LayoutControlItem5, Me.LayoutControlItem7, Me.LayoutControlItem8, Me.f0, Me.LayoutControlItem9, Me.LayoutControlItem10, Me.EmptySpaceItem6, Me.EmptySpaceItem5, Me.EmptySpaceItem7, Me.EmptySpaceItem8, Me.EmptySpaceItem9, Me.LayoutControlItem11})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.EmptySpaceItem1, Me.EmptySpaceItem2, Me.LayoutControlItem1, Me.EmptySpaceItem3, Me.EmptySpaceItem4, Me.LayoutControlItem14, Me.LayoutControlItem2, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.LayoutControlItem5, Me.LayoutControlItem7, Me.LayoutControlItem8, Me.f0, Me.LayoutControlItem9, Me.LayoutControlItem10, Me.EmptySpaceItem6, Me.EmptySpaceItem5, Me.EmptySpaceItem7, Me.EmptySpaceItem8, Me.EmptySpaceItem9, Me.LayoutControlItem11, Me.LayoutControlItem15, Me.LayoutControlItem16})
         Me.LayoutControlGroup1.Name = "Root"
         Me.LayoutControlGroup1.Size = New System.Drawing.Size(1411, 835)
         Me.LayoutControlGroup1.TextVisible = False
         '
-        'LayoutControlItem2
-        '
-        Me.LayoutControlItem2.Control = Me.dtCreated
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(40, 113)
-        Me.LayoutControlItem2.Name = "LayoutControlItem2"
-        Me.LayoutControlItem2.Size = New System.Drawing.Size(374, 28)
-        Me.LayoutControlItem2.Text = "Date:"
-        Me.LayoutControlItem2.TextSize = New System.Drawing.Size(109, 16)
-        '
-        'LayoutControlItem3
-        '
-        Me.LayoutControlItem3.Control = Me.cmbST
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(40, 141)
-        Me.LayoutControlItem3.Name = "LayoutControlItem3"
-        Me.LayoutControlItem3.Size = New System.Drawing.Size(374, 26)
-        Me.LayoutControlItem3.Text = "Sell Type:"
-        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(109, 16)
-        '
-        'LayoutControlItem4
-        '
-        Me.LayoutControlItem4.Control = Me.cmbUV
-        Me.LayoutControlItem4.Location = New System.Drawing.Point(40, 167)
-        Me.LayoutControlItem4.Name = "LayoutControlItem4"
-        Me.LayoutControlItem4.Size = New System.Drawing.Size(374, 26)
-        Me.LayoutControlItem4.Text = "Catcher:"
-        Me.LayoutControlItem4.TextSize = New System.Drawing.Size(109, 16)
-        '
-        'LayoutControlItem5
-        '
-        Me.LayoutControlItem5.Control = Me.txtSaleNum
-        Me.LayoutControlItem5.Location = New System.Drawing.Point(442, 113)
-        Me.LayoutControlItem5.Name = "LayoutControlItem5"
-        Me.LayoutControlItem5.Size = New System.Drawing.Size(400, 26)
-        Me.LayoutControlItem5.Text = "Sales No.:"
-        Me.LayoutControlItem5.TextSize = New System.Drawing.Size(109, 16)
-        '
-        'LayoutControlItem8
-        '
-        Me.LayoutControlItem8.Control = Me.txtCDNum
-        Me.LayoutControlItem8.Location = New System.Drawing.Point(442, 139)
-        Me.LayoutControlItem8.Name = "LayoutControlItem8"
-        Me.LayoutControlItem8.Size = New System.Drawing.Size(400, 26)
-        Me.LayoutControlItem8.Text = "Catch Delivery No.:"
-        Me.LayoutControlItem8.TextSize = New System.Drawing.Size(109, 16)
-        '
-        'f0
-        '
-        Me.f0.Control = Me.txtUSD
-        Me.f0.Location = New System.Drawing.Point(442, 165)
-        Me.f0.Name = "f0"
-        Me.f0.Size = New System.Drawing.Size(400, 26)
-        Me.f0.Text = "USD Rate:"
-        Me.f0.TextSize = New System.Drawing.Size(109, 16)
-        '
-        'LayoutControlItem10
-        '
-        Me.LayoutControlItem10.Control = Me.txtCNum
-        Me.LayoutControlItem10.Location = New System.Drawing.Point(442, 191)
-        Me.LayoutControlItem10.Name = "LayoutControlItem10"
-        Me.LayoutControlItem10.Size = New System.Drawing.Size(400, 26)
-        Me.LayoutControlItem10.Text = "Contract No.:"
-        Me.LayoutControlItem10.TextSize = New System.Drawing.Size(109, 16)
-        '
         'EmptySpaceItem1
         '
         Me.EmptySpaceItem1.AllowHotTrack = False
-        Me.EmptySpaceItem1.Location = New System.Drawing.Point(414, 0)
+        Me.EmptySpaceItem1.Location = New System.Drawing.Point(415, 0)
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(28, 303)
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(28, 305)
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'EmptySpaceItem2
+        '
+        Me.EmptySpaceItem2.AllowHotTrack = False
+        Me.EmptySpaceItem2.Location = New System.Drawing.Point(844, 0)
+        Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
+        Me.EmptySpaceItem2.Size = New System.Drawing.Size(28, 305)
+        Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem1
         '
         Me.LayoutControlItem1.Control = Me.LayoutControl2
-        Me.LayoutControlItem1.Location = New System.Drawing.Point(0, 303)
+        Me.LayoutControlItem1.Location = New System.Drawing.Point(0, 305)
         Me.LayoutControlItem1.Name = "LayoutControlItem1"
-        Me.LayoutControlItem1.Size = New System.Drawing.Size(1387, 463)
+        Me.LayoutControlItem1.Size = New System.Drawing.Size(1391, 465)
         Me.LayoutControlItem1.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem1.TextVisible = False
         '
@@ -515,27 +522,174 @@ Partial Class frm_salesInvoice
         Me.EmptySpaceItem3.AllowHotTrack = False
         Me.EmptySpaceItem3.Location = New System.Drawing.Point(0, 0)
         Me.EmptySpaceItem3.Name = "EmptySpaceItem3"
-        Me.EmptySpaceItem3.Size = New System.Drawing.Size(40, 303)
+        Me.EmptySpaceItem3.Size = New System.Drawing.Size(40, 305)
         Me.EmptySpaceItem3.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'EmptySpaceItem4
+        '
+        Me.EmptySpaceItem4.AllowHotTrack = False
+        Me.EmptySpaceItem4.Location = New System.Drawing.Point(1352, 0)
+        Me.EmptySpaceItem4.Name = "EmptySpaceItem4"
+        Me.EmptySpaceItem4.Size = New System.Drawing.Size(39, 305)
+        Me.EmptySpaceItem4.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem14
         '
         Me.LayoutControlItem14.Control = Me.txtRemark
-        Me.LayoutControlItem14.Location = New System.Drawing.Point(0, 766)
+        Me.LayoutControlItem14.Location = New System.Drawing.Point(0, 770)
         Me.LayoutControlItem14.Name = "LayoutControlItem14"
-        Me.LayoutControlItem14.Size = New System.Drawing.Size(1387, 45)
+        Me.LayoutControlItem14.Size = New System.Drawing.Size(1391, 45)
         Me.LayoutControlItem14.Text = "Note:"
         Me.LayoutControlItem14.TextLocation = DevExpress.Utils.Locations.Top
         Me.LayoutControlItem14.TextSize = New System.Drawing.Size(109, 16)
         '
+        'LayoutControlItem2
+        '
+        Me.LayoutControlItem2.Control = Me.dtCreated
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(40, 114)
+        Me.LayoutControlItem2.Name = "LayoutControlItem2"
+        Me.LayoutControlItem2.Size = New System.Drawing.Size(375, 28)
+        Me.LayoutControlItem2.Text = "Date:"
+        Me.LayoutControlItem2.TextSize = New System.Drawing.Size(109, 16)
+        '
+        'LayoutControlItem3
+        '
+        Me.LayoutControlItem3.Control = Me.cmbST
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(40, 142)
+        Me.LayoutControlItem3.Name = "LayoutControlItem3"
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(375, 26)
+        Me.LayoutControlItem3.Text = "Sell Type:"
+        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(109, 16)
+        '
+        'LayoutControlItem4
+        '
+        Me.LayoutControlItem4.Control = Me.cmbUV
+        Me.LayoutControlItem4.Location = New System.Drawing.Point(40, 168)
+        Me.LayoutControlItem4.Name = "LayoutControlItem4"
+        Me.LayoutControlItem4.Size = New System.Drawing.Size(375, 26)
+        Me.LayoutControlItem4.Text = "Catcher:"
+        Me.LayoutControlItem4.TextSize = New System.Drawing.Size(109, 16)
+        '
+        'LayoutControlItem5
+        '
+        Me.LayoutControlItem5.Control = Me.txtSaleNum
+        Me.LayoutControlItem5.Location = New System.Drawing.Point(443, 114)
+        Me.LayoutControlItem5.Name = "LayoutControlItem5"
+        Me.LayoutControlItem5.Size = New System.Drawing.Size(401, 26)
+        Me.LayoutControlItem5.Text = "Sales No.:"
+        Me.LayoutControlItem5.TextSize = New System.Drawing.Size(109, 16)
+        '
         'LayoutControlItem7
         '
         Me.LayoutControlItem7.Control = Me.txtInvoiceNum
-        Me.LayoutControlItem7.Location = New System.Drawing.Point(40, 193)
+        Me.LayoutControlItem7.Location = New System.Drawing.Point(40, 194)
         Me.LayoutControlItem7.Name = "LayoutControlItem7"
-        Me.LayoutControlItem7.Size = New System.Drawing.Size(374, 26)
+        Me.LayoutControlItem7.Size = New System.Drawing.Size(375, 26)
         Me.LayoutControlItem7.Text = "Invoice No.:"
         Me.LayoutControlItem7.TextSize = New System.Drawing.Size(109, 16)
+        '
+        'LayoutControlItem8
+        '
+        Me.LayoutControlItem8.Control = Me.txtCDNum
+        Me.LayoutControlItem8.Location = New System.Drawing.Point(443, 140)
+        Me.LayoutControlItem8.Name = "LayoutControlItem8"
+        Me.LayoutControlItem8.Size = New System.Drawing.Size(401, 26)
+        Me.LayoutControlItem8.Text = "Catch Delivery No.:"
+        Me.LayoutControlItem8.TextSize = New System.Drawing.Size(109, 16)
+        '
+        'f0
+        '
+        Me.f0.Control = Me.txtUSD
+        Me.f0.Location = New System.Drawing.Point(443, 166)
+        Me.f0.Name = "f0"
+        Me.f0.Size = New System.Drawing.Size(401, 26)
+        Me.f0.Text = "USD Rate:"
+        Me.f0.TextSize = New System.Drawing.Size(109, 16)
+        '
+        'LayoutControlItem9
+        '
+        Me.LayoutControlItem9.Control = Me.gcCarrier
+        Me.LayoutControlItem9.Location = New System.Drawing.Point(872, 45)
+        Me.LayoutControlItem9.Name = "LayoutControlItem9"
+        Me.LayoutControlItem9.Size = New System.Drawing.Size(480, 260)
+        Me.LayoutControlItem9.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem9.TextVisible = False
+        '
+        'LayoutControlItem10
+        '
+        Me.LayoutControlItem10.Control = Me.txtCNum
+        Me.LayoutControlItem10.Location = New System.Drawing.Point(443, 192)
+        Me.LayoutControlItem10.Name = "LayoutControlItem10"
+        Me.LayoutControlItem10.Size = New System.Drawing.Size(401, 26)
+        Me.LayoutControlItem10.Text = "Contract No.:"
+        Me.LayoutControlItem10.TextSize = New System.Drawing.Size(109, 16)
+        '
+        'EmptySpaceItem6
+        '
+        Me.EmptySpaceItem6.AllowHotTrack = False
+        Me.EmptySpaceItem6.Location = New System.Drawing.Point(40, 0)
+        Me.EmptySpaceItem6.Name = "EmptySpaceItem6"
+        Me.EmptySpaceItem6.Size = New System.Drawing.Size(375, 114)
+        Me.EmptySpaceItem6.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'EmptySpaceItem5
+        '
+        Me.EmptySpaceItem5.AllowHotTrack = False
+        Me.EmptySpaceItem5.Location = New System.Drawing.Point(443, 0)
+        Me.EmptySpaceItem5.Name = "EmptySpaceItem5"
+        Me.EmptySpaceItem5.Size = New System.Drawing.Size(401, 114)
+        Me.EmptySpaceItem5.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'EmptySpaceItem7
+        '
+        Me.EmptySpaceItem7.AllowHotTrack = False
+        Me.EmptySpaceItem7.Location = New System.Drawing.Point(443, 218)
+        Me.EmptySpaceItem7.Name = "EmptySpaceItem7"
+        Me.EmptySpaceItem7.Size = New System.Drawing.Size(401, 87)
+        Me.EmptySpaceItem7.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'EmptySpaceItem8
+        '
+        Me.EmptySpaceItem8.AllowHotTrack = False
+        Me.EmptySpaceItem8.Location = New System.Drawing.Point(40, 220)
+        Me.EmptySpaceItem8.Name = "EmptySpaceItem8"
+        Me.EmptySpaceItem8.Size = New System.Drawing.Size(375, 85)
+        Me.EmptySpaceItem8.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'EmptySpaceItem9
+        '
+        Me.EmptySpaceItem9.AllowHotTrack = False
+        Me.EmptySpaceItem9.Location = New System.Drawing.Point(872, 31)
+        Me.EmptySpaceItem9.Name = "EmptySpaceItem9"
+        Me.EmptySpaceItem9.Size = New System.Drawing.Size(480, 14)
+        Me.EmptySpaceItem9.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'LayoutControlItem11
+        '
+        Me.LayoutControlItem11.Control = Me.Label1
+        Me.LayoutControlItem11.Location = New System.Drawing.Point(872, 0)
+        Me.LayoutControlItem11.Name = "LayoutControlItem11"
+        Me.LayoutControlItem11.Size = New System.Drawing.Size(240, 31)
+        Me.LayoutControlItem11.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem11.TextVisible = False
+        '
+        'LayoutControlItem15
+        '
+        Me.LayoutControlItem15.Control = Me.btnAddCarrier
+        Me.LayoutControlItem15.Location = New System.Drawing.Point(1112, 0)
+        Me.LayoutControlItem15.Name = "LayoutControlItem15"
+        Me.LayoutControlItem15.Size = New System.Drawing.Size(120, 31)
+        Me.LayoutControlItem15.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem15.TextVisible = False
+        '
+        'LayoutControlItem16
+        '
+        Me.LayoutControlItem16.Control = Me.btnDeleteCarrier
+        Me.LayoutControlItem16.Location = New System.Drawing.Point(1232, 0)
+        Me.LayoutControlItem16.Name = "LayoutControlItem16"
+        Me.LayoutControlItem16.Size = New System.Drawing.Size(120, 31)
+        Me.LayoutControlItem16.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem16.TextVisible = False
         '
         'GridControl1
         '
@@ -624,147 +778,6 @@ Partial Class frm_salesInvoice
         Me.LayoutControlItem13.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem13.TextVisible = False
         '
-        'EmptySpaceItem2
-        '
-        Me.EmptySpaceItem2.AllowHotTrack = False
-        Me.EmptySpaceItem2.Location = New System.Drawing.Point(842, 0)
-        Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Size = New System.Drawing.Size(28, 303)
-        Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
-        '
-        'EmptySpaceItem4
-        '
-        Me.EmptySpaceItem4.AllowHotTrack = False
-        Me.EmptySpaceItem4.Location = New System.Drawing.Point(1348, 0)
-        Me.EmptySpaceItem4.Name = "EmptySpaceItem4"
-        Me.EmptySpaceItem4.Size = New System.Drawing.Size(39, 303)
-        Me.EmptySpaceItem4.TextSize = New System.Drawing.Size(0, 0)
-        '
-        'EmptySpaceItem5
-        '
-        Me.EmptySpaceItem5.AllowHotTrack = False
-        Me.EmptySpaceItem5.Location = New System.Drawing.Point(442, 0)
-        Me.EmptySpaceItem5.Name = "EmptySpaceItem5"
-        Me.EmptySpaceItem5.Size = New System.Drawing.Size(400, 113)
-        Me.EmptySpaceItem5.TextSize = New System.Drawing.Size(0, 0)
-        '
-        'LayoutControlItem9
-        '
-        Me.LayoutControlItem9.Control = Me.gcCarrier
-        Me.LayoutControlItem9.Location = New System.Drawing.Point(870, 45)
-        Me.LayoutControlItem9.Name = "LayoutControlItem9"
-        Me.LayoutControlItem9.Size = New System.Drawing.Size(478, 258)
-        Me.LayoutControlItem9.TextSize = New System.Drawing.Size(0, 0)
-        Me.LayoutControlItem9.TextVisible = False
-        '
-        'gvCarrier
-        '
-        Me.gvCarrier.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.CarrierType, Me.CarrierName, Me.MetricTon})
-        Me.gvCarrier.GridControl = Me.gcCarrier
-        Me.gvCarrier.Name = "gvCarrier"
-        Me.gvCarrier.OptionsView.ShowGroupPanel = False
-        '
-        'gcCarrier
-        '
-        Me.gcCarrier.Location = New System.Drawing.Point(884, 59)
-        Me.gcCarrier.MainView = Me.gvCarrier
-        Me.gcCarrier.MenuManager = Me.RibbonControl
-        Me.gcCarrier.Name = "gcCarrier"
-        Me.gcCarrier.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.Carrier, Me.cmbCarrier})
-        Me.gcCarrier.Size = New System.Drawing.Size(474, 254)
-        Me.gcCarrier.TabIndex = 28
-        Me.gcCarrier.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gvCarrier})
-        '
-        'EmptySpaceItem6
-        '
-        Me.EmptySpaceItem6.AllowHotTrack = False
-        Me.EmptySpaceItem6.Location = New System.Drawing.Point(40, 0)
-        Me.EmptySpaceItem6.Name = "EmptySpaceItem6"
-        Me.EmptySpaceItem6.Size = New System.Drawing.Size(374, 113)
-        Me.EmptySpaceItem6.TextSize = New System.Drawing.Size(0, 0)
-        '
-        'EmptySpaceItem7
-        '
-        Me.EmptySpaceItem7.AllowHotTrack = False
-        Me.EmptySpaceItem7.Location = New System.Drawing.Point(442, 217)
-        Me.EmptySpaceItem7.Name = "EmptySpaceItem7"
-        Me.EmptySpaceItem7.Size = New System.Drawing.Size(400, 86)
-        Me.EmptySpaceItem7.TextSize = New System.Drawing.Size(0, 0)
-        '
-        'EmptySpaceItem8
-        '
-        Me.EmptySpaceItem8.AllowHotTrack = False
-        Me.EmptySpaceItem8.Location = New System.Drawing.Point(40, 219)
-        Me.EmptySpaceItem8.Name = "EmptySpaceItem8"
-        Me.EmptySpaceItem8.Size = New System.Drawing.Size(374, 84)
-        Me.EmptySpaceItem8.TextSize = New System.Drawing.Size(0, 0)
-        '
-        'CarrierName
-        '
-        Me.CarrierName.FieldName = "Carrier Name"
-        Me.CarrierName.MinWidth = 25
-        Me.CarrierName.Name = "CarrierName"
-        Me.CarrierName.Visible = True
-        Me.CarrierName.VisibleIndex = 1
-        Me.CarrierName.Width = 94
-        '
-        'CarrierType
-        '
-        Me.CarrierType.ColumnEdit = Me.cmbCarrier
-        Me.CarrierType.FieldName = "Carrier Type"
-        Me.CarrierType.MinWidth = 25
-        Me.CarrierType.Name = "CarrierType"
-        Me.CarrierType.Visible = True
-        Me.CarrierType.VisibleIndex = 0
-        Me.CarrierType.Width = 94
-        '
-        'MetricTon
-        '
-        Me.MetricTon.FieldName = "Metric Ton"
-        Me.MetricTon.MinWidth = 25
-        Me.MetricTon.Name = "MetricTon"
-        Me.MetricTon.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
-        Me.MetricTon.Visible = True
-        Me.MetricTon.VisibleIndex = 2
-        Me.MetricTon.Width = 94
-        '
-        'EmptySpaceItem9
-        '
-        Me.EmptySpaceItem9.AllowHotTrack = False
-        Me.EmptySpaceItem9.Location = New System.Drawing.Point(870, 29)
-        Me.EmptySpaceItem9.Name = "EmptySpaceItem9"
-        Me.EmptySpaceItem9.Size = New System.Drawing.Size(478, 16)
-        Me.EmptySpaceItem9.TextSize = New System.Drawing.Size(0, 0)
-        '
-        'Label1
-        '
-        Me.Label1.Location = New System.Drawing.Point(884, 14)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(474, 25)
-        Me.Label1.TabIndex = 29
-        Me.Label1.Text = "Add carrier local and foreign:"
-        '
-        'LayoutControlItem11
-        '
-        Me.LayoutControlItem11.Control = Me.Label1
-        Me.LayoutControlItem11.Location = New System.Drawing.Point(870, 0)
-        Me.LayoutControlItem11.Name = "LayoutControlItem11"
-        Me.LayoutControlItem11.Size = New System.Drawing.Size(478, 29)
-        Me.LayoutControlItem11.TextSize = New System.Drawing.Size(0, 0)
-        Me.LayoutControlItem11.TextVisible = False
-        '
-        'Carrier
-        '
-        Me.Carrier.AutoHeight = False
-        Me.Carrier.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.Carrier.Name = "Carrier"
-        '
-        'cmbCarrier
-        '
-        Me.cmbCarrier.AutoHeight = False
-        Me.cmbCarrier.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cmbCarrier.Name = "cmbCarrier"
-        '
         'frm_salesInvoice
         '
         Me.AllowFormGlass = DevExpress.Utils.DefaultBoolean.[False]
@@ -783,6 +796,10 @@ Partial Class frm_salesInvoice
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.gcCarrier, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.gvCarrier, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Carrier, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cmbCarrier, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtInvoiceNum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl2.ResumeLayout(False)
@@ -800,18 +817,29 @@ Partial Class frm_salesInvoice
         CType(Me.txtRemark.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cmbUV.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem14, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.f0, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem10, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem14, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem7, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem7, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EmptySpaceItem9, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem11, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem15, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem16, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BandedGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -823,19 +851,6 @@ Partial Class frm_salesInvoice
         CType(Me.LayoutControlGroup3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BehaviorManager1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem5, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.gvCarrier, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.gcCarrier, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem6, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem7, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem9, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem11, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Carrier, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.cmbCarrier, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -895,10 +910,7 @@ Partial Class frm_salesInvoice
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents gcCarrier As DevExpress.XtraGrid.GridControl
     Friend WithEvents gvCarrier As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents CarrierType As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents cmbCarrier As DevExpress.XtraEditors.Repository.RepositoryItemComboBox
-    Friend WithEvents CarrierName As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents MetricTon As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents Carrier As DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit
     Friend WithEvents EmptySpaceItem2 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents EmptySpaceItem4 As DevExpress.XtraLayout.EmptySpaceItem
@@ -909,6 +921,10 @@ Partial Class frm_salesInvoice
     Friend WithEvents EmptySpaceItem8 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents EmptySpaceItem9 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents LayoutControlItem11 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents btnDeleteCarrier As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents btnAddCarrier As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LayoutControlItem15 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents LayoutControlItem16 As DevExpress.XtraLayout.LayoutControlItem
 
 
 End Class

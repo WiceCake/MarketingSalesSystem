@@ -29,10 +29,10 @@ Public Class ctrlSales
         frmSI = New frm_salesInvoice(Me)
 
         'initSalesDataTable()
-        initSalesDataTableS()
+        initCarrierDataTable()
 
         frmSI.GridControl1.DataSource = frmSI.dt
-        frmSI.GridControl2.DataSource = frmSI.dts
+        frmSI.gcCarrier.DataSource = frmSI.dts
 
         ucS = uc
 
@@ -45,6 +45,7 @@ Public Class ctrlSales
             .txt_refNum.Caption = "Draft"
             .rbnTools.Visible = False
             loadCombo()
+            loadCarrier()
             .Show()
         End With
     End Sub
@@ -62,15 +63,16 @@ Public Class ctrlSales
         frmSI = New frm_salesInvoice(Me)
 
         'initSalesDataTable()
-        'initSalesDataTableS()
+        initCarrierDataTable()
 
         frmSI.GridControl1.DataSource = frmSI.dt
-        frmSI.GridControl2.DataSource = frmSI.dts
+        frmSI.gcCarrier.DataSource = frmSI.dts
 
         ucS = uc
 
         With frmSI
             .rbnTools.Visible = False
+            .gvCarrier.OptionsSelection.MultiSelect = False
             If mdlSR.approvalStatus = Approval_Status.Posted Then
                 .rbnActions.Visible = False
                 .isPosted = True
@@ -80,8 +82,11 @@ Public Class ctrlSales
             .Text = "Sales Invoice"
             .dtCreated.Properties.MaxValue = Date.Now
             loadCombo()
+            loadCarrier()
             .cmbUV.Properties.ReadOnly = True
             .txtCDNum.Properties.ReadOnly = True
+            .btnAddCarrier.Enabled = False
+            .btnDeleteCarrier.Enabled = False
 
             'Fields
             .dtCreated.EditValue = mdlSR.salesDate
@@ -122,6 +127,44 @@ Public Class ctrlSales
             .dt.Columns.Add("NA_Total", GetType(Double))
             .rowCount = ca.Count
         End With
+    End Sub
+
+    Sub initCarrierDataTable()
+        With frmSI
+            .dts = New DataTable()
+
+            .dts.Columns.Add("Carrier_Type", GetType(String))
+            .dts.Columns.Add("Carrier_Name", GetType(String))
+            .dts.Columns.Add("Metric_Ton", GetType(Double))
+        End With
+    End Sub
+
+    Sub addCarrier()
+        Dim dr As DataRow = frmSI.dts.NewRow()
+
+        dr("Carrier_Type") = ""
+
+        frmSI.dts.Rows.Add(dr)
+    End Sub
+
+    Sub loadCarrier()
+        Dim dr As DataRow = frmSI.dts.NewRow()
+
+        If Not isNew Then
+            Dim cdList = (From i In mkdb.trans_SalesUnloadeds Where i.SalesReportID = mdlSR.salesReport_ID Select i).ToList
+
+            For Each cd In cdList
+                dr = frmSI.dts.NewRow()
+                dr("Carrier_Type") = cd.CarrierType
+                dr("Carrier_Name") = cd.CarrierName
+                dr("Metric_Ton") = cd.UnloadedValue
+                frmSI.dts.Rows.Add(dr)
+            Next
+            Return
+        End If
+
+        dr("Carrier_Name") = ""
+        frmSI.dts.Rows.Add(dr)
     End Sub
 
     Sub addColumnDT(dt As DataTable, caption As String, count As Integer)
@@ -228,9 +271,6 @@ Public Class ctrlSales
         r("NA_Total") = NA_Total
     End Sub
 
-
-
-
     Sub updateAllTotals()
         For Each r As DataRow In frmSI.dt.Rows
             updateTotal(r)
@@ -249,6 +289,9 @@ Public Class ctrlSales
                     mdlSR.invoiceNum = .txtInvoiceNum.Text
                     mdlSR.sellingType = .cmbST.EditValue.ToString
                     mdlSR.unloadingType = "###"
+                    mdlSR.buyer = "###"
+                    mdlSR.unloadingForeignVessel = "###"
+                    mdlSR.unloadingVessel_ID = "###"
                     mdlSR.catchtDeliveryNum = .cmbUV.EditValue.ToString
                     mdlSR.usdRate = CDec(.txtUSD.EditValue)
                     mdlSR.contractNum = .txtCNum.Text
@@ -274,6 +317,7 @@ Public Class ctrlSales
                 setSalesPrice(mdlSR.salesReport_ID)
                 setCatcherPrice("AUK_Catcher", mdlSR.salesReport_ID)
                 setCatcherPrice("SK_Catcher", mdlSR.salesReport_ID)
+                setCarrierData(mdlSR.salesReport_ID)
 
                 ts.Complete()
             Catch ex As Exception
@@ -367,6 +411,33 @@ Public Class ctrlSales
                 .Save()
             End If
         End With
+    End Sub
+
+    Sub setCarrierData(salesReportID As Integer)
+        Dim cd As New CarrierDetails(mkdb)
+        Dim count As Integer
+        Dim getCd As List(Of Integer) = New List(Of Integer)
+
+        If Not isNew Then
+            getCd = (From i In mkdb.trans_SalesUnloadeds Where i.SalesReportID = salesReportID Select i.CarrierID).ToList()
+            count = 0
+        End If
+
+        For Each row As DataRow In frmSI.dts.Rows
+            With cd
+                .SalesReportID = salesReportID
+                .CarrierName = row("Carrier_Name").ToString
+                .CarrierType = row("Carrier_Type").ToString
+                .UnloadedValue = CDec(row("Metric_Ton"))
+                If Not isNew Then
+                    .CarrierID = CInt(getCd(count))
+                    .Save()
+                    count += 1
+                Else
+                    .Add()
+                End If
+            End With
+        Next
     End Sub
 
     Sub setCatcherPrice(rowName As String, ByVal salesReportID As Integer)
@@ -543,27 +614,6 @@ Public Class ctrlSales
 
         lookUpTransMode(formattedUv, frmSI.cmbUV, "catchDate", "catchActivity_ID", "Select catcher")
 
-    End Sub
-
-
-    Sub initSalesDataTableS()
-        With frmSI
-            .dts = New DataTable()
-
-            .dts.Columns.Add("Catcher", GetType(String))
-            .dts.Columns.Add("T_CatcherPartial", GetType(String))
-            .dts.Columns.Add("T_ActualQty", GetType(Double))
-            .dts.Columns.Add("K_ActualQty", GetType(Double))
-            .dts.Columns.Add("K_Fishmeal", GetType(String))
-            .dts.Columns.Add("K_Spoilage", GetType(String))
-            .dts.Columns.Add("K_Net", GetType(Double))
-            .dts.Columns.Add("A_ActualQty", GetType(Double))
-            .dts.Columns.Add("A_Fishmeal", GetType(String))
-            .dts.Columns.Add("A_Spoilage", GetType(String))
-            .dts.Columns.Add("A_NetUSD", GetType(Double))
-            .dts.Columns.Add("A_NetPHP", GetType(Double))
-            .dts.Columns.Add("A_AveragePrice", GetType(Double))
-        End With
     End Sub
 
     Sub print()
