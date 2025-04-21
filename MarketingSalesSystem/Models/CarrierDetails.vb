@@ -47,7 +47,6 @@
             .CarrierName = CarrierName
             .CarrierType = CarrierType
             .UnloadedValue = UnloadedValue
-            .DateCreated = DateCreated
         End With
 
         dc.trans_SalesUnloadeds.InsertOnSubmit(carrier)
@@ -64,7 +63,6 @@
             i.CarrierName = CarrierName
             i.CarrierType = CarrierType
             i.UnloadedValue = UnloadedValue
-            i.DateCreated = DateCreated
             dc.SubmitChanges()
         Next
     End Sub

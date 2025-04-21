@@ -30,6 +30,7 @@
         Me.btn_salesInvc = New DevExpress.XtraBars.BarButtonItem()
         Me.btn_weightSlips = New DevExpress.XtraBars.BarButtonItem()
         Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonItem2 = New DevExpress.XtraBars.BarButtonItem()
         Me.ribbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.ribbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -54,9 +55,9 @@
         'ribbonControl1
         '
         Me.ribbonControl1.ExpandCollapseItem.Id = 0
-        Me.ribbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl1.ExpandCollapseItem, Me.btn_salesInvc, Me.btn_weightSlips, Me.BarButtonItem1})
+        Me.ribbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl1.ExpandCollapseItem, Me.btn_salesInvc, Me.btn_weightSlips, Me.BarButtonItem1, Me.BarButtonItem2})
         Me.ribbonControl1.Location = New System.Drawing.Point(0, 0)
-        Me.ribbonControl1.MaxItemId = 7
+        Me.ribbonControl1.MaxItemId = 8
         Me.ribbonControl1.Name = "ribbonControl1"
         Me.ribbonControl1.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.ribbonPage1})
         Me.ribbonControl1.Size = New System.Drawing.Size(894, 198)
@@ -85,6 +86,14 @@
         Me.BarButtonItem1.Name = "BarButtonItem1"
         Me.BarButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
         '
+        'BarButtonItem2
+        '
+        Me.BarButtonItem2.Caption = "Sell Catch"
+        Me.BarButtonItem2.Id = 7
+        Me.BarButtonItem2.ImageOptions.Image = CType(resources.GetObject("BarButtonItem2.ImageOptions.Image"), System.Drawing.Image)
+        Me.BarButtonItem2.Name = "BarButtonItem2"
+        Me.BarButtonItem2.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
         'ribbonPage1
         '
         Me.ribbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.ribbonPageGroup1, Me.RibbonPageGroup2})
@@ -96,6 +105,7 @@
         Me.ribbonPageGroup1.AllowTextClipping = False
         Me.ribbonPageGroup1.ItemLinks.Add(Me.btn_salesInvc)
         Me.ribbonPageGroup1.ItemLinks.Add(Me.BarButtonItem1)
+        Me.ribbonPageGroup1.ItemLinks.Add(Me.BarButtonItem2)
         Me.ribbonPageGroup1.Name = "ribbonPageGroup1"
         Me.ribbonPageGroup1.Text = "Sales"
         '
@@ -201,4 +211,5 @@
     Friend WithEvents XtraTabPage1 As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents BehaviorManager1 As DevExpress.Utils.Behaviors.BehaviorManager
     Friend WithEvents BarButtonItem1 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonItem2 As DevExpress.XtraBars.BarButtonItem
 End Class

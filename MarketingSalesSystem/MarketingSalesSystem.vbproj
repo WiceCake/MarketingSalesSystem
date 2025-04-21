@@ -118,7 +118,7 @@
     <Import Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\ctrlCarrier.vb" />
+    <Compile Include="Controllers\ctrlBuyers.vb" />
     <Compile Include="Controllers\ctrlCatchers.vb" />
     <Compile Include="Controllers\ctrlSales.vb" />
     <Compile Include="Data\mkdb.designer.vb">
@@ -151,6 +151,8 @@
     <Compile Include="Models\CatchMethod.vb" />
     <Compile Include="Models\ReportModels\CatchersActivity.vb" />
     <Compile Include="Models\ReportModels\SalesReportInvoice.vb" />
+    <Compile Include="Models\SalesInvoiceBuyer.vb" />
+    <Compile Include="Models\SalesReportBuyer.vb" />
     <Compile Include="Models\SalesReportCatcher.vb" />
     <Compile Include="Models\SalesReportWeightSlip.vb" />
     <Compile Include="Models\SalesReport.vb" />
@@ -185,10 +187,10 @@
     <Compile Include="Reports\rptSalesInvoiceReport.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Views\frm_carriersFC.Designer.vb">
-      <DependentUpon>frm_carriersFC.vb</DependentUpon>
+    <Compile Include="Views\frm_buyerSales.Designer.vb">
+      <DependentUpon>frm_buyerSales.vb</DependentUpon>
     </Compile>
-    <Compile Include="Views\frm_carriersFC.vb">
+    <Compile Include="Views\frm_buyerSales.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\frm_catchActivity.Designer.vb">
@@ -207,6 +209,12 @@
       <DependentUpon>ucBase.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\ucBase.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\ucBuyer.Designer.vb">
+      <DependentUpon>ucBuyer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ucBuyer.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\ucCatcher.Designer.vb">
@@ -239,11 +247,14 @@
     <EmbeddedResource Include="Reports\rptSalesInvoiceReport.resx">
       <DependentUpon>rptSalesInvoiceReport.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\frm_carriersFC.resx">
-      <DependentUpon>frm_carriersFC.vb</DependentUpon>
+    <EmbeddedResource Include="Views\frm_buyerSales.resx">
+      <DependentUpon>frm_buyerSales.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_catchActivity.resx">
       <DependentUpon>frm_catchActivity.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ucBuyer.resx">
+      <DependentUpon>ucBuyer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ucCatcher.resx">
       <DependentUpon>ucCatcher.vb</DependentUpon>
@@ -280,7 +291,6 @@
     </EmbeddedResource>
     <None Include="Data\mkdb.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>mkdb.designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="Data\tpmdb.dbml">
