@@ -4,8 +4,8 @@
     Public CarrierName As String
     Public CarrierType As String
     Public UnloadedValue As Decimal
-    Public DateCreated As Date
-    'Hello
+    Public DateCreated As Date?
+
     Private dc As mkdbDataContext
 
 
