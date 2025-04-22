@@ -1,4 +1,5 @@
-﻿Public Class ctrlBuyers
+﻿Imports System.Transactions
+Public Class ctrlBuyers
     Private isNew As Boolean
     Private mdlSIB As SalesInvoiceBuyer
     Private mdlSR As SalesReport
@@ -355,4 +356,10 @@
 
         lookUpTransMode(b, frmBS.cmbBuyer, "Name", "ID", "Select Buyer")
     End Sub
+
+
+    Sub save()
+
+    End Sub
+
 End Class

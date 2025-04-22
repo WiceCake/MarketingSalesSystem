@@ -202,21 +202,21 @@ Partial Class frm_catchActivity
         Me.LayoutControl2.Controls.Add(Me.btnDelete1)
         Me.LayoutControl2.Controls.Add(Me.btnAddCatcher)
         Me.LayoutControl2.Controls.Add(Me.GridControl1)
-        Me.LayoutControl2.Location = New System.Drawing.Point(14, 66)
+        Me.LayoutControl2.Location = New System.Drawing.Point(12, 64)
         Me.LayoutControl2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.LayoutControl2.Name = "LayoutControl2"
         Me.LayoutControl2.Root = Me.Root
-        Me.LayoutControl2.Size = New System.Drawing.Size(1032, 508)
+        Me.LayoutControl2.Size = New System.Drawing.Size(1036, 512)
         Me.LayoutControl2.TabIndex = 8
         Me.LayoutControl2.Text = "LayoutControl2"
         '
         'btnDelete1
         '
         Me.btnDelete1.ImageOptions.Image = CType(resources.GetObject("btnDelete1.ImageOptions.Image"), System.Drawing.Image)
-        Me.btnDelete1.Location = New System.Drawing.Point(517, 14)
+        Me.btnDelete1.Location = New System.Drawing.Point(519, 12)
         Me.btnDelete1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnDelete1.Name = "btnDelete1"
-        Me.btnDelete1.Size = New System.Drawing.Size(248, 36)
+        Me.btnDelete1.Size = New System.Drawing.Size(250, 36)
         Me.btnDelete1.StyleController = Me.LayoutControl2
         Me.btnDelete1.TabIndex = 7
         Me.btnDelete1.Text = "Delete"
@@ -224,10 +224,10 @@ Partial Class frm_catchActivity
         'btnAddCatcher
         '
         Me.btnAddCatcher.ImageOptions.Image = CType(resources.GetObject("btnAddCatcher.ImageOptions.Image"), System.Drawing.Image)
-        Me.btnAddCatcher.Location = New System.Drawing.Point(769, 14)
+        Me.btnAddCatcher.Location = New System.Drawing.Point(773, 12)
         Me.btnAddCatcher.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnAddCatcher.Name = "btnAddCatcher"
-        Me.btnAddCatcher.Size = New System.Drawing.Size(249, 36)
+        Me.btnAddCatcher.Size = New System.Drawing.Size(251, 36)
         Me.btnAddCatcher.StyleController = Me.LayoutControl2
         Me.btnAddCatcher.TabIndex = 5
         Me.btnAddCatcher.Text = "Add Catcher"
@@ -235,12 +235,12 @@ Partial Class frm_catchActivity
         'GridControl1
         '
         Me.GridControl1.EmbeddedNavigator.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.GridControl1.Location = New System.Drawing.Point(14, 54)
+        Me.GridControl1.Location = New System.Drawing.Point(12, 52)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GridControl1.MenuManager = Me.RibbonControl
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(1004, 440)
+        Me.GridControl1.Size = New System.Drawing.Size(1012, 448)
         Me.GridControl1.TabIndex = 4
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -256,7 +256,7 @@ Partial Class frm_catchActivity
         Me.Root.GroupBordersVisible = False
         Me.Root.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem6, Me.layoutBtnAdd, Me.EmptySpaceItem1, Me.layoutBtnDelete})
         Me.Root.Name = "Root"
-        Me.Root.Size = New System.Drawing.Size(1032, 508)
+        Me.Root.Size = New System.Drawing.Size(1036, 512)
         Me.Root.TextVisible = False
         '
         'LayoutControlItem6
@@ -264,16 +264,16 @@ Partial Class frm_catchActivity
         Me.LayoutControlItem6.Control = Me.GridControl1
         Me.LayoutControlItem6.Location = New System.Drawing.Point(0, 40)
         Me.LayoutControlItem6.Name = "LayoutControlItem6"
-        Me.LayoutControlItem6.Size = New System.Drawing.Size(1008, 444)
+        Me.LayoutControlItem6.Size = New System.Drawing.Size(1016, 452)
         Me.LayoutControlItem6.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem6.TextVisible = False
         '
         'layoutBtnAdd
         '
         Me.layoutBtnAdd.Control = Me.btnAddCatcher
-        Me.layoutBtnAdd.Location = New System.Drawing.Point(755, 0)
+        Me.layoutBtnAdd.Location = New System.Drawing.Point(761, 0)
         Me.layoutBtnAdd.Name = "layoutBtnAdd"
-        Me.layoutBtnAdd.Size = New System.Drawing.Size(253, 40)
+        Me.layoutBtnAdd.Size = New System.Drawing.Size(255, 40)
         Me.layoutBtnAdd.TextSize = New System.Drawing.Size(0, 0)
         Me.layoutBtnAdd.TextVisible = False
         '
@@ -282,65 +282,65 @@ Partial Class frm_catchActivity
         Me.EmptySpaceItem1.AllowHotTrack = False
         Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 0)
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(503, 40)
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(507, 40)
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
         '
         'layoutBtnDelete
         '
         Me.layoutBtnDelete.Control = Me.btnDelete1
-        Me.layoutBtnDelete.Location = New System.Drawing.Point(503, 0)
+        Me.layoutBtnDelete.Location = New System.Drawing.Point(507, 0)
         Me.layoutBtnDelete.Name = "layoutBtnDelete"
-        Me.layoutBtnDelete.Size = New System.Drawing.Size(252, 40)
+        Me.layoutBtnDelete.Size = New System.Drawing.Size(254, 40)
         Me.layoutBtnDelete.TextSize = New System.Drawing.Size(0, 0)
         Me.layoutBtnDelete.TextVisible = False
         '
         'txtLong
         '
-        Me.txtLong.Location = New System.Drawing.Point(704, 40)
+        Me.txtLong.Location = New System.Drawing.Point(704, 38)
         Me.txtLong.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtLong.MenuManager = Me.RibbonControl
         Me.txtLong.Name = "txtLong"
         Me.txtLong.Properties.Mask.EditMask = "f9"
         Me.txtLong.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.txtLong.Properties.MaxLength = 13
-        Me.txtLong.Size = New System.Drawing.Size(280, 22)
+        Me.txtLong.Size = New System.Drawing.Size(282, 22)
         Me.txtLong.StyleController = Me.LayoutControl1
         Me.txtLong.TabIndex = 7
         '
         'txtLat
         '
-        Me.txtLat.Location = New System.Drawing.Point(704, 14)
+        Me.txtLat.Location = New System.Drawing.Point(704, 12)
         Me.txtLat.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtLat.MenuManager = Me.RibbonControl
         Me.txtLat.Name = "txtLat"
         Me.txtLat.Properties.Mask.EditMask = "f9"
         Me.txtLat.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.txtLat.Properties.MaxLength = 13
-        Me.txtLat.Size = New System.Drawing.Size(280, 22)
+        Me.txtLat.Size = New System.Drawing.Size(282, 22)
         Me.txtLat.StyleController = Me.LayoutControl1
         Me.txtLat.TabIndex = 6
         '
         'cmbMethod
         '
-        Me.cmbMethod.Location = New System.Drawing.Point(195, 40)
+        Me.cmbMethod.Location = New System.Drawing.Point(193, 38)
         Me.cmbMethod.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.cmbMethod.MenuManager = Me.RibbonControl
         Me.cmbMethod.Name = "cmbMethod"
         Me.cmbMethod.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cmbMethod.Size = New System.Drawing.Size(290, 22)
+        Me.cmbMethod.Size = New System.Drawing.Size(292, 22)
         Me.cmbMethod.StyleController = Me.LayoutControl1
         Me.cmbMethod.TabIndex = 5
         '
         'dtCreated
         '
         Me.dtCreated.EditValue = Nothing
-        Me.dtCreated.Location = New System.Drawing.Point(195, 14)
+        Me.dtCreated.Location = New System.Drawing.Point(193, 12)
         Me.dtCreated.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dtCreated.MenuManager = Me.RibbonControl
         Me.dtCreated.Name = "dtCreated"
         Me.dtCreated.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.dtCreated.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.dtCreated.Size = New System.Drawing.Size(290, 22)
+        Me.dtCreated.Size = New System.Drawing.Size(292, 22)
         Me.dtCreated.StyleController = Me.LayoutControl1
         Me.dtCreated.TabIndex = 4
         '
@@ -358,7 +358,7 @@ Partial Class frm_catchActivity
         Me.LayoutControlItem1.Control = Me.dtCreated
         Me.LayoutControlItem1.Location = New System.Drawing.Point(59, 0)
         Me.LayoutControlItem1.Name = "LayoutControlItem1"
-        Me.LayoutControlItem1.Size = New System.Drawing.Size(416, 26)
+        Me.LayoutControlItem1.Size = New System.Drawing.Size(418, 26)
         Me.LayoutControlItem1.Text = "Date: "
         Me.LayoutControlItem1.TextSize = New System.Drawing.Size(119, 16)
         '
@@ -367,32 +367,32 @@ Partial Class frm_catchActivity
         Me.LayoutControlItem2.Control = Me.cmbMethod
         Me.LayoutControlItem2.Location = New System.Drawing.Point(59, 26)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
-        Me.LayoutControlItem2.Size = New System.Drawing.Size(416, 26)
+        Me.LayoutControlItem2.Size = New System.Drawing.Size(418, 26)
         Me.LayoutControlItem2.Text = "Method of Catching: "
         Me.LayoutControlItem2.TextSize = New System.Drawing.Size(119, 16)
         '
         'LayoutControlItem3
         '
         Me.LayoutControlItem3.Control = Me.txtLat
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(568, 0)
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(570, 0)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
-        Me.LayoutControlItem3.Size = New System.Drawing.Size(406, 26)
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(408, 26)
         Me.LayoutControlItem3.Text = "Latitude: "
         Me.LayoutControlItem3.TextSize = New System.Drawing.Size(119, 16)
         '
         'LayoutControlItem4
         '
         Me.LayoutControlItem4.Control = Me.txtLong
-        Me.LayoutControlItem4.Location = New System.Drawing.Point(568, 26)
+        Me.LayoutControlItem4.Location = New System.Drawing.Point(570, 26)
         Me.LayoutControlItem4.Name = "LayoutControlItem4"
-        Me.LayoutControlItem4.Size = New System.Drawing.Size(406, 26)
+        Me.LayoutControlItem4.Size = New System.Drawing.Size(408, 26)
         Me.LayoutControlItem4.Text = "Longitude: "
         Me.LayoutControlItem4.TextSize = New System.Drawing.Size(119, 16)
         '
         'EmptySpaceItem3
         '
         Me.EmptySpaceItem3.AllowHotTrack = False
-        Me.EmptySpaceItem3.Location = New System.Drawing.Point(475, 0)
+        Me.EmptySpaceItem3.Location = New System.Drawing.Point(477, 0)
         Me.EmptySpaceItem3.Name = "EmptySpaceItem3"
         Me.EmptySpaceItem3.Size = New System.Drawing.Size(93, 52)
         Me.EmptySpaceItem3.TextSize = New System.Drawing.Size(0, 0)
@@ -400,7 +400,7 @@ Partial Class frm_catchActivity
         'EmptySpaceItem4
         '
         Me.EmptySpaceItem4.AllowHotTrack = False
-        Me.EmptySpaceItem4.Location = New System.Drawing.Point(974, 0)
+        Me.EmptySpaceItem4.Location = New System.Drawing.Point(978, 0)
         Me.EmptySpaceItem4.Name = "EmptySpaceItem4"
         Me.EmptySpaceItem4.Size = New System.Drawing.Size(62, 52)
         Me.EmptySpaceItem4.TextSize = New System.Drawing.Size(0, 0)
@@ -418,7 +418,7 @@ Partial Class frm_catchActivity
         Me.LayoutControlItem5.Control = Me.LayoutControl2
         Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 52)
         Me.LayoutControlItem5.Name = "LayoutControlItem5"
-        Me.LayoutControlItem5.Size = New System.Drawing.Size(1036, 512)
+        Me.LayoutControlItem5.Size = New System.Drawing.Size(1040, 516)
         Me.LayoutControlItem5.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem5.TextVisible = False
         '

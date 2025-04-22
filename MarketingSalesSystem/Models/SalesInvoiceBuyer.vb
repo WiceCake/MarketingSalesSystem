@@ -4,7 +4,7 @@
     Public paidAmount, adjustmentsAmount As Decimal?
     Public encodedOn As Date
     Public dateCreated As Date?
-    Public approvalStatus, paymentStatus As Integer
+    Public approvalStatus As Integer
 
     Private dc As mkdbDataContext
 
@@ -29,7 +29,6 @@
             encodedOn = i.encodedOn
             dateCreated = i.dateCreated
             approvalStatus = i.approvalStatus
-            paymentStatus = i.paymentStatus
         Next
     End Sub
 
@@ -63,7 +62,7 @@
             .encodedBy = encodedBy
             .dateCreated = dateCreated
             .approvalStatus = approvalStatus
-            .paymentStatus = paymentStatus
+
         End With
 
         dc.trans_SalesInvoiceBuyers.InsertOnSubmit(sib)
@@ -86,7 +85,6 @@
             i.encodedBy = encodedBy
             i.dateCreated = dateCreated
             i.approvalStatus = approvalStatus
-            i.paymentStatus = paymentStatus
             dc.SubmitChanges()
         Next
     End Sub
@@ -101,6 +99,28 @@
         Next
 
         Return sibList
+    End Function
+
+    Function getByDate(Optional ByVal startDate As Date = #1/1/1900#, Optional ByVal endDate As Date = Nothing) As List(Of SalesInvoiceBuyer)
+        If endDate = Nothing Then
+            endDate = Date.Now
+        End If
+
+        If startDate = Nothing Then
+            startDate = #1/1/1900#
+        End If
+
+        Dim biList As New List(Of SalesInvoiceBuyer)
+
+        Dim bil = From bl In dc.trans_SalesInvoiceBuyers
+                   Where bl.encodedOn >= startDate.Date AndAlso bl.encodedOn <= endDate.Date
+                   Select bl
+
+        For Each bl In bil
+            biList.Add(New SalesInvoiceBuyer(bl, dc))
+        Next
+
+        Return biList
     End Function
 
     Function GenerateRefNum() As String

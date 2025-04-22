@@ -1,6 +1,7 @@
 ﻿Imports DevExpress.XtraEditors
 Imports DevExpress.XtraGrid.Views.BandedGrid
 Imports DevExpress.XtraGrid
+Imports System.Text
 
 Public Class frm_buyerSales
 
@@ -300,6 +301,31 @@ Public Class frm_buyerSales
             remainingBalance = CDec(totalDebt) - CDec(paidAmount)
             txtRemainingBalance.EditValue = remainingBalance
         End If
+
+    End Sub
+
+    Private Sub BarButtonItem1_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem1.ItemClick
+        'Dim dateCreated = validateField(dtEncoded)
+        'Dim typeOfSale = validateField(cmbSaleType)
+        'Dim invoiceReference = validateField(lueInvoice)
+        'Dim typeOfBuyer = valida(rBuyer)
+        'Dim typeOfBuyerValid As Boolean = rBuyer.SelectedIndex >= 0
+        'Dim newNameOfBuyer = validateField(txtBuyer)
+        'Dim oldNewOfBuyer = validateField(cmbBuyer)
+        'Dim referenceNo = validateField(txtSetNo)
+
+        'Dim missingFields = New StringBuilder()
+        'If Not dateCreated Then missingFields.AppendLine("Date Encoded")
+        'If Not typeOfSale Then missingFields.AppendLine("Type of Sale")
+        'If Not invoiceReference Then missingFields.AppendLine("Invoice Reference")
+        'If Not typeOfBuyerValid Then missingFields.AppendLine("Type of Buyer")
+        'If Not newNameOfBuyer Then missingFields.AppendLine("Name of New Buyer")
+        'If Not oldNewOfBuyer Then missingFields.AppendLine("Name of Old Buyer")
+        'If Not referenceNo Then missingFields.AppendLine("Reference Number")
+
+        'ctrlB.save()
+
+
 
     End Sub
 End Class

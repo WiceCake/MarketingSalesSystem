@@ -129,5 +129,4 @@ Public Class frm_catchActivity
     Private Sub BarButtonItem1_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem1.ItemClick
         ctrlCA.print()
     End Sub
-
 End Class
