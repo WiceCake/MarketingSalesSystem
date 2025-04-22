@@ -192,9 +192,18 @@ Public Class ctrlSales
         Dim remainingMetricTon As Decimal = totalMetricTonAvailable
 
         If remainingMetricTon <= 0D Then
-            MessageBox.Show("No remaining metric ton available.")
+            MessageBox.Show("No Metric ton available.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            ' Set all AUK_Catcher columns to 0
+            For Each col As DataColumn In r.Table.Columns
+                If col.ColumnName.StartsWith("AUK_Catcher") Then
+                    r(col.ColumnName) = 0D
+                End If
+            Next
+
             Return
         End If
+
 
         ' First pass: Compute AUK and AUA totals
         For Each col As DataColumn In r.Table.Columns
