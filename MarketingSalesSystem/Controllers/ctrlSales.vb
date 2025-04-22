@@ -183,24 +183,46 @@ Public Class ctrlSales
         Dim NK_Total As Decimal = 0
         Dim NA_Total As Decimal = 0
 
-        ' First pass: Compute AUK and AUA totals
+        Dim totalAUK_Catcher As Decimal = 0
+        Dim totalMetricTon As Decimal = frmSI.dts.AsEnumerable().Sum(Function(row) CDec(If(IsDBNull(row("Metric_Ton")), 0, row("Metric_Ton"))))
+
+        For Each row As DataRow In frmSI.dt.Rows
+            If row IsNot r Then
+                For Each col As DataColumn In row.Table.Columns
+                    Dim colName As String = col.ColumnName
+
+                    If colName.StartsWith("AUK_Catcher") Then
+                        Dim catcherValue As Decimal = Math.Max(0, CDec(If(IsDBNull(row(colName)), 0, row(colName))))
+
+                        totalAUK_Catcher += catcherValue
+                    End If
+                Next
+            End If
+        Next
+
         For Each col As DataColumn In r.Table.Columns
             Dim colName As String = col.ColumnName
 
             If colName.StartsWith("AUK_Catcher") Then
                 Dim catcherValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
-                AUK_Total += catcherValue
 
-                ' Calculate Actual Unloading Amount dynamically
-                Dim auaColumn As String = colName.Replace("AUK", "AUA")
-                If r.Table.Columns.Contains(auaColumn) Then
-                    r(auaColumn) = catcherValue * Price
-                    AUA_Total += CDec(r(auaColumn))
+                totalAUK_Catcher += catcherValue
+
+                If totalAUK_Catcher > totalMetricTon Then
+                    Dim excess As Decimal = totalAUK_Catcher - totalMetricTon
+                    catcherValue -= excess
+
+                    If catcherValue < 0 Then catcherValue = 0
+
+                    r(colName) = catcherValue
+
+                    totalAUK_Catcher = totalMetricTon
                 End If
+
+                AUK_Total += catcherValue
             End If
         Next
 
-        ' Second pass: Adjust SK values to ensure SK ≤ AUK and SK is non-negative
         For Each col As DataColumn In r.Table.Columns
             Dim colName As String = col.ColumnName
 
@@ -209,15 +231,13 @@ Public Class ctrlSales
                 Dim skValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
                 Dim aukValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(aukColumn)), 0, r(aukColumn))))
 
-                ' Ensure SK does not exceed AUK and is non-negative
                 skValue = Math.Min(skValue, aukValue)
-                r(colName) = skValue  ' Update SK with the corrected value
+                r(colName) = skValue
 
                 SK_Total += skValue
             End If
         Next
 
-        ' Third pass: Compute SA and SA_Total using the updated SK values
         For Each col As DataColumn In r.Table.Columns
             Dim colName As String = col.ColumnName
 
@@ -225,7 +245,6 @@ Public Class ctrlSales
                 Dim saColumn As String = colName.Replace("SK", "SA")
                 Dim skValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
 
-                ' Compute SA using the corrected SK value
                 If r.Table.Columns.Contains(saColumn) Then
                     r(saColumn) = skValue * Price
                     SA_Total += CDec(r(saColumn))
@@ -233,7 +252,6 @@ Public Class ctrlSales
             End If
         Next
 
-        ' Fourth pass: Compute NK and NA, ensuring no negative values
         For Each col As DataColumn In r.Table.Columns
             Dim colName As String = col.ColumnName
 

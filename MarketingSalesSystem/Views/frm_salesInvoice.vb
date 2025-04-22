@@ -197,8 +197,31 @@ Public Class frm_salesInvoice
         If view Is Nothing Then
             Return
         End If
+
         If e.Column.FieldName = "AUK_Total" Or e.Column.FieldName = "AUA_Total" Or e.Column.FieldName = "SK_Total" _
             Or e.Column.FieldName = "SA_Total" Or e.Column.FieldName = "NK_Total" Or e.Column.FieldName = "NA_Total" Then
+            Return
+        End If
+
+        If gvCarrier.RowCount = 0 Then Return
+
+        ' Check if any Metric_Ton is empty
+        Dim hasEmptyMetricTon As Boolean = False
+        For i As Integer = 0 To gvCarrier.RowCount - 1
+            Dim row As DataRow = gvCarrier.GetDataRow(i)
+            If String.IsNullOrWhiteSpace(row("Metric_Ton").ToString()) Then
+                hasEmptyMetricTon = True
+                Exit For
+            End If
+        Next
+
+        ' If there are empty Metric_Ton cells, revert the current cell to 0
+        If hasEmptyMetricTon Then
+            Dim changedRow As DataRow = view.GetDataRow(e.RowHandle)
+            If changedRow IsNot Nothing Then
+                changedRow(e.Column.FieldName) = 0
+                XtraMessageBox.Show("Please encode metric tons for carries!", APPNAME, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
             Return
         End If
 
