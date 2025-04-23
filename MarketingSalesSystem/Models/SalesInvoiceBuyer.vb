@@ -21,6 +21,7 @@
             salesInvoiceBuyerID = sibID
             salesInvoiceID = i.salesInvoiceID
             referenceNum = i.referenceNum
+            setNum = i.setNum
             buyerName = i.buyerName
             sellerType = i.sellerType
             paidAmount = i.paidAmount
@@ -98,6 +99,28 @@
 
         For Each i In e
             sibList.Add(New SalesInvoiceBuyer(i, dc))
+        Next
+
+        Return sibList
+    End Function
+
+    Function getByDate(Optional ByVal startDate As Date = #1/1/1900#, Optional ByVal endDate As Date = Nothing) As List(Of SalesInvoiceBuyer)
+        If endDate = Nothing Then
+            endDate = Date.Now
+        End If
+
+        If startDate = Nothing Then
+            startDate = #1/1/1900#
+        End If
+
+        Dim sibList As New List(Of SalesInvoiceBuyer)
+
+        Dim sibs = From sib In dc.trans_SalesInvoiceBuyers
+                   Where sib.encodedOn >= startDate.Date AndAlso sib.encodedOn <= endDate.Date
+                   Select sib
+
+        For Each sib In sibs
+            sibList.Add(New SalesInvoiceBuyer(sib, dc))
         Next
 
         Return sibList

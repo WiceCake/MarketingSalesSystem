@@ -218,8 +218,22 @@ Public Class ctrlSales
 
                     totalAUK_Catcher = totalMetricTon
                 End If
-
+                Debug.WriteLine(catcherValue)
                 AUK_Total += catcherValue
+            End If
+        Next
+
+        For Each col As DataColumn In r.Table.Columns
+            Dim colName As String = col.ColumnName
+
+            If colName.StartsWith("AUK_Catcher") Then
+                Dim auaColumn As String = colName.Replace("AUK", "AUA")
+                Dim aukValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
+
+                If r.Table.Columns.Contains(auaColumn) Then
+                    r(auaColumn) = aukValue * Price
+                    AUA_Total += CDec(r(auaColumn))
+                End If
             End If
         Next
 
