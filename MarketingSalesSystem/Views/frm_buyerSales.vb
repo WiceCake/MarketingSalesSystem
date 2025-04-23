@@ -9,6 +9,8 @@ Public Class frm_buyerSales
     Public dtAK As DataTable
     Public dtS As DataTable
 
+    Private ctrlBuyers As ctrlBuyers
+
     Sub New(ctrl As ctrlBuyers)
         ' This call is required by the designer.
         InitializeComponent()
@@ -301,5 +303,10 @@ Public Class frm_buyerSales
             txtRemainingBalance.EditValue = remainingBalance
         End If
 
+    End Sub
+
+    'NullReferences
+    Private Sub BarButtonItem4_ItemClick_1(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem4.ItemClick
+        ctrlBuyers.print()
     End Sub
 End Class

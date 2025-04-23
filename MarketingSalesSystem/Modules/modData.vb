@@ -121,5 +121,24 @@ Module modData
         Next
         Return retList1
     End Function
+
+    Function getReportPartial(reportID2 As Integer) As List(Of PartialReport)
+        Dim retList2 As New List(Of PartialReport)
+
+        Dim dc As New mkdbDataContext
+        Dim dc2 As New tpmdbDataContext
+
+        Dim pr = (From i In dc.trans_SalesInvoiceBuyers Where i.salesInvoiceBuyerID = reportID2).ToList
+
+        Dim pri = New PartialReport
+
+        For Each p In pr
+            pri.encodedOn = p.encodedOn
+
+            retList2.Add(pri)
+        Next
+
+        Return retList2
+    End Function
 End Module
 

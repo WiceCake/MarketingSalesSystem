@@ -150,6 +150,7 @@
     <Compile Include="Models\CatchActivityDetail.vb" />
     <Compile Include="Models\CatchMethod.vb" />
     <Compile Include="Models\ReportModels\CatchersActivity.vb" />
+    <Compile Include="Models\ReportModels\PartialReport.vb" />
     <Compile Include="Models\ReportModels\SalesReportInvoice.vb" />
     <Compile Include="Models\SalesInvoiceBuyer.vb" />
     <Compile Include="Models\SalesReportBuyer.vb" />
@@ -169,10 +170,10 @@
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
-    <Compile Include="Reports\PartialReports.Designer.vb">
-      <DependentUpon>PartialReports.vb</DependentUpon>
+    <Compile Include="Reports\rptPartialReports.Designer.vb">
+      <DependentUpon>rptPartialReports.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\PartialReports.vb">
+    <Compile Include="Reports\rptPartialReports.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\rptCatcherReport.Designer.vb">
@@ -238,8 +239,8 @@
     <None Include="Data\tpmdb.dbml.layout">
       <DependentUpon>tpmdb.dbml</DependentUpon>
     </None>
-    <EmbeddedResource Include="Reports\PartialReports.resx">
-      <DependentUpon>PartialReports.vb</DependentUpon>
+    <EmbeddedResource Include="Reports\rptPartialReports.resx">
+      <DependentUpon>rptPartialReports.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptCatcherReport.resx">
       <DependentUpon>rptCatcherReport.vb</DependentUpon>

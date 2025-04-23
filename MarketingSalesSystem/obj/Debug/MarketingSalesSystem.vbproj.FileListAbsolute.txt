@@ -37,4 +37,4 @@ D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.rptC
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.ucBuyer.resources
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.frm_buyerSales.resources
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.vbprojResolveAssemblyReference.cache
-D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.PartialReports.resources
+D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.rptPartialReports.resources

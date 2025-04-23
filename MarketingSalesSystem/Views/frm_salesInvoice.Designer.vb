@@ -155,11 +155,10 @@ Partial Class frm_salesInvoice
         Me.RibbonControl.ExpandCollapseItem.Id = 0
         Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.BarHeaderItem1, Me.txt_refNum, Me.btnSave, Me.btnDelete, Me.btnPost, Me.BarButtonItem1})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.RibbonControl.MaxItemId = 8
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.RibbonPage1})
-        Me.RibbonControl.Size = New System.Drawing.Size(1411, 198)
+        Me.RibbonControl.Size = New System.Drawing.Size(1209, 162)
         Me.RibbonControl.StatusBar = Me.RibbonStatusBar
         '
         'BarHeaderItem1
@@ -214,17 +213,21 @@ Partial Class frm_salesInvoice
         '
         'RibbonPageGroup1
         '
+        Me.RibbonPageGroup1.AllowTextClipping = False
         Me.RibbonPageGroup1.ItemLinks.Add(Me.BarHeaderItem1)
         Me.RibbonPageGroup1.ItemLinks.Add(Me.txt_refNum)
         Me.RibbonPageGroup1.Name = "RibbonPageGroup1"
+        Me.RibbonPageGroup1.ShowCaptionButton = False
         Me.RibbonPageGroup1.Text = "Information"
         '
         'rbnActions
         '
+        Me.rbnActions.AllowTextClipping = False
         Me.rbnActions.ItemLinks.Add(Me.btnSave)
         Me.rbnActions.ItemLinks.Add(Me.btnDelete)
         Me.rbnActions.ItemLinks.Add(Me.btnPost)
         Me.rbnActions.Name = "rbnActions"
+        Me.rbnActions.ShowCaptionButton = False
         Me.rbnActions.Text = "Actions"
         '
         'rbnTools
@@ -237,11 +240,10 @@ Partial Class frm_salesInvoice
         '
         'RibbonStatusBar
         '
-        Me.RibbonStatusBar.Location = New System.Drawing.Point(0, 1033)
-        Me.RibbonStatusBar.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.RibbonStatusBar.Location = New System.Drawing.Point(0, 839)
         Me.RibbonStatusBar.Name = "RibbonStatusBar"
         Me.RibbonStatusBar.Ribbon = Me.RibbonControl
-        Me.RibbonStatusBar.Size = New System.Drawing.Size(1411, 32)
+        Me.RibbonStatusBar.Size = New System.Drawing.Size(1209, 26)
         '
         'LayoutControl1
         '
@@ -260,56 +262,58 @@ Partial Class frm_salesInvoice
         Me.LayoutControl1.Controls.Add(Me.txtRemark)
         Me.LayoutControl1.Controls.Add(Me.cmbUV)
         Me.LayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LayoutControl1.Location = New System.Drawing.Point(0, 198)
-        Me.LayoutControl1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.LayoutControl1.Location = New System.Drawing.Point(0, 162)
         Me.LayoutControl1.Name = "LayoutControl1"
         Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(1270, 333, 650, 400)
         Me.LayoutControl1.Root = Me.LayoutControlGroup1
-        Me.LayoutControl1.Size = New System.Drawing.Size(1411, 835)
+        Me.LayoutControl1.Size = New System.Drawing.Size(1209, 677)
         Me.LayoutControl1.TabIndex = 2
         Me.LayoutControl1.Text = "LayoutControl1"
         '
         'btnDeleteCarrier
         '
-        Me.btnDeleteCarrier.ImageOptions.Image = CType(resources.GetObject("SimpleButton2.ImageOptions.Image"), System.Drawing.Image)
-        Me.btnDeleteCarrier.Location = New System.Drawing.Point(1244, 12)
+        Me.btnDeleteCarrier.Location = New System.Drawing.Point(1065, 12)
+        Me.btnDeleteCarrier.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnDeleteCarrier.Name = "btnDeleteCarrier"
-        Me.btnDeleteCarrier.Size = New System.Drawing.Size(116, 27)
+        Me.btnDeleteCarrier.Size = New System.Drawing.Size(99, 22)
         Me.btnDeleteCarrier.StyleController = Me.LayoutControl1
         Me.btnDeleteCarrier.TabIndex = 31
         Me.btnDeleteCarrier.Text = "Remove Carrier"
         '
         'btnAddCarrier
         '
-        Me.btnAddCarrier.ImageOptions.Image = CType(resources.GetObject("SimpleButton1.ImageOptions.Image"), System.Drawing.Image)
-        Me.btnAddCarrier.Location = New System.Drawing.Point(1124, 12)
+        Me.btnAddCarrier.Location = New System.Drawing.Point(962, 12)
+        Me.btnAddCarrier.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnAddCarrier.Name = "btnAddCarrier"
-        Me.btnAddCarrier.Size = New System.Drawing.Size(116, 27)
+        Me.btnAddCarrier.Size = New System.Drawing.Size(99, 22)
         Me.btnAddCarrier.StyleController = Me.LayoutControl1
         Me.btnAddCarrier.TabIndex = 30
         Me.btnAddCarrier.Text = "Add Carrier"
         '
         'Label1
         '
-        Me.Label1.Location = New System.Drawing.Point(884, 12)
+        Me.Label1.Location = New System.Drawing.Point(758, 12)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(236, 27)
+        Me.Label1.Size = New System.Drawing.Size(200, 22)
         Me.Label1.TabIndex = 29
         Me.Label1.Text = "Add carrier local and foreign:"
         '
         'gcCarrier
         '
-        Me.gcCarrier.Location = New System.Drawing.Point(884, 57)
+        Me.gcCarrier.EmbeddedNavigator.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.gcCarrier.Location = New System.Drawing.Point(758, 48)
         Me.gcCarrier.MainView = Me.gvCarrier
+        Me.gcCarrier.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.gcCarrier.MenuManager = Me.RibbonControl
         Me.gcCarrier.Name = "gcCarrier"
         Me.gcCarrier.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.Carrier, Me.cmbCarrier})
-        Me.gcCarrier.Size = New System.Drawing.Size(476, 256)
+        Me.gcCarrier.Size = New System.Drawing.Size(406, 204)
         Me.gcCarrier.TabIndex = 28
         Me.gcCarrier.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gvCarrier})
         '
         'gvCarrier
         '
+        Me.gvCarrier.DetailHeight = 284
         Me.gvCarrier.GridControl = Me.gcCarrier
         Me.gvCarrier.Name = "gvCarrier"
         Me.gvCarrier.OptionsView.ShowGroupPanel = False
@@ -328,39 +332,38 @@ Partial Class frm_salesInvoice
         '
         'txtInvoiceNum
         '
-        Me.txtInvoiceNum.Location = New System.Drawing.Point(164, 206)
-        Me.txtInvoiceNum.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtInvoiceNum.Location = New System.Drawing.Point(143, 175)
         Me.txtInvoiceNum.MenuManager = Me.RibbonControl
         Me.txtInvoiceNum.Name = "txtInvoiceNum"
-        Me.txtInvoiceNum.Size = New System.Drawing.Size(259, 22)
+        Me.txtInvoiceNum.Size = New System.Drawing.Size(219, 20)
         Me.txtInvoiceNum.StyleController = Me.LayoutControl1
         Me.txtInvoiceNum.TabIndex = 27
         '
         'LayoutControl2
         '
         Me.LayoutControl2.Controls.Add(Me.GridControl3)
-        Me.LayoutControl2.Location = New System.Drawing.Point(12, 317)
-        Me.LayoutControl2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.LayoutControl2.Location = New System.Drawing.Point(12, 256)
         Me.LayoutControl2.Name = "LayoutControl2"
         Me.LayoutControl2.Root = Me.Root
-        Me.LayoutControl2.Size = New System.Drawing.Size(1387, 461)
+        Me.LayoutControl2.Size = New System.Drawing.Size(1185, 369)
         Me.LayoutControl2.TabIndex = 14
         Me.LayoutControl2.Text = "LayoutControl2"
         '
         'GridControl3
         '
         Me.GridControl3.EmbeddedNavigator.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.GridControl3.Location = New System.Drawing.Point(14, 14)
+        Me.GridControl3.Location = New System.Drawing.Point(12, 12)
         Me.GridControl3.MainView = Me.BandedGridView3
         Me.GridControl3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GridControl3.MenuManager = Me.RibbonControl
         Me.GridControl3.Name = "GridControl3"
-        Me.GridControl3.Size = New System.Drawing.Size(1363, 437)
+        Me.GridControl3.Size = New System.Drawing.Size(1161, 345)
         Me.GridControl3.TabIndex = 4
         Me.GridControl3.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.BandedGridView3})
         '
         'BandedGridView3
         '
+        Me.BandedGridView3.DetailHeight = 284
         Me.BandedGridView3.GridControl = Me.GridControl3
         Me.BandedGridView3.Name = "BandedGridView3"
         Me.BandedGridView3.OptionsView.ShowGroupPanel = False
@@ -371,7 +374,7 @@ Partial Class frm_salesInvoice
         Me.Root.GroupBordersVisible = False
         Me.Root.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem6})
         Me.Root.Name = "Root"
-        Me.Root.Size = New System.Drawing.Size(1387, 461)
+        Me.Root.Size = New System.Drawing.Size(1185, 369)
         Me.Root.TextVisible = False
         '
         'LayoutControlItem6
@@ -379,49 +382,45 @@ Partial Class frm_salesInvoice
         Me.LayoutControlItem6.Control = Me.GridControl3
         Me.LayoutControlItem6.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlItem6.Name = "LayoutControlItem6"
-        Me.LayoutControlItem6.Size = New System.Drawing.Size(1367, 441)
+        Me.LayoutControlItem6.Size = New System.Drawing.Size(1165, 349)
         Me.LayoutControlItem6.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem6.TextVisible = False
         '
         'txtUSD
         '
-        Me.txtUSD.Location = New System.Drawing.Point(567, 178)
-        Me.txtUSD.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtUSD.Location = New System.Drawing.Point(487, 151)
         Me.txtUSD.MenuManager = Me.RibbonControl
         Me.txtUSD.Name = "txtUSD"
         Me.txtUSD.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.txtUSD.Properties.Mask.EditMask = "n2"
         Me.txtUSD.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.txtUSD.Properties.MaxLength = 13
-        Me.txtUSD.Size = New System.Drawing.Size(285, 22)
+        Me.txtUSD.Size = New System.Drawing.Size(243, 20)
         Me.txtUSD.StyleController = Me.LayoutControl1
         Me.txtUSD.TabIndex = 12
         '
         'txtCDNum
         '
-        Me.txtCDNum.Location = New System.Drawing.Point(567, 152)
-        Me.txtCDNum.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtCDNum.Location = New System.Drawing.Point(487, 127)
         Me.txtCDNum.MenuManager = Me.RibbonControl
         Me.txtCDNum.Name = "txtCDNum"
-        Me.txtCDNum.Size = New System.Drawing.Size(285, 22)
+        Me.txtCDNum.Size = New System.Drawing.Size(243, 20)
         Me.txtCDNum.StyleController = Me.LayoutControl1
         Me.txtCDNum.TabIndex = 11
         '
         'txtSaleNum
         '
-        Me.txtSaleNum.Location = New System.Drawing.Point(567, 126)
-        Me.txtSaleNum.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtSaleNum.Location = New System.Drawing.Point(487, 103)
         Me.txtSaleNum.MenuManager = Me.RibbonControl
         Me.txtSaleNum.Name = "txtSaleNum"
-        Me.txtSaleNum.Size = New System.Drawing.Size(285, 22)
+        Me.txtSaleNum.Size = New System.Drawing.Size(243, 20)
         Me.txtSaleNum.StyleController = Me.LayoutControl1
         Me.txtSaleNum.TabIndex = 8
         '
         'dtCreated
         '
         Me.dtCreated.EditValue = Nothing
-        Me.dtCreated.Location = New System.Drawing.Point(164, 126)
-        Me.dtCreated.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.dtCreated.Location = New System.Drawing.Point(143, 103)
         Me.dtCreated.MenuManager = Me.RibbonControl
         Me.dtCreated.Name = "dtCreated"
         Me.dtCreated.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -432,54 +431,51 @@ Partial Class frm_salesInvoice
         Me.dtCreated.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None
         Me.dtCreated.Properties.MaxValue = New Date(9999, 12, 31, 0, 0, 0, 0)
         Me.dtCreated.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.dtCreated.Size = New System.Drawing.Size(259, 24)
+        Me.dtCreated.Size = New System.Drawing.Size(219, 20)
         Me.dtCreated.StyleController = Me.LayoutControl1
         Me.dtCreated.TabIndex = 5
         '
         'cmbST
         '
-        Me.cmbST.Location = New System.Drawing.Point(164, 154)
-        Me.cmbST.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cmbST.Location = New System.Drawing.Point(143, 127)
         Me.cmbST.MenuManager = Me.RibbonControl
         Me.cmbST.Name = "cmbST"
         Me.cmbST.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cmbST.Size = New System.Drawing.Size(259, 22)
+        Me.cmbST.Size = New System.Drawing.Size(219, 20)
         Me.cmbST.StyleController = Me.LayoutControl1
         Me.cmbST.TabIndex = 6
         '
         'txtCNum
         '
         Me.txtCNum.EditValue = ""
-        Me.txtCNum.Location = New System.Drawing.Point(567, 204)
-        Me.txtCNum.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtCNum.Location = New System.Drawing.Point(487, 175)
         Me.txtCNum.MenuManager = Me.RibbonControl
         Me.txtCNum.Name = "txtCNum"
         Me.txtCNum.Properties.MaxLength = 50
-        Me.txtCNum.Size = New System.Drawing.Size(285, 22)
+        Me.txtCNum.Size = New System.Drawing.Size(243, 20)
         Me.txtCNum.StyleController = Me.LayoutControl1
         Me.txtCNum.TabIndex = 13
         '
         'txtRemark
         '
-        Me.txtRemark.Location = New System.Drawing.Point(12, 801)
+        Me.txtRemark.Location = New System.Drawing.Point(12, 645)
         Me.txtRemark.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtRemark.MenuManager = Me.RibbonControl
         Me.txtRemark.Name = "txtRemark"
-        Me.txtRemark.Size = New System.Drawing.Size(1387, 22)
+        Me.txtRemark.Size = New System.Drawing.Size(1185, 20)
         Me.txtRemark.StyleController = Me.LayoutControl1
         Me.txtRemark.TabIndex = 24
         '
         'cmbUV
         '
-        Me.cmbUV.Location = New System.Drawing.Point(164, 180)
-        Me.cmbUV.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cmbUV.Location = New System.Drawing.Point(143, 151)
         Me.cmbUV.MenuManager = Me.RibbonControl
         Me.cmbUV.Name = "cmbUV"
         Me.cmbUV.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.cmbUV.Properties.NullText = ""
         Me.cmbUV.Properties.PopupSizeable = False
         Me.cmbUV.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard
-        Me.cmbUV.Size = New System.Drawing.Size(259, 22)
+        Me.cmbUV.Size = New System.Drawing.Size(219, 20)
         Me.cmbUV.StyleController = Me.LayoutControl1
         Me.cmbUV.TabIndex = 7
         '
@@ -489,31 +485,31 @@ Partial Class frm_salesInvoice
         Me.LayoutControlGroup1.GroupBordersVisible = False
         Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.EmptySpaceItem1, Me.EmptySpaceItem2, Me.LayoutControlItem1, Me.EmptySpaceItem3, Me.EmptySpaceItem4, Me.LayoutControlItem14, Me.LayoutControlItem2, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.LayoutControlItem5, Me.LayoutControlItem7, Me.LayoutControlItem8, Me.f0, Me.LayoutControlItem9, Me.LayoutControlItem10, Me.EmptySpaceItem6, Me.EmptySpaceItem5, Me.EmptySpaceItem7, Me.EmptySpaceItem8, Me.EmptySpaceItem9, Me.LayoutControlItem11, Me.LayoutControlItem15, Me.LayoutControlItem16})
         Me.LayoutControlGroup1.Name = "Root"
-        Me.LayoutControlGroup1.Size = New System.Drawing.Size(1411, 835)
+        Me.LayoutControlGroup1.Size = New System.Drawing.Size(1209, 677)
         Me.LayoutControlGroup1.TextVisible = False
         '
         'EmptySpaceItem1
         '
         Me.EmptySpaceItem1.AllowHotTrack = False
-        Me.EmptySpaceItem1.Location = New System.Drawing.Point(415, 0)
+        Me.EmptySpaceItem1.Location = New System.Drawing.Point(354, 0)
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(28, 305)
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(24, 244)
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
         '
         'EmptySpaceItem2
         '
         Me.EmptySpaceItem2.AllowHotTrack = False
-        Me.EmptySpaceItem2.Location = New System.Drawing.Point(844, 0)
+        Me.EmptySpaceItem2.Location = New System.Drawing.Point(722, 0)
         Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Size = New System.Drawing.Size(28, 305)
+        Me.EmptySpaceItem2.Size = New System.Drawing.Size(24, 244)
         Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem1
         '
         Me.LayoutControlItem1.Control = Me.LayoutControl2
-        Me.LayoutControlItem1.Location = New System.Drawing.Point(0, 305)
+        Me.LayoutControlItem1.Location = New System.Drawing.Point(0, 244)
         Me.LayoutControlItem1.Name = "LayoutControlItem1"
-        Me.LayoutControlItem1.Size = New System.Drawing.Size(1391, 465)
+        Me.LayoutControlItem1.Size = New System.Drawing.Size(1189, 373)
         Me.LayoutControlItem1.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem1.TextVisible = False
         '
@@ -522,172 +518,172 @@ Partial Class frm_salesInvoice
         Me.EmptySpaceItem3.AllowHotTrack = False
         Me.EmptySpaceItem3.Location = New System.Drawing.Point(0, 0)
         Me.EmptySpaceItem3.Name = "EmptySpaceItem3"
-        Me.EmptySpaceItem3.Size = New System.Drawing.Size(40, 305)
+        Me.EmptySpaceItem3.Size = New System.Drawing.Size(34, 244)
         Me.EmptySpaceItem3.TextSize = New System.Drawing.Size(0, 0)
         '
         'EmptySpaceItem4
         '
         Me.EmptySpaceItem4.AllowHotTrack = False
-        Me.EmptySpaceItem4.Location = New System.Drawing.Point(1352, 0)
+        Me.EmptySpaceItem4.Location = New System.Drawing.Point(1156, 0)
         Me.EmptySpaceItem4.Name = "EmptySpaceItem4"
-        Me.EmptySpaceItem4.Size = New System.Drawing.Size(39, 305)
+        Me.EmptySpaceItem4.Size = New System.Drawing.Size(33, 244)
         Me.EmptySpaceItem4.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem14
         '
         Me.LayoutControlItem14.Control = Me.txtRemark
-        Me.LayoutControlItem14.Location = New System.Drawing.Point(0, 770)
+        Me.LayoutControlItem14.Location = New System.Drawing.Point(0, 617)
         Me.LayoutControlItem14.Name = "LayoutControlItem14"
-        Me.LayoutControlItem14.Size = New System.Drawing.Size(1391, 45)
+        Me.LayoutControlItem14.Size = New System.Drawing.Size(1189, 40)
         Me.LayoutControlItem14.Text = "Note:"
         Me.LayoutControlItem14.TextLocation = DevExpress.Utils.Locations.Top
-        Me.LayoutControlItem14.TextSize = New System.Drawing.Size(109, 16)
+        Me.LayoutControlItem14.TextSize = New System.Drawing.Size(94, 13)
         '
         'LayoutControlItem2
         '
         Me.LayoutControlItem2.Control = Me.dtCreated
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(40, 114)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(34, 91)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
-        Me.LayoutControlItem2.Size = New System.Drawing.Size(375, 28)
+        Me.LayoutControlItem2.Size = New System.Drawing.Size(320, 24)
         Me.LayoutControlItem2.Text = "Date:"
-        Me.LayoutControlItem2.TextSize = New System.Drawing.Size(109, 16)
+        Me.LayoutControlItem2.TextSize = New System.Drawing.Size(94, 13)
         '
         'LayoutControlItem3
         '
         Me.LayoutControlItem3.Control = Me.cmbST
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(40, 142)
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(34, 115)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
-        Me.LayoutControlItem3.Size = New System.Drawing.Size(375, 26)
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(320, 24)
         Me.LayoutControlItem3.Text = "Sell Type:"
-        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(109, 16)
+        Me.LayoutControlItem3.TextSize = New System.Drawing.Size(94, 13)
         '
         'LayoutControlItem4
         '
         Me.LayoutControlItem4.Control = Me.cmbUV
-        Me.LayoutControlItem4.Location = New System.Drawing.Point(40, 168)
+        Me.LayoutControlItem4.Location = New System.Drawing.Point(34, 139)
         Me.LayoutControlItem4.Name = "LayoutControlItem4"
-        Me.LayoutControlItem4.Size = New System.Drawing.Size(375, 26)
+        Me.LayoutControlItem4.Size = New System.Drawing.Size(320, 24)
         Me.LayoutControlItem4.Text = "Catcher:"
-        Me.LayoutControlItem4.TextSize = New System.Drawing.Size(109, 16)
+        Me.LayoutControlItem4.TextSize = New System.Drawing.Size(94, 13)
         '
         'LayoutControlItem5
         '
         Me.LayoutControlItem5.Control = Me.txtSaleNum
-        Me.LayoutControlItem5.Location = New System.Drawing.Point(443, 114)
+        Me.LayoutControlItem5.Location = New System.Drawing.Point(378, 91)
         Me.LayoutControlItem5.Name = "LayoutControlItem5"
-        Me.LayoutControlItem5.Size = New System.Drawing.Size(401, 26)
+        Me.LayoutControlItem5.Size = New System.Drawing.Size(344, 24)
         Me.LayoutControlItem5.Text = "Sales No.:"
-        Me.LayoutControlItem5.TextSize = New System.Drawing.Size(109, 16)
+        Me.LayoutControlItem5.TextSize = New System.Drawing.Size(94, 13)
         '
         'LayoutControlItem7
         '
         Me.LayoutControlItem7.Control = Me.txtInvoiceNum
-        Me.LayoutControlItem7.Location = New System.Drawing.Point(40, 194)
+        Me.LayoutControlItem7.Location = New System.Drawing.Point(34, 163)
         Me.LayoutControlItem7.Name = "LayoutControlItem7"
-        Me.LayoutControlItem7.Size = New System.Drawing.Size(375, 26)
+        Me.LayoutControlItem7.Size = New System.Drawing.Size(320, 24)
         Me.LayoutControlItem7.Text = "Invoice No.:"
-        Me.LayoutControlItem7.TextSize = New System.Drawing.Size(109, 16)
+        Me.LayoutControlItem7.TextSize = New System.Drawing.Size(94, 13)
         '
         'LayoutControlItem8
         '
         Me.LayoutControlItem8.Control = Me.txtCDNum
-        Me.LayoutControlItem8.Location = New System.Drawing.Point(443, 140)
+        Me.LayoutControlItem8.Location = New System.Drawing.Point(378, 115)
         Me.LayoutControlItem8.Name = "LayoutControlItem8"
-        Me.LayoutControlItem8.Size = New System.Drawing.Size(401, 26)
+        Me.LayoutControlItem8.Size = New System.Drawing.Size(344, 24)
         Me.LayoutControlItem8.Text = "Catch Delivery No.:"
-        Me.LayoutControlItem8.TextSize = New System.Drawing.Size(109, 16)
+        Me.LayoutControlItem8.TextSize = New System.Drawing.Size(94, 13)
         '
         'f0
         '
         Me.f0.Control = Me.txtUSD
-        Me.f0.Location = New System.Drawing.Point(443, 166)
+        Me.f0.Location = New System.Drawing.Point(378, 139)
         Me.f0.Name = "f0"
-        Me.f0.Size = New System.Drawing.Size(401, 26)
+        Me.f0.Size = New System.Drawing.Size(344, 24)
         Me.f0.Text = "USD Rate:"
-        Me.f0.TextSize = New System.Drawing.Size(109, 16)
+        Me.f0.TextSize = New System.Drawing.Size(94, 13)
         '
         'LayoutControlItem9
         '
         Me.LayoutControlItem9.Control = Me.gcCarrier
-        Me.LayoutControlItem9.Location = New System.Drawing.Point(872, 45)
+        Me.LayoutControlItem9.Location = New System.Drawing.Point(746, 36)
         Me.LayoutControlItem9.Name = "LayoutControlItem9"
-        Me.LayoutControlItem9.Size = New System.Drawing.Size(480, 260)
+        Me.LayoutControlItem9.Size = New System.Drawing.Size(410, 208)
         Me.LayoutControlItem9.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem9.TextVisible = False
         '
         'LayoutControlItem10
         '
         Me.LayoutControlItem10.Control = Me.txtCNum
-        Me.LayoutControlItem10.Location = New System.Drawing.Point(443, 192)
+        Me.LayoutControlItem10.Location = New System.Drawing.Point(378, 163)
         Me.LayoutControlItem10.Name = "LayoutControlItem10"
-        Me.LayoutControlItem10.Size = New System.Drawing.Size(401, 26)
+        Me.LayoutControlItem10.Size = New System.Drawing.Size(344, 24)
         Me.LayoutControlItem10.Text = "Contract No.:"
-        Me.LayoutControlItem10.TextSize = New System.Drawing.Size(109, 16)
+        Me.LayoutControlItem10.TextSize = New System.Drawing.Size(94, 13)
         '
         'EmptySpaceItem6
         '
         Me.EmptySpaceItem6.AllowHotTrack = False
-        Me.EmptySpaceItem6.Location = New System.Drawing.Point(40, 0)
+        Me.EmptySpaceItem6.Location = New System.Drawing.Point(34, 0)
         Me.EmptySpaceItem6.Name = "EmptySpaceItem6"
-        Me.EmptySpaceItem6.Size = New System.Drawing.Size(375, 114)
+        Me.EmptySpaceItem6.Size = New System.Drawing.Size(320, 91)
         Me.EmptySpaceItem6.TextSize = New System.Drawing.Size(0, 0)
         '
         'EmptySpaceItem5
         '
         Me.EmptySpaceItem5.AllowHotTrack = False
-        Me.EmptySpaceItem5.Location = New System.Drawing.Point(443, 0)
+        Me.EmptySpaceItem5.Location = New System.Drawing.Point(378, 0)
         Me.EmptySpaceItem5.Name = "EmptySpaceItem5"
-        Me.EmptySpaceItem5.Size = New System.Drawing.Size(401, 114)
+        Me.EmptySpaceItem5.Size = New System.Drawing.Size(344, 91)
         Me.EmptySpaceItem5.TextSize = New System.Drawing.Size(0, 0)
         '
         'EmptySpaceItem7
         '
         Me.EmptySpaceItem7.AllowHotTrack = False
-        Me.EmptySpaceItem7.Location = New System.Drawing.Point(443, 218)
+        Me.EmptySpaceItem7.Location = New System.Drawing.Point(378, 187)
         Me.EmptySpaceItem7.Name = "EmptySpaceItem7"
-        Me.EmptySpaceItem7.Size = New System.Drawing.Size(401, 87)
+        Me.EmptySpaceItem7.Size = New System.Drawing.Size(344, 57)
         Me.EmptySpaceItem7.TextSize = New System.Drawing.Size(0, 0)
         '
         'EmptySpaceItem8
         '
         Me.EmptySpaceItem8.AllowHotTrack = False
-        Me.EmptySpaceItem8.Location = New System.Drawing.Point(40, 220)
+        Me.EmptySpaceItem8.Location = New System.Drawing.Point(34, 187)
         Me.EmptySpaceItem8.Name = "EmptySpaceItem8"
-        Me.EmptySpaceItem8.Size = New System.Drawing.Size(375, 85)
+        Me.EmptySpaceItem8.Size = New System.Drawing.Size(320, 57)
         Me.EmptySpaceItem8.TextSize = New System.Drawing.Size(0, 0)
         '
         'EmptySpaceItem9
         '
         Me.EmptySpaceItem9.AllowHotTrack = False
-        Me.EmptySpaceItem9.Location = New System.Drawing.Point(872, 31)
+        Me.EmptySpaceItem9.Location = New System.Drawing.Point(746, 26)
         Me.EmptySpaceItem9.Name = "EmptySpaceItem9"
-        Me.EmptySpaceItem9.Size = New System.Drawing.Size(480, 14)
+        Me.EmptySpaceItem9.Size = New System.Drawing.Size(410, 10)
         Me.EmptySpaceItem9.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem11
         '
         Me.LayoutControlItem11.Control = Me.Label1
-        Me.LayoutControlItem11.Location = New System.Drawing.Point(872, 0)
+        Me.LayoutControlItem11.Location = New System.Drawing.Point(746, 0)
         Me.LayoutControlItem11.Name = "LayoutControlItem11"
-        Me.LayoutControlItem11.Size = New System.Drawing.Size(240, 31)
+        Me.LayoutControlItem11.Size = New System.Drawing.Size(204, 26)
         Me.LayoutControlItem11.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem11.TextVisible = False
         '
         'LayoutControlItem15
         '
         Me.LayoutControlItem15.Control = Me.btnAddCarrier
-        Me.LayoutControlItem15.Location = New System.Drawing.Point(1112, 0)
+        Me.LayoutControlItem15.Location = New System.Drawing.Point(950, 0)
         Me.LayoutControlItem15.Name = "LayoutControlItem15"
-        Me.LayoutControlItem15.Size = New System.Drawing.Size(120, 31)
+        Me.LayoutControlItem15.Size = New System.Drawing.Size(103, 26)
         Me.LayoutControlItem15.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem15.TextVisible = False
         '
         'LayoutControlItem16
         '
         Me.LayoutControlItem16.Control = Me.btnDeleteCarrier
-        Me.LayoutControlItem16.Location = New System.Drawing.Point(1232, 0)
+        Me.LayoutControlItem16.Location = New System.Drawing.Point(1053, 0)
         Me.LayoutControlItem16.Name = "LayoutControlItem16"
-        Me.LayoutControlItem16.Size = New System.Drawing.Size(120, 31)
+        Me.LayoutControlItem16.Size = New System.Drawing.Size(103, 26)
         Me.LayoutControlItem16.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem16.TextVisible = False
         '
@@ -781,13 +777,12 @@ Partial Class frm_salesInvoice
         'frm_salesInvoice
         '
         Me.AllowFormGlass = DevExpress.Utils.DefaultBoolean.[False]
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1411, 1065)
+        Me.ClientSize = New System.Drawing.Size(1209, 865)
         Me.Controls.Add(Me.LayoutControl1)
         Me.Controls.Add(Me.RibbonStatusBar)
         Me.Controls.Add(Me.RibbonControl)
-        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "frm_salesInvoice"
         Me.Ribbon = Me.RibbonControl
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

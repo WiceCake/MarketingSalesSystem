@@ -1,4 +1,6 @@
-﻿Public Class ctrlBuyers
+﻿Imports DevExpress.XtraReports.UI
+
+Public Class ctrlBuyers
     Private isNew As Boolean
     Private mdlSIB As SalesInvoiceBuyer
     Private mdlSR As SalesReport
@@ -31,6 +33,15 @@
             If .rBuyer.SelectedIndex = 0 Then
                 showTxtBuyer()
             End If
+
+            '-- Temporary Start --
+            .rbnTools.Visible = False
+            If mdlSIB.approvalStatus = Approval_Status.Posted Then
+                .rbnActions.Visible = False
+                '.isPosted = True
+                .rbnTools.Visible = True
+            End If
+            '-- Temporary End --
 
             .txtAmountPaid.ReadOnly = True
             .txtAdjustments.ReadOnly = True
@@ -355,4 +366,14 @@
 
         lookUpTransMode(b, frmBS.cmbBuyer, "Name", "ID", "Select Buyer")
     End Sub
+
+    Sub print()
+        Dim tool As ReportPrintTool
+
+        Dim rp = New rptPartialReports()
+        rp.DataSource = getReportPartial(mdlSIB.salesInvoiceBuyerID)
+        tool = New ReportPrintTool(rp)
+        tool.ShowPreviewDialog()
+    End Sub
+
 End Class
