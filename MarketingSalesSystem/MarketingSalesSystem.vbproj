@@ -229,8 +229,16 @@
     <Compile Include="Views\ucWeightSlip.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <None Include="Data\mkdb.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>mkdb.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Data\tpmdb.dbml.layout">
       <DependentUpon>tpmdb.dbml</DependentUpon>
+    </None>
+    <None Include="Data\mkdb.dbml.layout">
+      <DependentUpon>mkdb.dbml</DependentUpon>
     </None>
     <EmbeddedResource Include="Reports\rptCatcherReport.resx">
       <DependentUpon>rptCatcherReport.vb</DependentUpon>
@@ -257,9 +265,6 @@
       <DependentUpon>ucWeightSlip.vb</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="Data\mkdb.dbml.layout">
-      <DependentUpon>mkdb.dbml</DependentUpon>
-    </None>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -280,10 +285,6 @@
     <EmbeddedResource Include="Views\ucBase.resx">
       <DependentUpon>ucBase.vb</DependentUpon>
     </EmbeddedResource>
-    <None Include="Data\mkdb.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Data\tpmdb.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>tpmdb.designer.vb</LastGenOutput>

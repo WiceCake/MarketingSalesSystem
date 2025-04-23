@@ -1,6 +1,7 @@
 ﻿Imports DevExpress.XtraEditors
 Imports DevExpress.XtraGrid.Views.BandedGrid
 Imports DevExpress.XtraGrid
+Imports System.Text
 
 Public Class frm_buyerSales
 
@@ -301,5 +302,36 @@ Public Class frm_buyerSales
             txtRemainingBalance.EditValue = remainingBalance
         End If
 
+    End Sub
+
+    Private Sub btnSave_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnSave.ItemClick
+
+        Dim dateCreated = validateField(dtEncoded)
+        Dim typeOfSale = validateField(cmbSaleType)
+        Dim invoice = validateField(lueInvoice)
+        Dim setNo = validateField(txtSetNo)
+        Dim amountPaid = validateField(txtAmountPaid)
+        Dim buyer = False
+
+        If rBuyer.SelectedIndex = 0 Then
+            buyer = validateField(txtBuyer)
+        Else
+            buyer = validateField(cmbBuyer)
+        End If
+
+        Dim missingFields As New StringBuilder()
+        If Not dateCreated Then missingFields.AppendLine("Date Created")
+        If Not typeOfSale Then missingFields.AppendLine("Sale Type")
+        If Not invoice Then missingFields.AppendLine("Invoice")
+        If Not setNo Then missingFields.AppendLine("Set No.")
+        If Not amountPaid Then missingFields.AppendLine("Amount Paid")
+        If Not buyer Then missingFields.AppendLine("Buyer")
+
+        If missingFields.Length > 0 Then
+            requiredMessage(missingFields.ToString())
+            Return
+        End If
+
+        ctrlB.saveDraft()
     End Sub
 End Class

@@ -1,10 +1,10 @@
 ﻿Public Class SalesInvoiceBuyer
     Public salesInvoiceBuyerID, salesInvoiceID As Integer
-    Public buyerName, encodedBy, referenceNum, sellerType As String
+    Public buyerName, encodedBy, referenceNum, sellerType, setNum As String
     Public paidAmount, adjustmentsAmount As Decimal?
     Public encodedOn As Date
     Public dateCreated As Date?
-    Public approvalStatus, paymentStatus As Integer
+    Public approvalStatus As Integer
 
     Private dc As mkdbDataContext
 
@@ -29,7 +29,6 @@
             encodedOn = i.encodedOn
             dateCreated = i.dateCreated
             approvalStatus = i.approvalStatus
-            paymentStatus = i.paymentStatus
         Next
     End Sub
 
@@ -39,6 +38,7 @@
         salesInvoiceBuyerID = sib.salesInvoiceBuyerID
         salesInvoiceID = sib.salesInvoiceID
         referenceNum = sib.referenceNum
+        setNum = sib.setNum
         buyerName = sib.buyerName
         sellerType = sib.sellerType
         paidAmount = sib.paidAmount
@@ -55,6 +55,7 @@
         With sib
             .salesInvoiceID = salesInvoiceID
             .referenceNum = referenceNum
+            .setNum = setNum
             .buyerName = buyerName
             .sellerType = sellerType
             .paidAmount = paidAmount
@@ -63,7 +64,6 @@
             .encodedBy = encodedBy
             .dateCreated = dateCreated
             .approvalStatus = approvalStatus
-            .paymentStatus = paymentStatus
         End With
 
         dc.trans_SalesInvoiceBuyers.InsertOnSubmit(sib)
@@ -78,6 +78,7 @@
             i.salesInvoiceBuyerID = salesInvoiceBuyerID
             i.salesInvoiceID = salesInvoiceID
             i.referenceNum = referenceNum
+            i.setNum = setNum
             i.buyerName = buyerName
             i.sellerType = sellerType
             i.paidAmount = paidAmount
@@ -86,7 +87,6 @@
             i.encodedBy = encodedBy
             i.dateCreated = dateCreated
             i.approvalStatus = approvalStatus
-            i.paymentStatus = paymentStatus
             dc.SubmitChanges()
         Next
     End Sub

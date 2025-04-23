@@ -1,6 +1,10 @@
-﻿Public Class ctrlBuyers
+﻿Imports System.Transactions
+
+Public Class ctrlBuyers
     Private isNew As Boolean
+
     Private mdlSIB As SalesInvoiceBuyer
+    Private mdlSRB As SalesReportBuyer
     Private mdlSR As SalesReport
 
     Private frmBS As frm_buyerSales
@@ -17,6 +21,7 @@
         tpmdb = New tpmdbDataContext
 
         mdlSIB = New SalesInvoiceBuyer(mkdb)
+        mdlSRB = New SalesReportBuyer(mkdb)
         mdlSR = New SalesReport(mkdb)
 
         frmBS = New frm_buyerSales(Me)
@@ -31,6 +36,9 @@
             If .rBuyer.SelectedIndex = 0 Then
                 showTxtBuyer()
             End If
+
+            .btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            .btnPost.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
 
             .txtAmountPaid.ReadOnly = True
             .txtAdjustments.ReadOnly = True
@@ -56,6 +64,85 @@
         With frmBS
             .Show()
         End With
+    End Sub
+
+    Sub saveDraft()
+        Using ts As New TransactionScope()
+            Try
+                With frmBS
+                    mdlSIB.encodedOn = CDate(.dtEncoded.EditValue)
+                    mdlSIB.sellerType = .cmbSaleType.EditValue.ToString
+                    mdlSIB.salesInvoiceID = CInt(.lueInvoice.EditValue)
+                    If .rBuyer.SelectedIndex = 0 Then
+                        mdlSIB.buyerName = .txtBuyer.Text
+                    Else
+                        mdlSIB.buyerName = .cmbBuyer.EditValue.ToString
+                    End If
+                    mdlSIB.setNum = .txtSetNo.EditValue.ToString
+                    mdlSIB.adjustmentsAmount = CDec(.txtAdjustments.EditValue)
+                    mdlSIB.paidAmount = CDec(.txtAmountPaid.EditValue)
+                    mdlSIB.encodedBy = "###"
+                    mdlSIB.Add()
+                End With
+
+                setSalesPrice(mdlSIB.salesInvoiceBuyerID, mdlSIB.salesInvoiceID)
+
+                ts.Complete()
+            Catch ex As Exception
+                Debug.WriteLine(ex.Message)
+            End Try
+        End Using
+        frmBS.Close()
+    End Sub
+
+    Sub setSalesPrice(ByVal salesInvoiceBuyerID As Integer, ByVal salesInvoiceID As Integer)
+        Dim srb As New SalesReportBuyer(mkdb)
+
+        'If Not isNew Then
+        '    Dim getSrp = (From i In mkdb.trans_SalesReportPrices Where i.salesReport_ID = salesReportID Select i.salesReportPrice_ID).FirstOrDefault
+        '    srp = New SalesReportPrice(getSrp, mkdb)
+        'End If
+
+        For Each cols As DataColumn In frmBS.dtAK.Columns
+
+            If Not cols.Caption.Contains("K_Catcher") Then Continue For
+
+            With srb
+                .salesInvoiceBuyer_ID = salesInvoiceBuyerID
+                .salesInvoice_ID = salesInvoiceID
+                .skipjack0_300To0_499 = CDec(frmBS.dtAK.Rows(0)(cols))
+                .skipjack0_500To0_999 = CDec(frmBS.dtAK.Rows(1)(cols))
+                .skipjack1_0To1_39 = CDec(frmBS.dtAK.Rows(2)(cols))
+                .skipjack1_4To1_79 = CDec(frmBS.dtAK.Rows(3)(cols))
+                .skipjack1_8To2_49 = CDec(frmBS.dtAK.Rows(4)(cols))
+                .skipjack2_5To3_49 = CDec(frmBS.dtAK.Rows(5)(cols))
+                .skipjack3_5AndUP = CDec(frmBS.dtAK.Rows(6)(cols))
+                .yellowfin0_300To0_499 = CDec(frmBS.dtAK.Rows(7)(cols))
+                .yellowfin0_500To0_999 = CDec(frmBS.dtAK.Rows(8)(cols))
+                .yellowfin1_0To1_49 = CDec(frmBS.dtAK.Rows(9)(cols))
+                .yellowfin1_5To2_49 = CDec(frmBS.dtAK.Rows(10)(cols))
+                .yellowfin2_5To3_49 = CDec(frmBS.dtAK.Rows(11)(cols))
+                .yellowfin3_5To4_99 = CDec(frmBS.dtAK.Rows(12)(cols))
+                .yellowfin5_0To9_99 = CDec(frmBS.dtAK.Rows(13)(cols))
+                .yellowfin10AndUpGood = CDec(frmBS.dtAK.Rows(14)(cols))
+                .yellowfin10AndUpDeformed = CDec(frmBS.dtAK.Rows(15)(cols))
+                .bigeye0_500To0_999 = CDec(frmBS.dtAK.Rows(16)(cols))
+                .bigeye1_0To1_49 = CDec(frmBS.dtAK.Rows(17)(cols))
+                .bigeye1_5To2_49 = CDec(frmBS.dtAK.Rows(18)(cols))
+                .bigeye2_5To3_49 = CDec(frmBS.dtAK.Rows(19)(cols))
+                .bigeye3_5To4_99 = CDec(frmBS.dtAK.Rows(20)(cols))
+                .bigeye5_0To9_99 = CDec(frmBS.dtAK.Rows(21)(cols))
+                .bigeye10AndUP = CDec(frmBS.dtAK.Rows(22)(cols))
+                .bonito = CDec(frmBS.dtAK.Rows(23)(cols))
+                .fishmeal = CDec(frmBS.dtAK.Rows(24)(cols))
+                If isNew Then
+                    .Add()
+                Else
+                    '.Save()
+                End If
+            End With
+        Next
+
     End Sub
 
     'Sub loadDataRows()
