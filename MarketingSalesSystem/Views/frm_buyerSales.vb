@@ -304,28 +304,34 @@ Public Class frm_buyerSales
 
     End Sub
 
-    Private Sub BarButtonItem1_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem1.ItemClick
-        'Dim dateCreated = validateField(dtEncoded)
-        'Dim typeOfSale = validateField(cmbSaleType)
-        'Dim invoiceReference = validateField(lueInvoice)
-        'Dim typeOfBuyer = valida(rBuyer)
-        'Dim typeOfBuyerValid As Boolean = rBuyer.SelectedIndex >= 0
-        'Dim newNameOfBuyer = validateField(txtBuyer)
-        'Dim oldNewOfBuyer = validateField(cmbBuyer)
-        'Dim referenceNo = validateField(txtSetNo)
+    Private Sub btnSave_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnSave.ItemClick
 
-        'Dim missingFields = New StringBuilder()
-        'If Not dateCreated Then missingFields.AppendLine("Date Encoded")
-        'If Not typeOfSale Then missingFields.AppendLine("Type of Sale")
-        'If Not invoiceReference Then missingFields.AppendLine("Invoice Reference")
-        'If Not typeOfBuyerValid Then missingFields.AppendLine("Type of Buyer")
-        'If Not newNameOfBuyer Then missingFields.AppendLine("Name of New Buyer")
-        'If Not oldNewOfBuyer Then missingFields.AppendLine("Name of Old Buyer")
-        'If Not referenceNo Then missingFields.AppendLine("Reference Number")
+        Dim dateCreated = validateField(dtEncoded)
+        Dim typeOfSale = validateField(cmbSaleType)
+        Dim invoice = validateField(lueInvoice)
+        Dim setNo = validateField(txtSetNo)
+        Dim amountPaid = validateField(txtAmountPaid)
+        Dim buyer = False
 
-        'ctrlB.save()
+        If rBuyer.SelectedIndex = 0 Then
+            buyer = validateField(txtBuyer)
+        Else
+            buyer = validateField(cmbBuyer)
+        End If
 
+        Dim missingFields As New StringBuilder()
+        If Not dateCreated Then missingFields.AppendLine("Date Created")
+        If Not typeOfSale Then missingFields.AppendLine("Sale Type")
+        If Not invoice Then missingFields.AppendLine("Invoice")
+        If Not setNo Then missingFields.AppendLine("Set No.")
+        If Not amountPaid Then missingFields.AppendLine("Amount Paid")
+        If Not buyer Then missingFields.AppendLine("Buyer")
 
+        If missingFields.Length > 0 Then
+            requiredMessage(missingFields.ToString())
+            Return
+        End If
 
+        ctrlB.saveDraft()
     End Sub
 End Class

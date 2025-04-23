@@ -24,9 +24,9 @@ Partial Class frm_buyerSales
         Me.BarStaticItem1 = New DevExpress.XtraBars.BarStaticItem()
         Me.BarStaticItem2 = New DevExpress.XtraBars.BarStaticItem()
         Me.BarHeaderItem1 = New DevExpress.XtraBars.BarHeaderItem()
-        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
-        Me.BarButtonItem2 = New DevExpress.XtraBars.BarButtonItem()
-        Me.BarButtonItem3 = New DevExpress.XtraBars.BarButtonItem()
+        Me.btnSave = New DevExpress.XtraBars.BarButtonItem()
+        Me.btnDelete = New DevExpress.XtraBars.BarButtonItem()
+        Me.btnPost = New DevExpress.XtraBars.BarButtonItem()
         Me.RibbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -161,7 +161,7 @@ Partial Class frm_buyerSales
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.BarStaticItem1, Me.BarStaticItem2, Me.BarHeaderItem1, Me.BarButtonItem1, Me.BarButtonItem2, Me.BarButtonItem3})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.BarStaticItem1, Me.BarStaticItem2, Me.BarHeaderItem1, Me.btnSave, Me.btnDelete, Me.btnPost})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
         Me.RibbonControl.MaxItemId = 8
         Me.RibbonControl.Name = "RibbonControl"
@@ -187,29 +187,29 @@ Partial Class frm_buyerSales
         Me.BarHeaderItem1.Id = 3
         Me.BarHeaderItem1.Name = "BarHeaderItem1"
         '
-        'BarButtonItem1
+        'btnSave
         '
-        Me.BarButtonItem1.Caption = "Save"
-        Me.BarButtonItem1.Id = 4
-        Me.BarButtonItem1.ImageOptions.Image = CType(resources.GetObject("BarButtonItem1.ImageOptions.Image"), System.Drawing.Image)
-        Me.BarButtonItem1.Name = "BarButtonItem1"
-        Me.BarButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        Me.btnSave.Caption = "Save"
+        Me.btnSave.Id = 4
+        Me.btnSave.ImageOptions.Image = CType(resources.GetObject("btnSave.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
         '
-        'BarButtonItem2
+        'btnDelete
         '
-        Me.BarButtonItem2.Caption = "Delete"
-        Me.BarButtonItem2.Id = 5
-        Me.BarButtonItem2.ImageOptions.Image = CType(resources.GetObject("BarButtonItem2.ImageOptions.Image"), System.Drawing.Image)
-        Me.BarButtonItem2.Name = "BarButtonItem2"
-        Me.BarButtonItem2.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        Me.btnDelete.Caption = "Delete"
+        Me.btnDelete.Id = 5
+        Me.btnDelete.ImageOptions.Image = CType(resources.GetObject("btnDelete.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
         '
-        'BarButtonItem3
+        'btnPost
         '
-        Me.BarButtonItem3.Caption = "Post"
-        Me.BarButtonItem3.Id = 6
-        Me.BarButtonItem3.ImageOptions.Image = CType(resources.GetObject("BarButtonItem3.ImageOptions.Image"), System.Drawing.Image)
-        Me.BarButtonItem3.Name = "BarButtonItem3"
-        Me.BarButtonItem3.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        Me.btnPost.Caption = "Post"
+        Me.btnPost.Id = 6
+        Me.btnPost.ImageOptions.Image = CType(resources.GetObject("btnPost.ImageOptions.Image"), System.Drawing.Image)
+        Me.btnPost.Name = "btnPost"
+        Me.btnPost.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
         '
         'RibbonPage1
         '
@@ -228,9 +228,9 @@ Partial Class frm_buyerSales
         'RibbonPageGroup2
         '
         Me.RibbonPageGroup2.AllowTextClipping = False
-        Me.RibbonPageGroup2.ItemLinks.Add(Me.BarButtonItem1)
-        Me.RibbonPageGroup2.ItemLinks.Add(Me.BarButtonItem2)
-        Me.RibbonPageGroup2.ItemLinks.Add(Me.BarButtonItem3)
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.btnSave)
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.btnDelete)
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.btnPost)
         Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
         Me.RibbonPageGroup2.Text = "Tools"
         '
@@ -894,9 +894,9 @@ Partial Class frm_buyerSales
     Friend WithEvents BarStaticItem2 As DevExpress.XtraBars.BarStaticItem
     Friend WithEvents RibbonPageGroup2 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents BarHeaderItem1 As DevExpress.XtraBars.BarHeaderItem
-    Friend WithEvents BarButtonItem1 As DevExpress.XtraBars.BarButtonItem
-    Friend WithEvents BarButtonItem2 As DevExpress.XtraBars.BarButtonItem
-    Friend WithEvents BarButtonItem3 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents btnSave As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents btnDelete As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents btnPost As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents LayoutControl1 As DevExpress.XtraLayout.LayoutControl
     Friend WithEvents dtEncoded As DevExpress.XtraEditors.DateEdit
     Friend WithEvents LayoutControlGroup1 As DevExpress.XtraLayout.LayoutControlGroup

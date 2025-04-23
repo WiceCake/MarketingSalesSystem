@@ -44,37 +44,20 @@ Public Class ucBuyer
 
         Dim dc As New mkdbDataContext
 
-        Dim buyerList = New SalesInvoiceBuyer(dc).getByDate(CDate(dtFrom.EditValue), CDate(dtTo.EditValue)).ToList()
-        Dim buyerDetailsList = (From bi In buyerList
-                       Select New With {
-                           .salesInvoiceBuyerID = bi.salesInvoiceBuyerID,
-                           .salesInvoiceID = bi.salesInvoiceID,
-                           .referenceNum = bi.referenceNum,
-                           .buyerName = bi.buyerName,
-                           .sellerType = bi.sellerType,
-                           .paidAmount = bi.paidAmount,
-                           .adjustmentsAmount = bi.adjustmentsAmount,
-                           .encodedOn = bi.encodedOn,
-                           .encodedBy = bi.encodedBy,
-                           .approvalStatus = bi.approvalStatus
-                           }).ToList
+        Dim buyerList = New SalesInvoiceBuyer(dc).getRows()
 
-
-        Dim gridView = New GridView()
-        AddHandler gridView.DoubleClick, AddressOf HandleGridDoubleClick
-        gridView.GridControl = grid
-
-        grid.MainView = gridView
-        grid.ViewCollection.Add(gridView)
-
-        gridView.GridControl.DataSource = buyerDetailsList
-        gridView.PopulateColumns()
-
-        gridView.OptionsView.ShowFooter = True
-
-        gridTransMode(gridView)
-
-
+        Dim buyers = (From bl In buyerList
+                      Join sr In dc.trans_SalesReports On bl.salesInvoiceID Equals sr.salesReport_ID
+                      Select New With {
+                          .SalesInvoiceBuyerID = bl.salesInvoiceBuyerID,
+                          .DateCreated = bl.encodedOn,
+                          .InvoiceNo = sr.invoiceNum & "-" & bl.setNum,
+                          .Buyer = bl.buyerName,
+                          .AmountPaid = bl.paidAmount,
+                          .RemainingBalance = "",
+                          .Adjusments = "",
+                          .PaidInPercentage = ""
+                      })
 
         'Dim dc As New mkdbDataContext
         '
@@ -90,25 +73,25 @@ Public Class ucBuyer
         '                   .Latitude = ca.latitude
         '                   }).ToList
         '
-        'Dim gridView = New GridView()
+        Dim gridView = New GridView()
         'AddHandler gridView.DoubleClick, AddressOf HandleGridDoubleClick
-        'gridView.GridControl = grid
+        gridView.GridControl = grid
         '
-        'grid.MainView = gridView
-        'grid.ViewCollection.Add(gridView)
+        grid.MainView = gridView
+        grid.ViewCollection.Add(gridView)
         '
-        'gridView.GridControl.DataSource = cadList
-        'gridView.PopulateColumns()
+        gridView.GridControl.DataSource = buyers
+        gridView.PopulateColumns()
         '
-        'gridView.OptionsView.ShowFooter = True
+        gridView.OptionsView.ShowFooter = True
         '
-        'gridTransMode(gridView)
+        gridTransMode(gridView)
     End Sub
 
     Private Sub HandleGridDoubleClick(sender As Object, e As EventArgs)
-        Dim gridView As DevExpress.XtraGrid.Views.Grid.GridView = TryCast(sender, DevExpress.XtraGrid.Views.Grid.GridView)
-        Dim value = gridView.GetRowCellValue(gridView.FocusedRowHandle, "catchActivity_ID")
-        Dim ctrlSIB = New ctrlBuyers(Me, CInt(value))
+        'Dim gridView As DevExpress.XtraGrid.Views.Grid.GridView = TryCast(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+        'Dim value = gridView.GetRowCellValue(gridView.FocusedRowHandle, "catchActivity_ID")
+        'Dim ctrlCA = New ctrlCatchers(Me, CInt(value))
     End Sub
 
     Protected Overrides Function GetGridControl() As GridControl

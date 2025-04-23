@@ -1,6 +1,6 @@
 ﻿Public Class SalesInvoiceBuyer
     Public salesInvoiceBuyerID, salesInvoiceID As Integer
-    Public buyerName, encodedBy, referenceNum, sellerType As String
+    Public buyerName, encodedBy, referenceNum, sellerType, setNum As String
     Public paidAmount, adjustmentsAmount As Decimal?
     Public encodedOn As Date
     Public dateCreated As Date?
@@ -38,6 +38,7 @@
         salesInvoiceBuyerID = sib.salesInvoiceBuyerID
         salesInvoiceID = sib.salesInvoiceID
         referenceNum = sib.referenceNum
+        setNum = sib.setNum
         buyerName = sib.buyerName
         sellerType = sib.sellerType
         paidAmount = sib.paidAmount
@@ -54,6 +55,7 @@
         With sib
             .salesInvoiceID = salesInvoiceID
             .referenceNum = referenceNum
+            .setNum = setNum
             .buyerName = buyerName
             .sellerType = sellerType
             .paidAmount = paidAmount
@@ -62,7 +64,6 @@
             .encodedBy = encodedBy
             .dateCreated = dateCreated
             .approvalStatus = approvalStatus
-
         End With
 
         dc.trans_SalesInvoiceBuyers.InsertOnSubmit(sib)
@@ -77,6 +78,7 @@
             i.salesInvoiceBuyerID = salesInvoiceBuyerID
             i.salesInvoiceID = salesInvoiceID
             i.referenceNum = referenceNum
+            i.setNum = setNum
             i.buyerName = buyerName
             i.sellerType = sellerType
             i.paidAmount = paidAmount
@@ -99,28 +101,6 @@
         Next
 
         Return sibList
-    End Function
-
-    Function getByDate(Optional ByVal startDate As Date = #1/1/1900#, Optional ByVal endDate As Date = Nothing) As List(Of SalesInvoiceBuyer)
-        If endDate = Nothing Then
-            endDate = Date.Now
-        End If
-
-        If startDate = Nothing Then
-            startDate = #1/1/1900#
-        End If
-
-        Dim biList As New List(Of SalesInvoiceBuyer)
-
-        Dim bil = From bl In dc.trans_SalesInvoiceBuyers
-                   Where bl.encodedOn >= startDate.Date AndAlso bl.encodedOn <= endDate.Date
-                   Select bl
-
-        For Each bl In bil
-            biList.Add(New SalesInvoiceBuyer(bl, dc))
-        Next
-
-        Return biList
     End Function
 
     Function GenerateRefNum() As String

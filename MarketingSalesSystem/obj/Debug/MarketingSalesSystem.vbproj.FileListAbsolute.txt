@@ -47,4 +47,3 @@ C:\Users\admin\Documents\GitHub\MarketingSalesSystem\MarketingSalesSystem\obj\De
 C:\Users\admin\Documents\GitHub\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.rptSalesInvoiceReport.resources
 C:\Users\admin\Documents\GitHub\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.frm_buyerSales.resources
 C:\Users\admin\Documents\GitHub\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.ucBuyer.resources
-C:\Users\admin\Documents\GitHub\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.vbprojResolveAssemblyReference.cache
