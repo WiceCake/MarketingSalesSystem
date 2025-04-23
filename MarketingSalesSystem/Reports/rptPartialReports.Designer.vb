@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Public Class PartialReports
+Partial Public Class rptPartialReports
     Inherits DevExpress.XtraReports.UI.XtraReport
 
     'XtraReport overrides dispose to clean up the component list.
