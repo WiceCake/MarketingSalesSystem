@@ -103,12 +103,12 @@ Public Class ucBuyer
         '
         grid.MainView = gridView
         grid.ViewCollection.Add(gridView)
-        '
+
         gridView.GridControl.DataSource = buyers
         gridView.PopulateColumns()
-        '
+
         gridView.OptionsView.ShowFooter = True
-        '
+
         gridTransMode(gridView)
     End Sub
 

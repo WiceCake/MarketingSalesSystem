@@ -67,6 +67,9 @@ Public Class ctrlBuyers
         frmBS.GridControl1.DataSource = frmBS.dtAK
 
         With frmBS
+            If mdlSIB.approvalStatus = Approval_Status.Posted Then
+                .rbnTools.Visible = False
+            End If
 
             If Integer.TryParse(mdlSIB.buyerName, 0) Then
                 .rBuyer.SelectedIndex = 1
@@ -83,6 +86,7 @@ Public Class ctrlBuyers
             .cmbSaleType.EditValue = mdlSIB.sellerType
             .lueInvoice.EditValue = mdlSIB.salesInvoiceID
             .txtSetNo.EditValue = mdlSIB.setNum
+            .txtRefNum.Caption = mdlSIB.referenceNum
 
             .txtAmountPaid.EditValue = mdlSIB.paidAmount
             .txtAdjustments.EditValue = mdlSIB.adjustmentsAmount
@@ -107,7 +111,14 @@ Public Class ctrlBuyers
                     mdlSIB.adjustmentsAmount = CDec(.txtAdjustments.EditValue)
                     mdlSIB.paidAmount = CDec(.txtAmountPaid.EditValue)
                     mdlSIB.encodedBy = "###"
-                    mdlSIB.Add()
+                    mdlSIB.referenceNum = "Draft"
+                    If isNew Then
+                        mdlSIB.approvalStatus = Approval_Status.Draft
+                        mdlSIB.Add()
+                    Else
+                        mdlSIB.approvalStatus = Approval_Status.Submitted
+                        mdlSIB.Save()
+                    End If
                 End With
 
                 setSalesPrice(mdlSIB.salesInvoiceBuyerID, mdlSIB.salesInvoiceID)
@@ -118,15 +129,19 @@ Public Class ctrlBuyers
             End Try
         End Using
         frmBS.Close()
+        ucB.loadGrid()
     End Sub
 
     Sub setSalesPrice(ByVal salesInvoiceBuyerID As Integer, ByVal salesInvoiceID As Integer)
         Dim srb As New SalesReportBuyer(mkdb)
+        Dim count As Integer
+        Dim getSrb As List(Of Integer) = New List(Of Integer)
 
-        'If Not isNew Then
-        '    Dim getSrp = (From i In mkdb.trans_SalesReportPrices Where i.salesReport_ID = salesReportID Select i.salesReportPrice_ID).FirstOrDefault
-        '    srp = New SalesReportPrice(getSrp, mkdb)
-        'End If
+        If Not isNew Then
+            getSrb = (From i In mkdb.trans_SalesReportBuyers Where i.salesInvoiceBuyerID = CInt(salesInvoiceBuyerID) Select i.salesBuyerCatchID).ToList()
+
+            count = 0
+        End If
 
         For Each cols As DataColumn In frmBS.dtAK.Columns
 
@@ -163,11 +178,44 @@ Public Class ctrlBuyers
                 If isNew Then
                     .Add()
                 Else
+                    .salesBuyerCatch_ID = CInt(getSrb(count))
                     .Save()
+                    count += 1
                 End If
             End With
         Next
 
+    End Sub
+
+    Sub deleteBuyer()
+        Using ts As New TransactionScope
+            Try
+                mdlSRB.salesInvoiceBuyer_ID = mdlSIB.salesInvoiceBuyerID
+                mdlSRB.Delete()
+                mdlSIB.Delete()
+
+                ts.Complete()
+            Catch ex As Exception
+                Debug.WriteLine("Error: " & ex.Message)
+            End Try
+        End Using
+        ucB.loadGrid()
+        frmBS.Close()
+    End Sub
+
+    Sub postBuyer()
+        Using ts As New TransactionScope
+            Try
+                mdlSIB.approvalStatus = Approval_Status.Posted
+                mdlSIB.Posted()
+
+                ts.Complete()
+            Catch ex As Exception
+                Debug.WriteLine("Error: " & ex.Message)
+            End Try
+        End Using
+        ucB.loadGrid()
+        frmBS.Close()
     End Sub
 
     'Sub loadDataRows()

@@ -22,14 +22,14 @@ Partial Class frm_buyerSales
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_buyerSales))
         Me.RibbonControl = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.BarStaticItem1 = New DevExpress.XtraBars.BarStaticItem()
-        Me.BarStaticItem2 = New DevExpress.XtraBars.BarStaticItem()
+        Me.txtRefNum = New DevExpress.XtraBars.BarStaticItem()
         Me.BarHeaderItem1 = New DevExpress.XtraBars.BarHeaderItem()
         Me.btnSave = New DevExpress.XtraBars.BarButtonItem()
         Me.btnDelete = New DevExpress.XtraBars.BarButtonItem()
         Me.btnPost = New DevExpress.XtraBars.BarButtonItem()
         Me.RibbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
-        Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rbnTools = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
         Me.LayoutControl2 = New DevExpress.XtraLayout.LayoutControl()
@@ -161,7 +161,7 @@ Partial Class frm_buyerSales
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.BarStaticItem1, Me.BarStaticItem2, Me.BarHeaderItem1, Me.btnSave, Me.btnDelete, Me.btnPost})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.BarStaticItem1, Me.txtRefNum, Me.BarHeaderItem1, Me.btnSave, Me.btnDelete, Me.btnPost})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
         Me.RibbonControl.MaxItemId = 8
         Me.RibbonControl.Name = "RibbonControl"
@@ -175,11 +175,11 @@ Partial Class frm_buyerSales
         Me.BarStaticItem1.Id = 1
         Me.BarStaticItem1.Name = "BarStaticItem1"
         '
-        'BarStaticItem2
+        'txtRefNum
         '
-        Me.BarStaticItem2.Caption = "Draft"
-        Me.BarStaticItem2.Id = 2
-        Me.BarStaticItem2.Name = "BarStaticItem2"
+        Me.txtRefNum.Caption = "Draft"
+        Me.txtRefNum.Id = 2
+        Me.txtRefNum.Name = "txtRefNum"
         '
         'BarHeaderItem1
         '
@@ -213,7 +213,7 @@ Partial Class frm_buyerSales
         '
         'RibbonPage1
         '
-        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup1, Me.RibbonPageGroup2})
+        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup1, Me.rbnTools})
         Me.RibbonPage1.Name = "RibbonPage1"
         Me.RibbonPage1.Text = "Home"
         '
@@ -221,18 +221,18 @@ Partial Class frm_buyerSales
         '
         Me.RibbonPageGroup1.AllowTextClipping = False
         Me.RibbonPageGroup1.ItemLinks.Add(Me.BarStaticItem1)
-        Me.RibbonPageGroup1.ItemLinks.Add(Me.BarStaticItem2)
+        Me.RibbonPageGroup1.ItemLinks.Add(Me.txtRefNum)
         Me.RibbonPageGroup1.Name = "RibbonPageGroup1"
         Me.RibbonPageGroup1.Text = "Information"
         '
-        'RibbonPageGroup2
+        'rbnTools
         '
-        Me.RibbonPageGroup2.AllowTextClipping = False
-        Me.RibbonPageGroup2.ItemLinks.Add(Me.btnSave)
-        Me.RibbonPageGroup2.ItemLinks.Add(Me.btnDelete)
-        Me.RibbonPageGroup2.ItemLinks.Add(Me.btnPost)
-        Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
-        Me.RibbonPageGroup2.Text = "Tools"
+        Me.rbnTools.AllowTextClipping = False
+        Me.rbnTools.ItemLinks.Add(Me.btnSave)
+        Me.rbnTools.ItemLinks.Add(Me.btnDelete)
+        Me.rbnTools.ItemLinks.Add(Me.btnPost)
+        Me.rbnTools.Name = "rbnTools"
+        Me.rbnTools.Text = "Tools"
         '
         'RibbonStatusBar
         '
@@ -891,8 +891,8 @@ Partial Class frm_buyerSales
     Friend WithEvents RibbonPageGroup1 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents RibbonStatusBar As DevExpress.XtraBars.Ribbon.RibbonStatusBar
     Friend WithEvents BarStaticItem1 As DevExpress.XtraBars.BarStaticItem
-    Friend WithEvents BarStaticItem2 As DevExpress.XtraBars.BarStaticItem
-    Friend WithEvents RibbonPageGroup2 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents txtRefNum As DevExpress.XtraBars.BarStaticItem
+    Friend WithEvents rbnTools As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents BarHeaderItem1 As DevExpress.XtraBars.BarHeaderItem
     Friend WithEvents btnSave As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents btnDelete As DevExpress.XtraBars.BarButtonItem

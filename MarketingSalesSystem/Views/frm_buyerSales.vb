@@ -332,4 +332,12 @@ Public Class frm_buyerSales
 
         ctrlB.saveDraft()
     End Sub
+
+    Private Sub btnDelete_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnDelete.ItemClick
+        ctrlB.deleteBuyer()
+    End Sub
+
+    Private Sub btnPost_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnPost.ItemClick
+        ctrlB.postBuyer()
+    End Sub
 End Class
