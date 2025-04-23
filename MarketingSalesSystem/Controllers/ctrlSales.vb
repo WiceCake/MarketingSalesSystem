@@ -187,14 +187,12 @@ Public Class ctrlSales
         Dim NK_Total As Decimal = 0
         Dim NA_Total As Decimal = 0
 
-        ' Track the remaining metric ton across rows
-        ' Use the global remainingMetricTon that persists between rows
+        Dim totalAUK_Catcher As Decimal = 0
         Dim remainingMetricTon As Decimal = totalMetricTonAvailable
 
         If remainingMetricTon <= 0D Then
             MessageBox.Show("No Metric ton available.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
-            ' Set all AUK_Catcher columns to 0
             For Each col As DataColumn In r.Table.Columns
                 If col.ColumnName.StartsWith("AUK_Catcher") Then
                     r(col.ColumnName) = 0D
@@ -204,46 +202,55 @@ Public Class ctrlSales
             Return
         End If
 
+        For Each row As DataRow In frmSI.dt.Rows
+            If row IsNot r Then
+                For Each col As DataColumn In row.Table.Columns
+                    Dim colName As String = col.ColumnName
+
+                    If colName.StartsWith("AUK_Catcher") Then
+                        Dim catcherValue As Decimal = Math.Max(0, CDec(If(IsDBNull(row(colName)), 0, row(colName))))
+
+                        totalAUK_Catcher += catcherValue
+                    End If
+                Next
+            End If
+        Next
 
         ' First pass: Compute AUK and AUA totals
         For Each col As DataColumn In r.Table.Columns
             Dim colName As String = col.ColumnName
 
             If colName.StartsWith("AUK_Catcher") Then
-                Dim catcherValue As Decimal = 0D
+                ' Sanitize the value in the DataRow first
+                Dim originalValue As Decimal = CDec(If(IsDBNull(r(colName)), 0, r(colName)))
+                If originalValue < 0 Then
+                    originalValue = 0
+                    r(colName) = 0D ' Correct the negative value in the DataRow
+                End If
 
-                ' If there's remaining metric ton to assign
-                If remainingMetricTon > 0D Then
-                    ' Get the sanitized value for this row
-                    Dim rawValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
+                Dim catcherValue As Decimal = originalValue
+                totalAUK_Catcher += catcherValue
 
-                    ' If the row value is less than or equal to the remaining metric ton, assign it
-                    If rawValue <= remainingMetricTon Then
-                        catcherValue = rawValue
-                    Else
-                        ' If the row value exceeds the remaining metric ton, assign the remaining amount
-                        catcherValue = remainingMetricTon
-                        r(colName) = catcherValue ' Update the UI value with the remaining metric ton
-                    End If
+                If totalAUK_Catcher > remainingMetricTon Then
+                    Dim excess As Decimal = totalAUK_Catcher - remainingMetricTon
+                    catcherValue -= excess
 
-                    ' Update the total assigned for AUK
-                    AUK_Total += catcherValue
+                    If catcherValue < 0 Then catcherValue = 0
 
-                    ' Calculate Actual Unloading Amount dynamically (AUA)
-                    Dim auaColumn As String = colName.Replace("AUK", "AUA")
-                    If r.Table.Columns.Contains(auaColumn) Then
-                        r(auaColumn) = catcherValue * Price
-                        AUA_Total += CDec(r(auaColumn))
-                    End If
+                    r(colName) = catcherValue
+                    totalAUK_Catcher = remainingMetricTon
+                End If
 
-                    ' Deduct the assigned value from remaining metric ton
-                    remainingMetricTon -= catcherValue
+                AUK_Total += catcherValue
+
+                Dim auaColumn As String = colName.Replace("AUK", "AUA")
+                If r.Table.Columns.Contains(auaColumn) Then
+                    r(auaColumn) = catcherValue * Price
+                    AUA_Total += CDec(r(auaColumn))
                 End If
             End If
         Next
 
-        ' Optional: Show remaining metric ton after all rows are processed (for debugging)
-        ' MessageBox.Show("Remaining Metric Ton = " & remainingMetricTon.ToString(), "Debug Info")
 
         ' Second pass: Adjust SK values to ensure SK ≤ AUK and SK is non-negative
         For Each col As DataColumn In r.Table.Columns
@@ -254,9 +261,8 @@ Public Class ctrlSales
                 Dim skValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
                 Dim aukValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(aukColumn)), 0, r(aukColumn))))
 
-                ' Ensure SK does not exceed AUK and is non-negative
                 skValue = Math.Min(skValue, aukValue)
-                r(colName) = skValue  ' Update SK with the corrected value
+                r(colName) = skValue
 
                 SK_Total += skValue
             End If
@@ -270,7 +276,6 @@ Public Class ctrlSales
                 Dim saColumn As String = colName.Replace("SK", "SA")
                 Dim skValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
 
-                ' Compute SA using the corrected SK value
                 If r.Table.Columns.Contains(saColumn) Then
                     r(saColumn) = skValue * Price
                     SA_Total += CDec(r(saColumn))
@@ -315,6 +320,20 @@ Public Class ctrlSales
         r("NK_Total") = NK_Total
         r("NA_Total") = NA_Total
     End Sub
+
+    Function calculateTotalMetricTon() As Decimal
+        Dim totalMetricTon As Decimal = 0D
+
+        For Each row As DataRow In frmSI.dts.Rows
+            Dim metricTon As Decimal = 0D
+            If Decimal.TryParse(row("Metric_Ton").ToString(), metricTon) Then
+                totalMetricTon += metricTon
+            End If
+        Next
+
+        totalMetricTonAvailable = totalMetricTon
+        Return totalMetricTon
+    End Function
 
     Sub updateAllTotals()
         For Each r As DataRow In frmSI.dt.Rows
@@ -468,48 +487,24 @@ Public Class ctrlSales
             count = 0
         End If
 
-        ' Recalculate and store the total
-        calculateTotalMetricTon()
-
         For Each row As DataRow In frmSI.dts.Rows
             With cd
                 .SalesReportID = salesReportID
                 .CarrierName = row("Carrier_Name").ToString
                 .CarrierType = row("Carrier_Type").ToString
-
-                Dim metricTon As Decimal = 0D
-                If Decimal.TryParse(row("Metric_Ton").ToString(), metricTon) Then
-                    .UnloadedValue = metricTon
-
-                    If Not isNew Then
-                        .CarrierID = CInt(getCd(count))
-                        .Save()
-                        count += 1
-                    Else
-                        .Add()
-                    End If
+                .UnloadedValue = CDec(row("Metric_Ton"))
+                If Not isNew Then
+                    .CarrierID = CInt(getCd(count))
+                    .Save()
+                    count += 1
+                Else
+                    .Add()
                 End If
             End With
         Next
-
-        ' Debug.WriteLine("Total Metric Ton: " & totalMetricTonAvailable)
     End Sub
 
 
-
-    Function calculateTotalMetricTon() As Decimal
-        Dim totalMetricTon As Decimal = 0D
-
-        For Each row As DataRow In frmSI.dts.Rows
-            Dim metricTon As Decimal = 0D
-            If Decimal.TryParse(row("Metric_Ton").ToString(), metricTon) Then
-                totalMetricTon += metricTon
-            End If
-        Next
-
-        totalMetricTonAvailable = totalMetricTon
-        Return totalMetricTon
-    End Function
 
 
     Sub setCatcherPrice(rowName As String, ByVal salesReportID As Integer)
