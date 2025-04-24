@@ -219,8 +219,6 @@ Public Class frm_buyerSales
                       Join j In mkdb.trans_CatchActivityDetails On i.catchActivityDetail_ID Equals j.catchActivityDetail_ID
                       Where i.salesReport_ID = CInt(invoice.EditValue) Select j.catchActivity_ID
 
-        Debug.WriteLine(catcher.FirstOrDefault)
-
         Dim catcherID = catcher.FirstOrDefault
         Dim val = CInt(invoice.EditValue)
 
@@ -333,5 +331,13 @@ Public Class frm_buyerSales
         End If
 
         ctrlB.saveDraft()
+    End Sub
+
+    Private Sub btnDelete_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnDelete.ItemClick
+        ctrlB.deleteBuyer()
+    End Sub
+
+    Private Sub btnPost_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnPost.ItemClick
+        ctrlB.postBuyer()
     End Sub
 End Class

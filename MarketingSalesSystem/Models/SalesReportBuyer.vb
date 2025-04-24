@@ -110,13 +110,12 @@
     End Sub
 
     Sub Delete()
-        Dim sr = From i In dc.trans_SalesReportBuyers Where i.salesBuyerCatchID = salesBuyerCatch_ID Select i
+        Dim srb = From i In dc.trans_SalesReportBuyers Where i.salesInvoiceBuyerID = salesInvoiceBuyer_ID Select i
 
-        For Each i In sr
+        For Each i In srb
             dc.trans_SalesReportBuyers.DeleteOnSubmit(i)
             dc.SubmitChanges()
         Next
-
     End Sub
 
     Sub Save()
