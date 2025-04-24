@@ -1,10 +1,10 @@
 ﻿Public Class SalesInvoiceBuyer
     Public salesInvoiceBuyerID, salesInvoiceID As Integer
-    Public buyerName, encodedBy, referenceNum, sellerType, setNum As String
+    Public buyerName, encodedBy, referenceNum, sellerType As String
     Public paidAmount, adjustmentsAmount As Decimal?
     Public encodedOn As Date
     Public dateCreated As Date?
-    Public approvalStatus As Integer
+    Public approvalStatus, paymentStatus As Integer
 
     Private dc As mkdbDataContext
 
@@ -21,7 +21,6 @@
             salesInvoiceBuyerID = sibID
             salesInvoiceID = i.salesInvoiceID
             referenceNum = i.referenceNum
-            setNum = i.setNum
             buyerName = i.buyerName
             sellerType = i.sellerType
             paidAmount = i.paidAmount
@@ -30,6 +29,7 @@
             encodedOn = i.encodedOn
             dateCreated = i.dateCreated
             approvalStatus = i.approvalStatus
+            'paymentStatus = i.paymentStatus
         Next
     End Sub
 
@@ -39,7 +39,6 @@
         salesInvoiceBuyerID = sib.salesInvoiceBuyerID
         salesInvoiceID = sib.salesInvoiceID
         referenceNum = sib.referenceNum
-        setNum = sib.setNum
         buyerName = sib.buyerName
         sellerType = sib.sellerType
         paidAmount = sib.paidAmount
@@ -56,7 +55,6 @@
         With sib
             .salesInvoiceID = salesInvoiceID
             .referenceNum = referenceNum
-            .setNum = setNum
             .buyerName = buyerName
             .sellerType = sellerType
             .paidAmount = paidAmount
@@ -65,6 +63,7 @@
             .encodedBy = encodedBy
             .dateCreated = dateCreated
             .approvalStatus = approvalStatus
+            '.paymentStatus = paymentStatus
         End With
 
         dc.trans_SalesInvoiceBuyers.InsertOnSubmit(sib)
@@ -79,7 +78,6 @@
             i.salesInvoiceBuyerID = salesInvoiceBuyerID
             i.salesInvoiceID = salesInvoiceID
             i.referenceNum = referenceNum
-            i.setNum = setNum
             i.buyerName = buyerName
             i.sellerType = sellerType
             i.paidAmount = paidAmount
@@ -88,25 +86,7 @@
             i.encodedBy = encodedBy
             i.dateCreated = dateCreated
             i.approvalStatus = approvalStatus
-            dc.SubmitChanges()
-        Next
-    End Sub
-
-    Sub Delete()
-        Dim srb = From i In dc.trans_SalesInvoiceBuyers Where i.salesInvoiceBuyerID = salesInvoiceBuyerID Select i
-
-        For Each i In srb
-            dc.trans_SalesInvoiceBuyers.DeleteOnSubmit(i)
-            dc.SubmitChanges()
-        Next
-    End Sub
-
-    Sub Posted()
-        Dim sr = From i In dc.trans_SalesInvoiceBuyers Where i.salesInvoiceBuyerID = salesInvoiceBuyerID Select i
-
-        For Each i In sr
-            i.referenceNum = GenerateRefNum()
-            i.approvalStatus = approvalStatus
+            'i.paymentStatus = paymentStatus
             dc.SubmitChanges()
         Next
     End Sub
@@ -118,28 +98,6 @@
 
         For Each i In e
             sibList.Add(New SalesInvoiceBuyer(i, dc))
-        Next
-
-        Return sibList
-    End Function
-
-    Function getByDate(Optional ByVal startDate As Date = #1/1/1900#, Optional ByVal endDate As Date = Nothing) As List(Of SalesInvoiceBuyer)
-        If endDate = Nothing Then
-            endDate = Date.Now
-        End If
-
-        If startDate = Nothing Then
-            startDate = #1/1/1900#
-        End If
-
-        Dim sibList As New List(Of SalesInvoiceBuyer)
-
-        Dim sibs = From sib In dc.trans_SalesInvoiceBuyers
-                   Where sib.encodedOn >= startDate.Date AndAlso sib.encodedOn <= endDate.Date
-                   Select sib
-
-        For Each sib In sibs
-            sibList.Add(New SalesInvoiceBuyer(sib, dc))
         Next
 
         Return sibList
