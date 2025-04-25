@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MKDB" Class="mkdbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=MKDB;Integrated Security=True" SettingsObjectName="MarketingSalesSystem.Settings" SettingsPropertyName="MKDBConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=MSI-KIANPC\SQLEXPRESS;Initial Catalog=MKDB;Integrated Security=True" SettingsObjectName="MarketingSalesSystem.Settings" SettingsPropertyName="MKDBConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.trans_CatchActivities" Member="trans_CatchActivities">
     <Type Name="trans_CatchActivity">
       <Column Name="catchActivity_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -65,13 +65,6 @@
       <Column Name="modifiedBy" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.trans_SalesBuyerCatch" Member="trans_SalesBuyerCatches">
-    <Type Name="trans_SalesBuyerCatch">
-      <Column Name="salesBuyerCatchID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="salesInvoiceBuyerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="salesInvoiceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.trans_SalesInvoiceBuyer" Member="trans_SalesInvoiceBuyers">
     <Type Name="trans_SalesInvoiceBuyer">
       <Column Name="salesInvoiceBuyerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -85,7 +78,7 @@
       <Column Name="approvalStatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="encodedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="encodedBy" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="dateCreated" AutoSync="Never" Type="System.DateTime" DbType="DateTime" IsDbGenerated="true" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.trans_SalesReport" Member="trans_SalesReports">

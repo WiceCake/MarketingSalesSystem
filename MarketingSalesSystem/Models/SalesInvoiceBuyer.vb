@@ -92,21 +92,21 @@
         Next
     End Sub
 
-    Sub Delete()
-        Dim srb = From i In dc.trans_SalesInvoiceBuyers Where i.salesInvoiceBuyerID = salesInvoiceBuyerID Select i
-
-        For Each i In srb
-            dc.trans_SalesInvoiceBuyers.DeleteOnSubmit(i)
-            dc.SubmitChanges()
-        Next
-    End Sub
-
     Sub Posted()
         Dim sr = From i In dc.trans_SalesInvoiceBuyers Where i.salesInvoiceBuyerID = salesInvoiceBuyerID Select i
 
         For Each i In sr
             i.referenceNum = GenerateRefNum()
             i.approvalStatus = approvalStatus
+            dc.SubmitChanges()
+        Next
+    End Sub
+
+    Sub Delete()
+        Dim srb = From i In dc.trans_SalesInvoiceBuyers Where i.salesInvoiceBuyerID = salesInvoiceBuyerID Select i
+
+        For Each i In srb
+            dc.trans_SalesInvoiceBuyers.DeleteOnSubmit(i)
             dc.SubmitChanges()
         Next
     End Sub

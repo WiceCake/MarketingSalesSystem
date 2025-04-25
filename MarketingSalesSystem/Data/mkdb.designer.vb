@@ -55,12 +55,6 @@ Partial Public Class mkdbDataContext
     End Sub
   Partial Private Sub Deletetrans_CatchMethod(instance As trans_CatchMethod)
     End Sub
-  Partial Private Sub Inserttrans_SalesBuyerCatch(instance As trans_SalesBuyerCatch)
-    End Sub
-  Partial Private Sub Updatetrans_SalesBuyerCatch(instance As trans_SalesBuyerCatch)
-    End Sub
-  Partial Private Sub Deletetrans_SalesBuyerCatch(instance As trans_SalesBuyerCatch)
-    End Sub
   Partial Private Sub Inserttrans_SalesInvoiceBuyer(instance As trans_SalesInvoiceBuyer)
     End Sub
   Partial Private Sub Updatetrans_SalesInvoiceBuyer(instance As trans_SalesInvoiceBuyer)
@@ -118,7 +112,7 @@ Partial Public Class mkdbDataContext
   #End Region
 	
 	Public Sub New()
-		MyBase.New(Global.MarketingSalesSystem.Settings.Default.MKDBConnectionString, mappingSource)
+		MyBase.New(Global.MarketingSalesSystem.Settings.Default.MKDBConnectionString1, mappingSource)
 		OnCreated
 	End Sub
 	
@@ -163,12 +157,6 @@ Partial Public Class mkdbDataContext
 	Public ReadOnly Property trans_CatchMethods() As System.Data.Linq.Table(Of trans_CatchMethod)
 		Get
 			Return Me.GetTable(Of trans_CatchMethod)
-		End Get
-	End Property
-	
-	Public ReadOnly Property trans_SalesBuyerCatches() As System.Data.Linq.Table(Of trans_SalesBuyerCatch)
-		Get
-			Return Me.GetTable(Of trans_SalesBuyerCatch)
 		End Get
 	End Property
 	
@@ -1472,114 +1460,6 @@ Partial Public Class trans_CatchMethod
 	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_SalesBuyerCatch")>  _
-Partial Public Class trans_SalesBuyerCatch
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _salesBuyerCatchID As Integer
-	
-	Private _salesInvoiceBuyerID As Integer
-	
-	Private _salesInvoiceID As Integer
-	
-    #Region "Extensibility Method Definitions"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnsalesBuyerCatchIDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnsalesBuyerCatchIDChanged()
-    End Sub
-    Partial Private Sub OnsalesInvoiceBuyerIDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnsalesInvoiceBuyerIDChanged()
-    End Sub
-    Partial Private Sub OnsalesInvoiceIDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnsalesInvoiceIDChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesBuyerCatchID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property salesBuyerCatchID() As Integer
-		Get
-			Return Me._salesBuyerCatchID
-		End Get
-		Set
-			If ((Me._salesBuyerCatchID = value)  _
-						= false) Then
-				Me.OnsalesBuyerCatchIDChanging(value)
-				Me.SendPropertyChanging
-				Me._salesBuyerCatchID = value
-				Me.SendPropertyChanged("salesBuyerCatchID")
-				Me.OnsalesBuyerCatchIDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesInvoiceBuyerID", DbType:="Int NOT NULL")>  _
-	Public Property salesInvoiceBuyerID() As Integer
-		Get
-			Return Me._salesInvoiceBuyerID
-		End Get
-		Set
-			If ((Me._salesInvoiceBuyerID = value)  _
-						= false) Then
-				Me.OnsalesInvoiceBuyerIDChanging(value)
-				Me.SendPropertyChanging
-				Me._salesInvoiceBuyerID = value
-				Me.SendPropertyChanged("salesInvoiceBuyerID")
-				Me.OnsalesInvoiceBuyerIDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesInvoiceID", DbType:="Int NOT NULL")>  _
-	Public Property salesInvoiceID() As Integer
-		Get
-			Return Me._salesInvoiceID
-		End Get
-		Set
-			If ((Me._salesInvoiceID = value)  _
-						= false) Then
-				Me.OnsalesInvoiceIDChanging(value)
-				Me.SendPropertyChanging
-				Me._salesInvoiceID = value
-				Me.SendPropertyChanged("salesInvoiceID")
-				Me.OnsalesInvoiceIDChanged
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-End Class
-
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_SalesInvoiceBuyer")>  _
 Partial Public Class trans_SalesInvoiceBuyer
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
@@ -1852,7 +1732,7 @@ Partial Public Class trans_SalesInvoiceBuyer
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_dateCreated", DbType:="DateTime", IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_dateCreated", DbType:="DateTime")>  _
 	Public Property dateCreated() As System.Nullable(Of Date)
 		Get
 			Return Me._dateCreated
