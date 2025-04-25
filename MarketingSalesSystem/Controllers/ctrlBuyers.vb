@@ -1,4 +1,5 @@
 ﻿Imports System.Transactions
+Imports DevExpress.XtraReports.UI
 
 Public Class ctrlBuyers
     Private isNew As Boolean
@@ -505,5 +506,14 @@ Public Class ctrlBuyers
                 .Name = i.ml_Supplier}
 
         lookUpTransMode(b, frmBS.cmbBuyer, "Name", "ID", "Select Buyer")
+    End Sub
+
+    Sub print()
+        Dim tool As ReportPrintTool
+
+        Dim rp = New rptPartialSummaryReport()
+        rp.DataSource = getPartialSalesInvoice(mdlSIB.salesInvoiceID, mdlSIB.setNum)
+        tool = New ReportPrintTool(rp)
+        tool.ShowPreviewDialog()
     End Sub
 End Class

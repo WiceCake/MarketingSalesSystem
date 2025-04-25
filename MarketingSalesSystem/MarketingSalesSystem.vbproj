@@ -150,6 +150,7 @@
     <Compile Include="Models\CatchActivityDetail.vb" />
     <Compile Include="Models\CatchMethod.vb" />
     <Compile Include="Models\ReportModels\CatchersActivity.vb" />
+    <Compile Include="Models\ReportModels\PartialSalesInvoice.vb" />
     <Compile Include="Models\ReportModels\SalesReportInvoice.vb" />
     <Compile Include="Models\SalesInvoiceBuyer.vb" />
     <Compile Include="Models\SalesReportBuyer.vb" />
@@ -169,10 +170,22 @@
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="Reports\PartialReports.Designer.vb">
+      <DependentUpon>PartialReports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\PartialReports.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\rptCatcherReport.Designer.vb">
       <DependentUpon>rptCatcherReport.vb</DependentUpon>
     </Compile>
     <Compile Include="Reports\rptCatcherReport.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptPartialSummaryReport.Designer.vb">
+      <DependentUpon>rptPartialSummaryReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rptPartialSummaryReport.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\rptSalesInvoiceReport.Designer.vb">
@@ -240,8 +253,14 @@
     <None Include="Data\mkdb.dbml.layout">
       <DependentUpon>mkdb.dbml</DependentUpon>
     </None>
+    <EmbeddedResource Include="Reports\PartialReports.resx">
+      <DependentUpon>PartialReports.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptCatcherReport.resx">
       <DependentUpon>rptCatcherReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptPartialSummaryReport.resx">
+      <DependentUpon>rptPartialSummaryReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptSalesInvoiceReport.resx">
       <DependentUpon>rptSalesInvoiceReport.vb</DependentUpon>

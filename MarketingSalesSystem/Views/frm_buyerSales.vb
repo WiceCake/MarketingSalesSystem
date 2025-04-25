@@ -340,4 +340,8 @@ Public Class frm_buyerSales
     Private Sub btnPost_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btnPost.ItemClick
         ctrlB.postBuyer()
     End Sub
+
+    Private Sub BarButtonItem1_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem1.ItemClick
+        ctrlB.print()
+    End Sub
 End Class

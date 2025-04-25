@@ -90,6 +90,8 @@ Partial Class frm_buyerSales
         Me.LayoutControlItem6 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem7 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem8 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
@@ -161,9 +163,9 @@ Partial Class frm_buyerSales
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.BarStaticItem1, Me.txtRefNum, Me.BarHeaderItem1, Me.btnSave, Me.btnDelete, Me.btnPost})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.BarStaticItem1, Me.txtRefNum, Me.BarHeaderItem1, Me.btnSave, Me.btnDelete, Me.btnPost, Me.BarButtonItem1})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 8
+        Me.RibbonControl.MaxItemId = 9
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.RibbonPage1})
         Me.RibbonControl.Size = New System.Drawing.Size(1074, 198)
@@ -213,7 +215,7 @@ Partial Class frm_buyerSales
         '
         'RibbonPage1
         '
-        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup1, Me.rbnTools})
+        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup1, Me.rbnTools, Me.RibbonPageGroup2})
         Me.RibbonPage1.Name = "RibbonPage1"
         Me.RibbonPage1.Text = "Home"
         '
@@ -802,6 +804,21 @@ Partial Class frm_buyerSales
         Me.LayoutControlItem8.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem8.TextVisible = False
         '
+        'RibbonPageGroup2
+        '
+        Me.RibbonPageGroup2.AllowTextClipping = False
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.BarButtonItem1)
+        Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
+        Me.RibbonPageGroup2.Text = "Action"
+        '
+        'BarButtonItem1
+        '
+        Me.BarButtonItem1.Caption = "Print"
+        Me.BarButtonItem1.Id = 8
+        Me.BarButtonItem1.ImageOptions.Image = CType(resources.GetObject("BarButtonItem1.ImageOptions.Image"), System.Drawing.Image)
+        Me.BarButtonItem1.Name = "BarButtonItem1"
+        Me.BarButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
         'frm_buyerSales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
@@ -956,6 +973,8 @@ Partial Class frm_buyerSales
     Friend WithEvents EmptySpaceItem8 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents EmptySpaceItem9 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents txtSetNo As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents BarButtonItem1 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents RibbonPageGroup2 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
 
 
 End Class
