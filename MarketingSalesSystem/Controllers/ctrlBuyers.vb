@@ -392,7 +392,7 @@ Public Class ctrlBuyers
                     If col.ColumnName.Contains("AC_Catcher") Then
                         dr("AC_Catcher" & (countAvailableCatch + 1)) = CDec(propCatch.GetValue(cdList(countAvailableCatch), Nothing))
                         countAvailableCatch += 1
-                    ElseIf col.ColumnName.Contains("K_Catcher") AndAlso Not isNew Then
+                    ElseIf col.ColumnName.Contains("K_Catcher") AndAlso Not isNew AndAlso bList.Count > 0 Then
                         dr("K_Catcher" & (countKiloCatcher + 1)) = CDec(propBuyer.GetValue(bList(countKiloCatcher), Nothing))
                         countKiloCatcher += 1
                     ElseIf col.ColumnName <> "Class" AndAlso col.ColumnName <> "Size" AndAlso col.ColumnName <> "Price" Then
