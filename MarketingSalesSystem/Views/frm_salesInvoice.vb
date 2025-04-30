@@ -309,7 +309,7 @@ Public Class frm_salesInvoice
         ' Get the selected ID
         Dim selectedID As Integer = CInt(catcher.EditValue)
 
-        MessageBox.Show("Selected ID: " & selectedID.ToString(), "Selected report ID", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        'MessageBox.Show("Selected ID: " & selectedID.ToString(), "Selected report ID", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         ' Continue your original code
         ctrlSales.initSalesDataTable(selectedID)
