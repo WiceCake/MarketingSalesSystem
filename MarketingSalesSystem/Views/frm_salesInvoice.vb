@@ -197,8 +197,31 @@ Public Class frm_salesInvoice
         If view Is Nothing Then
             Return
         End If
+
         If e.Column.FieldName = "AUK_Total" Or e.Column.FieldName = "AUA_Total" Or e.Column.FieldName = "SK_Total" _
             Or e.Column.FieldName = "SA_Total" Or e.Column.FieldName = "NK_Total" Or e.Column.FieldName = "NA_Total" Then
+            Return
+        End If
+
+        If gvCarrier.RowCount = 0 Then Return
+
+        ' Check if any Metric_Ton is empty
+        Dim hasEmptyMetricTon As Boolean = False
+        For i As Integer = 0 To gvCarrier.RowCount - 1
+            Dim row As DataRow = gvCarrier.GetDataRow(i)
+            If String.IsNullOrWhiteSpace(row("Metric_Ton").ToString()) Then
+                hasEmptyMetricTon = True
+                Exit For
+            End If
+        Next
+
+        ' If there are empty Metric_Ton cells, revert the current cell to 0
+        If hasEmptyMetricTon Then
+            Dim changedRow As DataRow = view.GetDataRow(e.RowHandle)
+            If changedRow IsNot Nothing Then
+                changedRow(e.Column.FieldName) = 0
+                XtraMessageBox.Show("Please encode metric tons for carries!", APPNAME, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
             Return
         End If
 
@@ -216,6 +239,7 @@ Public Class frm_salesInvoice
         confirmClose = False ' Prevent FormClosing interference
         Dim dateCreated = validateField(dtCreated)
         Dim sellType = validateField(cmbST)
+        'ADD CONDITION FOR CATCHER
         Dim Catcher = validateField(cmbUV)
         Dim salesNum = validateField(txtSaleNum)
         Dim invoiceNum = validateField(txtInvoiceNum)
@@ -281,21 +305,37 @@ Public Class frm_salesInvoice
     Private Sub cmbUV_EditValueChanged(sender As Object, e As EventArgs) Handles cmbUV.EditValueChanged
         BandedGridView3.Bands.Clear()
         Dim catcher = CType(sender, DevExpress.XtraEditors.LookUpEdit)
-        'Debug.WriteLine(catcher.EditValue)
-        ctrlSales.initSalesDataTable(CInt(catcher.EditValue))
+
+        ' Get the selected ID
+        Dim selectedID As Integer = CInt(catcher.EditValue)
+
+        'MessageBox.Show("Selected ID: " & selectedID.ToString(), "Selected report ID", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        ' Continue your original code
+        ctrlSales.initSalesDataTable(selectedID)
         GridControl3.DataSource = dt
-        createBands(CInt(catcher.EditValue))
+        createBands(selectedID)
         ctrlSales.loadRows()
 
         ' Get reference number
         Dim dc As New mkdbDataContext
         Dim getValue = (From i In dc.trans_CatchActivities
-                        Where i.catchActivity_ID = CInt(catcher.EditValue)
-                        Select i.catchReferenceNum).Distinct().FirstOrDefault
+                        Where i.catchActivity_ID = selectedID
+                        Select i.catchReferenceNum).Distinct().FirstOrDefault()
 
-        'Debug.WriteLine(CInt(catcher.EditValue))
         txtCDNum.EditValue = getValue
+
+        '' Get the salesReport_ID where catchtDeliveryNum = selectedID using LINQ
+        'Dim salesReportID = (From c In dc.trans_SalesReports
+        '                     Where c.catchtDeliveryNum = selectedID.ToString() And c.salesReport_ID = mdlSR.salesReport_ID
+        '                     Select c.salesReport_ID).FirstOrDefault()
+
+        '' Show the ID in a MessageBox
+        'MessageBox.Show("Selected ID: " & salesReportID.ToString(), "Selected report ID", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
     End Sub
+
+
 
     Private Sub bandedGridView_CustomDrawEmptyForeground(ByVal sender As Object, ByVal e As CustomDrawEventArgs) Handles BandedGridView3.CustomDrawEmptyForeground
         Dim view As BandedGridView = TryCast(sender, BandedGridView)
@@ -442,4 +482,5 @@ Public Class frm_salesInvoice
             gvCarrier.ClearSelection()
         End If
     End Sub
+
 End Class

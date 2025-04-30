@@ -85,7 +85,7 @@ Public Class ctrlSales
             .dtCreated.Properties.MaxValue = Date.Now
             loadCombo()
             loadCarrier()
-            .cmbUV.Properties.ReadOnly = True
+            .cmbUV.Properties.ReadOnly = False
             .txtCDNum.Properties.ReadOnly = True
             .btnAddCarrier.Enabled = False
             .btnDeleteCarrier.Enabled = False
@@ -102,8 +102,19 @@ Public Class ctrlSales
             .txtRemark.EditValue = mdlSR.remarks
             .txt_refNum.Caption = mdlSR.referenceNum
 
+            AddHandler frmSI.cmbUV.EditValueChanged, AddressOf cmbVU_EditValueChanged
+
             .Show()
         End With
+    End Sub
+
+    Private Sub cmbVU_EditValueChanged(sender As Object, e As EventArgs)
+        ' Check if the value of cmbUV has changed
+        If frmSI.cmbUV.EditValue IsNot mdlSR.catchtDeliveryNum Then
+            ' Code to handle the change in cmbUV
+            MessageBox.Show("Value has changed!")
+            ' You can perform additional actions here
+        End If
     End Sub
 
     Sub initSalesDataTable(ByVal catchID As Integer)

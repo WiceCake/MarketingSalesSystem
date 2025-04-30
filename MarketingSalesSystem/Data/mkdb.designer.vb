@@ -37,11 +37,11 @@ Partial Public Class mkdbDataContext
     End Sub
   Partial Private Sub Deletetrans_CatchActivity(instance As trans_CatchActivity)
     End Sub
-  Partial Private Sub Inserttrans_WeightSlipDetail(instance As trans_WeightSlipDetail)
+  Partial Private Sub Inserttrans_SalesInvoiceBuyer(instance As trans_SalesInvoiceBuyer)
     End Sub
-  Partial Private Sub Updatetrans_WeightSlipDetail(instance As trans_WeightSlipDetail)
+  Partial Private Sub Updatetrans_SalesInvoiceBuyer(instance As trans_SalesInvoiceBuyer)
     End Sub
-  Partial Private Sub Deletetrans_WeightSlipDetail(instance As trans_WeightSlipDetail)
+  Partial Private Sub Deletetrans_SalesInvoiceBuyer(instance As trans_SalesInvoiceBuyer)
     End Sub
   Partial Private Sub Inserttrans_CatchActivityDetail(instance As trans_CatchActivityDetail)
     End Sub
@@ -54,12 +54,6 @@ Partial Public Class mkdbDataContext
   Partial Private Sub Updatetrans_CatchMethod(instance As trans_CatchMethod)
     End Sub
   Partial Private Sub Deletetrans_CatchMethod(instance As trans_CatchMethod)
-    End Sub
-  Partial Private Sub Inserttrans_SalesInvoiceBuyer(instance As trans_SalesInvoiceBuyer)
-    End Sub
-  Partial Private Sub Updatetrans_SalesInvoiceBuyer(instance As trans_SalesInvoiceBuyer)
-    End Sub
-  Partial Private Sub Deletetrans_SalesInvoiceBuyer(instance As trans_SalesInvoiceBuyer)
     End Sub
   Partial Private Sub Inserttrans_SalesReport(instance As trans_SalesReport)
     End Sub
@@ -109,10 +103,16 @@ Partial Public Class mkdbDataContext
     End Sub
   Partial Private Sub Deletetrans_WeightSlip(instance As trans_WeightSlip)
     End Sub
+  Partial Private Sub Inserttrans_WeightSlipDetail(instance As trans_WeightSlipDetail)
+    End Sub
+  Partial Private Sub Updatetrans_WeightSlipDetail(instance As trans_WeightSlipDetail)
+    End Sub
+  Partial Private Sub Deletetrans_WeightSlipDetail(instance As trans_WeightSlipDetail)
+    End Sub
   #End Region
 	
 	Public Sub New()
-		MyBase.New(Global.MarketingSalesSystem.Settings.Default.MKDBConnectionString1, mappingSource)
+		MyBase.New(Global.MarketingSalesSystem.Settings.Default.MKDBConnectionString, mappingSource)
 		OnCreated
 	End Sub
 	
@@ -142,9 +142,9 @@ Partial Public Class mkdbDataContext
 		End Get
 	End Property
 	
-	Public ReadOnly Property trans_WeightSlipDetails() As System.Data.Linq.Table(Of trans_WeightSlipDetail)
+	Public ReadOnly Property trans_SalesInvoiceBuyers() As System.Data.Linq.Table(Of trans_SalesInvoiceBuyer)
 		Get
-			Return Me.GetTable(Of trans_WeightSlipDetail)
+			Return Me.GetTable(Of trans_SalesInvoiceBuyer)
 		End Get
 	End Property
 	
@@ -157,12 +157,6 @@ Partial Public Class mkdbDataContext
 	Public ReadOnly Property trans_CatchMethods() As System.Data.Linq.Table(Of trans_CatchMethod)
 		Get
 			Return Me.GetTable(Of trans_CatchMethod)
-		End Get
-	End Property
-	
-	Public ReadOnly Property trans_SalesInvoiceBuyers() As System.Data.Linq.Table(Of trans_SalesInvoiceBuyer)
-		Get
-			Return Me.GetTable(Of trans_SalesInvoiceBuyer)
 		End Get
 	End Property
 	
@@ -211,6 +205,24 @@ Partial Public Class mkdbDataContext
 	Public ReadOnly Property trans_WeightSlips() As System.Data.Linq.Table(Of trans_WeightSlip)
 		Get
 			Return Me.GetTable(Of trans_WeightSlip)
+		End Get
+	End Property
+	
+	Public ReadOnly Property trans_WeightSlipDetails() As System.Data.Linq.Table(Of trans_WeightSlipDetail)
+		Get
+			Return Me.GetTable(Of trans_WeightSlipDetail)
+		End Get
+	End Property
+	
+	Public ReadOnly Property vWeightSlipDetails() As System.Data.Linq.Table(Of vWeightSlipDetail)
+		Get
+			Return Me.GetTable(Of vWeightSlipDetail)
+		End Get
+	End Property
+	
+	Public ReadOnly Property vWeigthSlipBuyers() As System.Data.Linq.Table(Of vWeigthSlipBuyer)
+		Get
+			Return Me.GetTable(Of vWeigthSlipBuyer)
 		End Get
 	End Property
 End Class
@@ -391,1052 +403,6 @@ Partial Public Class trans_CatchActivity
 				Me._approvalStatus = value
 				Me.SendPropertyChanged("approvalStatus")
 				Me.OnapprovalStatusChanged
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_WeightSlipDetails")>  _
-Partial Public Class trans_WeightSlipDetail
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _weightSlipDetail_ID As Integer
-	
-	Private _weightSlip_ID As System.Nullable(Of Integer)
-	
-	Private _weightSlipDetailDate As System.Nullable(Of Date)
-	
-	Private _weigslipFormNum As String
-	
-	Private _batchNum As String
-	
-	Private _lotNum As String
-	
-	Private _plateNum As String
-	
-	Private _skipjack0_200To0_299 As System.Nullable(Of Decimal)
-	
-	Private _skipjack0_300To0_499 As System.Nullable(Of Decimal)
-	
-	Private _skipjack0_500To0_999 As System.Nullable(Of Decimal)
-	
-	Private _skipjack1_0To1_39 As System.Nullable(Of Decimal)
-	
-	Private _skipjack1_4To1_79 As System.Nullable(Of Decimal)
-	
-	Private _skipjack1_8To2_49 As System.Nullable(Of Decimal)
-	
-	Private _skipjack2_5To3_49 As System.Nullable(Of Decimal)
-	
-	Private _skipjack3_5AndUP As System.Nullable(Of Decimal)
-	
-	Private _yelllowfin0_300To0_499 As System.Nullable(Of Decimal)
-	
-	Private _yellowfin0_500To0_999 As System.Nullable(Of Decimal)
-	
-	Private _yellowfin1_0To1_49 As System.Nullable(Of Decimal)
-	
-	Private _yellowfin1_5To2_49 As System.Nullable(Of Decimal)
-	
-	Private _yellowfin2_5To3_49 As System.Nullable(Of Decimal)
-	
-	Private _yellowfin3_5To4_99 As System.Nullable(Of Decimal)
-	
-	Private _yellowfin5_0To9_99 As System.Nullable(Of Decimal)
-	
-	Private _yellowfin10AndUP As System.Nullable(Of Decimal)
-	
-	Private _bigeye0_300To0_499 As System.Nullable(Of Decimal)
-	
-	Private _bigeye0_500To0_999 As System.Nullable(Of Decimal)
-	
-	Private _bigeye1_0To1_49 As System.Nullable(Of Decimal)
-	
-	Private _bigeye1_5To2_49 As System.Nullable(Of Decimal)
-	
-	Private _bigeye2_5To3_49 As System.Nullable(Of Decimal)
-	
-	Private _bigeye3_5To4_99 As System.Nullable(Of Decimal)
-	
-	Private _bigeye5_0To9_99 As System.Nullable(Of Decimal)
-	
-	Private _bigeye10AndUP As System.Nullable(Of Decimal)
-	
-	Private _bonito0_300To0_499 As System.Nullable(Of Decimal)
-	
-	Private _bonito0_500AndUP As System.Nullable(Of Decimal)
-	
-	Private _fishmeal As System.Nullable(Of Decimal)
-	
-    #Region "Extensibility Method Definitions"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnweightSlipDetail_IDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnweightSlipDetail_IDChanged()
-    End Sub
-    Partial Private Sub OnweightSlip_IDChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnweightSlip_IDChanged()
-    End Sub
-    Partial Private Sub OnweightSlipDetailDateChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnweightSlipDetailDateChanged()
-    End Sub
-    Partial Private Sub OnweigslipFormNumChanging(value As String)
-    End Sub
-    Partial Private Sub OnweigslipFormNumChanged()
-    End Sub
-    Partial Private Sub OnbatchNumChanging(value As String)
-    End Sub
-    Partial Private Sub OnbatchNumChanged()
-    End Sub
-    Partial Private Sub OnlotNumChanging(value As String)
-    End Sub
-    Partial Private Sub OnlotNumChanged()
-    End Sub
-    Partial Private Sub OnplateNumChanging(value As String)
-    End Sub
-    Partial Private Sub OnplateNumChanged()
-    End Sub
-    Partial Private Sub Onskipjack0_200To0_299Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onskipjack0_200To0_299Changed()
-    End Sub
-    Partial Private Sub Onskipjack0_300To0_499Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onskipjack0_300To0_499Changed()
-    End Sub
-    Partial Private Sub Onskipjack0_500To0_999Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onskipjack0_500To0_999Changed()
-    End Sub
-    Partial Private Sub Onskipjack1_0To1_39Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onskipjack1_0To1_39Changed()
-    End Sub
-    Partial Private Sub Onskipjack1_4To1_79Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onskipjack1_4To1_79Changed()
-    End Sub
-    Partial Private Sub Onskipjack1_8To2_49Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onskipjack1_8To2_49Changed()
-    End Sub
-    Partial Private Sub Onskipjack2_5To3_49Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onskipjack2_5To3_49Changed()
-    End Sub
-    Partial Private Sub Onskipjack3_5AndUPChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onskipjack3_5AndUPChanged()
-    End Sub
-    Partial Private Sub Onyelllowfin0_300To0_499Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onyelllowfin0_300To0_499Changed()
-    End Sub
-    Partial Private Sub Onyellowfin0_500To0_999Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onyellowfin0_500To0_999Changed()
-    End Sub
-    Partial Private Sub Onyellowfin1_0To1_49Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onyellowfin1_0To1_49Changed()
-    End Sub
-    Partial Private Sub Onyellowfin1_5To2_49Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onyellowfin1_5To2_49Changed()
-    End Sub
-    Partial Private Sub Onyellowfin2_5To3_49Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onyellowfin2_5To3_49Changed()
-    End Sub
-    Partial Private Sub Onyellowfin3_5To4_99Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onyellowfin3_5To4_99Changed()
-    End Sub
-    Partial Private Sub Onyellowfin5_0To9_99Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onyellowfin5_0To9_99Changed()
-    End Sub
-    Partial Private Sub Onyellowfin10AndUPChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onyellowfin10AndUPChanged()
-    End Sub
-    Partial Private Sub Onbigeye0_300To0_499Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onbigeye0_300To0_499Changed()
-    End Sub
-    Partial Private Sub Onbigeye0_500To0_999Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onbigeye0_500To0_999Changed()
-    End Sub
-    Partial Private Sub Onbigeye1_0To1_49Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onbigeye1_0To1_49Changed()
-    End Sub
-    Partial Private Sub Onbigeye1_5To2_49Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onbigeye1_5To2_49Changed()
-    End Sub
-    Partial Private Sub Onbigeye2_5To3_49Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onbigeye2_5To3_49Changed()
-    End Sub
-    Partial Private Sub Onbigeye3_5To4_99Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onbigeye3_5To4_99Changed()
-    End Sub
-    Partial Private Sub Onbigeye5_0To9_99Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onbigeye5_0To9_99Changed()
-    End Sub
-    Partial Private Sub Onbigeye10AndUPChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onbigeye10AndUPChanged()
-    End Sub
-    Partial Private Sub Onbonito0_300To0_499Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onbonito0_300To0_499Changed()
-    End Sub
-    Partial Private Sub Onbonito0_500AndUPChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub Onbonito0_500AndUPChanged()
-    End Sub
-    Partial Private Sub OnfishmealChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnfishmealChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_weightSlipDetail_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property weightSlipDetail_ID() As Integer
-		Get
-			Return Me._weightSlipDetail_ID
-		End Get
-		Set
-			If ((Me._weightSlipDetail_ID = value)  _
-						= false) Then
-				Me.OnweightSlipDetail_IDChanging(value)
-				Me.SendPropertyChanging
-				Me._weightSlipDetail_ID = value
-				Me.SendPropertyChanged("weightSlipDetail_ID")
-				Me.OnweightSlipDetail_IDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_weightSlip_ID", DbType:="Int")>  _
-	Public Property weightSlip_ID() As System.Nullable(Of Integer)
-		Get
-			Return Me._weightSlip_ID
-		End Get
-		Set
-			If (Me._weightSlip_ID.Equals(value) = false) Then
-				Me.OnweightSlip_IDChanging(value)
-				Me.SendPropertyChanging
-				Me._weightSlip_ID = value
-				Me.SendPropertyChanged("weightSlip_ID")
-				Me.OnweightSlip_IDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_weightSlipDetailDate", DbType:="Date")>  _
-	Public Property weightSlipDetailDate() As System.Nullable(Of Date)
-		Get
-			Return Me._weightSlipDetailDate
-		End Get
-		Set
-			If (Me._weightSlipDetailDate.Equals(value) = false) Then
-				Me.OnweightSlipDetailDateChanging(value)
-				Me.SendPropertyChanging
-				Me._weightSlipDetailDate = value
-				Me.SendPropertyChanged("weightSlipDetailDate")
-				Me.OnweightSlipDetailDateChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_weigslipFormNum", DbType:="VarChar(20)")>  _
-	Public Property weigslipFormNum() As String
-		Get
-			Return Me._weigslipFormNum
-		End Get
-		Set
-			If (String.Equals(Me._weigslipFormNum, value) = false) Then
-				Me.OnweigslipFormNumChanging(value)
-				Me.SendPropertyChanging
-				Me._weigslipFormNum = value
-				Me.SendPropertyChanged("weigslipFormNum")
-				Me.OnweigslipFormNumChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_batchNum", DbType:="VarChar(20)")>  _
-	Public Property batchNum() As String
-		Get
-			Return Me._batchNum
-		End Get
-		Set
-			If (String.Equals(Me._batchNum, value) = false) Then
-				Me.OnbatchNumChanging(value)
-				Me.SendPropertyChanging
-				Me._batchNum = value
-				Me.SendPropertyChanged("batchNum")
-				Me.OnbatchNumChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_lotNum", DbType:="VarChar(20)")>  _
-	Public Property lotNum() As String
-		Get
-			Return Me._lotNum
-		End Get
-		Set
-			If (String.Equals(Me._lotNum, value) = false) Then
-				Me.OnlotNumChanging(value)
-				Me.SendPropertyChanging
-				Me._lotNum = value
-				Me.SendPropertyChanged("lotNum")
-				Me.OnlotNumChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_plateNum", DbType:="VarChar(20)")>  _
-	Public Property plateNum() As String
-		Get
-			Return Me._plateNum
-		End Get
-		Set
-			If (String.Equals(Me._plateNum, value) = false) Then
-				Me.OnplateNumChanging(value)
-				Me.SendPropertyChanging
-				Me._plateNum = value
-				Me.SendPropertyChanged("plateNum")
-				Me.OnplateNumChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack0_200To0_299", DbType:="Decimal(10,5)")>  _
-	Public Property skipjack0_200To0_299() As System.Nullable(Of Decimal)
-		Get
-			Return Me._skipjack0_200To0_299
-		End Get
-		Set
-			If (Me._skipjack0_200To0_299.Equals(value) = false) Then
-				Me.Onskipjack0_200To0_299Changing(value)
-				Me.SendPropertyChanging
-				Me._skipjack0_200To0_299 = value
-				Me.SendPropertyChanged("skipjack0_200To0_299")
-				Me.Onskipjack0_200To0_299Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack0_300To0_499", DbType:="Decimal(10,5)")>  _
-	Public Property skipjack0_300To0_499() As System.Nullable(Of Decimal)
-		Get
-			Return Me._skipjack0_300To0_499
-		End Get
-		Set
-			If (Me._skipjack0_300To0_499.Equals(value) = false) Then
-				Me.Onskipjack0_300To0_499Changing(value)
-				Me.SendPropertyChanging
-				Me._skipjack0_300To0_499 = value
-				Me.SendPropertyChanged("skipjack0_300To0_499")
-				Me.Onskipjack0_300To0_499Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack0_500To0_999", DbType:="Decimal(10,5)")>  _
-	Public Property skipjack0_500To0_999() As System.Nullable(Of Decimal)
-		Get
-			Return Me._skipjack0_500To0_999
-		End Get
-		Set
-			If (Me._skipjack0_500To0_999.Equals(value) = false) Then
-				Me.Onskipjack0_500To0_999Changing(value)
-				Me.SendPropertyChanging
-				Me._skipjack0_500To0_999 = value
-				Me.SendPropertyChanged("skipjack0_500To0_999")
-				Me.Onskipjack0_500To0_999Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack1_0To1_39", DbType:="Decimal(10,5)")>  _
-	Public Property skipjack1_0To1_39() As System.Nullable(Of Decimal)
-		Get
-			Return Me._skipjack1_0To1_39
-		End Get
-		Set
-			If (Me._skipjack1_0To1_39.Equals(value) = false) Then
-				Me.Onskipjack1_0To1_39Changing(value)
-				Me.SendPropertyChanging
-				Me._skipjack1_0To1_39 = value
-				Me.SendPropertyChanged("skipjack1_0To1_39")
-				Me.Onskipjack1_0To1_39Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack1_4To1_79", DbType:="Decimal(10,5)")>  _
-	Public Property skipjack1_4To1_79() As System.Nullable(Of Decimal)
-		Get
-			Return Me._skipjack1_4To1_79
-		End Get
-		Set
-			If (Me._skipjack1_4To1_79.Equals(value) = false) Then
-				Me.Onskipjack1_4To1_79Changing(value)
-				Me.SendPropertyChanging
-				Me._skipjack1_4To1_79 = value
-				Me.SendPropertyChanged("skipjack1_4To1_79")
-				Me.Onskipjack1_4To1_79Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack1_8To2_49", DbType:="Decimal(10,5)")>  _
-	Public Property skipjack1_8To2_49() As System.Nullable(Of Decimal)
-		Get
-			Return Me._skipjack1_8To2_49
-		End Get
-		Set
-			If (Me._skipjack1_8To2_49.Equals(value) = false) Then
-				Me.Onskipjack1_8To2_49Changing(value)
-				Me.SendPropertyChanging
-				Me._skipjack1_8To2_49 = value
-				Me.SendPropertyChanged("skipjack1_8To2_49")
-				Me.Onskipjack1_8To2_49Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack2_5To3_49", DbType:="Decimal(10,5)")>  _
-	Public Property skipjack2_5To3_49() As System.Nullable(Of Decimal)
-		Get
-			Return Me._skipjack2_5To3_49
-		End Get
-		Set
-			If (Me._skipjack2_5To3_49.Equals(value) = false) Then
-				Me.Onskipjack2_5To3_49Changing(value)
-				Me.SendPropertyChanging
-				Me._skipjack2_5To3_49 = value
-				Me.SendPropertyChanged("skipjack2_5To3_49")
-				Me.Onskipjack2_5To3_49Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack3_5AndUP", DbType:="Decimal(10,5)")>  _
-	Public Property skipjack3_5AndUP() As System.Nullable(Of Decimal)
-		Get
-			Return Me._skipjack3_5AndUP
-		End Get
-		Set
-			If (Me._skipjack3_5AndUP.Equals(value) = false) Then
-				Me.Onskipjack3_5AndUPChanging(value)
-				Me.SendPropertyChanging
-				Me._skipjack3_5AndUP = value
-				Me.SendPropertyChanged("skipjack3_5AndUP")
-				Me.Onskipjack3_5AndUPChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yelllowfin0_300To0_499", DbType:="Decimal(10,5)")>  _
-	Public Property yelllowfin0_300To0_499() As System.Nullable(Of Decimal)
-		Get
-			Return Me._yelllowfin0_300To0_499
-		End Get
-		Set
-			If (Me._yelllowfin0_300To0_499.Equals(value) = false) Then
-				Me.Onyelllowfin0_300To0_499Changing(value)
-				Me.SendPropertyChanging
-				Me._yelllowfin0_300To0_499 = value
-				Me.SendPropertyChanged("yelllowfin0_300To0_499")
-				Me.Onyelllowfin0_300To0_499Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yellowfin0_500To0_999", DbType:="Decimal(10,5)")>  _
-	Public Property yellowfin0_500To0_999() As System.Nullable(Of Decimal)
-		Get
-			Return Me._yellowfin0_500To0_999
-		End Get
-		Set
-			If (Me._yellowfin0_500To0_999.Equals(value) = false) Then
-				Me.Onyellowfin0_500To0_999Changing(value)
-				Me.SendPropertyChanging
-				Me._yellowfin0_500To0_999 = value
-				Me.SendPropertyChanged("yellowfin0_500To0_999")
-				Me.Onyellowfin0_500To0_999Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yellowfin1_0To1_49", DbType:="Decimal(10,5)")>  _
-	Public Property yellowfin1_0To1_49() As System.Nullable(Of Decimal)
-		Get
-			Return Me._yellowfin1_0To1_49
-		End Get
-		Set
-			If (Me._yellowfin1_0To1_49.Equals(value) = false) Then
-				Me.Onyellowfin1_0To1_49Changing(value)
-				Me.SendPropertyChanging
-				Me._yellowfin1_0To1_49 = value
-				Me.SendPropertyChanged("yellowfin1_0To1_49")
-				Me.Onyellowfin1_0To1_49Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yellowfin1_5To2_49", DbType:="Decimal(10,5)")>  _
-	Public Property yellowfin1_5To2_49() As System.Nullable(Of Decimal)
-		Get
-			Return Me._yellowfin1_5To2_49
-		End Get
-		Set
-			If (Me._yellowfin1_5To2_49.Equals(value) = false) Then
-				Me.Onyellowfin1_5To2_49Changing(value)
-				Me.SendPropertyChanging
-				Me._yellowfin1_5To2_49 = value
-				Me.SendPropertyChanged("yellowfin1_5To2_49")
-				Me.Onyellowfin1_5To2_49Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yellowfin2_5To3_49", DbType:="Decimal(10,5)")>  _
-	Public Property yellowfin2_5To3_49() As System.Nullable(Of Decimal)
-		Get
-			Return Me._yellowfin2_5To3_49
-		End Get
-		Set
-			If (Me._yellowfin2_5To3_49.Equals(value) = false) Then
-				Me.Onyellowfin2_5To3_49Changing(value)
-				Me.SendPropertyChanging
-				Me._yellowfin2_5To3_49 = value
-				Me.SendPropertyChanged("yellowfin2_5To3_49")
-				Me.Onyellowfin2_5To3_49Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yellowfin3_5To4_99", DbType:="Decimal(10,5)")>  _
-	Public Property yellowfin3_5To4_99() As System.Nullable(Of Decimal)
-		Get
-			Return Me._yellowfin3_5To4_99
-		End Get
-		Set
-			If (Me._yellowfin3_5To4_99.Equals(value) = false) Then
-				Me.Onyellowfin3_5To4_99Changing(value)
-				Me.SendPropertyChanging
-				Me._yellowfin3_5To4_99 = value
-				Me.SendPropertyChanged("yellowfin3_5To4_99")
-				Me.Onyellowfin3_5To4_99Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yellowfin5_0To9_99", DbType:="Decimal(10,5)")>  _
-	Public Property yellowfin5_0To9_99() As System.Nullable(Of Decimal)
-		Get
-			Return Me._yellowfin5_0To9_99
-		End Get
-		Set
-			If (Me._yellowfin5_0To9_99.Equals(value) = false) Then
-				Me.Onyellowfin5_0To9_99Changing(value)
-				Me.SendPropertyChanging
-				Me._yellowfin5_0To9_99 = value
-				Me.SendPropertyChanged("yellowfin5_0To9_99")
-				Me.Onyellowfin5_0To9_99Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yellowfin10AndUP", DbType:="Decimal(10,5)")>  _
-	Public Property yellowfin10AndUP() As System.Nullable(Of Decimal)
-		Get
-			Return Me._yellowfin10AndUP
-		End Get
-		Set
-			If (Me._yellowfin10AndUP.Equals(value) = false) Then
-				Me.Onyellowfin10AndUPChanging(value)
-				Me.SendPropertyChanging
-				Me._yellowfin10AndUP = value
-				Me.SendPropertyChanged("yellowfin10AndUP")
-				Me.Onyellowfin10AndUPChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye0_300To0_499", DbType:="Decimal(10,5)")>  _
-	Public Property bigeye0_300To0_499() As System.Nullable(Of Decimal)
-		Get
-			Return Me._bigeye0_300To0_499
-		End Get
-		Set
-			If (Me._bigeye0_300To0_499.Equals(value) = false) Then
-				Me.Onbigeye0_300To0_499Changing(value)
-				Me.SendPropertyChanging
-				Me._bigeye0_300To0_499 = value
-				Me.SendPropertyChanged("bigeye0_300To0_499")
-				Me.Onbigeye0_300To0_499Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye0_500To0_999", DbType:="Decimal(10,5)")>  _
-	Public Property bigeye0_500To0_999() As System.Nullable(Of Decimal)
-		Get
-			Return Me._bigeye0_500To0_999
-		End Get
-		Set
-			If (Me._bigeye0_500To0_999.Equals(value) = false) Then
-				Me.Onbigeye0_500To0_999Changing(value)
-				Me.SendPropertyChanging
-				Me._bigeye0_500To0_999 = value
-				Me.SendPropertyChanged("bigeye0_500To0_999")
-				Me.Onbigeye0_500To0_999Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye1_0To1_49", DbType:="Decimal(10,5)")>  _
-	Public Property bigeye1_0To1_49() As System.Nullable(Of Decimal)
-		Get
-			Return Me._bigeye1_0To1_49
-		End Get
-		Set
-			If (Me._bigeye1_0To1_49.Equals(value) = false) Then
-				Me.Onbigeye1_0To1_49Changing(value)
-				Me.SendPropertyChanging
-				Me._bigeye1_0To1_49 = value
-				Me.SendPropertyChanged("bigeye1_0To1_49")
-				Me.Onbigeye1_0To1_49Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye1_5To2_49", DbType:="Decimal(10,5)")>  _
-	Public Property bigeye1_5To2_49() As System.Nullable(Of Decimal)
-		Get
-			Return Me._bigeye1_5To2_49
-		End Get
-		Set
-			If (Me._bigeye1_5To2_49.Equals(value) = false) Then
-				Me.Onbigeye1_5To2_49Changing(value)
-				Me.SendPropertyChanging
-				Me._bigeye1_5To2_49 = value
-				Me.SendPropertyChanged("bigeye1_5To2_49")
-				Me.Onbigeye1_5To2_49Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye2_5To3_49", DbType:="Decimal(10,5)")>  _
-	Public Property bigeye2_5To3_49() As System.Nullable(Of Decimal)
-		Get
-			Return Me._bigeye2_5To3_49
-		End Get
-		Set
-			If (Me._bigeye2_5To3_49.Equals(value) = false) Then
-				Me.Onbigeye2_5To3_49Changing(value)
-				Me.SendPropertyChanging
-				Me._bigeye2_5To3_49 = value
-				Me.SendPropertyChanged("bigeye2_5To3_49")
-				Me.Onbigeye2_5To3_49Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye3_5To4_99", DbType:="Decimal(10,5)")>  _
-	Public Property bigeye3_5To4_99() As System.Nullable(Of Decimal)
-		Get
-			Return Me._bigeye3_5To4_99
-		End Get
-		Set
-			If (Me._bigeye3_5To4_99.Equals(value) = false) Then
-				Me.Onbigeye3_5To4_99Changing(value)
-				Me.SendPropertyChanging
-				Me._bigeye3_5To4_99 = value
-				Me.SendPropertyChanged("bigeye3_5To4_99")
-				Me.Onbigeye3_5To4_99Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye5_0To9_99", DbType:="Decimal(10,5)")>  _
-	Public Property bigeye5_0To9_99() As System.Nullable(Of Decimal)
-		Get
-			Return Me._bigeye5_0To9_99
-		End Get
-		Set
-			If (Me._bigeye5_0To9_99.Equals(value) = false) Then
-				Me.Onbigeye5_0To9_99Changing(value)
-				Me.SendPropertyChanging
-				Me._bigeye5_0To9_99 = value
-				Me.SendPropertyChanged("bigeye5_0To9_99")
-				Me.Onbigeye5_0To9_99Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye10AndUP", DbType:="Decimal(10,5)")>  _
-	Public Property bigeye10AndUP() As System.Nullable(Of Decimal)
-		Get
-			Return Me._bigeye10AndUP
-		End Get
-		Set
-			If (Me._bigeye10AndUP.Equals(value) = false) Then
-				Me.Onbigeye10AndUPChanging(value)
-				Me.SendPropertyChanging
-				Me._bigeye10AndUP = value
-				Me.SendPropertyChanged("bigeye10AndUP")
-				Me.Onbigeye10AndUPChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bonito0_300To0_499", DbType:="Decimal(10,5)")>  _
-	Public Property bonito0_300To0_499() As System.Nullable(Of Decimal)
-		Get
-			Return Me._bonito0_300To0_499
-		End Get
-		Set
-			If (Me._bonito0_300To0_499.Equals(value) = false) Then
-				Me.Onbonito0_300To0_499Changing(value)
-				Me.SendPropertyChanging
-				Me._bonito0_300To0_499 = value
-				Me.SendPropertyChanged("bonito0_300To0_499")
-				Me.Onbonito0_300To0_499Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bonito0_500AndUP", DbType:="Decimal(10,5)")>  _
-	Public Property bonito0_500AndUP() As System.Nullable(Of Decimal)
-		Get
-			Return Me._bonito0_500AndUP
-		End Get
-		Set
-			If (Me._bonito0_500AndUP.Equals(value) = false) Then
-				Me.Onbonito0_500AndUPChanging(value)
-				Me.SendPropertyChanging
-				Me._bonito0_500AndUP = value
-				Me.SendPropertyChanged("bonito0_500AndUP")
-				Me.Onbonito0_500AndUPChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_fishmeal", DbType:="Decimal(10,5)")>  _
-	Public Property fishmeal() As System.Nullable(Of Decimal)
-		Get
-			Return Me._fishmeal
-		End Get
-		Set
-			If (Me._fishmeal.Equals(value) = false) Then
-				Me.OnfishmealChanging(value)
-				Me.SendPropertyChanging
-				Me._fishmeal = value
-				Me.SendPropertyChanged("fishmeal")
-				Me.OnfishmealChanged
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_CatchActivityDetails")>  _
-Partial Public Class trans_CatchActivityDetail
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _catchActivityDetail_ID As Integer
-	
-	Private _catchActivity_ID As Integer
-	
-	Private _vessel_ID As Integer
-	
-    #Region "Extensibility Method Definitions"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OncatchActivityDetail_IDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OncatchActivityDetail_IDChanged()
-    End Sub
-    Partial Private Sub OncatchActivity_IDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OncatchActivity_IDChanged()
-    End Sub
-    Partial Private Sub Onvessel_IDChanging(value As Integer)
-    End Sub
-    Partial Private Sub Onvessel_IDChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchActivityDetail_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property catchActivityDetail_ID() As Integer
-		Get
-			Return Me._catchActivityDetail_ID
-		End Get
-		Set
-			If ((Me._catchActivityDetail_ID = value)  _
-						= false) Then
-				Me.OncatchActivityDetail_IDChanging(value)
-				Me.SendPropertyChanging
-				Me._catchActivityDetail_ID = value
-				Me.SendPropertyChanged("catchActivityDetail_ID")
-				Me.OncatchActivityDetail_IDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchActivity_ID", DbType:="Int NOT NULL")>  _
-	Public Property catchActivity_ID() As Integer
-		Get
-			Return Me._catchActivity_ID
-		End Get
-		Set
-			If ((Me._catchActivity_ID = value)  _
-						= false) Then
-				Me.OncatchActivity_IDChanging(value)
-				Me.SendPropertyChanging
-				Me._catchActivity_ID = value
-				Me.SendPropertyChanged("catchActivity_ID")
-				Me.OncatchActivity_IDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_vessel_ID", DbType:="Int NOT NULL")>  _
-	Public Property vessel_ID() As Integer
-		Get
-			Return Me._vessel_ID
-		End Get
-		Set
-			If ((Me._vessel_ID = value)  _
-						= false) Then
-				Me.Onvessel_IDChanging(value)
-				Me.SendPropertyChanging
-				Me._vessel_ID = value
-				Me.SendPropertyChanged("vessel_ID")
-				Me.Onvessel_IDChanged
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_CatchMethod")>  _
-Partial Public Class trans_CatchMethod
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _catchMethod_ID As Integer
-	
-	Private _catchMethod As String
-	
-	Private _active As System.Nullable(Of Boolean)
-	
-	Private _modifiedDate As System.Nullable(Of Date)
-	
-	Private _modifiedBy As System.Nullable(Of Date)
-	
-    #Region "Extensibility Method Definitions"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OncatchMethod_IDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OncatchMethod_IDChanged()
-    End Sub
-    Partial Private Sub OncatchMethodChanging(value As String)
-    End Sub
-    Partial Private Sub OncatchMethodChanged()
-    End Sub
-    Partial Private Sub OnactiveChanging(value As System.Nullable(Of Boolean))
-    End Sub
-    Partial Private Sub OnactiveChanged()
-    End Sub
-    Partial Private Sub OnmodifiedDateChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnmodifiedDateChanged()
-    End Sub
-    Partial Private Sub OnmodifiedByChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnmodifiedByChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchMethod_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property catchMethod_ID() As Integer
-		Get
-			Return Me._catchMethod_ID
-		End Get
-		Set
-			If ((Me._catchMethod_ID = value)  _
-						= false) Then
-				Me.OncatchMethod_IDChanging(value)
-				Me.SendPropertyChanging
-				Me._catchMethod_ID = value
-				Me.SendPropertyChanged("catchMethod_ID")
-				Me.OncatchMethod_IDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchMethod", DbType:="VarChar(255) NOT NULL", CanBeNull:=false)>  _
-	Public Property catchMethod() As String
-		Get
-			Return Me._catchMethod
-		End Get
-		Set
-			If (String.Equals(Me._catchMethod, value) = false) Then
-				Me.OncatchMethodChanging(value)
-				Me.SendPropertyChanging
-				Me._catchMethod = value
-				Me.SendPropertyChanged("catchMethod")
-				Me.OncatchMethodChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_active", DbType:="Bit")>  _
-	Public Property active() As System.Nullable(Of Boolean)
-		Get
-			Return Me._active
-		End Get
-		Set
-			If (Me._active.Equals(value) = false) Then
-				Me.OnactiveChanging(value)
-				Me.SendPropertyChanging
-				Me._active = value
-				Me.SendPropertyChanged("active")
-				Me.OnactiveChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_modifiedDate", DbType:="DateTime")>  _
-	Public Property modifiedDate() As System.Nullable(Of Date)
-		Get
-			Return Me._modifiedDate
-		End Get
-		Set
-			If (Me._modifiedDate.Equals(value) = false) Then
-				Me.OnmodifiedDateChanging(value)
-				Me.SendPropertyChanging
-				Me._modifiedDate = value
-				Me.SendPropertyChanged("modifiedDate")
-				Me.OnmodifiedDateChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_modifiedBy", DbType:="DateTime")>  _
-	Public Property modifiedBy() As System.Nullable(Of Date)
-		Get
-			Return Me._modifiedBy
-		End Get
-		Set
-			If (Me._modifiedBy.Equals(value) = false) Then
-				Me.OnmodifiedByChanging(value)
-				Me.SendPropertyChanging
-				Me._modifiedBy = value
-				Me.SendPropertyChanged("modifiedBy")
-				Me.OnmodifiedByChanged
 			End If
 		End Set
 	End Property
@@ -1744,6 +710,264 @@ Partial Public Class trans_SalesInvoiceBuyer
 				Me._dateCreated = value
 				Me.SendPropertyChanged("dateCreated")
 				Me.OndateCreatedChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_CatchActivityDetails")>  _
+Partial Public Class trans_CatchActivityDetail
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _catchActivityDetail_ID As Integer
+	
+	Private _catchActivity_ID As Integer
+	
+	Private _vessel_ID As Integer
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OncatchActivityDetail_IDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OncatchActivityDetail_IDChanged()
+    End Sub
+    Partial Private Sub OncatchActivity_IDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OncatchActivity_IDChanged()
+    End Sub
+    Partial Private Sub Onvessel_IDChanging(value As Integer)
+    End Sub
+    Partial Private Sub Onvessel_IDChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchActivityDetail_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property catchActivityDetail_ID() As Integer
+		Get
+			Return Me._catchActivityDetail_ID
+		End Get
+		Set
+			If ((Me._catchActivityDetail_ID = value)  _
+						= false) Then
+				Me.OncatchActivityDetail_IDChanging(value)
+				Me.SendPropertyChanging
+				Me._catchActivityDetail_ID = value
+				Me.SendPropertyChanged("catchActivityDetail_ID")
+				Me.OncatchActivityDetail_IDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchActivity_ID", DbType:="Int NOT NULL")>  _
+	Public Property catchActivity_ID() As Integer
+		Get
+			Return Me._catchActivity_ID
+		End Get
+		Set
+			If ((Me._catchActivity_ID = value)  _
+						= false) Then
+				Me.OncatchActivity_IDChanging(value)
+				Me.SendPropertyChanging
+				Me._catchActivity_ID = value
+				Me.SendPropertyChanged("catchActivity_ID")
+				Me.OncatchActivity_IDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_vessel_ID", DbType:="Int NOT NULL")>  _
+	Public Property vessel_ID() As Integer
+		Get
+			Return Me._vessel_ID
+		End Get
+		Set
+			If ((Me._vessel_ID = value)  _
+						= false) Then
+				Me.Onvessel_IDChanging(value)
+				Me.SendPropertyChanging
+				Me._vessel_ID = value
+				Me.SendPropertyChanged("vessel_ID")
+				Me.Onvessel_IDChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_CatchMethod")>  _
+Partial Public Class trans_CatchMethod
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _catchMethod_ID As Integer
+	
+	Private _catchMethod As String
+	
+	Private _active As System.Nullable(Of Boolean)
+	
+	Private _modifiedDate As System.Nullable(Of Date)
+	
+	Private _modifiedBy As System.Nullable(Of Date)
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OncatchMethod_IDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OncatchMethod_IDChanged()
+    End Sub
+    Partial Private Sub OncatchMethodChanging(value As String)
+    End Sub
+    Partial Private Sub OncatchMethodChanged()
+    End Sub
+    Partial Private Sub OnactiveChanging(value As System.Nullable(Of Boolean))
+    End Sub
+    Partial Private Sub OnactiveChanged()
+    End Sub
+    Partial Private Sub OnmodifiedDateChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnmodifiedDateChanged()
+    End Sub
+    Partial Private Sub OnmodifiedByChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnmodifiedByChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchMethod_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property catchMethod_ID() As Integer
+		Get
+			Return Me._catchMethod_ID
+		End Get
+		Set
+			If ((Me._catchMethod_ID = value)  _
+						= false) Then
+				Me.OncatchMethod_IDChanging(value)
+				Me.SendPropertyChanging
+				Me._catchMethod_ID = value
+				Me.SendPropertyChanged("catchMethod_ID")
+				Me.OncatchMethod_IDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_catchMethod", DbType:="VarChar(255) NOT NULL", CanBeNull:=false)>  _
+	Public Property catchMethod() As String
+		Get
+			Return Me._catchMethod
+		End Get
+		Set
+			If (String.Equals(Me._catchMethod, value) = false) Then
+				Me.OncatchMethodChanging(value)
+				Me.SendPropertyChanging
+				Me._catchMethod = value
+				Me.SendPropertyChanged("catchMethod")
+				Me.OncatchMethodChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_active", DbType:="Bit")>  _
+	Public Property active() As System.Nullable(Of Boolean)
+		Get
+			Return Me._active
+		End Get
+		Set
+			If (Me._active.Equals(value) = false) Then
+				Me.OnactiveChanging(value)
+				Me.SendPropertyChanging
+				Me._active = value
+				Me.SendPropertyChanged("active")
+				Me.OnactiveChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_modifiedDate", DbType:="DateTime")>  _
+	Public Property modifiedDate() As System.Nullable(Of Date)
+		Get
+			Return Me._modifiedDate
+		End Get
+		Set
+			If (Me._modifiedDate.Equals(value) = false) Then
+				Me.OnmodifiedDateChanging(value)
+				Me.SendPropertyChanging
+				Me._modifiedDate = value
+				Me.SendPropertyChanged("modifiedDate")
+				Me.OnmodifiedDateChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_modifiedBy", DbType:="DateTime")>  _
+	Public Property modifiedBy() As System.Nullable(Of Date)
+		Get
+			Return Me._modifiedBy
+		End Get
+		Set
+			If (Me._modifiedBy.Equals(value) = false) Then
+				Me.OnmodifiedByChanging(value)
+				Me.SendPropertyChanging
+				Me._modifiedBy = value
+				Me.SendPropertyChanged("modifiedBy")
+				Me.OnmodifiedByChanged
 			End If
 		End Set
 	End Property
@@ -5175,4 +4399,865 @@ Partial Public Class trans_WeightSlip
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_WeightSlipDetails")>  _
+Partial Public Class trans_WeightSlipDetail
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _weightSlipDetail_ID As Integer
+	
+	Private _weightSlip_ID As System.Nullable(Of Integer)
+	
+	Private _weightSlipDetailDate As System.Nullable(Of Date)
+	
+	Private _weigslipFormNum As String
+	
+	Private _batchNum As String
+	
+	Private _lotNum As String
+	
+	Private _plateNum As String
+	
+	Private _skipjack0_200To0_299 As System.Nullable(Of Decimal)
+	
+	Private _skipjack0_300To0_499 As System.Nullable(Of Decimal)
+	
+	Private _skipjack0_500To0_999 As System.Nullable(Of Decimal)
+	
+	Private _skipjack1_0To1_39 As System.Nullable(Of Decimal)
+	
+	Private _skipjack1_4To1_79 As System.Nullable(Of Decimal)
+	
+	Private _skipjack1_8To2_49 As System.Nullable(Of Decimal)
+	
+	Private _skipjack2_5To3_49 As System.Nullable(Of Decimal)
+	
+	Private _skipjack3_5AndUP As System.Nullable(Of Decimal)
+	
+	Private _yelllowfin0_300To0_499 As System.Nullable(Of Decimal)
+	
+	Private _yellowfin0_500To0_999 As System.Nullable(Of Decimal)
+	
+	Private _yellowfin1_0To1_49 As System.Nullable(Of Decimal)
+	
+	Private _yellowfin1_5To2_49 As System.Nullable(Of Decimal)
+	
+	Private _yellowfin2_5To3_49 As System.Nullable(Of Decimal)
+	
+	Private _yellowfin3_5To4_99 As System.Nullable(Of Decimal)
+	
+	Private _yellowfin5_0To9_99 As System.Nullable(Of Decimal)
+	
+	Private _yellowfin10AndUP As System.Nullable(Of Decimal)
+	
+	Private _bigeye0_300To0_499 As System.Nullable(Of Decimal)
+	
+	Private _bigeye0_500To0_999 As System.Nullable(Of Decimal)
+	
+	Private _bigeye1_0To1_49 As System.Nullable(Of Decimal)
+	
+	Private _bigeye1_5To2_49 As System.Nullable(Of Decimal)
+	
+	Private _bigeye2_5To3_49 As System.Nullable(Of Decimal)
+	
+	Private _bigeye3_5To4_99 As System.Nullable(Of Decimal)
+	
+	Private _bigeye5_0To9_99 As System.Nullable(Of Decimal)
+	
+	Private _bigeye10AndUP As System.Nullable(Of Decimal)
+	
+	Private _bonito0_300To0_499 As System.Nullable(Of Decimal)
+	
+	Private _bonito0_500AndUP As System.Nullable(Of Decimal)
+	
+	Private _fishmeal As System.Nullable(Of Decimal)
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnweightSlipDetail_IDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnweightSlipDetail_IDChanged()
+    End Sub
+    Partial Private Sub OnweightSlip_IDChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnweightSlip_IDChanged()
+    End Sub
+    Partial Private Sub OnweightSlipDetailDateChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnweightSlipDetailDateChanged()
+    End Sub
+    Partial Private Sub OnweigslipFormNumChanging(value As String)
+    End Sub
+    Partial Private Sub OnweigslipFormNumChanged()
+    End Sub
+    Partial Private Sub OnbatchNumChanging(value As String)
+    End Sub
+    Partial Private Sub OnbatchNumChanged()
+    End Sub
+    Partial Private Sub OnlotNumChanging(value As String)
+    End Sub
+    Partial Private Sub OnlotNumChanged()
+    End Sub
+    Partial Private Sub OnplateNumChanging(value As String)
+    End Sub
+    Partial Private Sub OnplateNumChanged()
+    End Sub
+    Partial Private Sub Onskipjack0_200To0_299Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onskipjack0_200To0_299Changed()
+    End Sub
+    Partial Private Sub Onskipjack0_300To0_499Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onskipjack0_300To0_499Changed()
+    End Sub
+    Partial Private Sub Onskipjack0_500To0_999Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onskipjack0_500To0_999Changed()
+    End Sub
+    Partial Private Sub Onskipjack1_0To1_39Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onskipjack1_0To1_39Changed()
+    End Sub
+    Partial Private Sub Onskipjack1_4To1_79Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onskipjack1_4To1_79Changed()
+    End Sub
+    Partial Private Sub Onskipjack1_8To2_49Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onskipjack1_8To2_49Changed()
+    End Sub
+    Partial Private Sub Onskipjack2_5To3_49Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onskipjack2_5To3_49Changed()
+    End Sub
+    Partial Private Sub Onskipjack3_5AndUPChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onskipjack3_5AndUPChanged()
+    End Sub
+    Partial Private Sub Onyelllowfin0_300To0_499Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onyelllowfin0_300To0_499Changed()
+    End Sub
+    Partial Private Sub Onyellowfin0_500To0_999Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onyellowfin0_500To0_999Changed()
+    End Sub
+    Partial Private Sub Onyellowfin1_0To1_49Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onyellowfin1_0To1_49Changed()
+    End Sub
+    Partial Private Sub Onyellowfin1_5To2_49Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onyellowfin1_5To2_49Changed()
+    End Sub
+    Partial Private Sub Onyellowfin2_5To3_49Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onyellowfin2_5To3_49Changed()
+    End Sub
+    Partial Private Sub Onyellowfin3_5To4_99Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onyellowfin3_5To4_99Changed()
+    End Sub
+    Partial Private Sub Onyellowfin5_0To9_99Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onyellowfin5_0To9_99Changed()
+    End Sub
+    Partial Private Sub Onyellowfin10AndUPChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onyellowfin10AndUPChanged()
+    End Sub
+    Partial Private Sub Onbigeye0_300To0_499Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onbigeye0_300To0_499Changed()
+    End Sub
+    Partial Private Sub Onbigeye0_500To0_999Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onbigeye0_500To0_999Changed()
+    End Sub
+    Partial Private Sub Onbigeye1_0To1_49Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onbigeye1_0To1_49Changed()
+    End Sub
+    Partial Private Sub Onbigeye1_5To2_49Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onbigeye1_5To2_49Changed()
+    End Sub
+    Partial Private Sub Onbigeye2_5To3_49Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onbigeye2_5To3_49Changed()
+    End Sub
+    Partial Private Sub Onbigeye3_5To4_99Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onbigeye3_5To4_99Changed()
+    End Sub
+    Partial Private Sub Onbigeye5_0To9_99Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onbigeye5_0To9_99Changed()
+    End Sub
+    Partial Private Sub Onbigeye10AndUPChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onbigeye10AndUPChanged()
+    End Sub
+    Partial Private Sub Onbonito0_300To0_499Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onbonito0_300To0_499Changed()
+    End Sub
+    Partial Private Sub Onbonito0_500AndUPChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub Onbonito0_500AndUPChanged()
+    End Sub
+    Partial Private Sub OnfishmealChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnfishmealChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_weightSlipDetail_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property weightSlipDetail_ID() As Integer
+		Get
+			Return Me._weightSlipDetail_ID
+		End Get
+		Set
+			If ((Me._weightSlipDetail_ID = value)  _
+						= false) Then
+				Me.OnweightSlipDetail_IDChanging(value)
+				Me.SendPropertyChanging
+				Me._weightSlipDetail_ID = value
+				Me.SendPropertyChanged("weightSlipDetail_ID")
+				Me.OnweightSlipDetail_IDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_weightSlip_ID", DbType:="Int")>  _
+	Public Property weightSlip_ID() As System.Nullable(Of Integer)
+		Get
+			Return Me._weightSlip_ID
+		End Get
+		Set
+			If (Me._weightSlip_ID.Equals(value) = false) Then
+				Me.OnweightSlip_IDChanging(value)
+				Me.SendPropertyChanging
+				Me._weightSlip_ID = value
+				Me.SendPropertyChanged("weightSlip_ID")
+				Me.OnweightSlip_IDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_weightSlipDetailDate", DbType:="Date")>  _
+	Public Property weightSlipDetailDate() As System.Nullable(Of Date)
+		Get
+			Return Me._weightSlipDetailDate
+		End Get
+		Set
+			If (Me._weightSlipDetailDate.Equals(value) = false) Then
+				Me.OnweightSlipDetailDateChanging(value)
+				Me.SendPropertyChanging
+				Me._weightSlipDetailDate = value
+				Me.SendPropertyChanged("weightSlipDetailDate")
+				Me.OnweightSlipDetailDateChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_weigslipFormNum", DbType:="VarChar(20)")>  _
+	Public Property weigslipFormNum() As String
+		Get
+			Return Me._weigslipFormNum
+		End Get
+		Set
+			If (String.Equals(Me._weigslipFormNum, value) = false) Then
+				Me.OnweigslipFormNumChanging(value)
+				Me.SendPropertyChanging
+				Me._weigslipFormNum = value
+				Me.SendPropertyChanged("weigslipFormNum")
+				Me.OnweigslipFormNumChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_batchNum", DbType:="VarChar(20)")>  _
+	Public Property batchNum() As String
+		Get
+			Return Me._batchNum
+		End Get
+		Set
+			If (String.Equals(Me._batchNum, value) = false) Then
+				Me.OnbatchNumChanging(value)
+				Me.SendPropertyChanging
+				Me._batchNum = value
+				Me.SendPropertyChanged("batchNum")
+				Me.OnbatchNumChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_lotNum", DbType:="VarChar(20)")>  _
+	Public Property lotNum() As String
+		Get
+			Return Me._lotNum
+		End Get
+		Set
+			If (String.Equals(Me._lotNum, value) = false) Then
+				Me.OnlotNumChanging(value)
+				Me.SendPropertyChanging
+				Me._lotNum = value
+				Me.SendPropertyChanged("lotNum")
+				Me.OnlotNumChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_plateNum", DbType:="VarChar(20)")>  _
+	Public Property plateNum() As String
+		Get
+			Return Me._plateNum
+		End Get
+		Set
+			If (String.Equals(Me._plateNum, value) = false) Then
+				Me.OnplateNumChanging(value)
+				Me.SendPropertyChanging
+				Me._plateNum = value
+				Me.SendPropertyChanged("plateNum")
+				Me.OnplateNumChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack0_200To0_299", DbType:="Decimal(10,5)")>  _
+	Public Property skipjack0_200To0_299() As System.Nullable(Of Decimal)
+		Get
+			Return Me._skipjack0_200To0_299
+		End Get
+		Set
+			If (Me._skipjack0_200To0_299.Equals(value) = false) Then
+				Me.Onskipjack0_200To0_299Changing(value)
+				Me.SendPropertyChanging
+				Me._skipjack0_200To0_299 = value
+				Me.SendPropertyChanged("skipjack0_200To0_299")
+				Me.Onskipjack0_200To0_299Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack0_300To0_499", DbType:="Decimal(10,5)")>  _
+	Public Property skipjack0_300To0_499() As System.Nullable(Of Decimal)
+		Get
+			Return Me._skipjack0_300To0_499
+		End Get
+		Set
+			If (Me._skipjack0_300To0_499.Equals(value) = false) Then
+				Me.Onskipjack0_300To0_499Changing(value)
+				Me.SendPropertyChanging
+				Me._skipjack0_300To0_499 = value
+				Me.SendPropertyChanged("skipjack0_300To0_499")
+				Me.Onskipjack0_300To0_499Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack0_500To0_999", DbType:="Decimal(10,5)")>  _
+	Public Property skipjack0_500To0_999() As System.Nullable(Of Decimal)
+		Get
+			Return Me._skipjack0_500To0_999
+		End Get
+		Set
+			If (Me._skipjack0_500To0_999.Equals(value) = false) Then
+				Me.Onskipjack0_500To0_999Changing(value)
+				Me.SendPropertyChanging
+				Me._skipjack0_500To0_999 = value
+				Me.SendPropertyChanged("skipjack0_500To0_999")
+				Me.Onskipjack0_500To0_999Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack1_0To1_39", DbType:="Decimal(10,5)")>  _
+	Public Property skipjack1_0To1_39() As System.Nullable(Of Decimal)
+		Get
+			Return Me._skipjack1_0To1_39
+		End Get
+		Set
+			If (Me._skipjack1_0To1_39.Equals(value) = false) Then
+				Me.Onskipjack1_0To1_39Changing(value)
+				Me.SendPropertyChanging
+				Me._skipjack1_0To1_39 = value
+				Me.SendPropertyChanged("skipjack1_0To1_39")
+				Me.Onskipjack1_0To1_39Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack1_4To1_79", DbType:="Decimal(10,5)")>  _
+	Public Property skipjack1_4To1_79() As System.Nullable(Of Decimal)
+		Get
+			Return Me._skipjack1_4To1_79
+		End Get
+		Set
+			If (Me._skipjack1_4To1_79.Equals(value) = false) Then
+				Me.Onskipjack1_4To1_79Changing(value)
+				Me.SendPropertyChanging
+				Me._skipjack1_4To1_79 = value
+				Me.SendPropertyChanged("skipjack1_4To1_79")
+				Me.Onskipjack1_4To1_79Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack1_8To2_49", DbType:="Decimal(10,5)")>  _
+	Public Property skipjack1_8To2_49() As System.Nullable(Of Decimal)
+		Get
+			Return Me._skipjack1_8To2_49
+		End Get
+		Set
+			If (Me._skipjack1_8To2_49.Equals(value) = false) Then
+				Me.Onskipjack1_8To2_49Changing(value)
+				Me.SendPropertyChanging
+				Me._skipjack1_8To2_49 = value
+				Me.SendPropertyChanged("skipjack1_8To2_49")
+				Me.Onskipjack1_8To2_49Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack2_5To3_49", DbType:="Decimal(10,5)")>  _
+	Public Property skipjack2_5To3_49() As System.Nullable(Of Decimal)
+		Get
+			Return Me._skipjack2_5To3_49
+		End Get
+		Set
+			If (Me._skipjack2_5To3_49.Equals(value) = false) Then
+				Me.Onskipjack2_5To3_49Changing(value)
+				Me.SendPropertyChanging
+				Me._skipjack2_5To3_49 = value
+				Me.SendPropertyChanged("skipjack2_5To3_49")
+				Me.Onskipjack2_5To3_49Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_skipjack3_5AndUP", DbType:="Decimal(10,5)")>  _
+	Public Property skipjack3_5AndUP() As System.Nullable(Of Decimal)
+		Get
+			Return Me._skipjack3_5AndUP
+		End Get
+		Set
+			If (Me._skipjack3_5AndUP.Equals(value) = false) Then
+				Me.Onskipjack3_5AndUPChanging(value)
+				Me.SendPropertyChanging
+				Me._skipjack3_5AndUP = value
+				Me.SendPropertyChanged("skipjack3_5AndUP")
+				Me.Onskipjack3_5AndUPChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yelllowfin0_300To0_499", DbType:="Decimal(10,5)")>  _
+	Public Property yelllowfin0_300To0_499() As System.Nullable(Of Decimal)
+		Get
+			Return Me._yelllowfin0_300To0_499
+		End Get
+		Set
+			If (Me._yelllowfin0_300To0_499.Equals(value) = false) Then
+				Me.Onyelllowfin0_300To0_499Changing(value)
+				Me.SendPropertyChanging
+				Me._yelllowfin0_300To0_499 = value
+				Me.SendPropertyChanged("yelllowfin0_300To0_499")
+				Me.Onyelllowfin0_300To0_499Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yellowfin0_500To0_999", DbType:="Decimal(10,5)")>  _
+	Public Property yellowfin0_500To0_999() As System.Nullable(Of Decimal)
+		Get
+			Return Me._yellowfin0_500To0_999
+		End Get
+		Set
+			If (Me._yellowfin0_500To0_999.Equals(value) = false) Then
+				Me.Onyellowfin0_500To0_999Changing(value)
+				Me.SendPropertyChanging
+				Me._yellowfin0_500To0_999 = value
+				Me.SendPropertyChanged("yellowfin0_500To0_999")
+				Me.Onyellowfin0_500To0_999Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yellowfin1_0To1_49", DbType:="Decimal(10,5)")>  _
+	Public Property yellowfin1_0To1_49() As System.Nullable(Of Decimal)
+		Get
+			Return Me._yellowfin1_0To1_49
+		End Get
+		Set
+			If (Me._yellowfin1_0To1_49.Equals(value) = false) Then
+				Me.Onyellowfin1_0To1_49Changing(value)
+				Me.SendPropertyChanging
+				Me._yellowfin1_0To1_49 = value
+				Me.SendPropertyChanged("yellowfin1_0To1_49")
+				Me.Onyellowfin1_0To1_49Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yellowfin1_5To2_49", DbType:="Decimal(10,5)")>  _
+	Public Property yellowfin1_5To2_49() As System.Nullable(Of Decimal)
+		Get
+			Return Me._yellowfin1_5To2_49
+		End Get
+		Set
+			If (Me._yellowfin1_5To2_49.Equals(value) = false) Then
+				Me.Onyellowfin1_5To2_49Changing(value)
+				Me.SendPropertyChanging
+				Me._yellowfin1_5To2_49 = value
+				Me.SendPropertyChanged("yellowfin1_5To2_49")
+				Me.Onyellowfin1_5To2_49Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yellowfin2_5To3_49", DbType:="Decimal(10,5)")>  _
+	Public Property yellowfin2_5To3_49() As System.Nullable(Of Decimal)
+		Get
+			Return Me._yellowfin2_5To3_49
+		End Get
+		Set
+			If (Me._yellowfin2_5To3_49.Equals(value) = false) Then
+				Me.Onyellowfin2_5To3_49Changing(value)
+				Me.SendPropertyChanging
+				Me._yellowfin2_5To3_49 = value
+				Me.SendPropertyChanged("yellowfin2_5To3_49")
+				Me.Onyellowfin2_5To3_49Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yellowfin3_5To4_99", DbType:="Decimal(10,5)")>  _
+	Public Property yellowfin3_5To4_99() As System.Nullable(Of Decimal)
+		Get
+			Return Me._yellowfin3_5To4_99
+		End Get
+		Set
+			If (Me._yellowfin3_5To4_99.Equals(value) = false) Then
+				Me.Onyellowfin3_5To4_99Changing(value)
+				Me.SendPropertyChanging
+				Me._yellowfin3_5To4_99 = value
+				Me.SendPropertyChanged("yellowfin3_5To4_99")
+				Me.Onyellowfin3_5To4_99Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yellowfin5_0To9_99", DbType:="Decimal(10,5)")>  _
+	Public Property yellowfin5_0To9_99() As System.Nullable(Of Decimal)
+		Get
+			Return Me._yellowfin5_0To9_99
+		End Get
+		Set
+			If (Me._yellowfin5_0To9_99.Equals(value) = false) Then
+				Me.Onyellowfin5_0To9_99Changing(value)
+				Me.SendPropertyChanging
+				Me._yellowfin5_0To9_99 = value
+				Me.SendPropertyChanged("yellowfin5_0To9_99")
+				Me.Onyellowfin5_0To9_99Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_yellowfin10AndUP", DbType:="Decimal(10,5)")>  _
+	Public Property yellowfin10AndUP() As System.Nullable(Of Decimal)
+		Get
+			Return Me._yellowfin10AndUP
+		End Get
+		Set
+			If (Me._yellowfin10AndUP.Equals(value) = false) Then
+				Me.Onyellowfin10AndUPChanging(value)
+				Me.SendPropertyChanging
+				Me._yellowfin10AndUP = value
+				Me.SendPropertyChanged("yellowfin10AndUP")
+				Me.Onyellowfin10AndUPChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye0_300To0_499", DbType:="Decimal(10,5)")>  _
+	Public Property bigeye0_300To0_499() As System.Nullable(Of Decimal)
+		Get
+			Return Me._bigeye0_300To0_499
+		End Get
+		Set
+			If (Me._bigeye0_300To0_499.Equals(value) = false) Then
+				Me.Onbigeye0_300To0_499Changing(value)
+				Me.SendPropertyChanging
+				Me._bigeye0_300To0_499 = value
+				Me.SendPropertyChanged("bigeye0_300To0_499")
+				Me.Onbigeye0_300To0_499Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye0_500To0_999", DbType:="Decimal(10,5)")>  _
+	Public Property bigeye0_500To0_999() As System.Nullable(Of Decimal)
+		Get
+			Return Me._bigeye0_500To0_999
+		End Get
+		Set
+			If (Me._bigeye0_500To0_999.Equals(value) = false) Then
+				Me.Onbigeye0_500To0_999Changing(value)
+				Me.SendPropertyChanging
+				Me._bigeye0_500To0_999 = value
+				Me.SendPropertyChanged("bigeye0_500To0_999")
+				Me.Onbigeye0_500To0_999Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye1_0To1_49", DbType:="Decimal(10,5)")>  _
+	Public Property bigeye1_0To1_49() As System.Nullable(Of Decimal)
+		Get
+			Return Me._bigeye1_0To1_49
+		End Get
+		Set
+			If (Me._bigeye1_0To1_49.Equals(value) = false) Then
+				Me.Onbigeye1_0To1_49Changing(value)
+				Me.SendPropertyChanging
+				Me._bigeye1_0To1_49 = value
+				Me.SendPropertyChanged("bigeye1_0To1_49")
+				Me.Onbigeye1_0To1_49Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye1_5To2_49", DbType:="Decimal(10,5)")>  _
+	Public Property bigeye1_5To2_49() As System.Nullable(Of Decimal)
+		Get
+			Return Me._bigeye1_5To2_49
+		End Get
+		Set
+			If (Me._bigeye1_5To2_49.Equals(value) = false) Then
+				Me.Onbigeye1_5To2_49Changing(value)
+				Me.SendPropertyChanging
+				Me._bigeye1_5To2_49 = value
+				Me.SendPropertyChanged("bigeye1_5To2_49")
+				Me.Onbigeye1_5To2_49Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye2_5To3_49", DbType:="Decimal(10,5)")>  _
+	Public Property bigeye2_5To3_49() As System.Nullable(Of Decimal)
+		Get
+			Return Me._bigeye2_5To3_49
+		End Get
+		Set
+			If (Me._bigeye2_5To3_49.Equals(value) = false) Then
+				Me.Onbigeye2_5To3_49Changing(value)
+				Me.SendPropertyChanging
+				Me._bigeye2_5To3_49 = value
+				Me.SendPropertyChanged("bigeye2_5To3_49")
+				Me.Onbigeye2_5To3_49Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye3_5To4_99", DbType:="Decimal(10,5)")>  _
+	Public Property bigeye3_5To4_99() As System.Nullable(Of Decimal)
+		Get
+			Return Me._bigeye3_5To4_99
+		End Get
+		Set
+			If (Me._bigeye3_5To4_99.Equals(value) = false) Then
+				Me.Onbigeye3_5To4_99Changing(value)
+				Me.SendPropertyChanging
+				Me._bigeye3_5To4_99 = value
+				Me.SendPropertyChanged("bigeye3_5To4_99")
+				Me.Onbigeye3_5To4_99Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye5_0To9_99", DbType:="Decimal(10,5)")>  _
+	Public Property bigeye5_0To9_99() As System.Nullable(Of Decimal)
+		Get
+			Return Me._bigeye5_0To9_99
+		End Get
+		Set
+			If (Me._bigeye5_0To9_99.Equals(value) = false) Then
+				Me.Onbigeye5_0To9_99Changing(value)
+				Me.SendPropertyChanging
+				Me._bigeye5_0To9_99 = value
+				Me.SendPropertyChanged("bigeye5_0To9_99")
+				Me.Onbigeye5_0To9_99Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bigeye10AndUP", DbType:="Decimal(10,5)")>  _
+	Public Property bigeye10AndUP() As System.Nullable(Of Decimal)
+		Get
+			Return Me._bigeye10AndUP
+		End Get
+		Set
+			If (Me._bigeye10AndUP.Equals(value) = false) Then
+				Me.Onbigeye10AndUPChanging(value)
+				Me.SendPropertyChanging
+				Me._bigeye10AndUP = value
+				Me.SendPropertyChanged("bigeye10AndUP")
+				Me.Onbigeye10AndUPChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bonito0_300To0_499", DbType:="Decimal(10,5)")>  _
+	Public Property bonito0_300To0_499() As System.Nullable(Of Decimal)
+		Get
+			Return Me._bonito0_300To0_499
+		End Get
+		Set
+			If (Me._bonito0_300To0_499.Equals(value) = false) Then
+				Me.Onbonito0_300To0_499Changing(value)
+				Me.SendPropertyChanging
+				Me._bonito0_300To0_499 = value
+				Me.SendPropertyChanged("bonito0_300To0_499")
+				Me.Onbonito0_300To0_499Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_bonito0_500AndUP", DbType:="Decimal(10,5)")>  _
+	Public Property bonito0_500AndUP() As System.Nullable(Of Decimal)
+		Get
+			Return Me._bonito0_500AndUP
+		End Get
+		Set
+			If (Me._bonito0_500AndUP.Equals(value) = false) Then
+				Me.Onbonito0_500AndUPChanging(value)
+				Me.SendPropertyChanging
+				Me._bonito0_500AndUP = value
+				Me.SendPropertyChanged("bonito0_500AndUP")
+				Me.Onbonito0_500AndUPChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_fishmeal", DbType:="Decimal(10,5)")>  _
+	Public Property fishmeal() As System.Nullable(Of Decimal)
+		Get
+			Return Me._fishmeal
+		End Get
+		Set
+			If (Me._fishmeal.Equals(value) = false) Then
+				Me.OnfishmealChanging(value)
+				Me.SendPropertyChanging
+				Me._fishmeal = value
+				Me.SendPropertyChanged("fishmeal")
+				Me.OnfishmealChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.vWeightSlipDetails")>  _
+Partial Public Class vWeightSlipDetail
+	
+	Private _weightSlipDetail_ID As Integer
+	
+	Private _salesReportWeightSlip_ID As System.Nullable(Of Integer)
+	
+	Private _approvalStatus As System.Nullable(Of Integer)
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_weightSlipDetail_ID", DbType:="Int NOT NULL")>  _
+	Public Property weightSlipDetail_ID() As Integer
+		Get
+			Return Me._weightSlipDetail_ID
+		End Get
+		Set
+			If ((Me._weightSlipDetail_ID = value)  _
+						= false) Then
+				Me._weightSlipDetail_ID = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesReportWeightSlip_ID", DbType:="Int")>  _
+	Public Property salesReportWeightSlip_ID() As System.Nullable(Of Integer)
+		Get
+			Return Me._salesReportWeightSlip_ID
+		End Get
+		Set
+			If (Me._salesReportWeightSlip_ID.Equals(value) = false) Then
+				Me._salesReportWeightSlip_ID = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_approvalStatus", DbType:="Int")>  _
+	Public Property approvalStatus() As System.Nullable(Of Integer)
+		Get
+			Return Me._approvalStatus
+		End Get
+		Set
+			If (Me._approvalStatus.Equals(value) = false) Then
+				Me._approvalStatus = value
+			End If
+		End Set
+	End Property
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.vWeigthSlipBuyers")>  _
+Partial Public Class vWeigthSlipBuyer
+	
+	Private _buyer As String
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_buyer", DbType:="VarChar(100)")>  _
+	Public Property buyer() As String
+		Get
+			Return Me._buyer
+		End Get
+		Set
+			If (String.Equals(Me._buyer, value) = false) Then
+				Me._buyer = value
+			End If
+		End Set
+	End Property
 End Class
