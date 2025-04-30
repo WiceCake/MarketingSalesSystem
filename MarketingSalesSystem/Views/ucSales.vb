@@ -167,6 +167,41 @@ Public Class ucSales
                         .AveragePrice = totalAmount
                     }).ToList()
 
+
+        ' Slow Version but working
+        'Dim salesList = New SalesReport(dc).getByDate(CDate(dtFrom.EditValue), CDate(dtTo.EditValue)).ToList()
+        '
+        'Dim catchList = (From src In dc.trans_SalesReportCatchers Select src.salesReport_ID, src.catchActivityDetail_ID).Distinct().ToList()
+        'Dim vesselList = mdc.ml_Vessels.ToDictionary(Function(v) v.ml_vID, Function(v) v.vesselName)
+        '
+        'Dim data = (From cl In catchList
+        '            Join s In salesList On s.salesReport_ID Equals cl.salesReport_ID
+        '            Let catchData = (From cad In dc.trans_CatchActivityDetails
+        '                             Join ca In dc.trans_CatchActivities On cad.catchActivity_ID Equals ca.catchActivity_ID
+        '                             Where cl.catchActivityDetail_ID = cad.catchActivityDetail_ID Select cad, ca).FirstOrDefault
+        '            Let catchersData = (From src In dc.trans_SalesReportCatchers
+        '                                Where src.catchActivityDetail_ID = cl.catchActivityDetail_ID AndAlso src.salesReport_ID = cl.salesReport_ID Select src)
+        '            Let actualQty = sumFields(catchersData.FirstOrDefault)
+        '            Let spoilageQty = sumFields(catchersData.Skip(1).FirstOrDefault)
+        '            Let totalAmount = multiplyFields(catchersData.FirstOrDefault) - multiplyFields(catchersData.Skip(1).FirstOrDefault)
+        '            Select New With {
+        '                    .salesReport_ID = s.salesReport_ID,
+        '                    .SalesNo = s.salesNum,
+        '                    .Catcher = vesselList(catchData.cad.vessel_ID),
+        '                    .CatchReferenceNumber = catchData.ca.catchReferenceNum,
+        '                    .CoveredDate = s.salesDate,
+        '                    .SellingType = s.sellingType,
+        '                    .Buyer = s.buyer,
+        '                    .ActualQty = actualQty,
+        '                    .Fishmeal = catchersData.FirstOrDefault.fishmeal - catchersData.Skip(1).FirstOrDefault.fishmeal,
+        '                    .Spoilage = spoilageQty,
+        '                    .NetQty = actualQty - spoilageQty,
+        '                    .SalesInUSD = Math.Round(totalAmount / s.usdRate, 2),
+        '                    .USDRate = s.usdRate,
+        '                    .SalesInPHP = totalAmount,
+        '                    .AveragePrice = totalAmount
+        '            })
+
         catcherGridView.GridControl.DataSource = data
         If Not refreshCatcher Then catcherGridView.PopulateColumns()
 
@@ -239,41 +274,41 @@ Public Class ucSales
                         .AveragePrice = totalPrice
                     }).ToList()
 
-            ' Slow Approach
-            'Dim salesList = New SalesReport(dc).getByDate(CDate(dtFrom.EditValue), CDate(dtTo.EditValue)).ToList()
-            '
-            'Dim data = (From s In salesList
-            '            Let catchData = (From src In dc.trans_SalesReportCatchers
-            '                               Join cad In dc.trans_CatchActivityDetails On src.catchActivityDetail_ID Equals cad.catchActivityDetail_ID
-            '                               Join ca In dc.trans_CatchActivities On ca.catchActivity_ID Equals cad.catchActivity_ID
-            '                               Where src.salesReport_ID = s.salesReport_ID Select ca).FirstOrDefault
-            '            Let catcherData = (From src In dc.trans_SalesReportCatchers
-            '                               Where src.salesReport_ID = s.salesReport_ID
-            '                               Group By src.catchActivityDetail_ID Into cGroup = Group Select cGroup)
-            '            Let actualQty = catcherData.Select(Function(aq) aq.FirstOrDefault).ToList
-            '            Let spoilageQty = catcherData.Select(Function(sq) sq.Skip(1).FirstOrDefault).ToList
-            '            Let totalAmount = actualQty.Sum(Function(aq) multiplyFields(aq)) - spoilageQty.Sum(Function(sq) multiplyFields(sq))
-            '            Select New With {
-            '                .salesReport_ID = s.salesReport_ID,
-            '                .SalesNo = s.salesNum,
-            '                .CatcherRefNum = catchData.catchReferenceNum,
-            '                .CoveredDate = s.salesDate,
-            '                .SellingType = s.sellingType,
-            '                .Buyer = s.buyer,
-            '                .ActualQty = actualQty.Sum(Function(aq) sumFields(aq)),
-            '                .Fishmeal = actualQty.Sum(Function(aq) aq.fishmeal) - spoilageQty.Sum(Function(sq) sq.fishmeal),
-            '                .Spoilage = spoilageQty.Sum(Function(sq) sumFields(sq)),
-            '                .NetQty = actualQty.Sum(Function(aq) sumFields(aq)) - spoilageQty.Sum(Function(sq) sumFields(sq)),
-            '                .SalesInUSD = Math.Round(totalAmount / s.usdRate, 2),
-            '                .USDRate = s.usdRate,
-            '                .SalesInPHP = totalAmount,
-            '                .AveragePrice = totalAmount
-            '            })
+        ' Slow Approach
+        'Dim salesList = New SalesReport(dc).getByDate(CDate(dtFrom.EditValue), CDate(dtTo.EditValue)).ToList()
+        '
+        'Dim data = (From s In salesList
+        '            Let catchData = (From src In dc.trans_SalesReportCatchers
+        '                               Join cad In dc.trans_CatchActivityDetails On src.catchActivityDetail_ID Equals cad.catchActivityDetail_ID
+        '                               Join ca In dc.trans_CatchActivities On ca.catchActivity_ID Equals cad.catchActivity_ID
+        '                               Where src.salesReport_ID = s.salesReport_ID Select ca).FirstOrDefault
+        '            Let catcherData = (From src In dc.trans_SalesReportCatchers
+        '                               Where src.salesReport_ID = s.salesReport_ID
+        '                               Group By src.catchActivityDetail_ID Into cGroup = Group Select cGroup)
+        '            Let actualQty = catcherData.Select(Function(aq) aq.FirstOrDefault).ToList
+        '            Let spoilageQty = catcherData.Select(Function(sq) sq.Skip(1).FirstOrDefault).ToList
+        '            Let totalAmount = actualQty.Sum(Function(aq) multiplyFields(aq)) - spoilageQty.Sum(Function(sq) multiplyFields(sq))
+        '            Select New With {
+        '                .salesReport_ID = s.salesReport_ID,
+        '                .SalesNo = s.salesNum,
+        '                .CatcherRefNum = catchData.catchReferenceNum,
+        '                .CoveredDate = s.salesDate,
+        '                .SellingType = s.sellingType,
+        '                .Buyer = s.buyer,
+        '                .ActualQty = actualQty.Sum(Function(aq) sumFields(aq)),
+        '                .Fishmeal = actualQty.Sum(Function(aq) aq.fishmeal) - spoilageQty.Sum(Function(sq) sq.fishmeal),
+        '                .Spoilage = spoilageQty.Sum(Function(sq) sumFields(sq)),
+        '                .NetQty = actualQty.Sum(Function(aq) sumFields(aq)) - spoilageQty.Sum(Function(sq) sumFields(sq)),
+        '                .SalesInUSD = Math.Round(totalAmount / s.usdRate, 2),
+        '                .USDRate = s.usdRate,
+        '                .SalesInPHP = totalAmount,
+        '                .AveragePrice = totalAmount
+        '            })
 
         buyerGridView.GridControl.DataSource = data
         If Not refreshBuyer Then buyerGridView.PopulateColumns()
 
-            ' Enable footer
+        ' Enable footer
         buyerGridView.OptionsView.ShowFooter = True
 
         gridTransMode(buyerGridView)
