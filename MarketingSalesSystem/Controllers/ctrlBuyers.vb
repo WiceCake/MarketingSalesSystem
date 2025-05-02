@@ -38,6 +38,7 @@ Public Class ctrlBuyers
                 showTxtBuyer()
             End If
 
+            .rbnAction.Visible = False
             .conReport.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
             .conContainer.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
             .conBacking.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
@@ -76,6 +77,8 @@ Public Class ctrlBuyers
         With frmBS
             If mdlSIB.approvalStatus = Approval_Status.Posted Then
                 .rbnTools.Visible = False
+            Else
+                .rbnAction.Visible = False
             End If
 
             If Integer.TryParse(mdlSIB.buyerName, 0) Then
@@ -94,6 +97,28 @@ Public Class ctrlBuyers
             .lueCarrierInvoice.EditValue = mdlSIB.salesInvoiceID
             .txtSetNo.EditValue = mdlSIB.setNum
             .txtRefNum.Caption = mdlSIB.referenceNum
+            .txtInvoiceNum.EditValue = mdlSIB.invoiceNum
+
+            .conReport.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+            .barPartial.CheckBoxVisibility = DevExpress.XtraBars.CheckBoxVisibility.None
+            .barPartialFinal.CheckBoxVisibility = DevExpress.XtraBars.CheckBoxVisibility.None
+            .barFinal.CheckBoxVisibility = DevExpress.XtraBars.CheckBoxVisibility.None
+            .barPartial.Enabled = False
+            .barPartialFinal.Enabled = False
+            .barFinal.Enabled = False
+            .barPartial.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            .barPartialFinal.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            .barFinal.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+
+            If mdlSIB.paymentStatus = 1 Then
+                .barPartial.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            ElseIf mdlSIB.paymentStatus = 2 Then
+                .barPartialFinal.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+                .conReport.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+            Else
+                .barFinal.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+                .conReport.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+            End If
 
             .txtAmountPaid.EditValue = mdlSIB.paidAmount
             .txtAdjustments.EditValue = mdlSIB.adjustmentsAmount
@@ -114,9 +139,9 @@ Public Class ctrlBuyers
                     ElseIf .cmbSaleType.EditValue Is "Backing" Then
                         mdlSIB.backing = CInt(.lueBacking.EditValue)
                     End If
-                    If .BarCheckItem3.Checked Then
+                    If .barPartial.Checked Then
                         mdlSIB.paymentStatus = Payment_Status.Partial_
-                    ElseIf .BarCheckItem4.Checked Then
+                    ElseIf .barPartialFinal.Checked Then
                         mdlSIB.paymentStatus = Payment_Status.Partial_Final
                     Else
                         mdlSIB.paymentStatus = Payment_Status.Final_
@@ -141,7 +166,8 @@ Public Class ctrlBuyers
                     End If
                 End With
 
-                setSalesPrice(mdlSIB.salesInvoiceBuyerID, mdlSIB.salesInvoiceID)
+                setSalesPrice(mdlSIB.salesInvoiceBuyerID, mdlSIB.salesInvoiceID, "AUK_Catcher")
+                setSalesPrice(mdlSIB.salesInvoiceBuyerID, mdlSIB.salesInvoiceID, "SK_Catcher")
 
                 ts.Complete()
             Catch ex As Exception
@@ -160,7 +186,7 @@ Public Class ctrlBuyers
         sir.Add()
     End Sub
 
-    Sub setSalesPrice(ByVal salesInvoiceBuyerID As Integer, ByVal salesInvoiceID As Integer)
+    Sub setSalesPrice(ByVal salesInvoiceBuyerID As Integer, ByVal salesInvoiceID As Integer, colName As String)
         Dim srb As New SalesReportBuyer(mkdb)
         Dim count As Integer
         Dim getSrb As List(Of Integer) = New List(Of Integer)
@@ -173,7 +199,7 @@ Public Class ctrlBuyers
 
         For Each cols As DataColumn In frmBS.dt.Columns
 
-            If Not cols.Caption.Contains("K_Catcher") Then Continue For
+            If Not cols.Caption.Contains(colName) Then Continue For
 
             With srb
                 .salesInvoiceBuyer_ID = salesInvoiceBuyerID
@@ -320,13 +346,19 @@ Public Class ctrlBuyers
 
             If colName.StartsWith("SK_Catcher") Then
 
-                Dim kValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
+                Dim aukColumn As String = colName.Replace("SK", "AUK")
+                Dim skValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
+                Dim aukValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(aukColumn)), 0, r(aukColumn))))
 
-                SK_Total += kValue
+
+                skValue = Math.Min(skValue, aukValue)
+                r(colName) = skValue
+
+                SK_Total += skValue
 
                 Dim saColumn As String = colName.Replace("SK", "SA")
                 If r.Table.Columns.Contains(saColumn) Then
-                    r(saColumn) = kValue * Price
+                    r(saColumn) = skValue * Price
                     SA_Total += CDec(r(saColumn))
                 End If
             End If
@@ -414,11 +446,19 @@ Public Class ctrlBuyers
             Where(Function(s) s.salesInvoiceID = salesReportID).
             ToList()
 
+        Dim baAUList As New List(Of trans_SalesReportBuyer)
+        Dim baSList As New List(Of trans_SalesReportBuyer)
+
         If Not isNew Then
             bList = mkdb.trans_SalesReportBuyers.
             Where(Function(s) s.salesInvoiceID = salesReportID).
             Where(Function(s) s.salesInvoiceBuyerID = mdlSIB.salesInvoiceBuyerID).
             ToList()
+
+            Dim halfCount As Integer = bList.Count \ 2
+
+            baAUList = bList.Take(halfCount).ToList
+            baSList = bList.Skip(halfCount).Take(halfCount).ToList
         End If
 
         Dim priceCount As Integer = 0
@@ -442,11 +482,14 @@ Public Class ctrlBuyers
 
                 For Each col As DataColumn In columns
                     If col.ColumnName.Contains("AUK_Catcher") AndAlso Not isNew AndAlso bList.Count <> 0 Then
-                        dr("AUK_Catcher" & (countKiloCatcher + 1)) = CDec(propBuyer.GetValue(bList(countKiloCatcher), Nothing))
+                        dr("AUK_Catcher" & (countKiloCatcher + 1)) = CDec(propBuyer.GetValue(baAUList(countKiloCatcher), Nothing))
                         countKiloCatcher += 1
                     ElseIf col.ColumnName.Contains("AUK_Catcher") Then
                         dr("AUK_Catcher" & (countKiloCatcher + 1)) = CDec(propCatch.GetValue(kiloList(countKiloCatcher), Nothing))
                         countKiloCatcher += 1
+                    ElseIf col.ColumnName.Contains("SK_Catcher") AndAlso Not isNew AndAlso bList.Count <> 0 Then
+                        dr("SK_Catcher" & (countSpoilageCatcher + 1)) = CDec(propBuyer.GetValue(baSList(countSpoilageCatcher), Nothing))
+                        countSpoilageCatcher += 1
                     ElseIf col.ColumnName.Contains("SK_Catcher") Then
                         dr("SK_Catcher" & (countSpoilageCatcher + 1)) = CDec(propCatch.GetValue(spoilageList(countSpoilageCatcher), Nothing))
                         countSpoilageCatcher += 1

@@ -43,13 +43,13 @@ Partial Class frm_buyerSales
         Me.BarToggleSwitchItem3 = New DevExpress.XtraBars.BarToggleSwitchItem()
         Me.BarToggleSwitchItem4 = New DevExpress.XtraBars.BarToggleSwitchItem()
         Me.BarToggleSwitchItem5 = New DevExpress.XtraBars.BarToggleSwitchItem()
-        Me.BarCheckItem3 = New DevExpress.XtraBars.BarCheckItem()
-        Me.BarCheckItem4 = New DevExpress.XtraBars.BarCheckItem()
-        Me.BarCheckItem5 = New DevExpress.XtraBars.BarCheckItem()
+        Me.barPartial = New DevExpress.XtraBars.BarCheckItem()
+        Me.barPartialFinal = New DevExpress.XtraBars.BarCheckItem()
+        Me.barFinal = New DevExpress.XtraBars.BarCheckItem()
         Me.RibbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rbnTools = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
-        Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rbnAction = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup3 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
@@ -178,7 +178,7 @@ Partial Class frm_buyerSales
         'RibbonControl
         '
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.BarStaticItem1, Me.txtRefNum, Me.BarHeaderItem1, Me.btnSave, Me.btnDelete, Me.btnPost, Me.BarButtonItem1, Me.BarSubItem1, Me.BarEditItem1, Me.BarStaticItem2, Me.BarEditItem2, Me.BarToggleSwitchItem1, Me.BarCheckItem1, Me.BarEditItem3, Me.BarCheckItem2, Me.BarToggleSwitchItem2, Me.BarToggleSwitchItem3, Me.BarToggleSwitchItem4, Me.BarToggleSwitchItem5, Me.BarCheckItem3, Me.BarCheckItem4, Me.BarCheckItem5})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.BarStaticItem1, Me.txtRefNum, Me.BarHeaderItem1, Me.btnSave, Me.btnDelete, Me.btnPost, Me.BarButtonItem1, Me.BarSubItem1, Me.BarEditItem1, Me.BarStaticItem2, Me.BarEditItem2, Me.BarToggleSwitchItem1, Me.BarCheckItem1, Me.BarEditItem3, Me.BarCheckItem2, Me.BarToggleSwitchItem2, Me.BarToggleSwitchItem3, Me.BarToggleSwitchItem4, Me.BarToggleSwitchItem5, Me.barPartial, Me.barPartialFinal, Me.barFinal})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
         Me.RibbonControl.MaxItemId = 24
         Me.RibbonControl.Name = "RibbonControl"
@@ -333,38 +333,38 @@ Partial Class frm_buyerSales
         Me.BarToggleSwitchItem5.Id = 20
         Me.BarToggleSwitchItem5.Name = "BarToggleSwitchItem5"
         '
-        'BarCheckItem3
+        'barPartial
         '
-        Me.BarCheckItem3.BindableChecked = True
-        Me.BarCheckItem3.Caption = "Partial"
-        Me.BarCheckItem3.CheckBoxVisibility = DevExpress.XtraBars.CheckBoxVisibility.BeforeText
-        Me.BarCheckItem3.Checked = True
-        Me.BarCheckItem3.CheckStyle = DevExpress.XtraBars.BarCheckStyles.Radio
-        Me.BarCheckItem3.GroupIndex = 1
-        Me.BarCheckItem3.Id = 21
-        Me.BarCheckItem3.Name = "BarCheckItem3"
+        Me.barPartial.BindableChecked = True
+        Me.barPartial.Caption = "Partial"
+        Me.barPartial.CheckBoxVisibility = DevExpress.XtraBars.CheckBoxVisibility.BeforeText
+        Me.barPartial.Checked = True
+        Me.barPartial.CheckStyle = DevExpress.XtraBars.BarCheckStyles.Radio
+        Me.barPartial.GroupIndex = 1
+        Me.barPartial.Id = 21
+        Me.barPartial.Name = "barPartial"
         '
-        'BarCheckItem4
+        'barPartialFinal
         '
-        Me.BarCheckItem4.Caption = "Partial-Final"
-        Me.BarCheckItem4.CheckBoxVisibility = DevExpress.XtraBars.CheckBoxVisibility.BeforeText
-        Me.BarCheckItem4.CheckStyle = DevExpress.XtraBars.BarCheckStyles.Radio
-        Me.BarCheckItem4.GroupIndex = 1
-        Me.BarCheckItem4.Id = 22
-        Me.BarCheckItem4.Name = "BarCheckItem4"
+        Me.barPartialFinal.Caption = "Partial-Final"
+        Me.barPartialFinal.CheckBoxVisibility = DevExpress.XtraBars.CheckBoxVisibility.BeforeText
+        Me.barPartialFinal.CheckStyle = DevExpress.XtraBars.BarCheckStyles.Radio
+        Me.barPartialFinal.GroupIndex = 1
+        Me.barPartialFinal.Id = 22
+        Me.barPartialFinal.Name = "barPartialFinal"
         '
-        'BarCheckItem5
+        'barFinal
         '
-        Me.BarCheckItem5.Caption = "Final"
-        Me.BarCheckItem5.CheckBoxVisibility = DevExpress.XtraBars.CheckBoxVisibility.BeforeText
-        Me.BarCheckItem5.CheckStyle = DevExpress.XtraBars.BarCheckStyles.Radio
-        Me.BarCheckItem5.GroupIndex = 1
-        Me.BarCheckItem5.Id = 23
-        Me.BarCheckItem5.Name = "BarCheckItem5"
+        Me.barFinal.Caption = "Final"
+        Me.barFinal.CheckBoxVisibility = DevExpress.XtraBars.CheckBoxVisibility.BeforeText
+        Me.barFinal.CheckStyle = DevExpress.XtraBars.BarCheckStyles.Radio
+        Me.barFinal.GroupIndex = 1
+        Me.barFinal.Id = 23
+        Me.barFinal.Name = "barFinal"
         '
         'RibbonPage1
         '
-        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup1, Me.rbnTools, Me.RibbonPageGroup2, Me.RibbonPageGroup3})
+        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup1, Me.rbnTools, Me.rbnAction, Me.RibbonPageGroup3})
         Me.RibbonPage1.Name = "RibbonPage1"
         Me.RibbonPage1.Text = "Home"
         '
@@ -385,19 +385,19 @@ Partial Class frm_buyerSales
         Me.rbnTools.Name = "rbnTools"
         Me.rbnTools.Text = "Tools"
         '
-        'RibbonPageGroup2
+        'rbnAction
         '
-        Me.RibbonPageGroup2.AllowTextClipping = False
-        Me.RibbonPageGroup2.ItemLinks.Add(Me.BarButtonItem1)
-        Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
-        Me.RibbonPageGroup2.Text = "Action"
+        Me.rbnAction.AllowTextClipping = False
+        Me.rbnAction.ItemLinks.Add(Me.BarButtonItem1)
+        Me.rbnAction.Name = "rbnAction"
+        Me.rbnAction.Text = "Action"
         '
         'RibbonPageGroup3
         '
         Me.RibbonPageGroup3.AllowTextClipping = False
-        Me.RibbonPageGroup3.ItemLinks.Add(Me.BarCheckItem3)
-        Me.RibbonPageGroup3.ItemLinks.Add(Me.BarCheckItem4)
-        Me.RibbonPageGroup3.ItemLinks.Add(Me.BarCheckItem5)
+        Me.RibbonPageGroup3.ItemLinks.Add(Me.barPartial)
+        Me.RibbonPageGroup3.ItemLinks.Add(Me.barPartialFinal)
+        Me.RibbonPageGroup3.ItemLinks.Add(Me.barFinal)
         Me.RibbonPageGroup3.Name = "RibbonPageGroup3"
         Me.RibbonPageGroup3.ShowCaptionButton = False
         Me.RibbonPageGroup3.Text = "Payment Status"
@@ -1099,7 +1099,7 @@ Partial Class frm_buyerSales
     Friend WithEvents EmptySpaceItem8 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents txtSetNo As DevExpress.XtraEditors.TextEdit
     Friend WithEvents BarButtonItem1 As DevExpress.XtraBars.BarButtonItem
-    Friend WithEvents RibbonPageGroup2 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents rbnAction As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents BarSubItem1 As DevExpress.XtraBars.BarSubItem
     Friend WithEvents BarEditItem1 As DevExpress.XtraBars.BarEditItem
     Friend WithEvents RepositoryItemComboBox1 As DevExpress.XtraEditors.Repository.RepositoryItemComboBox
@@ -1115,10 +1115,10 @@ Partial Class frm_buyerSales
     Friend WithEvents BarToggleSwitchItem3 As DevExpress.XtraBars.BarToggleSwitchItem
     Friend WithEvents BarToggleSwitchItem4 As DevExpress.XtraBars.BarToggleSwitchItem
     Friend WithEvents BarToggleSwitchItem5 As DevExpress.XtraBars.BarToggleSwitchItem
-    Friend WithEvents BarCheckItem3 As DevExpress.XtraBars.BarCheckItem
+    Friend WithEvents barPartial As DevExpress.XtraBars.BarCheckItem
     Friend WithEvents RibbonPageGroup3 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
-    Friend WithEvents BarCheckItem4 As DevExpress.XtraBars.BarCheckItem
-    Friend WithEvents BarCheckItem5 As DevExpress.XtraBars.BarCheckItem
+    Friend WithEvents barPartialFinal As DevExpress.XtraBars.BarCheckItem
+    Friend WithEvents barFinal As DevExpress.XtraBars.BarCheckItem
     Friend WithEvents lueBacking As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents lueCarrier As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents txtInvoiceNum As DevExpress.XtraEditors.TextEdit
