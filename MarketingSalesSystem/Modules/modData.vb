@@ -104,6 +104,118 @@ Module modData
         Return retList
     End Function
 
+    Function getPartialSalesInvoice(reportID As Integer, setNum As String) As List(Of PartialSalesInvoice)
+        Dim retList As New List(Of PartialSalesInvoice)
+
+        Dim dc As New mkdbDataContext
+        Dim dc2 As New tpmdbDataContext
+
+        Dim groupSib = (From i In dc.trans_SalesInvoiceBuyers
+                  Join j In dc.trans_SalesReportBuyers On i.salesInvoiceBuyerID Equals j.salesInvoiceBuyerID
+                  Join k In dc.trans_SalesReports On i.salesInvoiceID Equals k.salesReport_ID
+                  Where i.salesInvoiceID = CInt(reportID) AndAlso i.setNum = setNum
+                  Select i, j, k).ToList()
+
+        Dim totalKilo = sumFields(groupSib.First().j)
+
+
+        ' Step 2: Perform the query using LINQ to Objects
+        Dim catchers = (From i In dc.trans_SalesReportCatchers
+            Join j In dc.trans_CatchActivityDetails On i.catchActivityDetail_ID Equals j.catchActivityDetail_ID
+            Where i.salesReport_ID = CInt(reportID)
+            Select j.vessel_ID).FirstOrDefault()
+
+        Dim carriers = (From i In dc.trans_SalesUnloadeds Where i.SalesReportID = CInt(reportID) Select i.CarrierID)
+
+        Dim soldKilos = (From i In dc.trans_SalesReportBuyers Where i.salesInvoiceID = CInt(reportID) Select i).ToLookup(Function(s) s.salesInvoiceBuyerID)
+
+        Dim vessels = (From i In dc2.ml_Vessels Where i.ml_vID = catchers Select i.vesselName).FirstOrDefault
+
+        Dim carrierName = (From i In dc2.ML_SULLIER_20170329s Where i.ml_SupID = CInt(carriers.FirstOrDefault()) Select i.ml_Supplier).FirstOrDefault()
+
+        Dim buyers = (From i In dc2.ML_SULLIER_20170329s Select i).ToLookup(Function(s) s.ml_SupID)
+
+        Dim dates = groupSib.Select(Function(s) s.i.encodedOn).ToList
+
+        For Each s In groupSib
+            Dim sib As New PartialSalesInvoice
+
+            Dim kiloMix = Math.Round(sumFields(s.j), 2)
+            Dim kiloFishMeal = Math.Round(s.j.fishmeal, 2)
+            Dim totalPrice = Math.Round(soldKilos(s.j.salesInvoiceBuyerID).Sum(Function(sa) multiplyFields(sa)), 2)
+            Dim buyerName = If(Integer.TryParse(s.i.buyerName, 0), buyers(CInt(s.i.buyerName)).FirstOrDefault.ml_Supplier, s.i.buyerName)
+
+            sib.CatcherName = vessels
+            sib.CarrierName = carrierName.ToString
+            sib.InvoiceNum = s.k.invoiceNum
+            sib.SetNum = s.i.setNum
+            sib.PriceTotalPeso = totalPrice
+            sib.usdRate = s.k.usdRate
+            sib.PriceTotalUSD = Math.Round((totalPrice / s.k.usdRate), 2)
+            sib.DateFrom = CDate(dates.Min)
+            sib.DateTo = CDate(dates.Max)
+            sib.KiloMix = kiloMix
+            sib.KiloFishMeal = kiloFishMeal
+            sib.BuyerName = buyerName
+            sib.BuyerType = s.i.sellerType
+
+            retList.Add(sib)
+        Next
+
+        Return retList
+    End Function
+
+    Function sumFields(record As trans_SalesReportBuyer) As Decimal
+        Return record.skipjack0_300To0_499 + record.skipjack0_500To0_999 +
+               record.skipjack1_0To1_39 + record.skipjack1_4To1_79 +
+               record.skipjack1_8To2_49 + record.skipjack2_5To3_49 +
+               record.skipjack3_5AndUP + record.yellowfin0_300To0_499 +
+               record.yellowfin0_500To0_999 + record.yellowfin1_0To1_49 +
+               record.yellowfin1_5To2_49 + record.yellowfin2_5To3_49 +
+               record.yellowfin3_5To4_99 + record.yellowfin5_0To9_99 +
+               record.yellowfin10AndUpGood + record.yellowfin10AndUpDeformed +
+               record.bigeye0_500To0_999 + record.bigeye1_0To1_49 +
+               record.bigeye1_5To2_49 + record.bigeye2_5To3_49 +
+               record.bigeye3_5To4_99 + record.bigeye5_0To9_99 +
+               record.bigeye10AndUP + record.bonito
+    End Function
+
+    Function multiplyFields(qty As trans_SalesReportBuyer) As Decimal
+        Dim total As Decimal = 0
+
+        Dim dc = New mkdbDataContext
+
+        Dim price = (From i In dc.trans_SalesReportPrices Where qty.salesInvoiceID = i.salesReport_ID Select i).FirstOrDefault
+
+        total += qty.skipjack0_300To0_499 * price.skipjack0_300To0_499
+        total += qty.skipjack0_500To0_999 * price.skipjack0_500To0_999
+        total += qty.skipjack1_0To1_39 * price.skipjack1_0To1_39
+        total += qty.skipjack1_4To1_79 * price.skipjack1_4To1_79
+        total += qty.skipjack1_8To2_49 * price.skipjack1_8To2_49
+        total += qty.skipjack2_5To3_49 * price.skipjack2_5To3_49
+        total += qty.skipjack3_5AndUP * price.skipjack3_5AndUP
+        total += qty.yellowfin0_300To0_499 * price.yellowfin0_300To0_499
+        total += qty.yellowfin0_500To0_999 * price.yellowfin0_500To0_999
+        total += qty.yellowfin1_0To1_49 * price.yellowfin1_0To1_49
+        total += qty.yellowfin1_5To2_49 * price.yellowfin1_5To2_49
+        total += qty.yellowfin2_5To3_49 * price.yellowfin2_5To3_49
+        total += qty.yellowfin3_5To4_99 * price.yellowfin3_5To4_99
+        total += qty.yellowfin5_0To9_99 * price.yellowfin5_0To9_99
+        total += qty.yellowfin10AndUpGood * price.yellowfin10AndUpGood
+        total += qty.yellowfin10AndUpDeformed * price.yellowfin10AndUpDeformed
+        total += qty.bigeye0_500To0_999 * price.bigeye0_500To0_999
+        total += qty.bigeye1_0To1_49 * price.bigeye1_0To1_49
+        total += qty.bigeye1_5To2_49 * price.bigeye1_5To2_49
+        total += qty.bigeye2_5To3_49 * price.bigeye2_5To3_49
+        total += qty.bigeye3_5To4_99 * price.bigeye3_5To4_99
+        total += qty.bigeye5_0To9_99 * price.bigeye5_0To9_99
+        total += qty.bigeye10AndUP * price.bigeye10AndUP
+        total += qty.bonito * price.bonito
+        total += qty.fishmeal * price.fishmeal
+
+        Return Math.Round(total, 2)
+    End Function
+
     Function getReportCatcherAct(reportID1 As Integer) As List(Of CatchersReportActivity)
         Dim retList1 As New List(Of CatchersReportActivity)
 

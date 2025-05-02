@@ -1,10 +1,12 @@
 ﻿Public Class SalesInvoiceBuyer
     Public salesInvoiceBuyerID, salesInvoiceID As Integer
-    Public buyerName, encodedBy, referenceNum, sellerType, setNum As String
+    Public buyerName, encodedBy, referenceNum, sellerType, setNum, invoiceNum, containerNum As String
     Public paidAmount, adjustmentsAmount As Decimal?
     Public encodedOn As Date
+    Public carrier As Integer
+    Public backing As Integer?
     Public dateCreated As Date?
-    Public approvalStatus As Integer
+    Public approvalStatus, paymentStatus As Integer
 
     Private dc As mkdbDataContext
 
@@ -20,16 +22,20 @@
         For Each i In e
             salesInvoiceBuyerID = sibID
             salesInvoiceID = i.salesInvoiceID
-            referenceNum = i.referenceNum
             setNum = i.setNum
-            buyerName = i.buyerName
-            sellerType = i.sellerType
             paidAmount = i.paidAmount
             adjustmentsAmount = i.adjustmentsAmount
-            encodedBy = i.encodedBy
-            encodedOn = i.encodedOn
-            dateCreated = i.dateCreated
+            referenceNum = i.referenceNum
+            buyerName = i.buyerName
+            carrier = i.carrier
+            backing = i.backing
+            sellerType = i.sellerType
+            containerNum = i.containerNum
+            paymentStatus = i.paymentStatus
             approvalStatus = i.approvalStatus
+            encodedOn = i.encodedOn
+            encodedBy = i.encodedBy
+            dateCreated = i.dateCreated
         Next
     End Sub
 
@@ -38,16 +44,20 @@
 
         salesInvoiceBuyerID = sib.salesInvoiceBuyerID
         salesInvoiceID = sib.salesInvoiceID
-        referenceNum = sib.referenceNum
         setNum = sib.setNum
-        buyerName = sib.buyerName
-        sellerType = sib.sellerType
         paidAmount = sib.paidAmount
         adjustmentsAmount = sib.adjustmentsAmount
-        encodedBy = sib.encodedBy
-        encodedOn = sib.encodedOn
-        dateCreated = sib.dateCreated
+        referenceNum = sib.referenceNum
+        buyerName = sib.buyerName
+        carrier = sib.carrier
+        backing = sib.backing
+        sellerType = sib.sellerType
+        containerNum = sib.containerNum
+        paymentStatus = sib.paymentStatus
         approvalStatus = sib.approvalStatus
+        encodedOn = sib.encodedOn
+        encodedBy = sib.encodedBy
+        dateCreated = sib.dateCreated
     End Sub
 
     Sub Add()
@@ -55,16 +65,21 @@
 
         With sib
             .salesInvoiceID = salesInvoiceID
-            .referenceNum = referenceNum
+            .invoiceNum = invoiceNum
             .setNum = setNum
-            .buyerName = buyerName
-            .sellerType = sellerType
             .paidAmount = paidAmount
             .adjustmentsAmount = adjustmentsAmount
+            .referenceNum = referenceNum
+            .buyerName = buyerName
+            .carrier = carrier
+            .backing = backing
+            .sellerType = sellerType
+            .containerNum = containerNum
+            .paymentStatus = paymentStatus
+            .approvalStatus = approvalStatus
             .encodedOn = encodedOn
             .encodedBy = encodedBy
             .dateCreated = dateCreated
-            .approvalStatus = approvalStatus
         End With
 
         dc.trans_SalesInvoiceBuyers.InsertOnSubmit(sib)
@@ -78,16 +93,28 @@
         For Each i In e
             i.salesInvoiceBuyerID = salesInvoiceBuyerID
             i.salesInvoiceID = salesInvoiceID
-            i.referenceNum = referenceNum
+            i.invoiceNum = invoiceNum
             i.setNum = setNum
-            i.buyerName = buyerName
-            i.sellerType = sellerType
             i.paidAmount = paidAmount
             i.adjustmentsAmount = adjustmentsAmount
+            i.referenceNum = referenceNum
+            i.buyerName = buyerName
+            i.sellerType = sellerType
+            i.containerNum = containerNum
+            i.paymentStatus = paymentStatus
+            i.approvalStatus = approvalStatus
             i.encodedOn = encodedOn
             i.encodedBy = encodedBy
             i.dateCreated = dateCreated
-            i.approvalStatus = approvalStatus
+            dc.SubmitChanges()
+        Next
+    End Sub
+
+    Sub Delete()
+        Dim srb = From i In dc.trans_SalesInvoiceBuyers Where i.salesInvoiceBuyerID = salesInvoiceBuyerID Select i
+
+        For Each i In srb
+            dc.trans_SalesInvoiceBuyers.DeleteOnSubmit(i)
             dc.SubmitChanges()
         Next
     End Sub
@@ -98,15 +125,6 @@
         For Each i In sr
             i.referenceNum = GenerateRefNum()
             i.approvalStatus = approvalStatus
-            dc.SubmitChanges()
-        Next
-    End Sub
-
-    Sub Delete()
-        Dim srb = From i In dc.trans_SalesInvoiceBuyers Where i.salesInvoiceBuyerID = salesInvoiceBuyerID Select i
-
-        For Each i In srb
-            dc.trans_SalesInvoiceBuyers.DeleteOnSubmit(i)
             dc.SubmitChanges()
         Next
     End Sub

@@ -17,8 +17,6 @@ Public Class ctrlSales
     Private mkdb As mkdbDataContext
     Private tpmdb As tpmdbDataContext
 
-    Public totalMetricTonAvailable As Decimal
-
     Sub New(ByRef uc As ucSales)
         isNew = True
 
@@ -85,7 +83,7 @@ Public Class ctrlSales
             .dtCreated.Properties.MaxValue = Date.Now
             loadCombo()
             loadCarrier()
-            .cmbUV.Properties.ReadOnly = False
+            .cmbUV.Properties.ReadOnly = True
             .txtCDNum.Properties.ReadOnly = True
             .btnAddCarrier.Enabled = False
             .btnDeleteCarrier.Enabled = False
@@ -102,19 +100,8 @@ Public Class ctrlSales
             .txtRemark.EditValue = mdlSR.remarks
             .txt_refNum.Caption = mdlSR.referenceNum
 
-            AddHandler frmSI.cmbUV.EditValueChanged, AddressOf cmbVU_EditValueChanged
-
             .Show()
         End With
-    End Sub
-
-    Private Sub cmbVU_EditValueChanged(sender As Object, e As EventArgs)
-        ' Check if the value of cmbUV has changed
-        If frmSI.cmbUV.EditValue IsNot mdlSR.catchtDeliveryNum Then
-            ' Code to handle the change in cmbUV
-            MessageBox.Show("Value has changed!")
-            ' You can perform additional actions here
-        End If
     End Sub
 
     Sub initSalesDataTable(ByVal catchID As Integer)
@@ -187,8 +174,6 @@ Public Class ctrlSales
     End Sub
 
     Sub updateTotal(ByRef r As DataRow)
-        calculateTotalMetricTon() ' Make sure it's up to date
-
         Dim Price As Decimal = CDec(If(IsDBNull(r("Price")), 0, r("Price")))
 
         Dim AUK_Total As Decimal = 0
@@ -199,19 +184,7 @@ Public Class ctrlSales
         Dim NA_Total As Decimal = 0
 
         Dim totalAUK_Catcher As Decimal = 0
-        Dim remainingMetricTon As Decimal = totalMetricTonAvailable
-
-        If remainingMetricTon <= 0D Then
-            MessageBox.Show("No Metric ton available.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-            For Each col As DataColumn In r.Table.Columns
-                If col.ColumnName.StartsWith("AUK_Catcher") Then
-                    r(col.ColumnName) = 0D
-                End If
-            Next
-
-            Return
-        End If
+        Dim totalMetricTon As Decimal = frmSI.dts.AsEnumerable().Sum(Function(row) CDec(If(IsDBNull(row("Metric_Ton")), 0, row("Metric_Ton"))))
 
         For Each row As DataRow In frmSI.dt.Rows
             If row IsNot r Then
@@ -227,33 +200,32 @@ Public Class ctrlSales
             End If
         Next
 
-        ' First pass: Compute AUK and AUA totals
         For Each col As DataColumn In r.Table.Columns
             Dim colName As String = col.ColumnName
 
             If colName.StartsWith("AUK_Catcher") Then
-                ' Sanitize the value in the DataRow first
-                Dim originalValue As Decimal = CDec(If(IsDBNull(r(colName)), 0, r(colName)))
-                If originalValue < 0 Then
-                    originalValue = 0
-                    r(colName) = 0D ' Correct the negative value in the DataRow
-                End If
+                Dim catcherValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
 
-                Dim catcherValue As Decimal = originalValue
                 totalAUK_Catcher += catcherValue
 
-                If totalAUK_Catcher > remainingMetricTon Then
-                    Dim excess As Decimal = totalAUK_Catcher - remainingMetricTon
+                If totalAUK_Catcher > totalMetricTon Then
+                    Dim excess As Decimal = totalAUK_Catcher - totalMetricTon
                     catcherValue -= excess
 
                     If catcherValue < 0 Then catcherValue = 0
 
                     r(colName) = catcherValue
-                    totalAUK_Catcher = remainingMetricTon
+
+                    totalAUK_Catcher = totalMetricTon
                 End If
-
                 AUK_Total += catcherValue
+            End If
+        Next
 
+        For Each col As DataColumn In r.Table.Columns
+            Dim colName As String = col.ColumnName
+
+            If colName.StartsWith("AUK_Catcher") Then
                 Dim auaColumn As String = colName.Replace("AUK", "AUA")
                 Dim aukValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
 
@@ -264,8 +236,6 @@ Public Class ctrlSales
             End If
         Next
 
-
-        ' Second pass: Adjust SK values to ensure SK ≤ AUK and SK is non-negative
         For Each col As DataColumn In r.Table.Columns
             Dim colName As String = col.ColumnName
 
@@ -331,20 +301,6 @@ Public Class ctrlSales
         r("NK_Total") = NK_Total
         r("NA_Total") = NA_Total
     End Sub
-
-    Function calculateTotalMetricTon() As Decimal
-        Dim totalMetricTon As Decimal = 0D
-
-        For Each row As DataRow In frmSI.dts.Rows
-            Dim metricTon As Decimal = 0D
-            If Decimal.TryParse(row("Metric_Ton").ToString(), metricTon) Then
-                totalMetricTon += metricTon
-            End If
-        Next
-
-        totalMetricTonAvailable = totalMetricTon
-        Return totalMetricTon
-    End Function
 
     Sub updateAllTotals()
         For Each r As DataRow In frmSI.dt.Rows
@@ -515,9 +471,6 @@ Public Class ctrlSales
         Next
     End Sub
 
-
-
-
     Sub setCatcherPrice(rowName As String, ByVal salesReportID As Integer)
         Dim ca = (From i In mkdb.trans_CatchActivities
                   Join j In mkdb.trans_CatchActivityDetails On i.catchActivity_ID Equals j.catchActivity_ID
@@ -671,6 +624,7 @@ Public Class ctrlSales
 
             updateAllTotals()
         End If
+
     End Sub
 
     Sub loadCombo()

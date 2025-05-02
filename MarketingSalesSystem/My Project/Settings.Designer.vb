@@ -72,16 +72,6 @@ Partial Friend NotInheritable Class Settings
             Return CType(Me("TSP_MASTERDBConnectionString"),String)
         End Get
     End Property
-    
-    <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("Data Source=MSI-KIANPC\SQLEXPRESS;Initial Catalog=MKDB;Integrated Security=True")>  _
-    Public ReadOnly Property MKDBConnectionString1() As String
-        Get
-            Return CType(Me("MKDBConnectionString1"),String)
-        End Get
-    End Property
 End Class
 
 Namespace My
