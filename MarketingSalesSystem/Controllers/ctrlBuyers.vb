@@ -262,7 +262,7 @@ Public Class ctrlBuyers
             .dtAK.Columns.Add("Size", GetType(String))
             .dtAK.Columns.Add("Price", GetType(Double))
             '.dtAK.Columns.Add("Available_Catch", GetType(Double))
-            addColumnDT(.dtAK, "AC_Catcher", ca.Count)
+            'addColumnDT(.dtAK, "AC_Catcher", ca.Count)
             .dtAK.Columns.Add("Kilo_Total", GetType(Double))
             addColumnDT(.dtAK, "K_Catcher", ca.Count)
             .dtAK.Columns.Add("Amount_Total", GetType(Double))
@@ -302,12 +302,9 @@ Public Class ctrlBuyers
             Dim colName As String = col.ColumnName
 
             If colName.StartsWith("K_Catcher") Then
-                Dim acColumn As String = colName.Replace("K", "AC")
 
                 Dim kValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
-                Dim acValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(acColumn)), 0, r(acColumn))))
 
-                kValue = Math.Min(kValue, acValue)
                 r(colName) = kValue  ' Update the value in the DataRow
 
                 Kilo_Total += kValue
@@ -389,6 +386,8 @@ Public Class ctrlBuyers
             GroupBy(Function(s) s.catchActivityDetail_ID).
             Select(Function(s) s.Skip(0).FirstOrDefault()).ToList()
 
+        Debug.WriteLine(cdList.Count)
+
         Dim bList = mkdb.trans_SalesReportBuyers.
             Where(Function(s) s.salesInvoiceID = salesReportID).
             ToList()
@@ -419,11 +418,11 @@ Public Class ctrlBuyers
                 Dim propBuyer = GetType(trans_SalesReportBuyer).GetProperty(priceColumn)
 
                 For Each col As DataColumn In columns
-                    If col.ColumnName.Contains("AC_Catcher") Then
-                        dr("AC_Catcher" & (countAvailableCatch + 1)) = CDec(propCatch.GetValue(cdList(countAvailableCatch), Nothing))
-                        countAvailableCatch += 1
-                    ElseIf col.ColumnName.Contains("K_Catcher") AndAlso Not isNew AndAlso bList.Count <> 0 Then
+                    If col.ColumnName.Contains("K_Catcher") AndAlso Not isNew AndAlso bList.Count <> 0 Then
                         dr("K_Catcher" & (countKiloCatcher + 1)) = CDec(propBuyer.GetValue(bList(countKiloCatcher), Nothing))
+                        countKiloCatcher += 1
+                    ElseIf col.ColumnName.Contains("K_Catcher") Then
+                        dr("K_Catcher" & (countKiloCatcher + 1)) = CDec(propCatch.GetValue(cdList(countKiloCatcher), Nothing))
                         countKiloCatcher += 1
                     ElseIf col.ColumnName <> "Class" AndAlso col.ColumnName <> "Size" AndAlso col.ColumnName <> "Price" Then
                         dr(col) = 0

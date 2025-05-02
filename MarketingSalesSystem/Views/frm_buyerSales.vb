@@ -40,9 +40,6 @@ Public Class frm_buyerSales
         Dim bandClass = AddBand("Class", BandedGridView1)
         Dim bandSize = AddBand("Size", BandedGridView1)
         Dim bandPrice = AddBand("Price", BandedGridView1)
-        Dim bandAvailableCatch = AddBand("Available Catch", BandedGridView1)
-
-        populateBand(bandAvailableCatch, catchers)
 
         Dim bandKilos = AddBand("Kilos", BandedGridView1)
         Dim bandAmount = AddBand("Amount", BandedGridView1)
@@ -58,7 +55,6 @@ Public Class frm_buyerSales
             .Columns("Class").OwnerBand = bandClass
             .Columns("Size").OwnerBand = bandSize
             .Columns("Price").OwnerBand = bandPrice
-            setOwnerBand("AC_Catcher", bandAvailableCatch, BandedGridView1, True)
             setOwnerBand("K_Catcher", bandKilos, BandedGridView1)
             setOwnerBand("A_Catcher", bandAmount, BandedGridView1, True)
             .Columns("Kilo_Total").OwnerBand = bandKTotal
