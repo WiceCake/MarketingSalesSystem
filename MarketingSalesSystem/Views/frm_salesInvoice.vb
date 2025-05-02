@@ -239,6 +239,7 @@ Public Class frm_salesInvoice
         confirmClose = False ' Prevent FormClosing interference
         Dim dateCreated = validateField(dtCreated)
         Dim sellType = validateField(cmbST)
+        'ADD CONDITION FOR CATCHER
         Dim Catcher = validateField(cmbUV)
         Dim salesNum = validateField(txtSaleNum)
         Dim invoiceNum = validateField(txtInvoiceNum)
@@ -304,21 +305,37 @@ Public Class frm_salesInvoice
     Private Sub cmbUV_EditValueChanged(sender As Object, e As EventArgs) Handles cmbUV.EditValueChanged
         BandedGridView3.Bands.Clear()
         Dim catcher = CType(sender, DevExpress.XtraEditors.LookUpEdit)
-        'Debug.WriteLine(catcher.EditValue)
-        ctrlSales.initSalesDataTable(CInt(catcher.EditValue))
+
+        ' Get the selected ID
+        Dim selectedID As Integer = CInt(catcher.EditValue)
+
+        'MessageBox.Show("Selected ID: " & selectedID.ToString(), "Selected report ID", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        ' Continue your original code
+        ctrlSales.initSalesDataTable(selectedID)
         GridControl3.DataSource = dt
-        createBands(CInt(catcher.EditValue))
+        createBands(selectedID)
         ctrlSales.loadRows()
 
         ' Get reference number
         Dim dc As New mkdbDataContext
         Dim getValue = (From i In dc.trans_CatchActivities
-                        Where i.catchActivity_ID = CInt(catcher.EditValue)
-                        Select i.catchReferenceNum).Distinct().FirstOrDefault
+                        Where i.catchActivity_ID = selectedID
+                        Select i.catchReferenceNum).Distinct().FirstOrDefault()
 
-        'Debug.WriteLine(CInt(catcher.EditValue))
         txtCDNum.EditValue = getValue
+
+        '' Get the salesReport_ID where catchtDeliveryNum = selectedID using LINQ
+        'Dim salesReportID = (From c In dc.trans_SalesReports
+        '                     Where c.catchtDeliveryNum = selectedID.ToString() And c.salesReport_ID = mdlSR.salesReport_ID
+        '                     Select c.salesReport_ID).FirstOrDefault()
+
+        '' Show the ID in a MessageBox
+        'MessageBox.Show("Selected ID: " & salesReportID.ToString(), "Selected report ID", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
     End Sub
+
+
 
     Private Sub bandedGridView_CustomDrawEmptyForeground(ByVal sender As Object, ByVal e As CustomDrawEventArgs) Handles BandedGridView3.CustomDrawEmptyForeground
         Dim view As BandedGridView = TryCast(sender, BandedGridView)
@@ -465,4 +482,5 @@ Public Class frm_salesInvoice
             gvCarrier.ClearSelection()
         End If
     End Sub
+
 End Class
