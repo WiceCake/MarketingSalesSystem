@@ -381,8 +381,9 @@ Public Class frm_buyerSales
         If txtOverallTotalAmount.EditValue IsNot Nothing Then
             Dim totalDebt = txtOverallTotalAmount.EditValue
 
-            'totalPercentage = Math.Round((CDec(paidAmount) / CDec(totalDebt)) * 100, 2)
-            totalPercentage = 0
+            totalPercentage = Math.Round((CDec(paidAmount) / CDec(totalDebt)) * 100, 2)
+            totalPercentage = If(totalPercentage > 100, 100, totalPercentage)
+            'totalPercentage = 0
             txtAmountInPercentage.EditValue = "% " & totalPercentage
             remainingBalance = CDec(totalDebt) - CDec(paidAmount)
             txtRemainingBalance.EditValue = remainingBalance
