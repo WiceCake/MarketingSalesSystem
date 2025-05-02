@@ -67,21 +67,7 @@ Partial Class frm_buyerSales
         Me.txtTotalAmount = New DevExpress.XtraEditors.TextEdit()
         Me.txtSpoilage = New DevExpress.XtraEditors.TextEdit()
         Me.txtActualUnloading = New DevExpress.XtraEditors.TextEdit()
-        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
-        Me.akPage = New DevExpress.XtraTab.XtraTabPage()
-        Me.LayoutControl3 = New DevExpress.XtraLayout.LayoutControl()
-        Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
-        Me.BandedGridView1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
-        Me.LayoutControlGroup2 = New DevExpress.XtraLayout.LayoutControlGroup()
-        Me.LayoutControlItem10 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.sPage = New DevExpress.XtraTab.XtraTabPage()
-        Me.LayoutControl4 = New DevExpress.XtraLayout.LayoutControl()
-        Me.GridControl2 = New DevExpress.XtraGrid.GridControl()
-        Me.BandedGridView2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
-        Me.LayoutControlGroup3 = New DevExpress.XtraLayout.LayoutControlGroup()
-        Me.LayoutControlItem11 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.Root = New DevExpress.XtraLayout.LayoutControlGroup()
-        Me.LayoutControlItem9 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutControlItem12 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem14 = New DevExpress.XtraLayout.LayoutControlItem()
@@ -96,7 +82,6 @@ Partial Class frm_buyerSales
         Me.EmptySpaceItem6 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.EmptySpaceItem7 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.EmptySpaceItem8 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.EmptySpaceItem9 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.lueCarrierInvoice = New DevExpress.XtraEditors.LookUpEdit()
         Me.cmbBuyer = New DevExpress.XtraEditors.LookUpEdit()
         Me.txtBuyer = New DevExpress.XtraEditors.TextEdit()
@@ -121,6 +106,9 @@ Partial Class frm_buyerSales
         Me.conBacking = New DevExpress.XtraLayout.LayoutControlItem()
         Me.conContainer = New DevExpress.XtraLayout.LayoutControlItem()
         Me.conReport = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
+        Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.BandedGridView1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemComboBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemComboBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -142,24 +130,7 @@ Partial Class frm_buyerSales
         CType(Me.txtTotalAmount.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtSpoilage.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtActualUnloading.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.XtraTabControl1.SuspendLayout()
-        Me.akPage.SuspendLayout()
-        CType(Me.LayoutControl3, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.LayoutControl3.SuspendLayout()
-        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BandedGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlGroup2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem10, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.sPage.SuspendLayout()
-        CType(Me.LayoutControl4, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.LayoutControl4.SuspendLayout()
-        CType(Me.GridControl2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BandedGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlGroup3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Root, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem14, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -174,7 +145,6 @@ Partial Class frm_buyerSales
         CType(Me.EmptySpaceItem6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.lueCarrierInvoice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cmbBuyer.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtBuyer.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -200,6 +170,9 @@ Partial Class frm_buyerSales
         CType(Me.conBacking, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.conContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.conReport, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BandedGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
@@ -509,6 +482,7 @@ Partial Class frm_buyerSales
         '
         'LayoutControl2
         '
+        Me.LayoutControl2.Controls.Add(Me.GridControl1)
         Me.LayoutControl2.Controls.Add(Me.txtRemainingBalance)
         Me.LayoutControl2.Controls.Add(Me.txtAmountInPercentage)
         Me.LayoutControl2.Controls.Add(Me.txtAmountPaid)
@@ -517,7 +491,6 @@ Partial Class frm_buyerSales
         Me.LayoutControl2.Controls.Add(Me.txtTotalAmount)
         Me.LayoutControl2.Controls.Add(Me.txtSpoilage)
         Me.LayoutControl2.Controls.Add(Me.txtActualUnloading)
-        Me.LayoutControl2.Controls.Add(Me.XtraTabControl1)
         Me.LayoutControl2.Location = New System.Drawing.Point(12, 194)
         Me.LayoutControl2.Name = "LayoutControl2"
         Me.LayoutControl2.Root = Me.Root
@@ -603,138 +576,14 @@ Partial Class frm_buyerSales
         Me.txtActualUnloading.StyleController = Me.LayoutControl2
         Me.txtActualUnloading.TabIndex = 5
         '
-        'XtraTabControl1
-        '
-        Me.XtraTabControl1.Location = New System.Drawing.Point(12, 12)
-        Me.XtraTabControl1.Name = "XtraTabControl1"
-        Me.XtraTabControl1.SelectedTabPage = Me.akPage
-        Me.XtraTabControl1.Size = New System.Drawing.Size(654, 375)
-        Me.XtraTabControl1.TabIndex = 4
-        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.akPage, Me.sPage})
-        '
-        'akPage
-        '
-        Me.akPage.Controls.Add(Me.LayoutControl3)
-        Me.akPage.Name = "akPage"
-        Me.akPage.Size = New System.Drawing.Size(652, 341)
-        Me.akPage.Text = "Actual Kilo"
-        '
-        'LayoutControl3
-        '
-        Me.LayoutControl3.Controls.Add(Me.GridControl1)
-        Me.LayoutControl3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LayoutControl3.Location = New System.Drawing.Point(0, 0)
-        Me.LayoutControl3.Name = "LayoutControl3"
-        Me.LayoutControl3.Root = Me.LayoutControlGroup2
-        Me.LayoutControl3.Size = New System.Drawing.Size(652, 341)
-        Me.LayoutControl3.TabIndex = 0
-        Me.LayoutControl3.Text = "LayoutControl3"
-        '
-        'GridControl1
-        '
-        Me.GridControl1.Location = New System.Drawing.Point(2, 2)
-        Me.GridControl1.MainView = Me.BandedGridView1
-        Me.GridControl1.MenuManager = Me.RibbonControl
-        Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(648, 337)
-        Me.GridControl1.TabIndex = 4
-        Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.BandedGridView1})
-        '
-        'BandedGridView1
-        '
-        Me.BandedGridView1.GridControl = Me.GridControl1
-        Me.BandedGridView1.Name = "BandedGridView1"
-        Me.BandedGridView1.OptionsView.ShowGroupPanel = False
-        '
-        'LayoutControlGroup2
-        '
-        Me.LayoutControlGroup2.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
-        Me.LayoutControlGroup2.GroupBordersVisible = False
-        Me.LayoutControlGroup2.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem10})
-        Me.LayoutControlGroup2.Name = "LayoutControlGroup2"
-        Me.LayoutControlGroup2.Padding = New DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0)
-        Me.LayoutControlGroup2.Size = New System.Drawing.Size(652, 341)
-        Me.LayoutControlGroup2.TextVisible = False
-        '
-        'LayoutControlItem10
-        '
-        Me.LayoutControlItem10.Control = Me.GridControl1
-        Me.LayoutControlItem10.Location = New System.Drawing.Point(0, 0)
-        Me.LayoutControlItem10.Name = "LayoutControlItem10"
-        Me.LayoutControlItem10.Size = New System.Drawing.Size(652, 341)
-        Me.LayoutControlItem10.TextSize = New System.Drawing.Size(0, 0)
-        Me.LayoutControlItem10.TextVisible = False
-        '
-        'sPage
-        '
-        Me.sPage.Controls.Add(Me.LayoutControl4)
-        Me.sPage.Name = "sPage"
-        Me.sPage.Size = New System.Drawing.Size(652, 341)
-        Me.sPage.Text = "Spoilage"
-        '
-        'LayoutControl4
-        '
-        Me.LayoutControl4.Controls.Add(Me.GridControl2)
-        Me.LayoutControl4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LayoutControl4.Location = New System.Drawing.Point(0, 0)
-        Me.LayoutControl4.Name = "LayoutControl4"
-        Me.LayoutControl4.Root = Me.LayoutControlGroup3
-        Me.LayoutControl4.Size = New System.Drawing.Size(652, 341)
-        Me.LayoutControl4.TabIndex = 0
-        Me.LayoutControl4.Text = "LayoutControl4"
-        '
-        'GridControl2
-        '
-        Me.GridControl2.Location = New System.Drawing.Point(2, 2)
-        Me.GridControl2.MainView = Me.BandedGridView2
-        Me.GridControl2.MenuManager = Me.RibbonControl
-        Me.GridControl2.Name = "GridControl2"
-        Me.GridControl2.Size = New System.Drawing.Size(648, 337)
-        Me.GridControl2.TabIndex = 4
-        Me.GridControl2.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.BandedGridView2})
-        '
-        'BandedGridView2
-        '
-        Me.BandedGridView2.GridControl = Me.GridControl2
-        Me.BandedGridView2.Name = "BandedGridView2"
-        Me.BandedGridView2.OptionsView.ShowGroupPanel = False
-        '
-        'LayoutControlGroup3
-        '
-        Me.LayoutControlGroup3.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
-        Me.LayoutControlGroup3.GroupBordersVisible = False
-        Me.LayoutControlGroup3.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem11})
-        Me.LayoutControlGroup3.Name = "LayoutControlGroup3"
-        Me.LayoutControlGroup3.Padding = New DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0)
-        Me.LayoutControlGroup3.Size = New System.Drawing.Size(652, 341)
-        Me.LayoutControlGroup3.TextVisible = False
-        '
-        'LayoutControlItem11
-        '
-        Me.LayoutControlItem11.Control = Me.GridControl2
-        Me.LayoutControlItem11.Location = New System.Drawing.Point(0, 0)
-        Me.LayoutControlItem11.Name = "LayoutControlItem11"
-        Me.LayoutControlItem11.Size = New System.Drawing.Size(652, 341)
-        Me.LayoutControlItem11.TextSize = New System.Drawing.Size(0, 0)
-        Me.LayoutControlItem11.TextVisible = False
-        '
         'Root
         '
         Me.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.Root.GroupBordersVisible = False
-        Me.Root.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem9, Me.EmptySpaceItem1, Me.LayoutControlItem12, Me.LayoutControlItem14, Me.LayoutControlItem15, Me.SimpleLabelItem1, Me.LayoutControlItem13, Me.LayoutControlItem16, Me.LayoutControlItem17, Me.LayoutControlItem18, Me.LayoutControlItem19, Me.EmptySpaceItem5, Me.EmptySpaceItem6, Me.EmptySpaceItem7, Me.EmptySpaceItem8, Me.EmptySpaceItem9})
+        Me.Root.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.EmptySpaceItem1, Me.LayoutControlItem12, Me.LayoutControlItem14, Me.LayoutControlItem15, Me.SimpleLabelItem1, Me.LayoutControlItem13, Me.LayoutControlItem16, Me.LayoutControlItem17, Me.LayoutControlItem18, Me.LayoutControlItem19, Me.EmptySpaceItem5, Me.EmptySpaceItem6, Me.EmptySpaceItem7, Me.EmptySpaceItem8, Me.LayoutControlItem5})
         Me.Root.Name = "Root"
         Me.Root.Size = New System.Drawing.Size(1050, 399)
         Me.Root.TextVisible = False
-        '
-        'LayoutControlItem9
-        '
-        Me.LayoutControlItem9.Control = Me.XtraTabControl1
-        Me.LayoutControlItem9.Location = New System.Drawing.Point(0, 0)
-        Me.LayoutControlItem9.Name = "LayoutControlItem9"
-        Me.LayoutControlItem9.Size = New System.Drawing.Size(658, 379)
-        Me.LayoutControlItem9.TextSize = New System.Drawing.Size(0, 0)
-        Me.LayoutControlItem9.TextVisible = False
         '
         'EmptySpaceItem1
         '
@@ -858,14 +707,6 @@ Partial Class frm_buyerSales
         Me.EmptySpaceItem8.Name = "EmptySpaceItem8"
         Me.EmptySpaceItem8.Size = New System.Drawing.Size(362, 30)
         Me.EmptySpaceItem8.TextSize = New System.Drawing.Size(0, 0)
-        '
-        'EmptySpaceItem9
-        '
-        Me.EmptySpaceItem9.AllowHotTrack = False
-        Me.EmptySpaceItem9.Location = New System.Drawing.Point(658, 0)
-        Me.EmptySpaceItem9.Name = "EmptySpaceItem9"
-        Me.EmptySpaceItem9.Size = New System.Drawing.Size(10, 379)
-        Me.EmptySpaceItem9.TextSize = New System.Drawing.Size(0, 0)
         '
         'lueCarrierInvoice
         '
@@ -1095,6 +936,31 @@ Partial Class frm_buyerSales
         Me.conReport.Text = "Select Report:"
         Me.conReport.TextSize = New System.Drawing.Size(133, 16)
         '
+        'GridControl1
+        '
+        Me.GridControl1.Location = New System.Drawing.Point(12, 12)
+        Me.GridControl1.MainView = Me.BandedGridView1
+        Me.GridControl1.MenuManager = Me.RibbonControl
+        Me.GridControl1.Name = "GridControl1"
+        Me.GridControl1.Size = New System.Drawing.Size(664, 375)
+        Me.GridControl1.TabIndex = 14
+        Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.BandedGridView1})
+        '
+        'LayoutControlItem5
+        '
+        Me.LayoutControlItem5.Control = Me.GridControl1
+        Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 0)
+        Me.LayoutControlItem5.Name = "LayoutControlItem5"
+        Me.LayoutControlItem5.Size = New System.Drawing.Size(668, 379)
+        Me.LayoutControlItem5.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem5.TextVisible = False
+        '
+        'BandedGridView1
+        '
+        Me.BandedGridView1.GridControl = Me.GridControl1
+        Me.BandedGridView1.Name = "BandedGridView1"
+        Me.BandedGridView1.OptionsView.ShowGroupPanel = False
+        '
         'frm_buyerSales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
@@ -1129,24 +995,7 @@ Partial Class frm_buyerSales
         CType(Me.txtTotalAmount.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtSpoilage.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtActualUnloading.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.XtraTabControl1.ResumeLayout(False)
-        Me.akPage.ResumeLayout(False)
-        CType(Me.LayoutControl3, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.LayoutControl3.ResumeLayout(False)
-        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BandedGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlGroup2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem10, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.sPage.ResumeLayout(False)
-        CType(Me.LayoutControl4, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.LayoutControl4.ResumeLayout(False)
-        CType(Me.GridControl2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BandedGridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlGroup3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem11, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Root, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem12, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem14, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1161,7 +1010,6 @@ Partial Class frm_buyerSales
         CType(Me.EmptySpaceItem6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.lueCarrierInvoice.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cmbBuyer.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtBuyer.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1187,6 +1035,9 @@ Partial Class frm_buyerSales
         CType(Me.conBacking, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.conContainer, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.conReport, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BandedGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1220,21 +1071,7 @@ Partial Class frm_buyerSales
     Friend WithEvents EmptySpaceItem4 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents LayoutControlItem6 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControl2 As DevExpress.XtraLayout.LayoutControl
-    Friend WithEvents XtraTabControl1 As DevExpress.XtraTab.XtraTabControl
-    Friend WithEvents akPage As DevExpress.XtraTab.XtraTabPage
-    Friend WithEvents LayoutControl3 As DevExpress.XtraLayout.LayoutControl
-    Friend WithEvents GridControl1 As DevExpress.XtraGrid.GridControl
-    Friend WithEvents BandedGridView1 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridView
-    Friend WithEvents LayoutControlGroup2 As DevExpress.XtraLayout.LayoutControlGroup
-    Friend WithEvents LayoutControlItem10 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents sPage As DevExpress.XtraTab.XtraTabPage
-    Friend WithEvents LayoutControl4 As DevExpress.XtraLayout.LayoutControl
-    Friend WithEvents GridControl2 As DevExpress.XtraGrid.GridControl
-    Friend WithEvents BandedGridView2 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridView
-    Friend WithEvents LayoutControlGroup3 As DevExpress.XtraLayout.LayoutControlGroup
-    Friend WithEvents LayoutControlItem11 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents Root As DevExpress.XtraLayout.LayoutControlGroup
-    Friend WithEvents LayoutControlItem9 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents lueCarrierInvoice As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents conCarrierInvoice As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem8 As DevExpress.XtraLayout.LayoutControlItem
@@ -1260,7 +1097,6 @@ Partial Class frm_buyerSales
     Friend WithEvents EmptySpaceItem6 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents EmptySpaceItem7 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents EmptySpaceItem8 As DevExpress.XtraLayout.EmptySpaceItem
-    Friend WithEvents EmptySpaceItem9 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents txtSetNo As DevExpress.XtraEditors.TextEdit
     Friend WithEvents BarButtonItem1 As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents RibbonPageGroup2 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
@@ -1293,6 +1129,9 @@ Partial Class frm_buyerSales
     Friend WithEvents conReport As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents txtContainerNum As DevExpress.XtraEditors.TextEdit
     Friend WithEvents conContainer As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents GridControl1 As DevExpress.XtraGrid.GridControl
+    Friend WithEvents BandedGridView1 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridView
+    Friend WithEvents LayoutControlItem5 As DevExpress.XtraLayout.LayoutControlItem
 
 
 End Class
