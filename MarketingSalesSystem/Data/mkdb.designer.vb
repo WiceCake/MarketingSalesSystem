@@ -55,17 +55,17 @@ Partial Public Class mkdbDataContext
     End Sub
   Partial Private Sub Deletetrans_SalesInvoiceBuyer(instance As trans_SalesInvoiceBuyer)
     End Sub
-  Partial Private Sub Inserttrans_SalesReport(instance As trans_SalesReport)
-    End Sub
-  Partial Private Sub Updatetrans_SalesReport(instance As trans_SalesReport)
-    End Sub
-  Partial Private Sub Deletetrans_SalesReport(instance As trans_SalesReport)
-    End Sub
   Partial Private Sub Inserttrans_SalesInvoiceReport(instance As trans_SalesInvoiceReport)
     End Sub
   Partial Private Sub Updatetrans_SalesInvoiceReport(instance As trans_SalesInvoiceReport)
     End Sub
   Partial Private Sub Deletetrans_SalesInvoiceReport(instance As trans_SalesInvoiceReport)
+    End Sub
+  Partial Private Sub Inserttrans_SalesReport(instance As trans_SalesReport)
+    End Sub
+  Partial Private Sub Updatetrans_SalesReport(instance As trans_SalesReport)
+    End Sub
+  Partial Private Sub Deletetrans_SalesReport(instance As trans_SalesReport)
     End Sub
   Partial Private Sub Inserttrans_SalesReportBuyer(instance As trans_SalesReportBuyer)
     End Sub
@@ -166,15 +166,15 @@ Partial Public Class mkdbDataContext
 		End Get
 	End Property
 	
-	Public ReadOnly Property trans_SalesReports() As System.Data.Linq.Table(Of trans_SalesReport)
-		Get
-			Return Me.GetTable(Of trans_SalesReport)
-		End Get
-	End Property
-	
 	Public ReadOnly Property trans_SalesInvoiceReports() As System.Data.Linq.Table(Of trans_SalesInvoiceReport)
 		Get
 			Return Me.GetTable(Of trans_SalesInvoiceReport)
+		End Get
+	End Property
+	
+	Public ReadOnly Property trans_SalesReports() As System.Data.Linq.Table(Of trans_SalesReport)
+		Get
+			Return Me.GetTable(Of trans_SalesReport)
 		End Get
 	End Property
 	
@@ -1115,6 +1115,135 @@ Partial Public Class trans_SalesInvoiceBuyer
 	End Sub
 End Class
 
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_SalesInvoiceReports")>  _
+Partial Public Class trans_SalesInvoiceReport
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _salesInvoiceReport_ID As Integer
+	
+	Private _salesInvoiceBuyer_ID As Integer
+	
+	Private _previousReport_ID As System.Nullable(Of Integer)
+	
+	Private _dateCreated As System.Nullable(Of Date)
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnsalesInvoiceReport_IDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnsalesInvoiceReport_IDChanged()
+    End Sub
+    Partial Private Sub OnsalesInvoiceBuyer_IDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnsalesInvoiceBuyer_IDChanged()
+    End Sub
+    Partial Private Sub OnpreviousReport_IDChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnpreviousReport_IDChanged()
+    End Sub
+    Partial Private Sub OndateCreatedChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OndateCreatedChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesInvoiceReport_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property salesInvoiceReport_ID() As Integer
+		Get
+			Return Me._salesInvoiceReport_ID
+		End Get
+		Set
+			If ((Me._salesInvoiceReport_ID = value)  _
+						= false) Then
+				Me.OnsalesInvoiceReport_IDChanging(value)
+				Me.SendPropertyChanging
+				Me._salesInvoiceReport_ID = value
+				Me.SendPropertyChanged("salesInvoiceReport_ID")
+				Me.OnsalesInvoiceReport_IDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesInvoiceBuyer_ID", DbType:="Int NOT NULL")>  _
+	Public Property salesInvoiceBuyer_ID() As Integer
+		Get
+			Return Me._salesInvoiceBuyer_ID
+		End Get
+		Set
+			If ((Me._salesInvoiceBuyer_ID = value)  _
+						= false) Then
+				Me.OnsalesInvoiceBuyer_IDChanging(value)
+				Me.SendPropertyChanging
+				Me._salesInvoiceBuyer_ID = value
+				Me.SendPropertyChanged("salesInvoiceBuyer_ID")
+				Me.OnsalesInvoiceBuyer_IDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_previousReport_ID", DbType:="Int")>  _
+	Public Property previousReport_ID() As System.Nullable(Of Integer)
+		Get
+			Return Me._previousReport_ID
+		End Get
+		Set
+			If (Me._previousReport_ID.Equals(value) = false) Then
+				Me.OnpreviousReport_IDChanging(value)
+				Me.SendPropertyChanging
+				Me._previousReport_ID = value
+				Me.SendPropertyChanged("previousReport_ID")
+				Me.OnpreviousReport_IDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_dateCreated", DbType:="DateTime")>  _
+	Public Property dateCreated() As System.Nullable(Of Date)
+		Get
+			Return Me._dateCreated
+		End Get
+		Set
+			If (Me._dateCreated.Equals(value) = false) Then
+				Me.OndateCreatedChanging(value)
+				Me.SendPropertyChanging
+				Me._dateCreated = value
+				Me.SendPropertyChanged("dateCreated")
+				Me.OndateCreatedChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_SalesReport")>  _
 Partial Public Class trans_SalesReport
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
@@ -1511,135 +1640,6 @@ Partial Public Class trans_SalesReport
 				Me._approvalStatus = value
 				Me.SendPropertyChanged("approvalStatus")
 				Me.OnapprovalStatusChanged
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.trans_SalesInvoiceReports")>  _
-Partial Public Class trans_SalesInvoiceReport
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _salesInvoiceReport_ID As Integer
-	
-	Private _salesInvoiceBuyer_ID As Integer
-	
-	Private _previousReport_ID As System.Nullable(Of Integer)
-	
-	Private _dateCreated As System.Nullable(Of Date)
-	
-    #Region "Extensibility Method Definitions"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnsalesInvoiceReport_IDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnsalesInvoiceReport_IDChanged()
-    End Sub
-    Partial Private Sub OnsalesInvoiceBuyer_IDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnsalesInvoiceBuyer_IDChanged()
-    End Sub
-    Partial Private Sub OnpreviousReport_IDChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnpreviousReport_IDChanged()
-    End Sub
-    Partial Private Sub OndateCreatedChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OndateCreatedChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesInvoiceReport_ID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property salesInvoiceReport_ID() As Integer
-		Get
-			Return Me._salesInvoiceReport_ID
-		End Get
-		Set
-			If ((Me._salesInvoiceReport_ID = value)  _
-						= false) Then
-				Me.OnsalesInvoiceReport_IDChanging(value)
-				Me.SendPropertyChanging
-				Me._salesInvoiceReport_ID = value
-				Me.SendPropertyChanged("salesInvoiceReport_ID")
-				Me.OnsalesInvoiceReport_IDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_salesInvoiceBuyer_ID", DbType:="Int NOT NULL")>  _
-	Public Property salesInvoiceBuyer_ID() As Integer
-		Get
-			Return Me._salesInvoiceBuyer_ID
-		End Get
-		Set
-			If ((Me._salesInvoiceBuyer_ID = value)  _
-						= false) Then
-				Me.OnsalesInvoiceBuyer_IDChanging(value)
-				Me.SendPropertyChanging
-				Me._salesInvoiceBuyer_ID = value
-				Me.SendPropertyChanged("salesInvoiceBuyer_ID")
-				Me.OnsalesInvoiceBuyer_IDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_previousReport_ID", DbType:="Int")>  _
-	Public Property previousReport_ID() As System.Nullable(Of Integer)
-		Get
-			Return Me._previousReport_ID
-		End Get
-		Set
-			If (Me._previousReport_ID.Equals(value) = false) Then
-				Me.OnpreviousReport_IDChanging(value)
-				Me.SendPropertyChanging
-				Me._previousReport_ID = value
-				Me.SendPropertyChanged("previousReport_ID")
-				Me.OnpreviousReport_IDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_dateCreated", DbType:="DateTime")>  _
-	Public Property dateCreated() As System.Nullable(Of Date)
-		Get
-			Return Me._dateCreated
-		End Get
-		Set
-			If (Me._dateCreated.Equals(value) = false) Then
-				Me.OndateCreatedChanging(value)
-				Me.SendPropertyChanging
-				Me._dateCreated = value
-				Me.SendPropertyChanged("dateCreated")
-				Me.OndateCreatedChanged
 			End If
 		End Set
 	End Property

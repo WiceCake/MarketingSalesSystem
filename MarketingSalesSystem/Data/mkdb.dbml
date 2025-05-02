@@ -48,6 +48,14 @@
       <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.trans_SalesInvoiceReports" Member="trans_SalesInvoiceReports">
+    <Type Name="trans_SalesInvoiceReport">
+      <Column Name="salesInvoiceReport_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="salesInvoiceBuyer_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="previousReport_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.trans_SalesReport" Member="trans_SalesReports">
     <Type Name="trans_SalesReport">
       <Column Name="salesReport_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -67,14 +75,6 @@
       <Column Name="encodedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="encodedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="approvalStatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.trans_SalesInvoiceReports" Member="trans_SalesInvoiceReports">
-    <Type Name="trans_SalesInvoiceReport">
-      <Column Name="salesInvoiceReport_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="salesInvoiceBuyer_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="previousReport_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.trans_SalesReportBuyer" Member="trans_SalesReportBuyers">
