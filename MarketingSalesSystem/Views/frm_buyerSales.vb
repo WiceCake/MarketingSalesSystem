@@ -218,6 +218,7 @@ Public Class frm_buyerSales
         ctrlB.updateTotal(r.Row)
 
         getActualUnloadingTotal()
+        getSpoilageTotal()
     End Sub
 
     Private Sub lueInvoice_EditValueChanged(sender As Object, e As EventArgs) Handles lueCarrierInvoice.EditValueChanged
@@ -307,7 +308,7 @@ Public Class frm_buyerSales
         BandedGridView1.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never
     End Sub
 
-    Private Function SumAmount(ByVal dt As DataTable, Optional ByVal columnName As String = "AUA_Total") As Decimal
+    Private Function SumAmount(ByVal dt As DataTable, ByVal columnName As String) As Decimal
         Dim amount As Decimal
         Dim val = cmbSaleType.EditValue
 
@@ -323,16 +324,16 @@ Public Class frm_buyerSales
     End Function
 
     Sub getActualUnloadingTotal()
-        txtActualUnloading.EditValue = SumAmount(dt)
+        txtActualUnloading.EditValue = SumAmount(dt, "AUA_Total")
     End Sub
 
     Sub getSpoilageTotal()
-        txtSpoilage.EditValue = SumAmount(dt)
+        txtSpoilage.EditValue = SumAmount(dt, "SA_Total")
     End Sub
 
     Sub getAmountTotal()
-        Dim totalAUAmount As Decimal = SumAmount(dt)
-        Dim totalSAmount As Decimal = SumAmount(dt)
+        Dim totalAUAmount As Decimal = SumAmount(dt, "AUA_Total")
+        Dim totalSAmount As Decimal = SumAmount(dt, "SA_Total")
         txtTotalAmount.EditValue = Math.Round(totalAUAmount - totalSAmount, 2)
     End Sub
 
@@ -418,7 +419,7 @@ Public Class frm_buyerSales
             If Not validateField(lueBacking) Then missingFields.AppendLine("Backing")
         End If
 
-        If BarCheckItem4.Checked OrElse BarCheckItem5.Checked Then
+        If barPartialFinal.Checked OrElse barFinal.Checked Then
             If Not validateField(lueReport) Then missingFields.AppendLine("Report")
         End If
 
@@ -474,15 +475,15 @@ Public Class frm_buyerSales
         End If
     End Sub
 
-    Private Sub BarCheckItem3_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarCheckItem3.ItemClick
+    Private Sub BarCheckItem3_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles barPartial.ItemClick
         setBarPartialItems()
     End Sub
 
-    Private Sub BarCheckItem4_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarCheckItem4.ItemClick
+    Private Sub BarCheckItem4_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles barPartialFinal.ItemClick
         setBarFinalItems()
     End Sub
 
-    Private Sub BarCheckItem5_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarCheckItem5.ItemClick
+    Private Sub BarCheckItem5_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles barFinal.ItemClick
         setBarFinalItems()
     End Sub
 
@@ -530,7 +531,7 @@ Public Class frm_buyerSales
         Dim mkdb As New mkdbDataContext
         Dim reports = Nothing
 
-        If BarCheckItem4.Checked Then
+        If barPartialFinal.Checked Then
             reports = (From i In mkdb.trans_SalesInvoiceBuyers
                        Where i.paymentStatus = 2
                        Select New With {

@@ -22,6 +22,7 @@
         For Each i In e
             salesInvoiceBuyerID = sibID
             salesInvoiceID = i.salesInvoiceID
+            invoiceNum = i.invoiceNum
             setNum = i.setNum
             paidAmount = i.paidAmount
             adjustmentsAmount = i.adjustmentsAmount
@@ -44,6 +45,7 @@
 
         salesInvoiceBuyerID = sib.salesInvoiceBuyerID
         salesInvoiceID = sib.salesInvoiceID
+        invoiceNum = sib.invoiceNum
         setNum = sib.setNum
         paidAmount = sib.paidAmount
         adjustmentsAmount = sib.adjustmentsAmount
