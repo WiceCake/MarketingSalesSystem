@@ -68,7 +68,7 @@ Public Class frm_buyerSales
             .Columns("AUA_Total").OwnerBand = bandAUATotal
             setOwnerBand("SK_Catcher", bandSK, BandedGridView1)
             setOwnerBand("SA_Catcher", bandSA, BandedGridView1, True)
-            .Columns("SK_Total").OwnerBand = bandSATotal
+            .Columns("SK_Total").OwnerBand = bandSKTotal
             .Columns("SA_Total").OwnerBand = bandSATotal
 
             .Columns("Class").OptionsColumn.ReadOnly = True
@@ -203,15 +203,17 @@ Public Class frm_buyerSales
         Next
     End Sub
 
-    Private Sub BandedGridView1_CellValueChanged(sender As Object, e As Views.Base.CellValueChangedEventArgs)
+    Private Sub BandedGridView1_CellValueChanged(sender As Object, e As Views.Base.CellValueChangedEventArgs) Handles BandedGridView1.CellValueChanged
         Dim view As BandedGridView = TryCast(sender, DevExpress.XtraGrid.Views.BandedGrid.BandedGridView)
         If view Is Nothing Then
             Return
         End If
-        If e.Column.FieldName = "Kilo_Total" Or e.Column.FieldName = "Amount_Total" Then
+        If e.Column.FieldName = "AUK_Total" Or e.Column.FieldName = "AUA_Total" Or _
+            e.Column.FieldName = "SK_Total" Or e.Column.FieldName = "SA_Total" Then
             Return
         End If
 
+        Debug.WriteLine("Calculated")
         Dim r As DataRowView = CType(view.GetRow(view.FocusedRowHandle), DataRowView)
         ctrlB.updateTotal(r.Row)
 

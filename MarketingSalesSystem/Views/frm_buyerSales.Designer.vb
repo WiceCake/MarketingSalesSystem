@@ -59,6 +59,8 @@ Partial Class frm_buyerSales
         Me.lueCarrier = New DevExpress.XtraEditors.LookUpEdit()
         Me.txtInvoiceNum = New DevExpress.XtraEditors.TextEdit()
         Me.LayoutControl2 = New DevExpress.XtraLayout.LayoutControl()
+        Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
+        Me.BandedGridView1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
         Me.txtRemainingBalance = New DevExpress.XtraEditors.TextEdit()
         Me.txtAmountInPercentage = New DevExpress.XtraEditors.TextEdit()
         Me.txtAmountPaid = New DevExpress.XtraEditors.TextEdit()
@@ -82,6 +84,7 @@ Partial Class frm_buyerSales
         Me.EmptySpaceItem6 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.EmptySpaceItem7 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.EmptySpaceItem8 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.lueCarrierInvoice = New DevExpress.XtraEditors.LookUpEdit()
         Me.cmbBuyer = New DevExpress.XtraEditors.LookUpEdit()
         Me.txtBuyer = New DevExpress.XtraEditors.TextEdit()
@@ -106,9 +109,6 @@ Partial Class frm_buyerSales
         Me.conBacking = New DevExpress.XtraLayout.LayoutControlItem()
         Me.conContainer = New DevExpress.XtraLayout.LayoutControlItem()
         Me.conReport = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
-        Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.BandedGridView1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemComboBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemComboBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -122,6 +122,8 @@ Partial Class frm_buyerSales
         CType(Me.txtInvoiceNum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl2.SuspendLayout()
+        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BandedGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtRemainingBalance.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtAmountInPercentage.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtAmountPaid.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -145,6 +147,7 @@ Partial Class frm_buyerSales
         CType(Me.EmptySpaceItem6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.lueCarrierInvoice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cmbBuyer.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtBuyer.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -170,9 +173,6 @@ Partial Class frm_buyerSales
         CType(Me.conBacking, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.conContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.conReport, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BandedGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl
@@ -498,6 +498,22 @@ Partial Class frm_buyerSales
         Me.LayoutControl2.TabIndex = 11
         Me.LayoutControl2.Text = "LayoutControl2"
         '
+        'GridControl1
+        '
+        Me.GridControl1.Location = New System.Drawing.Point(12, 12)
+        Me.GridControl1.MainView = Me.BandedGridView1
+        Me.GridControl1.MenuManager = Me.RibbonControl
+        Me.GridControl1.Name = "GridControl1"
+        Me.GridControl1.Size = New System.Drawing.Size(664, 375)
+        Me.GridControl1.TabIndex = 14
+        Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.BandedGridView1})
+        '
+        'BandedGridView1
+        '
+        Me.BandedGridView1.GridControl = Me.GridControl1
+        Me.BandedGridView1.Name = "BandedGridView1"
+        Me.BandedGridView1.OptionsView.ShowGroupPanel = False
+        '
         'txtRemainingBalance
         '
         Me.txtRemainingBalance.Location = New System.Drawing.Point(862, 312)
@@ -707,6 +723,15 @@ Partial Class frm_buyerSales
         Me.EmptySpaceItem8.Name = "EmptySpaceItem8"
         Me.EmptySpaceItem8.Size = New System.Drawing.Size(362, 30)
         Me.EmptySpaceItem8.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'LayoutControlItem5
+        '
+        Me.LayoutControlItem5.Control = Me.GridControl1
+        Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 0)
+        Me.LayoutControlItem5.Name = "LayoutControlItem5"
+        Me.LayoutControlItem5.Size = New System.Drawing.Size(668, 379)
+        Me.LayoutControlItem5.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem5.TextVisible = False
         '
         'lueCarrierInvoice
         '
@@ -936,31 +961,6 @@ Partial Class frm_buyerSales
         Me.conReport.Text = "Select Report:"
         Me.conReport.TextSize = New System.Drawing.Size(133, 16)
         '
-        'GridControl1
-        '
-        Me.GridControl1.Location = New System.Drawing.Point(12, 12)
-        Me.GridControl1.MainView = Me.BandedGridView1
-        Me.GridControl1.MenuManager = Me.RibbonControl
-        Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(664, 375)
-        Me.GridControl1.TabIndex = 14
-        Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.BandedGridView1})
-        '
-        'LayoutControlItem5
-        '
-        Me.LayoutControlItem5.Control = Me.GridControl1
-        Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 0)
-        Me.LayoutControlItem5.Name = "LayoutControlItem5"
-        Me.LayoutControlItem5.Size = New System.Drawing.Size(668, 379)
-        Me.LayoutControlItem5.TextSize = New System.Drawing.Size(0, 0)
-        Me.LayoutControlItem5.TextVisible = False
-        '
-        'BandedGridView1
-        '
-        Me.BandedGridView1.GridControl = Me.GridControl1
-        Me.BandedGridView1.Name = "BandedGridView1"
-        Me.BandedGridView1.OptionsView.ShowGroupPanel = False
-        '
         'frm_buyerSales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
@@ -987,6 +987,8 @@ Partial Class frm_buyerSales
         CType(Me.txtInvoiceNum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl2.ResumeLayout(False)
+        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BandedGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtRemainingBalance.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtAmountInPercentage.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtAmountPaid.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1010,6 +1012,7 @@ Partial Class frm_buyerSales
         CType(Me.EmptySpaceItem6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem8, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.lueCarrierInvoice.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cmbBuyer.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtBuyer.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1035,9 +1038,6 @@ Partial Class frm_buyerSales
         CType(Me.conBacking, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.conContainer, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.conReport, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BandedGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

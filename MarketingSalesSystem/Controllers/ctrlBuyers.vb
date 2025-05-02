@@ -299,6 +299,8 @@ Public Class ctrlBuyers
 
         Dim AUK_Total As Decimal = 0
         Dim AUA_Total As Decimal = 0
+        Dim SK_Total As Decimal = 0
+        Dim SA_Total As Decimal = 0
 
         For Each col As DataColumn In r.Table.Columns
             Dim colName As String = col.ColumnName
@@ -315,11 +317,26 @@ Public Class ctrlBuyers
                     AUA_Total += CDec(r(auaColumn))
                 End If
             End If
+
+            If colName.StartsWith("SK_Catcher") Then
+
+                Dim kValue As Decimal = Math.Max(0, CDec(If(IsDBNull(r(colName)), 0, r(colName))))
+
+                SK_Total += kValue
+
+                Dim saColumn As String = colName.Replace("SK", "SA")
+                If r.Table.Columns.Contains(saColumn) Then
+                    r(saColumn) = kValue * Price
+                    SA_Total += CDec(r(saColumn))
+                End If
+            End If
         Next
 
         ' Store final totals
         r("AUK_Total") = AUK_Total
         r("AUA_Total") = AUA_Total
+        r("SK_Total") = SK_Total
+        r("SA_Total") = SA_Total
     End Sub
 
     'Sub updateSpoilageTotal(ByRef r As DataRow)
@@ -381,12 +398,17 @@ Public Class ctrlBuyers
             FirstOrDefault()
 
         ' Preload Catch Data for faster lookup
-        Dim cdList = mkdb.trans_SalesReportCatchers.
+        Dim kiloList = mkdb.trans_SalesReportCatchers.
             Where(Function(s) s.salesReport_ID = salesReportID).
             GroupBy(Function(s) s.catchActivityDetail_ID).
             Select(Function(s) s.Skip(0).FirstOrDefault()).ToList()
 
-        Debug.WriteLine(cdList.Count)
+        Dim spoilageList = mkdb.trans_SalesReportCatchers.
+            Where(Function(s) s.salesReport_ID = salesReportID).
+            GroupBy(Function(s) s.catchActivityDetail_ID).
+            Select(Function(s) s.Skip(1).FirstOrDefault()).ToList()
+
+        'Debug.WriteLine(cdList.Count)
 
         Dim bList = mkdb.trans_SalesReportBuyers.
             Where(Function(s) s.salesInvoiceID = salesReportID).
@@ -414,6 +436,7 @@ Public Class ctrlBuyers
 
                 Dim countAvailableCatch As Integer = 0
                 Dim countKiloCatcher As Integer = 0
+                Dim countSpoilageCatcher As Integer = 0
                 Dim propCatch = GetType(trans_SalesReportCatcher).GetProperty(priceColumn)
                 Dim propBuyer = GetType(trans_SalesReportBuyer).GetProperty(priceColumn)
 
@@ -422,8 +445,11 @@ Public Class ctrlBuyers
                         dr("AUK_Catcher" & (countKiloCatcher + 1)) = CDec(propBuyer.GetValue(bList(countKiloCatcher), Nothing))
                         countKiloCatcher += 1
                     ElseIf col.ColumnName.Contains("AUK_Catcher") Then
-                        dr("AUK_Catcher" & (countKiloCatcher + 1)) = CDec(propCatch.GetValue(cdList(countKiloCatcher), Nothing))
+                        dr("AUK_Catcher" & (countKiloCatcher + 1)) = CDec(propCatch.GetValue(kiloList(countKiloCatcher), Nothing))
                         countKiloCatcher += 1
+                    ElseIf col.ColumnName.Contains("SK_Catcher") Then
+                        dr("SK_Catcher" & (countSpoilageCatcher + 1)) = CDec(propCatch.GetValue(spoilageList(countSpoilageCatcher), Nothing))
+                        countSpoilageCatcher += 1
                     ElseIf col.ColumnName <> "Class" AndAlso col.ColumnName <> "Size" AndAlso col.ColumnName <> "Price" Then
                         dr(col) = 0
                     End If
