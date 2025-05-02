@@ -7,8 +7,7 @@ Public Class frm_buyerSales
 
     Private ctrlB As ctrlBuyers
 
-    Public dtAK As DataTable
-    Public dtS As DataTable
+    Public dt As DataTable
 
     Sub New(ctrl As ctrlBuyers)
         ' This call is required by the designer.
@@ -40,13 +39,21 @@ Public Class frm_buyerSales
         Dim bandClass = AddBand("Class", BandedGridView1)
         Dim bandSize = AddBand("Size", BandedGridView1)
         Dim bandPrice = AddBand("Price", BandedGridView1)
+        Dim bandAU = AddBand("Actual Unloading", BandedGridView1)
+        Dim bandAUK = AddBand("Kilos", bandAU)
+        Dim bandAUA = AddBand("Amount", bandAU)
+        populateBand(bandAUK, catchers)
+        Dim bandAUKTotal = AddBand("Total", bandAUK)
+        populateBand(bandAUA, catchers)
+        Dim bandAUATotal = AddBand("Total", bandAUA)
 
-        Dim bandKilos = AddBand("Kilos", BandedGridView1)
-        Dim bandAmount = AddBand("Amount", BandedGridView1)
-        populateBand(bandKilos, catchers)
-        Dim bandKTotal = AddBand("Total", bandKilos) ' Restored Total band
-        populateBand(bandAmount, catchers)
-        Dim bandATotal = AddBand("Total", bandAmount) ' Restored Total band
+        Dim bandS = AddBand("Spoilage", BandedGridView1)
+        Dim bandSK = AddBand("Kilos", bandS)
+        Dim bandSA = AddBand("Amount", bandS)
+        populateBand(bandSK, catchers)
+        Dim bandSKTotal = AddBand("Total", bandSK)
+        populateBand(bandSA, catchers)
+        Dim bandSATotal = AddBand("Total", bandSA)
 
         BandedGridView1.PopulateColumns()
 
@@ -55,16 +62,22 @@ Public Class frm_buyerSales
             .Columns("Class").OwnerBand = bandClass
             .Columns("Size").OwnerBand = bandSize
             .Columns("Price").OwnerBand = bandPrice
-            setOwnerBand("K_Catcher", bandKilos, BandedGridView1)
-            setOwnerBand("A_Catcher", bandAmount, BandedGridView1, True)
-            .Columns("Kilo_Total").OwnerBand = bandKTotal
-            .Columns("Amount_Total").OwnerBand = bandATotal
+            setOwnerBand("AUK_Catcher", bandAUK, BandedGridView1)
+            setOwnerBand("AUA_Catcher", bandAUA, BandedGridView1, True)
+            .Columns("AUK_Total").OwnerBand = bandAUKTotal
+            .Columns("AUA_Total").OwnerBand = bandAUATotal
+            setOwnerBand("SK_Catcher", bandSK, BandedGridView1)
+            setOwnerBand("SA_Catcher", bandSA, BandedGridView1, True)
+            .Columns("SK_Total").OwnerBand = bandSKTotal
+            .Columns("SA_Total").OwnerBand = bandSATotal
 
             .Columns("Class").OptionsColumn.ReadOnly = True
             .Columns("Size").OptionsColumn.ReadOnly = True
             .Columns("Price").OptionsColumn.ReadOnly = True
-            .Columns("Kilo_Total").OptionsColumn.ReadOnly = True
-            .Columns("Amount_Total").OptionsColumn.ReadOnly = True
+            .Columns("AUK_Total").OptionsColumn.ReadOnly = True
+            .Columns("AUA_Total").OptionsColumn.ReadOnly = True
+            .Columns("SK_Total").OptionsColumn.ReadOnly = True
+            .Columns("SA_Total").OptionsColumn.ReadOnly = True
 
             .BestFitColumns()
             .OptionsView.ColumnAutoWidth = False
@@ -82,59 +95,59 @@ Public Class frm_buyerSales
         End With
     End Sub
 
-    Sub createSpoilageBand(catcherID As Integer)
-        Dim mkdb As New mkdbDataContext
+    'Sub createSpoilageBand(catcherID As Integer)
+    '    Dim mkdb As New mkdbDataContext
 
-        Dim catchers As List(Of Integer) = mkdb.trans_CatchActivityDetails.
-            Where(Function(j) j.catchActivity_ID = catcherID).
-            Select(Function(j) j.vessel_ID).ToList()
+    '    Dim catchers As List(Of Integer) = mkdb.trans_CatchActivityDetails.
+    '        Where(Function(j) j.catchActivity_ID = catcherID).
+    '        Select(Function(j) j.vessel_ID).ToList()
 
-        Dim bandClass = AddBand("Class", BandedGridView2)
-        Dim bandSize = AddBand("Size", BandedGridView2)
-        Dim bandPrice = AddBand("Price", BandedGridView2)
+    '    Dim bandClass = AddBand("Class", BandedGridView2)
+    '    Dim bandSize = AddBand("Size", BandedGridView2)
+    '    Dim bandPrice = AddBand("Price", BandedGridView2)
 
-        Dim bandKilos = AddBand("Kilos", BandedGridView2)
-        Dim bandAmount = AddBand("Amount", BandedGridView2)
-        populateBand(bandKilos, catchers)
-        Dim bandKTotal = AddBand("Total", bandKilos) ' Restored Total band
-        populateBand(bandAmount, catchers)
-        Dim bandATotal = AddBand("Total", bandAmount) ' Restored Total band
+    '    Dim bandKilos = AddBand("Kilos", BandedGridView2)
+    '    Dim bandAmount = AddBand("Amount", BandedGridView2)
+    '    populateBand(bandKilos, catchers)
+    '    Dim bandKTotal = AddBand("Total", bandKilos) ' Restored Total band
+    '    populateBand(bandAmount, catchers)
+    '    Dim bandATotal = AddBand("Total", bandAmount) ' Restored Total band
 
-        BandedGridView2.PopulateColumns()
+    '    BandedGridView2.PopulateColumns()
 
-        With BandedGridView2
+    '    With BandedGridView2
 
-            .Columns("Class").OwnerBand = bandClass
-            .Columns("Size").OwnerBand = bandSize
-            .Columns("Price").OwnerBand = bandPrice
-            setOwnerBand("K_Catcher", bandKilos, BandedGridView2, True)
-            setOwnerBand("A_Catcher", bandAmount, BandedGridView2, True)
-            .Columns("Kilo_Total").OwnerBand = bandKTotal
-            .Columns("Amount_Total").OwnerBand = bandATotal
+    '        .Columns("Class").OwnerBand = bandClass
+    '        .Columns("Size").OwnerBand = bandSize
+    '        .Columns("Price").OwnerBand = bandPrice
+    '        setOwnerBand("K_Catcher", bandKilos, BandedGridView2, True)
+    '        setOwnerBand("A_Catcher", bandAmount, BandedGridView2, True)
+    '        .Columns("Kilo_Total").OwnerBand = bandKTotal
+    '        .Columns("Amount_Total").OwnerBand = bandATotal
 
-            .Columns("Class").OptionsColumn.ReadOnly = True
-            .Columns("Size").OptionsColumn.ReadOnly = True
-            .Columns("Price").OptionsColumn.ReadOnly = True
-            .Columns("Kilo_Total").OptionsColumn.ReadOnly = True
-            .Columns("Amount_Total").OptionsColumn.ReadOnly = True
+    '        .Columns("Class").OptionsColumn.ReadOnly = True
+    '        .Columns("Size").OptionsColumn.ReadOnly = True
+    '        .Columns("Price").OptionsColumn.ReadOnly = True
+    '        .Columns("Kilo_Total").OptionsColumn.ReadOnly = True
+    '        .Columns("Amount_Total").OptionsColumn.ReadOnly = True
 
-            .BestFitColumns()
-            .OptionsView.ColumnAutoWidth = False
-            .OptionsView.ShowColumnHeaders = False
+    '        .BestFitColumns()
+    '        .OptionsView.ColumnAutoWidth = False
+    '        .OptionsView.ShowColumnHeaders = False
 
-            bandClass.Fixed = Columns.FixedStyle.Left
-            bandSize.Fixed = Columns.FixedStyle.Left
+    '        bandClass.Fixed = Columns.FixedStyle.Left
+    '        bandSize.Fixed = Columns.FixedStyle.Left
 
-            .OptionsView.ShowFooter = True
+    '        .OptionsView.ShowFooter = True
 
-            ' ---- Align Headers & Columns ----
-            For Each band As GridBand In .Bands
-                SetHeaderAlignment(band)
-            Next
-        End With
-    End Sub
+    '        ' ---- Align Headers & Columns ----
+    '        For Each band As GridBand In .Bands
+    '            SetHeaderAlignment(band)
+    '        Next
+    '    End With
+    'End Sub
 
-    Private Sub GridControl1_Load(sender As Object, e As EventArgs) Handles GridControl1.Load
+    Private Sub GridControl1_Load(sender As Object, e As EventArgs)
         ' For testing
     End Sub
 
@@ -195,19 +208,20 @@ Public Class frm_buyerSales
         If view Is Nothing Then
             Return
         End If
-        If e.Column.FieldName = "Kilo_Total" Or e.Column.FieldName = "Amount_Total" Then
+        If e.Column.FieldName = "AUK_Total" Or e.Column.FieldName = "AUA_Total" Or _
+            e.Column.FieldName = "SK_Total" Or e.Column.FieldName = "SA_Total" Then
             Return
         End If
 
+        Debug.WriteLine("Calculated")
         Dim r As DataRowView = CType(view.GetRow(view.FocusedRowHandle), DataRowView)
-        ctrlB.updateKiloTotal(r.Row)
+        ctrlB.updateTotal(r.Row)
 
         getActualUnloadingTotal()
     End Sub
 
     Private Sub lueInvoice_EditValueChanged(sender As Object, e As EventArgs) Handles lueCarrierInvoice.EditValueChanged
         BandedGridView1.Bands.Clear()
-        BandedGridView2.Bands.Clear()
         Dim invoice = CType(sender, DevExpress.XtraEditors.LookUpEdit)
 
         If invoice.EditValue Is Nothing Then Return
@@ -224,15 +238,11 @@ Public Class frm_buyerSales
 
         loadCarrier(mkdb, tpmdb, val)
 
-        ctrlB.initKiloDataTable(catcherID)
-        ctrlB.initSpoilageDataTable(catcherID)
-        GridControl1.DataSource = dtAK
-        GridControl2.DataSource = dtS
+        ctrlB.initDataTable(catcherID)
+        GridControl1.DataSource = dt
 
         createKiloBands(catcherID)
-        createSpoilageBand(catcherID)
-        ctrlB.loadKiloRows(val)
-        ctrlB.loadSpoilageRows(val)
+        ctrlB.loadRows(val)
 
         showRows()
 
@@ -292,14 +302,12 @@ Public Class frm_buyerSales
 
         If filters IsNot Nothing Then
             BandedGridView1.ActiveFilterCriteria = New DevExpress.Data.Filtering.GroupOperator(DevExpress.Data.Filtering.GroupOperatorType.And, filters)
-            BandedGridView2.ActiveFilterCriteria = New DevExpress.Data.Filtering.GroupOperator(DevExpress.Data.Filtering.GroupOperatorType.And, filters)
         End If
 
         BandedGridView1.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never
-        BandedGridView2.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never
     End Sub
 
-    Private Function SumAmount(ByVal dt As DataTable, Optional ByVal columnName As String = "Amount_Total") As Decimal
+    Private Function SumAmount(ByVal dt As DataTable, Optional ByVal columnName As String = "AUA_Total") As Decimal
         Dim amount As Decimal
         Dim val = cmbSaleType.EditValue
 
@@ -315,16 +323,16 @@ Public Class frm_buyerSales
     End Function
 
     Sub getActualUnloadingTotal()
-        txtActualUnloading.EditValue = SumAmount(dtAK)
+        txtActualUnloading.EditValue = SumAmount(dt)
     End Sub
 
     Sub getSpoilageTotal()
-        txtSpoilage.EditValue = SumAmount(dtS)
+        txtSpoilage.EditValue = SumAmount(dt)
     End Sub
 
     Sub getAmountTotal()
-        Dim totalAUAmount As Decimal = SumAmount(dtAK)
-        Dim totalSAmount As Decimal = SumAmount(dtS)
+        Dim totalAUAmount As Decimal = SumAmount(dt)
+        Dim totalSAmount As Decimal = SumAmount(dt)
         txtTotalAmount.EditValue = Math.Round(totalAUAmount - totalSAmount, 2)
     End Sub
 
@@ -372,7 +380,8 @@ Public Class frm_buyerSales
         If txtOverallTotalAmount.EditValue IsNot Nothing Then
             Dim totalDebt = txtOverallTotalAmount.EditValue
 
-            totalPercentage = Math.Round((CDec(paidAmount) / CDec(totalDebt)) * 100, 2)
+            'totalPercentage = Math.Round((CDec(paidAmount) / CDec(totalDebt)) * 100, 2)
+            totalPercentage = 0
             txtAmountInPercentage.EditValue = "% " & totalPercentage
             remainingBalance = CDec(totalDebt) - CDec(paidAmount)
             txtRemainingBalance.EditValue = remainingBalance
@@ -442,7 +451,6 @@ Public Class frm_buyerSales
         lueCarrier.EditValue = Nothing
         lueCarrier.Properties.DataSource = Nothing
         GridControl1.DataSource = Nothing
-        GridControl2.DataSource = Nothing
         txtActualUnloading.EditValue = Nothing
         txtSpoilage.EditValue = Nothing
         txtTotalAmount.EditValue = Nothing
@@ -499,7 +507,6 @@ Public Class frm_buyerSales
 
         lueCarrier.Properties.DataSource = Nothing
         GridControl1.DataSource = Nothing
-        GridControl2.DataSource = Nothing
 
         conReport.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
         conCarrier.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
@@ -559,7 +566,6 @@ Public Class frm_buyerSales
 
         lueCarrier.Properties.DataSource = Nothing
         GridControl1.DataSource = Nothing
-        GridControl2.DataSource = Nothing
 
         lookUpTransMode(reports, lueReport, "Value", "ID", "Select Report")
 
