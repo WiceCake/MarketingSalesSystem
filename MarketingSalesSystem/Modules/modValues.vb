@@ -8,8 +8,9 @@
     End Enum
 
     Enum Payment_Status As Integer
-        Adjustments = 1
-        Final = 1
+        Partial_ = 1
+        Partial_Final = 2
+        Final_ = 3
     End Enum
 
 End Module

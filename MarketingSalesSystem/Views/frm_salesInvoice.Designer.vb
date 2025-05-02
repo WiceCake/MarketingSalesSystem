@@ -350,7 +350,7 @@ Partial Class frm_salesInvoice
         'GridControl3
         '
         Me.GridControl3.EmbeddedNavigator.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.GridControl3.Location = New System.Drawing.Point(14, 14)
+        Me.GridControl3.Location = New System.Drawing.Point(12, 12)
         Me.GridControl3.MainView = Me.BandedGridView3
         Me.GridControl3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GridControl3.MenuManager = Me.RibbonControl

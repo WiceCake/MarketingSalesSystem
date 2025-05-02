@@ -221,6 +221,7 @@ Partial Public Class rptSalesInvoiceReport
         Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrPictureBox1 = New DevExpress.XtraReports.UI.XRPictureBox()
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.GroupFooterBand1 = New DevExpress.XtraReports.UI.GroupFooterBand()
         CType(Me.XrTable3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -2845,6 +2846,10 @@ Partial Public Class rptSalesInvoiceReport
         '
         Me.BindingSource1.DataSource = GetType(MarketingSalesSystem.SalesReportInvoice)
         '
+        'GroupFooterBand1
+        '
+        Me.GroupFooterBand1.Name = "GroupFooterBand1"
+        '
         'rptSalesInvoiceReport
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.ReportFooter, Me.PageHeader})
@@ -3061,4 +3066,5 @@ Partial Public Class rptSalesInvoiceReport
     Friend WithEvents XrLabel2 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel1 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrPictureBox1 As DevExpress.XtraReports.UI.XRPictureBox
+    Friend WithEvents GroupFooterBand1 As DevExpress.XtraReports.UI.GroupFooterBand
 End Class
