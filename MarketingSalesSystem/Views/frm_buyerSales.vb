@@ -209,11 +209,15 @@ Public Class frm_buyerSales
         getActualUnloadingTotal()
     End Sub
 
-    Private Sub lueInvoice_EditValueChanged(sender As Object, e As EventArgs) Handles lueInvoice.EditValueChanged
+    Private Sub lueInvoice_EditValueChanged(sender As Object, e As EventArgs) Handles lueCarrierInvoice.EditValueChanged
         BandedGridView1.Bands.Clear()
+        BandedGridView2.Bands.Clear()
         Dim invoice = CType(sender, DevExpress.XtraEditors.LookUpEdit)
 
+        If invoice.EditValue Is Nothing Then Return
+
         Dim mkdb As New mkdbDataContext
+        Dim tpmdb As New tpmdbDataContext
 
         Dim catcher = From i In mkdb.trans_SalesReportCatchers
                       Join j In mkdb.trans_CatchActivityDetails On i.catchActivityDetail_ID Equals j.catchActivityDetail_ID
@@ -222,20 +226,96 @@ Public Class frm_buyerSales
         Dim catcherID = catcher.FirstOrDefault
         Dim val = CInt(invoice.EditValue)
 
+        loadCarrier(mkdb, tpmdb, val)
+
         ctrlB.initKiloDataTable(catcherID)
         ctrlB.initSpoilageDataTable(catcherID)
         GridControl1.DataSource = dtAK
         GridControl2.DataSource = dtS
+
         createKiloBands(catcherID)
         createSpoilageBand(catcherID)
         ctrlB.loadKiloRows(val)
         ctrlB.loadSpoilageRows(val)
 
+        showRows()
+
         getActualUnloadingTotal()
         getSpoilageTotal()
     End Sub
+
+    Sub loadCarrier(mkdb As mkdbDataContext, tpmdb As tpmdbDataContext, invoiceID As Integer)
+
+        Dim carriers = (From i In mkdb.trans_SalesUnloadeds
+                       Where i.SalesReportID = invoiceID Select New With {
+                           .ID = i.CarrierID,
+                           .Name = i.CarrierName})
+
+        Dim carrierCompany = (From i In tpmdb.ml_Vessels Select i).ToDictionary(Function(s) s.ml_vID, Function(v) v.vesselName)
+
+        Dim carrierList As New List(Of Object)
+
+        For Each c In carriers
+            If Integer.TryParse(c.Name, 0) Then
+                carrierList.Add(New With {.ID = c.ID, .Name = carrierCompany(CInt(c.Name))})
+            Else
+                carrierList.Add(New With {.ID = c.ID, .Name = c.Name})
+            End If
+        Next
+
+        conCarrier.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+        lookUpTransMode(carrierList, lueCarrier, "Name", "ID", "Select Carrier")
+    End Sub
+
+    Sub showRows()
+        Dim val = cmbSaleType.EditValue
+        Dim filters As New List(Of DevExpress.Data.Filtering.CriteriaOperator)
+
+        If val Is "Export" Then
+            filters = New List(Of DevExpress.Data.Filtering.CriteriaOperator) From {
+                New DevExpress.Data.Filtering.BinaryOperator("Class", "SKIPJACK", DevExpress.Data.Filtering.BinaryOperatorType.NotEqual),
+                New DevExpress.Data.Filtering.BinaryOperator("Class", "BIGEYE", DevExpress.Data.Filtering.BinaryOperatorType.NotEqual),
+                New DevExpress.Data.Filtering.BinaryOperator("Class", "FISHMEAL", DevExpress.Data.Filtering.BinaryOperatorType.NotEqual),
+                New DevExpress.Data.Filtering.BinaryOperator("Class", "BONITO", DevExpress.Data.Filtering.BinaryOperatorType.NotEqual),
+                New DevExpress.Data.Filtering.BinaryOperator("Class", "YELLOWFIN", DevExpress.Data.Filtering.BinaryOperatorType.Equal),
+                New DevExpress.Data.Filtering.GroupOperator(DevExpress.Data.Filtering.GroupOperatorType.Or,
+                    New DevExpress.Data.Filtering.BinaryOperator("Size", "10 - UP GOOD", DevExpress.Data.Filtering.BinaryOperatorType.Equal),
+                    New DevExpress.Data.Filtering.BinaryOperator("Size", "10 - UP DEFORMED", DevExpress.Data.Filtering.BinaryOperatorType.Equal)
+                )
+            }
+        ElseIf val Is "Local" Then
+            filters = New List(Of DevExpress.Data.Filtering.CriteriaOperator) From {
+                New DevExpress.Data.Filtering.BinaryOperator("Class", "SKIPJACK", DevExpress.Data.Filtering.BinaryOperatorType.NotEqual),
+                New DevExpress.Data.Filtering.BinaryOperator("Class", "BIGEYE", DevExpress.Data.Filtering.BinaryOperatorType.NotEqual),
+                New DevExpress.Data.Filtering.BinaryOperator("Class", "FISHMEAL", DevExpress.Data.Filtering.BinaryOperatorType.NotEqual),
+                New DevExpress.Data.Filtering.BinaryOperator("Class", "BONITO", DevExpress.Data.Filtering.BinaryOperatorType.NotEqual)
+            }
+        Else
+            filters = Nothing
+        End If
+
+        If filters IsNot Nothing Then
+            BandedGridView1.ActiveFilterCriteria = New DevExpress.Data.Filtering.GroupOperator(DevExpress.Data.Filtering.GroupOperatorType.And, filters)
+            BandedGridView2.ActiveFilterCriteria = New DevExpress.Data.Filtering.GroupOperator(DevExpress.Data.Filtering.GroupOperatorType.And, filters)
+        End If
+
+        BandedGridView1.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never
+        BandedGridView2.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never
+    End Sub
+
     Private Function SumAmount(ByVal dt As DataTable, Optional ByVal columnName As String = "Amount_Total") As Decimal
-        Return Math.Round(dt.AsEnumerable().Sum(Function(row) CDec(row(columnName))), 2)
+        Dim amount As Decimal
+        Dim val = cmbSaleType.EditValue
+
+        If val Is "Export" Then
+            amount = dt.AsEnumerable().Where(Function(row) row("Class") Is "YELLOWFIN" AndAlso (row("Price") Is "10 - UP GOOD" OrElse row("Price") Is "10 - UP DEFORMED")).Sum(Function(row) CDec(row(columnName)))
+        ElseIf val Is "Local" Then
+            amount = dt.AsEnumerable().Where(Function(row) row("Class") Is "YELLOWFIN").Sum(Function(row) CDec(row(columnName)))
+        Else
+            amount = dt.AsEnumerable().Sum(Function(row) CDec(row(columnName)))
+        End If
+
+        Return Math.Round(amount, 2)
     End Function
 
     Sub getActualUnloadingTotal()
@@ -283,6 +363,8 @@ Public Class frm_buyerSales
     End Sub
 
     Private Sub txtAmountPaid_EditValueChanged(sender As Object, e As EventArgs) Handles txtAmountPaid.EditValueChanged
+        If txtAmountPaid.EditValue Is Nothing Then Return
+
         Dim paidAmount As Decimal = 0
         Dim totalPercentage As Decimal = 0
         Dim remainingBalance As Decimal = 0
@@ -306,7 +388,7 @@ Public Class frm_buyerSales
 
         Dim dateCreated = validateField(dtEncoded)
         Dim typeOfSale = validateField(cmbSaleType)
-        Dim invoice = validateField(lueInvoice)
+        Dim invoice = validateField(lueCarrierInvoice)
         Dim setNo = validateField(txtSetNo)
         Dim amountPaid = validateField(txtAmountPaid)
         Dim buyer = False
@@ -324,6 +406,16 @@ Public Class frm_buyerSales
         If Not setNo Then missingFields.AppendLine("Set No.")
         If Not amountPaid Then missingFields.AppendLine("Amount Paid")
         If Not buyer Then missingFields.AppendLine("Buyer")
+
+        If cmbSaleType.EditValue Is "Export" Then
+            If Not validateField(txtContainerNum) Then missingFields.AppendLine("Container No.")
+        ElseIf cmbSaleType.EditValue Is "Backing" Then
+            If Not validateField(lueBacking) Then missingFields.AppendLine("Backing")
+        End If
+
+        If BarCheckItem4.Checked OrElse BarCheckItem5.Checked Then
+            If Not validateField(lueReport) Then missingFields.AppendLine("Report")
+        End If
 
         If missingFields.Length > 0 Then
             requiredMessage(missingFields.ToString())
@@ -343,5 +435,167 @@ Public Class frm_buyerSales
 
     Private Sub BarButtonItem1_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem1.ItemClick
         ctrlB.print()
+    End Sub
+
+    Private Sub cmbSaleType_EditValueChanged(sender As Object, e As EventArgs) Handles cmbSaleType.EditValueChanged
+        Dim val = TryCast(sender, ComboBoxEdit).EditValue()
+
+        conCarrierInvoice.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+
+        lueCarrierInvoice.EditValue = Nothing
+        lueCarrier.EditValue = Nothing
+        lueCarrier.Properties.DataSource = Nothing
+        GridControl1.DataSource = Nothing
+        GridControl2.DataSource = Nothing
+        txtActualUnloading.EditValue = Nothing
+        txtSpoilage.EditValue = Nothing
+        txtTotalAmount.EditValue = Nothing
+        txtAdjustments.EditValue = Nothing
+        txtOverallTotalAmount.EditValue = Nothing
+        txtAmountPaid.EditValue = Nothing
+        txtAmountInPercentage.EditValue = Nothing
+        txtRemainingBalance.EditValue = Nothing
+
+        txtAdjustments.ReadOnly = True
+        txtAmountPaid.ReadOnly = True
+
+        conCarrier.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+        conContainer.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+        conBacking.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+
+        If val Is "Export" Then
+            conContainer.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+        ElseIf val Is "Backing" Then
+            conBacking.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+        End If
+    End Sub
+
+    Private Sub BarCheckItem3_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarCheckItem3.ItemClick
+        setBarPartialItems()
+    End Sub
+
+    Private Sub BarCheckItem4_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarCheckItem4.ItemClick
+        setBarFinalItems()
+    End Sub
+
+    Private Sub BarCheckItem5_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarCheckItem5.ItemClick
+        setBarFinalItems()
+    End Sub
+
+    Sub setBarPartialItems()
+        lueReport.EditValue = Nothing
+        dtEncoded.EditValue = Nothing
+        cmbSaleType.EditValue = Nothing
+        lueCarrierInvoice.EditValue = Nothing
+        lueCarrier.EditValue = Nothing
+        cmbBuyer.EditValue = Nothing
+        txtBuyer.EditValue = Nothing
+        txtSetNo.EditValue = Nothing
+        txtInvoiceNum.EditValue = Nothing
+        txtActualUnloading.EditValue = Nothing
+        txtSpoilage.EditValue = Nothing
+        txtTotalAmount.EditValue = Nothing
+        txtAdjustments.EditValue = Nothing
+        txtOverallTotalAmount.EditValue = Nothing
+        txtAmountPaid.EditValue = Nothing
+        txtAmountInPercentage.EditValue = Nothing
+        txtRemainingBalance.EditValue = Nothing
+
+        lueCarrier.Properties.DataSource = Nothing
+        GridControl1.DataSource = Nothing
+        GridControl2.DataSource = Nothing
+
+        conReport.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+        conCarrier.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+        conContainer.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+        conBacking.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+        conCarrierInvoice.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+
+        dtEncoded.ReadOnly = False
+        cmbSaleType.ReadOnly = False
+        lueCarrierInvoice.ReadOnly = False
+        lueCarrier.ReadOnly = False
+        cmbBuyer.ReadOnly = False
+        txtBuyer.ReadOnly = False
+        txtSetNo.ReadOnly = False
+        txtInvoiceNum.ReadOnly = False
+        txtAdjustments.ReadOnly = True
+        txtAmountPaid.ReadOnly = True
+    End Sub
+
+    Sub setBarFinalItems()
+        Dim mkdb As New mkdbDataContext
+        Dim reports = Nothing
+
+        If BarCheckItem4.Checked Then
+            reports = (From i In mkdb.trans_SalesInvoiceBuyers
+                       Where i.paymentStatus = 2
+                       Select New With {
+                           .ID = i.salesInvoiceBuyerID,
+                           .Value = i.salesInvoiceBuyerID & "-" & i.invoiceNum
+                       }).ToList()
+        Else
+            reports = (From i In mkdb.trans_SalesInvoiceBuyers
+                       Where i.paymentStatus = 3
+                       Select New With {
+                           .ID = i.salesInvoiceBuyerID,
+                           .Value = i.salesInvoiceBuyerID & "-" & i.invoiceNum
+                       }).ToList()
+        End If
+
+        lueReport.EditValue = Nothing
+        dtEncoded.EditValue = Nothing
+        cmbSaleType.EditValue = Nothing
+        lueCarrierInvoice.EditValue = Nothing
+        lueCarrier.EditValue = Nothing
+        cmbBuyer.EditValue = Nothing
+        txtBuyer.EditValue = Nothing
+        txtSetNo.EditValue = Nothing
+        txtInvoiceNum.EditValue = Nothing
+        txtActualUnloading.EditValue = Nothing
+        txtSpoilage.EditValue = Nothing
+        txtTotalAmount.EditValue = Nothing
+        txtAdjustments.EditValue = Nothing
+        txtOverallTotalAmount.EditValue = Nothing
+        txtAmountPaid.EditValue = Nothing
+        txtAmountInPercentage.EditValue = Nothing
+        txtRemainingBalance.EditValue = Nothing
+
+        lueCarrier.Properties.DataSource = Nothing
+        GridControl1.DataSource = Nothing
+        GridControl2.DataSource = Nothing
+
+        lookUpTransMode(reports, lueReport, "Value", "ID", "Select Report")
+
+        conReport.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+        conCarrier.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+        conContainer.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+        conBacking.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+        conCarrierInvoice.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+
+        dtEncoded.ReadOnly = True
+        cmbSaleType.ReadOnly = True
+        lueCarrierInvoice.ReadOnly = True
+        lueCarrier.ReadOnly = True
+        cmbBuyer.ReadOnly = True
+        txtBuyer.ReadOnly = True
+        txtSetNo.ReadOnly = True
+        txtInvoiceNum.ReadOnly = True
+        txtAdjustments.ReadOnly = True
+        txtAmountPaid.ReadOnly = True
+    End Sub
+
+    Private Sub lueReport_EditValueChanged(sender As Object, e As EventArgs) Handles lueReport.EditValueChanged
+
+    End Sub
+
+    Private Sub txtTotalAmount_EditValueChanged(sender As Object, e As EventArgs) Handles txtTotalAmount.EditValueChanged
+        txtOverallTotalAmount.EditValue = Math.Round(CDec(txtTotalAmount.EditValue), 2)
+    End Sub
+
+    Private Sub txtOverallTotalAmount_EditValueChanged(sender As Object, e As EventArgs) Handles txtOverallTotalAmount.EditValueChanged
+        If CDec(txtAmountPaid.EditValue) = 0 Then
+            txtRemainingBalance.EditValue = txtOverallTotalAmount.EditValue
+        End If
     End Sub
 End Class

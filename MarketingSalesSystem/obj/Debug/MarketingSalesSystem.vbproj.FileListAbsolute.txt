@@ -13,16 +13,17 @@ C:\Users\admin\Documents\GitHub\MarketingSalesSystem\MarketingSalesSystem\obj\De
 C:\Users\admin\Documents\GitHub\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.exe.licenses
 C:\Users\admin\Documents\GitHub\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.exe
 C:\Users\admin\Documents\GitHub\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.pdb
-D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\MarketingSalesSystem.exe.config
 D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\SqlServerTypes\x64\msvcr100.dll
 D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\SqlServerTypes\x64\SqlServerSpatial110.dll
 D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\SqlServerTypes\x86\msvcr100.dll
 D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\SqlServerTypes\x86\SqlServerSpatial110.dll
+D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\MarketingSalesSystem.exe.config
 D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\MarketingSalesSystem.exe
 D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\MarketingSalesSystem.pdb
 D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\Microsoft.SqlServer.Types.dll
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.PartialReports.resources
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.rptCatcherReport.resources
+D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.rptPartialSummaryReport.resources
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.rptSalesInvoiceReport.resources
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.frm_buyerSales.resources
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.frm_catchActivity.resources
@@ -38,4 +39,4 @@ D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.vbpr
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.exe.licenses
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.exe
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.pdb
-D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.rptPartialSummaryReport.resources
+D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.vbprojResolveAssemblyReference.cache

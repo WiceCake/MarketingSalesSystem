@@ -218,7 +218,6 @@ Public Class ctrlSales
 
                     totalAUK_Catcher = totalMetricTon
                 End If
-                Debug.WriteLine(catcherValue)
                 AUK_Total += catcherValue
             End If
         Next

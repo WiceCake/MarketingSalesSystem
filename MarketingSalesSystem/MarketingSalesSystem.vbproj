@@ -153,6 +153,7 @@
     <Compile Include="Models\ReportModels\PartialSalesInvoice.vb" />
     <Compile Include="Models\ReportModels\SalesReportInvoice.vb" />
     <Compile Include="Models\SalesInvoiceBuyer.vb" />
+    <Compile Include="Models\SalesInvoiceReport.vb" />
     <Compile Include="Models\SalesReportBuyer.vb" />
     <Compile Include="Models\SalesReportCatcher.vb" />
     <Compile Include="Models\SalesReportWeightSlip.vb" />

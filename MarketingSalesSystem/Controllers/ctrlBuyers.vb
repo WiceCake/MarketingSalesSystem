@@ -38,6 +38,12 @@ Public Class ctrlBuyers
                 showTxtBuyer()
             End If
 
+            .conReport.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+            .conContainer.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+            .conBacking.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+            .conCarrier.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+            .conCarrierInvoice.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+
             .btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
             .btnPost.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
             .dtEncoded.Properties.MaxValue = Date.Now()
@@ -82,10 +88,10 @@ Public Class ctrlBuyers
             End If
 
             loadComboxes()
-
+            .lueCarrierInvoice.ReadOnly = True
             .dtEncoded.EditValue = mdlSIB.encodedOn
             .cmbSaleType.EditValue = mdlSIB.sellerType
-            .lueInvoice.EditValue = mdlSIB.salesInvoiceID
+            .lueCarrierInvoice.EditValue = mdlSIB.salesInvoiceID
             .txtSetNo.EditValue = mdlSIB.setNum
             .txtRefNum.Caption = mdlSIB.referenceNum
 
@@ -102,7 +108,19 @@ Public Class ctrlBuyers
                 With frmBS
                     mdlSIB.encodedOn = CDate(.dtEncoded.EditValue)
                     mdlSIB.sellerType = .cmbSaleType.EditValue.ToString
-                    mdlSIB.salesInvoiceID = CInt(.lueInvoice.EditValue)
+                    mdlSIB.salesInvoiceID = CInt(.lueCarrierInvoice.EditValue)
+                    If .cmbSaleType.EditValue Is "Export" Then
+                        mdlSIB.containerNum = .txtContainerNum.EditValue.ToString
+                    ElseIf .cmbSaleType.EditValue Is "Backing" Then
+                        mdlSIB.backing = CInt(.lueBacking.EditValue)
+                    End If
+                    If .BarCheckItem3.Checked Then
+                        mdlSIB.paymentStatus = Payment_Status.Partial_
+                    ElseIf .BarCheckItem4.Checked Then
+                        mdlSIB.paymentStatus = Payment_Status.Partial_Final
+                    Else
+                        mdlSIB.paymentStatus = Payment_Status.Final_
+                    End If
                     If .rBuyer.SelectedIndex = 0 Then
                         mdlSIB.buyerName = .txtBuyer.Text
                     Else
@@ -111,6 +129,7 @@ Public Class ctrlBuyers
                     mdlSIB.setNum = .txtSetNo.EditValue.ToString
                     mdlSIB.adjustmentsAmount = CDec(.txtAdjustments.EditValue)
                     mdlSIB.paidAmount = CDec(.txtAmountPaid.EditValue)
+                    mdlSIB.invoiceNum = .txtInvoiceNum.EditValue.ToString
                     mdlSIB.encodedBy = "###"
                     mdlSIB.referenceNum = "Draft"
                     If isNew Then
@@ -131,6 +150,14 @@ Public Class ctrlBuyers
         End Using
         frmBS.Close()
         ucB.loadGrid()
+    End Sub
+
+    Sub setInvoiceReport(ByVal salesInvoiceBuyerID As Integer, Optional ByVal previousReport As Integer = Nothing)
+        Dim sir As New SalesInvoiceReport(mkdb)
+
+        sir.previousReport_ID = previousReport
+        sir.salesInvoiceBuyer_ID = salesInvoiceBuyerID
+        sir.Add()
     End Sub
 
     Sub setSalesPrice(ByVal salesInvoiceBuyerID As Integer, ByVal salesInvoiceID As Integer)
@@ -209,6 +236,8 @@ Public Class ctrlBuyers
             Try
                 mdlSIB.approvalStatus = Approval_Status.Posted
                 mdlSIB.Posted()
+
+                setInvoiceReport(mdlSIB.salesInvoiceBuyerID)
 
                 ts.Complete()
             Catch ex As Exception
@@ -393,7 +422,7 @@ Public Class ctrlBuyers
                     If col.ColumnName.Contains("AC_Catcher") Then
                         dr("AC_Catcher" & (countAvailableCatch + 1)) = CDec(propCatch.GetValue(cdList(countAvailableCatch), Nothing))
                         countAvailableCatch += 1
-                    ElseIf col.ColumnName.Contains("K_Catcher") AndAlso Not isNew Then
+                    ElseIf col.ColumnName.Contains("K_Catcher") AndAlso Not isNew AndAlso bList.Count <> 0 Then
                         dr("K_Catcher" & (countKiloCatcher + 1)) = CDec(propBuyer.GetValue(bList(countKiloCatcher), Nothing))
                         countKiloCatcher += 1
                     ElseIf col.ColumnName <> "Class" AndAlso col.ColumnName <> "Size" AndAlso col.ColumnName <> "Price" Then
@@ -497,7 +526,7 @@ Public Class ctrlBuyers
                  .ID = i.salesReport_ID,
                  .Invoice = i.invoiceNum}
 
-        lookUpTransMode(sr, frmBS.lueInvoice, "Invoice", "ID", "Select Invoice")
+        lookUpTransMode(sr, frmBS.lueCarrierInvoice, "Invoice", "ID", "Select Invoice")
     End Sub
 
     Sub loadBuyer()

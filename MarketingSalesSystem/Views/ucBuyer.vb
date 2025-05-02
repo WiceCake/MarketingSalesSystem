@@ -83,6 +83,7 @@ Public Class ucBuyer
                      Let actualKilo = buyerKilosDict(bl.salesInvoiceBuyerID)
                      Let spoilageKilo = If(spoilageDict.ContainsKey(invoiceId), spoilageDict(invoiceId), 0D)
                      Let rb = actualKilo - spoilageKilo
+                     Let orb = rb - bl.adjustmentsAmount
                      Let buyerName = If(Integer.TryParse(bl.buyerName, 0) AndAlso buyerNames.ContainsKey(CInt(bl.buyerName)),
                                         buyerNames(CInt(bl.buyerName)),
                                         bl.buyerName)
@@ -92,7 +93,7 @@ Public Class ucBuyer
                          .InvoiceNo = sr.invoiceNum & "-" & bl.setNum,
                          .Buyer = buyerName,
                          .AmountPaid = bl.paidAmount,
-                         .RemainingBalance = Math.Round(rb - CDec(bl.paidAmount), 2),
+                         .RemainingBalance = Math.Round(CDec(orb) - CDec(bl.paidAmount), 2),
                          .Adjustments = bl.adjustmentsAmount,
                          .PaidInPercentage = If(rb > 0, Math.Round((CDec(bl.paidAmount) / rb) * 100, 2) & "%", "0%")
                      }
