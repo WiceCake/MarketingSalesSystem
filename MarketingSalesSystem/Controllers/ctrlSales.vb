@@ -184,7 +184,7 @@ Public Class ctrlSales
         Dim NA_Total As Decimal = 0
 
         Dim totalAUK_Catcher As Decimal = 0
-        Dim totalMetricTon As Decimal = frmSI.dts.AsEnumerable().Sum(Function(row) CDec(If(IsDBNull(row("Metric_Ton")), 0, row("Metric_Ton"))))
+        'Dim totalMetricTon As Decimal = frmSI.dts.AsEnumerable().Sum(Function(row) CDec(If(IsDBNull(row("Metric_Ton")), 0, row("Metric_Ton"))))
 
         For Each row As DataRow In frmSI.dt.Rows
             If row IsNot r Then
@@ -208,16 +208,16 @@ Public Class ctrlSales
 
                 totalAUK_Catcher += catcherValue
 
-                If totalAUK_Catcher > totalMetricTon Then
-                    Dim excess As Decimal = totalAUK_Catcher - totalMetricTon
-                    catcherValue -= excess
+                'If totalAUK_Catcher > totalMetricTon Then
+                '    Dim excess As Decimal = totalAUK_Catcher - totalMetricTon
+                '    catcherValue -= excess
 
-                    If catcherValue < 0 Then catcherValue = 0
+                '    If catcherValue < 0 Then catcherValue = 0
 
-                    r(colName) = catcherValue
+                '    r(colName) = catcherValue
 
-                    totalAUK_Catcher = totalMetricTon
-                End If
+                '    totalAUK_Catcher = totalMetricTon
+                'End If
                 AUK_Total += catcherValue
             End If
         Next
