@@ -101,6 +101,7 @@
             i.adjustmentsAmount = adjustmentsAmount
             i.referenceNum = referenceNum
             i.buyerName = buyerName
+            i.carrier = carrier
             i.sellerType = sellerType
             i.containerNum = containerNum
             i.paymentStatus = paymentStatus

@@ -2,6 +2,7 @@
 Imports DevExpress.XtraLayout
 Imports System.Transactions
 Imports DevExpress.XtraReports.UI
+Imports DevExpress.XtraLayout.Utils
 
 Public Class ctrlSales
 

@@ -1,5 +1,7 @@
 ﻿Imports System.Transactions
 Imports DevExpress.XtraReports.UI
+Imports DevExpress.XtraLayout
+Imports DevExpress.XtraLayout.Utils
 
 Public Class ctrlBuyers
     Private isNew As Boolean
@@ -39,14 +41,16 @@ Public Class ctrlBuyers
             End If
 
             .rbnAction.Visible = False
-            .conReport.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
-            .conContainer.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
-            .conBacking.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
-            .conCarrier.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
-            .conCarrierInvoice.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
 
-            .btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-            .btnPost.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            SetLayoutVisibility(.conReport, False,
+                          .conContainer, False,
+                          .conBacking, False,
+                          .conCarrierInvoice, False,
+                          .conCarrier, False)
+
+            SetBarVisibility(.btnDelete, False,
+                             .btnPost, False)
+
             .dtEncoded.Properties.MaxValue = Date.Now()
 
             .txtAmountPaid.ReadOnly = True
@@ -74,12 +78,13 @@ Public Class ctrlBuyers
 
         frmBS.GridControl1.DataSource = frmBS.dt
 
+        Dim reports = (From i In mkdb.trans_SalesInvoiceReports
+                       Where i.salesInvoiceBuyer_ID = CInt(mdlSIB.salesInvoiceBuyerID)
+                       Select i.previousReport_ID).FirstOrDefault()
+
         With frmBS
-            If mdlSIB.approvalStatus = Approval_Status.Posted Then
-                .rbnTools.Visible = False
-            Else
-                .rbnAction.Visible = False
-            End If
+            .rbnTools.Visible = (mdlSIB.approvalStatus <> Approval_Status.Posted)
+            .rbnAction.Visible = Not .rbnTools.Visible
 
             If Integer.TryParse(mdlSIB.buyerName, 0) Then
                 .rBuyer.SelectedIndex = 1
@@ -98,27 +103,35 @@ Public Class ctrlBuyers
             .txtSetNo.EditValue = mdlSIB.setNum
             .txtRefNum.Caption = mdlSIB.referenceNum
             .txtInvoiceNum.EditValue = mdlSIB.invoiceNum
+            .lueCarrier.EditValue = mdlSIB.carrier
 
-            .conReport.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never
-            .barPartial.CheckBoxVisibility = DevExpress.XtraBars.CheckBoxVisibility.None
-            .barPartialFinal.CheckBoxVisibility = DevExpress.XtraBars.CheckBoxVisibility.None
-            .barFinal.CheckBoxVisibility = DevExpress.XtraBars.CheckBoxVisibility.None
-            .barPartial.Enabled = False
-            .barPartialFinal.Enabled = False
-            .barFinal.Enabled = False
-            .barPartial.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-            .barPartialFinal.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-            .barFinal.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            SetLayoutVisibility(.conReport, False)
 
-            If mdlSIB.paymentStatus = 1 Then
-                .barPartial.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-            ElseIf mdlSIB.paymentStatus = 2 Then
-                .barPartialFinal.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-                .conReport.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-            Else
-                .barFinal.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-                .conReport.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-            End If
+            SetCheckboxVisibility(.barPartial, False,
+                                  .barPartialFinal, False,
+                                  .barFinal, False)
+
+            SetBarEnabled(.barPartial, False,
+                          .barPartialFinal, False,
+                          .barFinal, False)
+
+            SetBarVisibility(.barPartial, False,
+                             .barPartialFinal, False,
+                             .barFinal, False)
+
+            Select Case mdlSIB.paymentStatus
+                Case Payment_Status.Partial_
+                    SetBarVisibility(.barPartial, True)
+                Case Payment_Status.Partial_Final
+                    SetBarVisibility(.barPartialFinal, True)
+                    SetLayoutVisibility(.conReport, True)
+                    .lueReport.EditValue = reports
+                    loadPartialReport()
+                Case Payment_Status.Final_
+                    SetBarVisibility(.barFinal, True)
+                    SetLayoutVisibility(.conReport, True)
+                    .lueReport.EditValue = reports
+            End Select
 
             .txtAmountPaid.EditValue = mdlSIB.paidAmount
             .txtAdjustments.EditValue = mdlSIB.adjustmentsAmount
@@ -153,6 +166,7 @@ Public Class ctrlBuyers
                     End If
                     mdlSIB.setNum = .txtSetNo.EditValue.ToString
                     mdlSIB.adjustmentsAmount = CDec(.txtAdjustments.EditValue)
+                    mdlSIB.carrier = CInt(.lueCarrier.EditValue)
                     mdlSIB.paidAmount = CDec(.txtAmountPaid.EditValue)
                     mdlSIB.invoiceNum = .txtInvoiceNum.EditValue.ToString
                     mdlSIB.encodedBy = "###"
@@ -164,10 +178,18 @@ Public Class ctrlBuyers
                         mdlSIB.approvalStatus = Approval_Status.Submitted
                         mdlSIB.Save()
                     End If
+
+                    If .barPartialFinal.Checked Then
+                        setInvoiceReport(mdlSIB.salesInvoiceBuyerID, CInt(.lueReport.EditValue))
+                    ElseIf .barFinal.Checked Then
+                        setInvoiceReport(mdlSIB.salesInvoiceBuyerID, CInt(.lueReport.EditValue))
+                    End If
                 End With
 
+
+
                 setSalesPrice(mdlSIB.salesInvoiceBuyerID, mdlSIB.salesInvoiceID, "AUK_Catcher")
-                setSalesPrice(mdlSIB.salesInvoiceBuyerID, mdlSIB.salesInvoiceID, "SK_Catcher")
+                setSalesPrice(mdlSIB.salesInvoiceBuyerID, mdlSIB.salesInvoiceID, "SK_Catcher", True)
 
                 ts.Complete()
             Catch ex As Exception
@@ -181,18 +203,33 @@ Public Class ctrlBuyers
     Sub setInvoiceReport(ByVal salesInvoiceBuyerID As Integer, Optional ByVal previousReport As Integer = Nothing)
         Dim sir As New SalesInvoiceReport(mkdb)
 
+        If Not isNew AndAlso Not mdlSIB.paymentStatus = Payment_Status.Partial_ Then
+            Dim reps = (From i In mkdb.trans_SalesInvoiceReports
+                        Where i.salesInvoiceBuyer_ID = salesInvoiceBuyerID AndAlso i.previousReport_ID = previousReport
+                        Select i).FirstOrDefault()
+            sir.salesInvoiceReport_ID = reps.salesInvoiceReport_ID
+        End If
+
         sir.previousReport_ID = previousReport
         sir.salesInvoiceBuyer_ID = salesInvoiceBuyerID
-        sir.Add()
+        If isNew Then
+            sir.Add()
+        Else
+            sir.Save()
+        End If
     End Sub
 
-    Sub setSalesPrice(ByVal salesInvoiceBuyerID As Integer, ByVal salesInvoiceID As Integer, colName As String)
+    Sub setSalesPrice(ByVal salesInvoiceBuyerID As Integer, ByVal salesInvoiceID As Integer, colName As String, Optional isSkip As Boolean = False)
         Dim srb As New SalesReportBuyer(mkdb)
         Dim count As Integer
         Dim getSrb As List(Of Integer) = New List(Of Integer)
 
         If Not isNew Then
             getSrb = (From i In mkdb.trans_SalesReportBuyers Where i.salesInvoiceBuyerID = CInt(salesInvoiceBuyerID) Select i.salesBuyerCatchID).ToList()
+
+            If isSkip Then
+                getSrb = getSrb.Skip(getSrb.Count \ 2).ToList
+            End If
 
             count = 0
         End If
@@ -263,7 +300,9 @@ Public Class ctrlBuyers
                 mdlSIB.approvalStatus = Approval_Status.Posted
                 mdlSIB.Posted()
 
-                setInvoiceReport(mdlSIB.salesInvoiceBuyerID)
+                If mdlSIB.paymentStatus = Payment_Status.Partial_ Then
+                    setInvoiceReport(mdlSIB.salesInvoiceBuyerID)
+                End If
 
                 ts.Complete()
             Catch ex As Exception
@@ -605,6 +644,32 @@ Public Class ctrlBuyers
         lookUpTransMode(b, frmBS.cmbBuyer, "Name", "ID", "Select Buyer")
     End Sub
 
+    Sub loadPartialReport()
+
+        Dim pr = (From i In mkdb.trans_SalesInvoiceReports Join
+                 j In mkdb.trans_SalesInvoiceBuyers On i.salesInvoiceBuyer_ID Equals j.salesInvoiceBuyerID
+                 Where j.paymentStatus = Payment_Status.Partial_
+                 Where j.approvalStatus = Approval_Status.Posted
+                 Select New With {
+                     .ID = i.salesInvoiceBuyer_ID,
+                     .Value = j.invoiceNum}).ToList
+
+        lookUpTransMode(pr, frmBS.lueReport, "Value", "ID", "Select Previous Report")
+    End Sub
+
+    Sub loadPartialFinalReport()
+
+        Dim pr = (From i In mkdb.trans_SalesInvoiceReports Join
+                 j In mkdb.trans_SalesInvoiceBuyers On i.salesInvoiceBuyer_ID Equals j.salesInvoiceBuyerID
+                 Where j.paymentStatus = Payment_Status.Partial_Final
+                 Where j.approvalStatus = Approval_Status.Posted
+                 Select New With {
+                     .ID = i.salesInvoiceBuyer_ID,
+                     .Value = j.invoiceNum}).ToList
+
+        lookUpTransMode(pr, frmBS.lueReport, "Value", "ID", "Select Previous Report")
+    End Sub
+
     Sub print()
         Dim tool As ReportPrintTool
 
@@ -613,4 +678,5 @@ Public Class ctrlBuyers
         tool = New ReportPrintTool(rp)
         tool.ShowPreviewDialog()
     End Sub
+
 End Class

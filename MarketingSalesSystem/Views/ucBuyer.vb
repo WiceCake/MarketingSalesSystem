@@ -51,25 +51,9 @@ Public Class ucBuyer
         Dim buyerNames = tsp.ML_SULLIER_20170329s.
             ToDictionary(Function(s) s.ml_SupID, Function(s) s.ml_Supplier)
 
-        ' Preprocess actual kilos
-        Dim buyerKilosDict = dc.trans_SalesReportBuyers.
-            AsEnumerable().
+        Dim buyerData = dc.trans_SalesReportBuyers.
             GroupBy(Function(s) s.salesInvoiceBuyerID).
-            ToDictionary(
-                Function(g) g.Key,
-                Function(g) g.Select(Function(s) multiplyFields(s)).Sum()
-            )
-
-        ' Preprocess spoilage kilos
-        Dim spoilageDict = dc.trans_SalesReportCatchers.
-            AsEnumerable().
-            GroupBy(Function(s) s.catchActivityDetail_ID).
-            SelectMany(Function(g) g.Skip(1)).
-            GroupBy(Function(s) s.salesReport_ID).
-            ToDictionary(
-                Function(g) g.Key,
-                Function(g) g.Select(Function(s) multiplyFields(s)).Sum()
-            )
+            ToDictionary(Function(g) g.Key, Function(g) g.ToList)
 
         ' Preload sales report dictionary
         Dim transReportsDict = dc.trans_SalesReports.
@@ -79,9 +63,11 @@ Public Class ucBuyer
         Dim buyers = From bl In buyerList
                      Let invoiceId = bl.salesInvoiceID
                      Let sr = If(transReportsDict.TryGetValue(invoiceId, Nothing), transReportsDict(invoiceId), Nothing)
-                     Where sr IsNot Nothing AndAlso buyerKilosDict.ContainsKey(bl.salesInvoiceBuyerID)
-                     Let actualKilo = buyerKilosDict(bl.salesInvoiceBuyerID)
-                     Let spoilageKilo = If(spoilageDict.ContainsKey(invoiceId), spoilageDict(invoiceId), 0D)
+                     Where sr IsNot Nothing AndAlso buyerData.ContainsKey(bl.salesInvoiceBuyerID)
+                     Let entryCount = buyerData(bl.salesInvoiceBuyerID).Count()
+                     Let halfCount = entryCount \ 2
+                     Let actualKilo = buyerData(bl.salesInvoiceBuyerID).Take(halfCount).Sum(Function(s) multiplyFields(s))
+                     Let spoilageKilo = buyerData(bl.salesInvoiceBuyerID).Skip(halfCount).Sum(Function(s) multiplyFields(s))
                      Let rb = actualKilo - spoilageKilo
                      Let orb = rb - bl.adjustmentsAmount
                      Let buyerName = If(Integer.TryParse(bl.buyerName, 0) AndAlso buyerNames.ContainsKey(CInt(bl.buyerName)),
