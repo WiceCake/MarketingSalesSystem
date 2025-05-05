@@ -66,8 +66,8 @@ Public Class ucBuyer
                      Where sr IsNot Nothing AndAlso buyerData.ContainsKey(bl.salesInvoiceBuyerID)
                      Let entryCount = buyerData(bl.salesInvoiceBuyerID).Count()
                      Let halfCount = entryCount \ 2
-                     Let actualKilo = buyerData(bl.salesInvoiceBuyerID).Take(halfCount).Sum(Function(s) multiplyFields(s))
-                     Let spoilageKilo = buyerData(bl.salesInvoiceBuyerID).Skip(halfCount).Sum(Function(s) multiplyFields(s))
+                     Let actualKilo = CalculateActualKilo(bl.salesInvoiceBuyerID, bl.sellerType, buyerData(bl.salesInvoiceBuyerID))
+                     Let spoilageKilo = CalculateSpoilageKilo(bl.salesInvoiceBuyerID, bl.sellerType, buyerData(bl.salesInvoiceBuyerID))
                      Let rb = actualKilo - spoilageKilo
                      Let orb = rb - bl.adjustmentsAmount
                      Let buyerName = If(Integer.TryParse(bl.buyerName, 0) AndAlso buyerNames.ContainsKey(CInt(bl.buyerName)),
@@ -81,13 +81,13 @@ Public Class ucBuyer
                          .AmountPaid = bl.paidAmount,
                          .RemainingBalance = Math.Round(CDec(orb) - CDec(bl.paidAmount), 2),
                          .Adjustments = bl.adjustmentsAmount,
-                         .PaidInPercentage = If(rb > 0, Math.Round((CDec(bl.paidAmount) / rb) * 100, 2) & "%", "0%")
+        .PaidInPercentage = If(rb > 0, Math.Round((CDec(bl.paidAmount) / rb) * 100, 2) & "%", "0%")
                      }
 
         Dim gridView = New GridView()
         AddHandler gridView.DoubleClick, AddressOf HandleGridDoubleClick
         gridView.GridControl = grid
-        '
+                '
         grid.MainView = gridView
         grid.ViewCollection.Add(gridView)
 
@@ -99,12 +99,57 @@ Public Class ucBuyer
         gridTransMode(gridView)
     End Sub
 
-    Function multiplyFields(qty As trans_SalesReportBuyer) As Decimal
+    Private Function CalculateActualKilo(buyerID As Integer, status As String, entries As List(Of trans_SalesReportBuyer)) As Decimal
+        Dim halfCount = entries.Count() \ 2
+
+        Select Case status
+            Case "Export"
+                Return entries.Take(halfCount).Sum(Function(s) multiplyFields(s, "Export"))
+            Case "Local"
+                Return entries.Take(halfCount).Sum(Function(s) multiplyFields(s, "Local"))
+            Case Else
+                Return entries.Take(halfCount).Sum(Function(s) multiplyFields(s, "None"))
+        End Select
+    End Function
+
+    Private Function CalculateSpoilageKilo(buyerID As Integer, status As String, entries As List(Of trans_SalesReportBuyer)) As Decimal
+        Dim halfCount = entries.Count() \ 2
+
+        Select Case status
+            Case "Export"
+                Return entries.Skip(halfCount).Sum(Function(s) multiplyFields(s, "Export"))
+            Case "Local"
+                Return entries.Skip(halfCount).Sum(Function(s) multiplyFields(s, "Local"))
+            Case Else
+                Return entries.Skip(halfCount).Sum(Function(s) multiplyFields(s, "None"))
+        End Select
+    End Function
+
+    Function multiplyFields(qty As trans_SalesReportBuyer, sellerType As String) As Decimal
         Dim total As Decimal = 0
 
         Dim dc = New mkdbDataContext
 
         Dim price = (From i In dc.trans_SalesReportPrices Where qty.salesInvoiceID = i.salesReport_ID Select i).FirstOrDefault
+
+        If sellerType = "Export" Then
+            total += qty.yellowfin10AndUpGood * price.yellowfin10AndUpGood
+            total += qty.yellowfin10AndUpDeformed * price.yellowfin10AndUpDeformed
+
+            Return Math.Round(total, 2)
+        ElseIf sellerType = "Local" Then
+            total += qty.yellowfin0_300To0_499 * price.yellowfin0_300To0_499
+            total += qty.yellowfin0_500To0_999 * price.yellowfin0_500To0_999
+            total += qty.yellowfin1_0To1_49 * price.yellowfin1_0To1_49
+            total += qty.yellowfin1_5To2_49 * price.yellowfin1_5To2_49
+            total += qty.yellowfin2_5To3_49 * price.yellowfin2_5To3_49
+            total += qty.yellowfin3_5To4_99 * price.yellowfin3_5To4_99
+            total += qty.yellowfin5_0To9_99 * price.yellowfin5_0To9_99
+            total += qty.yellowfin10AndUpGood * price.yellowfin10AndUpGood
+            total += qty.yellowfin10AndUpDeformed * price.yellowfin10AndUpDeformed
+
+            Return Math.Round(total, 2)
+        End If
 
         total += qty.skipjack0_300To0_499 * price.skipjack0_300To0_499
         total += qty.skipjack0_500To0_999 * price.skipjack0_500To0_999
@@ -135,12 +180,31 @@ Public Class ucBuyer
         Return Math.Round(total, 2)
     End Function
 
-    Function multiplyFields(qty As trans_SalesReportCatcher) As Decimal
+    Function multiplyFields(qty As trans_SalesReportCatcher, sellerType As String) As Decimal
         Dim total As Decimal = 0
 
         Dim dc = New mkdbDataContext
 
         Dim price = (From i In dc.trans_SalesReportPrices Where qty.salesReport_ID = i.salesReport_ID Select i).FirstOrDefault
+
+        If sellerType = "Export" Then
+            total += qty.yellowfin10AndUpGood * price.yellowfin10AndUpGood
+            total += qty.yellowfin10AndUpDeformed * price.yellowfin10AndUpDeformed
+
+            Return Math.Round(total, 2)
+        ElseIf sellerType = "Local" Then
+            total += qty.yellowfin0_300To0_499 * price.yellowfin0_300To0_499
+            total += qty.yellowfin0_500To0_999 * price.yellowfin0_500To0_999
+            total += qty.yellowfin1_0To1_49 * price.yellowfin1_0To1_49
+            total += qty.yellowfin1_5To2_49 * price.yellowfin1_5To2_49
+            total += qty.yellowfin2_5To3_49 * price.yellowfin2_5To3_49
+            total += qty.yellowfin3_5To4_99 * price.yellowfin3_5To4_99
+            total += qty.yellowfin5_0To9_99 * price.yellowfin5_0To9_99
+            total += qty.yellowfin10AndUpGood * price.yellowfin10AndUpGood
+            total += qty.yellowfin10AndUpDeformed * price.yellowfin10AndUpDeformed
+
+            Return Math.Round(total, 2)
+        End If
 
         total += qty.skipjack0_300To0_499 * price.skipjack0_300To0_499
         total += qty.skipjack0_500To0_999 * price.skipjack0_500To0_999

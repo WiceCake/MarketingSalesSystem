@@ -172,9 +172,21 @@ Module modUtils
         Next
     End Sub
 
+    Sub ZeroEditValues(ParamArray controls() As BaseEdit)
+        For Each ctrl In controls
+            ctrl.EditValue = 0D
+        Next
+    End Sub
+
     Sub SetReadOnlyFields(ParamArray controls() As BaseEdit)
         For Each ctrl In controls
             ctrl.ReadOnly = True
+        Next
+    End Sub
+
+    Sub UnSetReadOnlyFields(ParamArray controls() As BaseEdit)
+        For Each ctrl In controls
+            ctrl.ReadOnly = False
         Next
     End Sub
 
