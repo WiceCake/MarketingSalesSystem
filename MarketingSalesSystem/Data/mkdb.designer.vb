@@ -226,15 +226,15 @@ Partial Public Class mkdbDataContext
 		End Get
 	End Property
 	
-	Public ReadOnly Property vWeightSlipDetails() As System.Data.Linq.Table(Of vWeightSlipDetail)
-		Get
-			Return Me.GetTable(Of vWeightSlipDetail)
-		End Get
-	End Property
-	
 	Public ReadOnly Property vWeigthSlipBuyers() As System.Data.Linq.Table(Of vWeigthSlipBuyer)
 		Get
 			Return Me.GetTable(Of vWeigthSlipBuyer)
+		End Get
+	End Property
+	
+	Public ReadOnly Property vWeightSlipDetails() As System.Data.Linq.Table(Of vWeightSlipDetail)
+		Get
+			Return Me.GetTable(Of vWeightSlipDetail)
 		End Get
 	End Property
 End Class
@@ -868,7 +868,7 @@ Partial Public Class trans_SalesInvoiceBuyer
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_setNum", DbType:="VarChar(6) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_setNum", DbType:="VarChar(20) NOT NULL", CanBeNull:=false)>  _
 	Public Property setNum() As String
 		Get
 			Return Me._setNum
@@ -5442,6 +5442,28 @@ Partial Public Class trans_WeightSlipDetail
 	End Sub
 End Class
 
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.vWeigthSlipBuyers")>  _
+Partial Public Class vWeigthSlipBuyer
+	
+	Private _buyer As String
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_buyer", DbType:="VarChar(100)")>  _
+	Public Property buyer() As String
+		Get
+			Return Me._buyer
+		End Get
+		Set
+			If (String.Equals(Me._buyer, value) = false) Then
+				Me._buyer = value
+			End If
+		End Set
+	End Property
+End Class
+
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.vWeightSlipDetails")>  _
 Partial Public Class vWeightSlipDetail
 	
@@ -5488,28 +5510,6 @@ Partial Public Class vWeightSlipDetail
 		Set
 			If (Me._approvalStatus.Equals(value) = false) Then
 				Me._approvalStatus = value
-			End If
-		End Set
-	End Property
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.vWeigthSlipBuyers")>  _
-Partial Public Class vWeigthSlipBuyer
-	
-	Private _buyer As String
-	
-	Public Sub New()
-		MyBase.New
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_buyer", DbType:="VarChar(100)")>  _
-	Public Property buyer() As String
-		Get
-			Return Me._buyer
-		End Get
-		Set
-			If (String.Equals(Me._buyer, value) = false) Then
-				Me._buyer = value
 			End If
 		End Set
 	End Property

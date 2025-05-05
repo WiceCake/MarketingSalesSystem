@@ -32,7 +32,7 @@
       <Column Name="salesInvoiceBuyerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="salesInvoiceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="invoiceNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="setNum" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="setNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="paidAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="adjustmentsAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="referenceNum" Type="System.String" DbType="VarChar(14)" CanBeNull="true" />
@@ -262,16 +262,16 @@
       <Column Name="fishmeal" Type="System.Decimal" DbType="Decimal(10,5)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.vWeigthSlipBuyers" Member="vWeigthSlipBuyers">
+    <Type Name="vWeigthSlipBuyer">
+      <Column Name="buyer" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.vWeightSlipDetails" Member="vWeightSlipDetails">
     <Type Name="vWeightSlipDetail">
       <Column Name="weightSlipDetail_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="salesReportWeightSlip_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="approvalStatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.vWeigthSlipBuyers" Member="vWeigthSlipBuyers">
-    <Type Name="vWeigthSlipBuyer">
-      <Column Name="buyer" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
