@@ -130,11 +130,10 @@
     End Function
 
     Function GenerateRefNum() As String
-        Dim yearMonth = Date.Now.ToString("yyyyMM")
-        'Dim yearMonth = Date.Now.Year & Date.Now.Month
+        Dim yearMonth = Date.Now.ToString("yyyyMM") ' Get the current year and month in YYYYMM format
+        Dim prefix As String = "CA-" & yearMonth ' Prefix is "CA-YYYYMM"
 
-        Dim prefix As String = "CA-" & yearMonth
-
+        ' Get the last reference number that starts with the prefix
         Dim lastRef = (From sr In dc.trans_CatchActivities
                        Where sr.catchReferenceNum.StartsWith(prefix)
                        Order By sr.catchReferenceNum Descending
@@ -143,7 +142,8 @@
         Dim newNum As Integer
 
         If lastRef IsNot Nothing Then
-            Dim lastNumStr As String = lastRef.Substring(9) ' Get the part after "SR-YYYYMM"
+            ' Extract the numeric part of the last reference number by removing the prefix
+            Dim lastNumStr As String = lastRef.Substring(prefix.Length) ' Get the part after "CA-YYYYMM"
             Dim lastNum As Integer
             If Integer.TryParse(lastNumStr, lastNum) Then
                 newNum = lastNum + 1 ' Increment the last number
@@ -152,8 +152,8 @@
             newNum = 1 ' Start from 1 if no previous reference number exists
         End If
 
-        Return String.Format("{0}{1:D3}", prefix, newNum)
-        'Return String.Format("CA-{0}{1:D3}", yearMonth, newNum)
+        ' Format the new reference number to ensure it has 3 digits
+        Return String.Format("{0}{1:D3}", prefix, newNum) ' Ensures 3 digits
     End Function
 
 End Class

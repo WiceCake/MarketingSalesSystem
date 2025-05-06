@@ -215,7 +215,6 @@ Public Class frm_buyerSales
             Return
         End If
 
-        Debug.WriteLine("Passing")
         Dim r As DataRowView = CType(view.GetRow(view.FocusedRowHandle), DataRowView)
         ctrlB.updateTotal(r.Row)
 
@@ -229,8 +228,25 @@ Public Class frm_buyerSales
 
         If invoice.EditValue Is Nothing Then Return
 
+
         Dim mkdb As New mkdbDataContext
         Dim tpmdb As New tpmdbDataContext
+
+        If cmbSaleType.EditValue.ToString = "Backing" Then
+            Dim rpb = (From i In mkdb.trans_SalesInvoiceBuyers
+                       Where i.salesInvoiceID = CInt(invoice.EditValue)
+                       Where i.approvalStatus = Approval_Status.Posted
+                       Where i.paymentStatus = Payment_Status.Partial_
+                       Where i.sellerType = "Canning"
+                       Select New With {
+                           .ID = i.salesInvoiceBuyerID,
+                           .Value = "#" & i.salesInvoiceBuyerID & " - " & i.invoiceNum & "-" & i.setNum
+                       })
+
+            conBacking.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+
+            lookUpTransMode(rpb, lueBacking, "Value", "ID", "Select Report for Backing")
+        End If
 
         Dim catcher = From i In mkdb.trans_SalesReportCatchers
                       Join j In mkdb.trans_CatchActivityDetails On i.catchActivityDetail_ID Equals j.catchActivityDetail_ID
@@ -493,8 +509,6 @@ Public Class frm_buyerSales
 
         If val Is "Export" Then
             conContainer.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-        ElseIf val Is "Backing" Then
-            conBacking.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always
         End If
     End Sub
 
