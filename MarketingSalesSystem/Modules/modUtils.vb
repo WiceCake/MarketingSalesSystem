@@ -2,6 +2,8 @@ Imports DevExpress.XtraTab
 Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraEditors
 Imports DevExpress.XtraEditors.Repository
+Imports DevExpress.XtraLayout
+Imports DevExpress.XtraLayout.Utils
 
 Module modUtils
     Function getServerDate() As Date
@@ -129,5 +131,63 @@ Module modUtils
     Function SuccessfullyAddedUpdatedMessage() As System.Windows.Forms.DialogResult
         Return XtraMessageBox.Show("Your record is successfully added or updated in the database.", APPNAME, MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Function
-    '================================ End MessageBox Methods ==================================' 
+
+    Sub SetLayoutVisibility(ParamArray items() As Object)
+        For i = 0 To items.Length - 1 Step 2
+            Dim ctrl = CType(items(i), DevExpress.XtraLayout.LayoutControlItem)
+            Dim visible = CBool(items(i + 1))
+            ctrl.Visibility = If(visible, DevExpress.XtraLayout.Utils.LayoutVisibility.Always, DevExpress.XtraLayout.Utils.LayoutVisibility.Never)
+        Next
+    End Sub
+
+    Sub SetBarVisibility(ParamArray items() As Object)
+        For i = 0 To items.Length - 1 Step 2
+            Dim ctrl = CType(items(i), DevExpress.XtraBars.BarItem)
+            Dim visible = CBool(items(i + 1))
+            ctrl.Visibility = If(visible, DevExpress.XtraBars.BarItemVisibility.Always, DevExpress.XtraBars.BarItemVisibility.Never)
+        Next
+    End Sub
+
+    Sub SetBarEnabled(ParamArray items() As Object)
+        For i = 0 To items.Length - 1 Step 2
+            Dim ctrl = CType(items(i), DevExpress.XtraBars.BarItem)
+            Dim isEnabled = CBool(items(i + 1))
+
+            ctrl.Enabled = isEnabled
+        Next
+    End Sub
+
+    Sub SetCheckboxVisibility(ParamArray items() As Object)
+        For i = 0 To items.Length - 1 Step 2
+            Dim ctrl = CType(items(i), DevExpress.XtraBars.BarCheckItem)
+            Dim checkBoxVisible = CBool(items(i + 1))
+
+            ctrl.CheckBoxVisibility = If(checkBoxVisible, DevExpress.XtraBars.CheckBoxVisibility.BeforeText, DevExpress.XtraBars.CheckBoxVisibility.None)
+        Next
+    End Sub
+
+    Sub ClearEditValues(ParamArray controls() As BaseEdit)
+        For Each ctrl In controls
+            ctrl.EditValue = Nothing
+        Next
+    End Sub
+
+    Sub ZeroEditValues(ParamArray controls() As BaseEdit)
+        For Each ctrl In controls
+            ctrl.EditValue = 0D
+        Next
+    End Sub
+
+    Sub SetReadOnlyFields(ParamArray controls() As BaseEdit)
+        For Each ctrl In controls
+            ctrl.ReadOnly = True
+        Next
+    End Sub
+
+    Sub UnSetReadOnlyFields(ParamArray controls() As BaseEdit)
+        For Each ctrl In controls
+            ctrl.ReadOnly = False
+        Next
+    End Sub
+
 End Module

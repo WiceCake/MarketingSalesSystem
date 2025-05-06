@@ -70,10 +70,10 @@
       <Column Name="salesInvoiceBuyerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="salesInvoiceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="invoiceNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="setNum" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="setNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="paidAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="adjustmentsAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="referenceNum" Type="System.String" DbType="VarChar(14)" CanBeNull="true" />
+      <Column Name="referenceNum" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
       <Column Name="buyerName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="carrier" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="backing" Type="System.Int32" DbType="Int" CanBeNull="true" />

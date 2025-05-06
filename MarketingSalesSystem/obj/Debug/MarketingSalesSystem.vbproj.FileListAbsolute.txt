@@ -20,7 +20,6 @@ D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\SqlServerTypes\x86\SqlSer
 D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\MarketingSalesSystem.exe.config
 D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\MarketingSalesSystem.exe
 D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\MarketingSalesSystem.pdb
-D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\Microsoft.SqlServer.Types.dll
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.PartialReports.resources
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.rptCatcherReport.resources
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.rptPartialSummaryReport.resources
@@ -40,3 +39,4 @@ D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.exe.
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.exe
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.pdb
 D:\MarketingSalesSystem\MarketingSalesSystem\obj\Debug\MarketingSalesSystem.vbprojResolveAssemblyReference.cache
+D:\MarketingSalesSystem\MarketingSalesSystem\bin\Debug\Microsoft.SqlServer.Types.dll

@@ -1644,7 +1644,7 @@ Partial Public Class trans_SalesInvoiceBuyer
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_setNum", DbType:="VarChar(6) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_setNum", DbType:="VarChar(20) NOT NULL", CanBeNull:=false)>  _
 	Public Property setNum() As String
 		Get
 			Return Me._setNum
@@ -1692,7 +1692,7 @@ Partial Public Class trans_SalesInvoiceBuyer
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_referenceNum", DbType:="VarChar(14)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_referenceNum", DbType:="VarChar(15)")>  _
 	Public Property referenceNum() As String
 		Get
 			Return Me._referenceNum

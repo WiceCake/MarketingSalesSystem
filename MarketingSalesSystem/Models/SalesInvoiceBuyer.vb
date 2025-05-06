@@ -22,6 +22,7 @@
         For Each i In e
             salesInvoiceBuyerID = sibID
             salesInvoiceID = i.salesInvoiceID
+            invoiceNum = i.invoiceNum
             setNum = i.setNum
             paidAmount = i.paidAmount
             adjustmentsAmount = i.adjustmentsAmount
@@ -44,6 +45,7 @@
 
         salesInvoiceBuyerID = sib.salesInvoiceBuyerID
         salesInvoiceID = sib.salesInvoiceID
+        invoiceNum = sib.invoiceNum
         setNum = sib.setNum
         paidAmount = sib.paidAmount
         adjustmentsAmount = sib.adjustmentsAmount
@@ -99,6 +101,7 @@
             i.adjustmentsAmount = adjustmentsAmount
             i.referenceNum = referenceNum
             i.buyerName = buyerName
+            i.carrier = carrier
             i.sellerType = sellerType
             i.containerNum = containerNum
             i.paymentStatus = paymentStatus
@@ -127,6 +130,7 @@
             i.approvalStatus = approvalStatus
             dc.SubmitChanges()
         Next
+        Debug.WriteLine(approvalStatus)
     End Sub
 
     Function getRows() As List(Of SalesInvoiceBuyer)
@@ -177,8 +181,8 @@
         Dim newNum As Integer
 
         If lastRef IsNot Nothing Then
-            ' Extract the numeric part of the last reference number
-            Dim lastNumStr As String = lastRef.Substring(9) ' Get the part after "SR-YYYYMM"
+            ' Extract the numeric part of the last reference number by removing the prefix
+            Dim lastNumStr As String = lastRef.Substring(prefix.Length) ' Get the part after "SIB-YYYYMM"
             Dim lastNum As Integer
             If Integer.TryParse(lastNumStr, lastNum) Then
                 newNum = lastNum + 1 ' Increment the last number
