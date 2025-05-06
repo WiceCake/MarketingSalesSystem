@@ -119,6 +119,10 @@ Public Class ctrlBuyers
                              .barPartialFinal, False,
                              .barFinal, False)
 
+            If mdlSIB.sellerType = "Backing" Then
+                .lueBacking.EditValue = mdlSIB.backing
+            End If
+
             Select Case mdlSIB.paymentStatus
                 Case Payment_Status.Partial_
                     SetBarVisibility(.barPartial, True)

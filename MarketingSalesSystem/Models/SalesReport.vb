@@ -181,8 +181,7 @@
 
     Function GenerateRefNum() As String
         Dim yearMonth = Date.Now.ToString("yyyyMM") ' Format year and month as YYYYMM
-
-        Dim prefix As String = "SR-" & yearMonth
+        Dim prefix As String = "SR-" & yearMonth ' Prefix is "SR-YYYYMM"
 
         ' Get the last reference number that starts with the prefix
         Dim lastRef = (From sr In dc.trans_SalesReports
@@ -194,7 +193,7 @@
 
         If lastRef IsNot Nothing Then
             ' Extract the numeric part of the last reference number
-            Dim lastNumStr As String = lastRef.Substring(9) ' Get the part after "SR-YYYYMM"
+            Dim lastNumStr As String = lastRef.Substring(prefix.Length) ' Get the part after "SR-YYYYMM"
             Dim lastNum As Integer
             If Integer.TryParse(lastNumStr, lastNum) Then
                 newNum = lastNum + 1 ' Increment the last number
@@ -204,7 +203,7 @@
         End If
 
         ' Format the new reference number to ensure it has 3 digits
-        Return String.Format("{0}{1:D3}", prefix, newNum)
+        Return String.Format("{0}{1:D3}", prefix, newNum) ' Ensure 3 digits for the number
     End Function
 
 End Class
