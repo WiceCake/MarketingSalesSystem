@@ -42,6 +42,7 @@
         Me.xtraTab = New DevExpress.XtraTab.XtraTabControl()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
         Me.BehaviorManager1 = New DevExpress.Utils.Behaviors.BehaviorManager(Me.components)
+        Me.BarButtonItem3 = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.ribbonControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XtraTabbedMdiManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -55,9 +56,9 @@
         'ribbonControl1
         '
         Me.ribbonControl1.ExpandCollapseItem.Id = 0
-        Me.ribbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl1.ExpandCollapseItem, Me.btn_salesInvc, Me.btn_weightSlips, Me.BarButtonItem1, Me.BarButtonItem2})
+        Me.ribbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl1.ExpandCollapseItem, Me.btn_salesInvc, Me.btn_weightSlips, Me.BarButtonItem1, Me.BarButtonItem2, Me.BarButtonItem3})
         Me.ribbonControl1.Location = New System.Drawing.Point(0, 0)
-        Me.ribbonControl1.MaxItemId = 8
+        Me.ribbonControl1.MaxItemId = 9
         Me.ribbonControl1.Name = "ribbonControl1"
         Me.ribbonControl1.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.ribbonPage1})
         Me.ribbonControl1.Size = New System.Drawing.Size(894, 198)
@@ -77,6 +78,7 @@
         Me.btn_weightSlips.ImageOptions.Image = CType(resources.GetObject("btn_weightSlips.ImageOptions.Image"), System.Drawing.Image)
         Me.btn_weightSlips.ImageOptions.LargeImage = CType(resources.GetObject("btn_weightSlips.ImageOptions.LargeImage"), System.Drawing.Image)
         Me.btn_weightSlips.Name = "btn_weightSlips"
+        Me.btn_weightSlips.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         '
         'BarButtonItem1
         '
@@ -114,9 +116,9 @@
         Me.RibbonPageGroup2.AllowTextClipping = False
         Me.RibbonPageGroup2.ImageOptions.SvgImage = CType(resources.GetObject("RibbonPageGroup2.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.RibbonPageGroup2.ItemLinks.Add(Me.btn_weightSlips)
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.BarButtonItem3)
         Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
         Me.RibbonPageGroup2.Text = "Reports"
-        Me.RibbonPageGroup2.Visible = False
         '
         'XtraTabbedMdiManager1
         '
@@ -170,6 +172,14 @@
         Me.LayoutControl1.TabIndex = 3
         Me.LayoutControl1.Text = "LayoutControl1"
         '
+        'BarButtonItem3
+        '
+        Me.BarButtonItem3.Caption = "Generate Report"
+        Me.BarButtonItem3.Id = 8
+        Me.BarButtonItem3.ImageOptions.Image = CType(resources.GetObject("BarButtonItem3.ImageOptions.Image"), System.Drawing.Image)
+        Me.BarButtonItem3.Name = "BarButtonItem3"
+        Me.BarButtonItem3.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large
+        '
         'frmMain
         '
         Me.ClientSize = New System.Drawing.Size(894, 509)
@@ -212,4 +222,5 @@
     Friend WithEvents BehaviorManager1 As DevExpress.Utils.Behaviors.BehaviorManager
     Friend WithEvents BarButtonItem1 As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents BarButtonItem2 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonItem3 As DevExpress.XtraBars.BarButtonItem
 End Class
