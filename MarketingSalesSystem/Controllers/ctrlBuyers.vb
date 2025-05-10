@@ -146,6 +146,46 @@ Public Class ctrlBuyers
             .txtAmountPaid.EditValue = mdlSIB.paidAmount
             .txtAdjustments.EditValue = mdlSIB.adjustmentsAmount
 
+            Dim isPosted As Boolean = (mdlSIB.approvalStatus = Approval_Status.Posted)
+
+            If Not isPosted Then
+                If Integer.TryParse(mdlSIB.buyerName, 0) Then
+                    .rBuyer.SelectedIndex = 1
+                    showCbBuyer()
+                    .cmbBuyer.EditValue = mdlSIB.buyerName
+                Else
+                    showTxtBuyer()
+                    .txtBuyer.EditValue = mdlSIB.buyerName
+                End If
+            Else
+                .cmbBuyer.ReadOnly = True
+                .txtBuyer.ReadOnly = True
+                .dtEncoded.ReadOnly = True
+                .cmbSaleType.ReadOnly = True
+                .lueCarrierInvoice.ReadOnly = True
+                .txtSetNo.ReadOnly = True
+                .txtInvoiceNum.ReadOnly = True
+                .lueCarrier.ReadOnly = True
+                .lueReport.ReadOnly = True
+                .txtAmountPaid.ReadOnly = True
+                .txtAdjustments.ReadOnly = True
+
+                ' Disable any layout controls if needed
+                .conReport.Enabled = False
+
+                ' Still show the correct control based on the type, but don't allow editing
+                If Integer.TryParse(mdlSIB.buyerName, 0) Then
+                    showCbBuyer()
+                    .cmbBuyer.EditValue = mdlSIB.buyerName
+                    .cmbBuyer.ReadOnly = True
+                Else
+                    showTxtBuyer()
+                    .txtBuyer.EditValue = mdlSIB.buyerName
+                    .txtBuyer.ReadOnly = True
+                End If
+                .rBuyer.Enabled = False
+            End If
+
             .Show()
         End With
     End Sub
