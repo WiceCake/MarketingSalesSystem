@@ -23,17 +23,23 @@ Public Class ctrlBuyers
         mkdb = New mkdbDataContext
         tpmdb = New tpmdbDataContext
 
+        Debug.WriteLine(Now.ToString("hh:mm:ss.fff") & " - Step Initialize datasource")
+
         mdlSIB = New SalesInvoiceBuyer(mkdb)
         mdlSRB = New SalesReportBuyer(mkdb)
         mdlSR = New SalesReport(mkdb)
+
+        Debug.WriteLine(Now.ToString("hh:mm:ss.fff") & " - Step Initialize model")
 
         frmBS = New frm_buyerSales(Me)
 
         ucB = uc
 
+
         'initKiloDataTable()
 
         frmBS.GridControl1.DataSource = frmBS.dt
+
 
         With frmBS
             If .rBuyer.SelectedIndex = 0 Then
@@ -718,7 +724,7 @@ Public Class ctrlBuyers
         Dim tool As ReportPrintTool
 
         Dim rp = New rptPartialSummaryReport()
-        rp.DataSource = getPartialSalesInvoice(mdlSIB.salesInvoiceID, mdlSIB.setNum)
+        rp.DataSource = getPartialSalesInvoice(mdlSIB.salesInvoiceID, mdlSIB.setNum, mdlSIB.carrier)
         tool = New ReportPrintTool(rp)
         tool.ShowPreviewDialog()
     End Sub

@@ -280,6 +280,24 @@
         +hsjECQapN2SNyZbom/BTPgNH2DM0MF4GscMt2/MhBthhg7+b/0JXfEMk6uYkKgAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="BarButtonItem3.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAydEVYdFRpdGxlAEdyYW5kVG90YWxzT25Sb3dzQ29sdW1uc1Bpdm90VGFibGU7RG9jdW1lbnQ7
+        +C4skgAAAqNJREFUWEe1l2tPE0EUhg9eY/Tf+Il/ZCIV7xqhgChK8IIoicHEhJigBlS8IN5iTIwxRPwh
+        4KWF0u51tse8087mONsyHxhInmR2MvOcd892S4eYmYioh4j2ENH+qbmVmemnP3k3gBs12rV6dG0RYB8R
+        Hbz3eJWbTWaVNb0CJ9yo0a71XwB990R0aGruh94Qp5lX4IQbNUwXOgU4PPlohVPV5CjJvAIn3KjRLcAB
+        Ijpya/Y7pwqblFfghBs12rU6B5h4+E0vDhPlFTjhdgYYf/C1FSBWObMLqwXkvD3uLS1rpANOuJ0Bxu5/
+        4URlHMTKK3DC7QwwOv2ZkzTjRqQKyA7Ia3tsOiD3wgm3M8DI3U/6tamHqVfghNsZYOjOx64BZAfktT3u
+        7VvW2AHgdgYoT37gOMl4K0i9AifczgCDt9/r97YWJDnyzg1y3h6bDkgHnHA7AwzcfKcXbzYSr8AJtzPA
+        pRut93ejnhSQHZDX9th0QO6FE25ngIsTb9sBYq/ACbczwIXxJb24uhXn2M8fyHl7bDogHXDC7Qxw/vob
+        DiLFlVrsFTjhdgY4d+01B1HKf2tRAdkBeW2PTQfkXjjhdgY4O/aKG1HKfzYjr8AJtzPAmasvCwHs5w/k
+        vD02HbADwO0McPrKIjfClH9vhF6BE25ngFOjL/R3969qmHP02FIBOW+PTQekA064nQFOXm4FWK+GXoET
+        bmeA/pHnXA9SXq+EXoET7u0C6F/F/cPP9H+vtUroFTjh3u5XsT4XnBhCgITXKoFX4IS727kgPxmVygv6
+        EIENPoET7m4no/xseHzgyUypPM+7Adwdz4Z9g/MmxN72AqREq/C88KHZCXDABSfcqIFarZu3AphOoEVY
+        DPCJ3QnGA6e+844BDFYQn+SFzR9q/wOaIIh+LxA3swAAAABJRU5ErkJggg==
+</value>
+  </data>
   <assembly alias="DevExpress.Data.v18.1" name="DevExpress.Data.v18.1, Version=18.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
   <data name="RibbonPageGroup2.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v18.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
