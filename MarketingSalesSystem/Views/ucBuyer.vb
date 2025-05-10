@@ -75,13 +75,15 @@ Public Class ucBuyer
                                         bl.buyerName)
                      Select New With {
                          .SalesInvoiceBuyerID = bl.salesInvoiceBuyerID,
-                         .DateCreated = bl.encodedOn,
+                         .DateCreated = bl.encodedOn.ToString("MM-dd-yyyy"),
                          .InvoiceNo = sr.invoiceNum & "-" & bl.setNum,
+                         .SellType = bl.sellerType,
+                         .Status = GetStatusReport(bl.paymentStatus),
                          .Buyer = buyerName,
                          .AmountPaid = bl.paidAmount,
                          .RemainingBalance = Math.Round(CDec(orb) - CDec(bl.paidAmount), 2),
                          .Adjustments = bl.adjustmentsAmount,
-        .PaidInPercentage = If(rb > 0, Math.Round((CDec(bl.paidAmount) / rb) * 100, 2) & "%", "0%")
+                         .PaidInPercentage = If(rb > 0, Math.Round((CDec(bl.paidAmount) / rb) * 100, 2) & "%", "0%")
                      }
 
         Dim gridView = New GridView()
@@ -98,6 +100,19 @@ Public Class ucBuyer
 
         gridTransMode(gridView)
     End Sub
+
+    Private Function GetStatusReport(PaymentStatus As Integer) As String
+        Select Case PaymentStatus
+            Case Payment_Status.Partial_
+                Return "Partial"
+            Case Payment_Status.Partial_Final
+                Return "Partial-Final"
+            Case Payment_Status.Final_
+                Return "Final"
+            Case Else
+                Return "None"
+        End Select
+    End Function
 
     Private Function CalculateActualKilo(buyerID As Integer, status As String, entries As List(Of trans_SalesReportBuyer)) As Decimal
         Dim halfCount = entries.Count() \ 2

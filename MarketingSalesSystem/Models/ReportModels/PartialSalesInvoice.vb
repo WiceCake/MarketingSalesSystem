@@ -13,5 +13,7 @@
     Public Property KiloFishMeal As Decimal
     Public Property PriceTotalUSD As Decimal
     Public Property PriceTotalPeso As Decimal
-
+    Public Property BackingName As String
+    Public Property BackingValue As Decimal
+    Public Property ContainerNum As String
 End Class
