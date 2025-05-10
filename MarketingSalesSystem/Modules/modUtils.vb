@@ -58,7 +58,6 @@ Module modUtils
         End With
     End Sub
 
-
     Sub lookUpTransMode(ByVal dataSource As Object, ByRef lookUpEdit As RepositoryItemLookUpEdit, valueName As String, idName As String, defaultValue As String)
         With lookUpEdit
             .DataSource = dataSource
