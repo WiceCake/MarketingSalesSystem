@@ -70,16 +70,16 @@ Partial Public Class frmMain
     End Sub
 
 
-    Private Sub btn_weightSlips_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btn_weightSlips.ItemClick
-        Dim title = "Weight Slip"
-        Dim intab = InTabs("ucWeightSlip")
-        If intab = -1 Then
-            Dim uc As New ucWeightSlip(title)
-            addTab(uc, title)
-        Else
-            xtraTab.TabPages(intab).Show()
-        End If
-    End Sub
+    'Private Sub btn_weightSlips_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles btn_weightSlips.ItemClick
+    '    Dim title = "Weight Slip"
+    '    Dim intab = InTabs("ucWeightSlip")
+    '    If intab = -1 Then
+    '        Dim uc As New ucWeightSlip(title)
+    '        addTab(uc, title)
+    '    Else
+    '        xtraTab.TabPages(intab).Show()
+    '    End If
+    'End Sub
 
     Private Sub BarButtonItem1_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem1.ItemClick
         Dim title = "Catcher Activities"
@@ -101,5 +101,9 @@ Partial Public Class frmMain
         Else
             xtraTab.TabPages(intab).Show()
         End If
+    End Sub
+
+    Private Sub BarButtonItem3_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem3.ItemClick
+
     End Sub
 End Class
