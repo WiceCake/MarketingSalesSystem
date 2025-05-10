@@ -120,6 +120,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ctrlBuyers.vb" />
     <Compile Include="Controllers\ctrlCatchers.vb" />
+    <Compile Include="Controllers\ctrlReports.vb" />
     <Compile Include="Controllers\ctrlSales.vb" />
     <Compile Include="Data\mkdb.designer.vb">
       <AutoGen>True</AutoGen>
