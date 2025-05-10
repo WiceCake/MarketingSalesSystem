@@ -172,10 +172,22 @@
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="Reports\FinalSummary.Designer.vb">
+      <DependentUpon>FinalSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\FinalSummary.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\PartialReports.Designer.vb">
       <DependentUpon>PartialReports.vb</DependentUpon>
     </Compile>
     <Compile Include="Reports\PartialReports.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PartialSummary.Designer.vb">
+      <DependentUpon>PartialSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\PartialSummary.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\rptCatcherReport.Designer.vb">
@@ -261,8 +273,14 @@
     <None Include="Data\mkdb.dbml.layout">
       <DependentUpon>mkdb.dbml</DependentUpon>
     </None>
+    <EmbeddedResource Include="Reports\FinalSummary.resx">
+      <DependentUpon>FinalSummary.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\PartialReports.resx">
       <DependentUpon>PartialReports.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PartialSummary.resx">
+      <DependentUpon>PartialSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptCatcherReport.resx">
       <DependentUpon>rptCatcherReport.vb</DependentUpon>
