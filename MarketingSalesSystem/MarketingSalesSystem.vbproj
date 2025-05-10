@@ -177,6 +177,12 @@
     <Compile Include="Reports\PartialReports.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\PartialSummary.Designer.vb">
+      <DependentUpon>PartialSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\PartialSummary.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\rptCatcherReport.Designer.vb">
       <DependentUpon>rptCatcherReport.vb</DependentUpon>
     </Compile>
