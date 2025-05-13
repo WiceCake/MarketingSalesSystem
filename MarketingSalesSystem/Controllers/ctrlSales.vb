@@ -649,12 +649,12 @@ Public Class ctrlSales
     End Sub
 
     Sub print()
-        Dim tool As ReportPrintTool
+        'Dim tool As ReportPrintTool
 
-        Dim rp = New rptSalesInvoiceReport()
-        rp.DataSource = getReportSalesInvoice(mdlSR.salesReport_ID)
-        tool = New ReportPrintTool(rp)
-        tool.ShowPreviewDialog()
+        'Dim rp = New rptSalesInvoiceReport()
+        'rp.DataSource = getReportSalesInvoice(mdlSR.salesReport_ID)
+        'tool = New ReportPrintTool(rp)
+        'tool.ShowPreviewDialog()
     End Sub
 
 End Class

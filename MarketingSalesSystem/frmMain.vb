@@ -104,6 +104,6 @@ Partial Public Class frmMain
     End Sub
 
     Private Sub BarButtonItem3_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem3.ItemClick
-
+        Dim ctrl = New ctrlReports()
     End Sub
 End Class
